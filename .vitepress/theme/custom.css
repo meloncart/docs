@@ -1,5 +1,537 @@
+/* ============================================
+   Meloncart Brand Theme
+   Colors from logo:
+   - Watermelon Red:  #c1272d
+   - Watermelon Green: #006838
+   - Dark Grey:       #58595b
+   ============================================ */
+
 :root {
-  --vp-font-family-base: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-  --vp-font-family-mono: Menlo,Monaco,Consolas,Courier New,monospace;
-  --vp-nav-logo-height: 32px;
+    --vp-font-family-base: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    --vp-font-family-mono: Menlo, Monaco, Consolas, Courier New, monospace;
+    --vp-nav-logo-height: 32px;
+
+    /* Brand colors */
+    --mc-red: #c1272d;
+    --mc-red-light: #d94449;
+    --mc-red-dark: #a01f24;
+    --mc-green: #006838;
+    --mc-green-light: #00884a;
+    --mc-green-dark: #004d2a;
+    --mc-grey: #58595b;
+    --mc-grey-light: #7a7b7d;
+
+    /* VitePress brand color overrides — green primary */
+    --vp-c-brand-1: #006838;
+    --vp-c-brand-2: #00884a;
+    --vp-c-brand-3: #006838;
+    --vp-c-brand-soft: rgba(0, 104, 56, 0.12);
+
+    /* Tip/success use green */
+    --vp-c-tip-1: var(--mc-green);
+    --vp-c-tip-soft: rgba(0, 104, 56, 0.12);
+
+    /* Warning uses red */
+    --vp-c-warning-1: var(--mc-red);
+    --vp-c-warning-soft: rgba(193, 39, 45, 0.12);
+
+    /* Button overrides */
+    --vp-button-brand-bg: var(--mc-green);
+    --vp-button-brand-hover-bg: var(--mc-green-light);
+    --vp-button-brand-active-bg: var(--mc-green-dark);
+    --vp-button-brand-border: transparent;
+    --vp-button-brand-text: #fff;
+
+    --vp-button-alt-bg: rgba(0, 104, 56, 0.08);
+    --vp-button-alt-hover-bg: rgba(0, 104, 56, 0.14);
+    --vp-button-alt-border: rgba(0, 104, 56, 0.3);
+    --vp-button-alt-text: var(--mc-green);
+
+    /* Home hero name gradient */
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: linear-gradient(135deg, var(--mc-green) 0%, var(--mc-green-light) 50%, var(--mc-red) 100%);
+
+    /* Hero image glow */
+    --vp-home-hero-image-background-image: linear-gradient(135deg, rgba(0, 104, 56, 0.25) 0%, rgba(193, 39, 45, 0.15) 100%);
+    --vp-home-hero-image-filter: blur(56px);
+}
+
+/* Dark mode adjustments */
+.dark {
+    --vp-c-brand-1: #00a85a;
+    --vp-c-brand-2: #00c96b;
+    --vp-c-brand-3: #00a85a;
+    --vp-c-brand-soft: rgba(0, 168, 90, 0.16);
+
+    --vp-button-brand-bg: #00a85a;
+    --vp-button-brand-hover-bg: #00c96b;
+    --vp-button-brand-active-bg: #008f4d;
+
+    --vp-button-alt-bg: rgba(0, 168, 90, 0.1);
+    --vp-button-alt-hover-bg: rgba(0, 168, 90, 0.18);
+    --vp-button-alt-border: rgba(0, 168, 90, 0.35);
+    --vp-button-alt-text: #00c96b;
+
+    --vp-home-hero-name-background: linear-gradient(135deg, #00c96b 0%, #00a85a 50%, #d94449 100%);
+    --vp-home-hero-image-background-image: linear-gradient(135deg, rgba(0, 168, 90, 0.3) 0%, rgba(217, 68, 73, 0.2) 100%);
+}
+
+/* ============================================
+   Hero Section Enhancements
+   ============================================ */
+
+.VPHero .text {
+    font-size: 40px !important;
+    line-height: 1.2 !important;
+}
+
+.VPHero .tagline {
+    font-size: 20px !important;
+    color: var(--mc-grey-light) !important;
+}
+
+@media (min-width: 960px) {
+    .VPHero .VPImage {
+        max-width: 480px;
+        max-height: 480px;
+    }
+
+    .VPHero .text {
+        font-size: 52px !important;
+    }
+}
+
+/* ============================================
+   Features Section (VitePress built-in)
+   ============================================ */
+
+.VPFeatures .VPFeature {
+    border: 1px solid var(--vp-c-divider);
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+
+.VPFeatures .VPFeature:hover {
+    border-color: var(--mc-green);
+    box-shadow: 0 4px 24px rgba(0, 104, 56, 0.08);
+    transform: translateY(-2px);
+}
+
+.VPFeature .icon {
+    font-size: 28px;
+}
+
+/* ============================================
+   Custom Landing Sections (below the fold)
+   ============================================ */
+
+.mc-landing {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.mc-landing .VPButton {
+    text-decoration: none !important;
+}
+
+/* Base section */
+.mc-section {
+    padding: 80px 24px;
+}
+
+.mc-section__inner {
+    max-width: 1152px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.mc-section__inner--centered {
+    flex-direction: column;
+    text-align: center;
+}
+
+.mc-section__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.mc-section__visual {
+    flex: 1;
+    min-width: 0;
+}
+
+.mc-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+    color: var(--vp-c-text-1);
+    border-top: none;
+    padding-top: 0;
+}
+
+.mc-section p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--vp-c-text-2);
+    margin: 0 0 24px 0;
+}
+
+.mc-section__subtitle {
+    max-width: 680px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Reversed layout (visual on left) */
+.mc-section--reverse .mc-section__inner {
+    flex-direction: row-reverse;
+}
+
+/* Alternating backgrounds */
+.mc-section--elegant {
+    background: var(--vp-c-bg);
+}
+
+.mc-section--customize {
+    background: var(--vp-c-bg-soft);
+}
+
+.mc-section--features {
+    background: var(--vp-c-bg);
+    padding: 100px 24px;
+}
+
+.mc-section--cta {
+    background: linear-gradient(135deg, var(--mc-green) 0%, var(--mc-green-dark) 100%);
+    padding: 100px 24px;
+}
+
+.mc-section--cta h2 {
+    color: #fff;
+    font-size: 36px;
+}
+
+.mc-section--cta p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 18px;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.mc-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.mc-btn--primary {
+    background: var(--mc-green);
+    color: #fff;
+    border: 2px solid transparent;
+}
+
+.mc-btn--primary:hover {
+    background: var(--mc-green-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 104, 56, 0.3);
+}
+
+.mc-btn--secondary {
+    background: transparent;
+    color: var(--mc-green);
+    border: 2px solid var(--mc-green);
+}
+
+.mc-btn--secondary:hover {
+    background: rgba(0, 104, 56, 0.06);
+    transform: translateY(-1px);
+}
+
+.mc-btn--large {
+    padding: 14px 32px;
+    font-size: 17px;
+    border-radius: 10px;
+}
+
+/* CTA section button overrides */
+.mc-section--cta {
+    --vp-button-brand-bg: #fff;
+    --vp-button-brand-text: var(--mc-green);
+    --vp-button-brand-border: #fff;
+    --vp-button-brand-hover-bg: #f0f0f0;
+    --vp-button-brand-hover-border: #f0f0f0;
+    --vp-button-brand-hover-text: var(--mc-green);
+    --vp-button-alt-bg: transparent;
+    --vp-button-alt-text: #fff;
+    --vp-button-alt-border: rgba(255, 255, 255, 0.5);
+    --vp-button-alt-hover-bg: rgba(255, 255, 255, 0.1);
+    --vp-button-alt-hover-border: #fff;
+    --vp-button-alt-hover-text: #fff;
+}
+
+.mc-cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   Browser Mockup (Elegant section)
+   ============================================ */
+
+.mc-mockup {
+    background: var(--vp-c-bg-soft);
+    border-radius: 12px;
+    border: 1px solid var(--vp-c-divider);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.mc-mockup__bar {
+    display: flex;
+    gap: 6px;
+    padding: 12px 16px;
+    background: var(--vp-c-bg-alt);
+    border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.mc-mockup__bar span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--vp-c-divider);
+}
+
+.mc-mockup__bar span:first-child {
+    background: #ff5f57;
+}
+
+.mc-mockup__bar span:nth-child(2) {
+    background: #ffbd2e;
+}
+
+.mc-mockup__bar span:nth-child(3) {
+    background: #28c840;
+}
+
+.mc-mockup__screen {
+    padding: 0;
+}
+
+.mc-mockup__screen img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.mc-mockup__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.mc-mockup__card {
+    aspect-ratio: 3/4;
+    background: linear-gradient(145deg, rgba(0, 104, 56, 0.06), rgba(193, 39, 45, 0.04));
+    border-radius: 8px;
+    border: 1px solid var(--vp-c-divider);
+    position: relative;
+    overflow: hidden;
+}
+
+.mc-mockup__card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: var(--vp-c-bg-soft);
+    border-top: 1px solid var(--vp-c-divider);
+}
+
+/* ============================================
+   Code Editor Mockup (Customize section)
+   ============================================ */
+
+.mc-editor {
+    background: #1e1e2e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.mc-editor__bar {
+    display: flex;
+    gap: 6px;
+    padding: 12px 16px;
+    background: #181825;
+}
+
+.mc-editor__bar span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.mc-editor__bar span:first-child {
+    background: #ff5f57;
+}
+
+.mc-editor__bar span:nth-child(2) {
+    background: #ffbd2e;
+}
+
+.mc-editor__bar span:nth-child(3) {
+    background: #28c840;
+}
+
+.mc-editor__body {
+    padding: 20px 24px;
+    font-family: var(--vp-font-family-mono);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.mc-editor__body code {
+    display: block;
+    color: #cdd6f4;
+    background: none !important;
+    padding: 0 !important;
+    font-size: 14px;
+}
+
+.mc-code-tag { color: #89b4fa; }
+.mc-code-attr { color: #f9e2af; }
+.mc-code-str { color: #a6e3a1; }
+.mc-code-twig { color: #fab387; }
+
+/* ============================================
+   Features Grid (custom section)
+   ============================================ */
+
+.mc-features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.mc-feature {
+    background: var(--vp-c-bg-soft);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+
+.mc-feature:hover {
+    border-color: var(--mc-green);
+    box-shadow: 0 4px 20px rgba(0, 104, 56, 0.08);
+    transform: translateY(-3px);
+}
+
+.mc-feature__icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+}
+
+.mc-feature h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: var(--vp-c-text-1);
+}
+
+.mc-feature p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--vp-c-text-2);
+    margin: 0;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 959px) {
+    .mc-section__inner {
+        flex-direction: column !important;
+        gap: 40px;
+    }
+
+    .mc-section h2 {
+        font-size: 26px;
+    }
+
+    .mc-section--cta h2 {
+        font-size: 28px;
+    }
+
+    .mc-features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mc-section {
+        padding: 60px 24px;
+    }
+}
+
+@media (max-width: 639px) {
+    .mc-features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mc-section h2 {
+        font-size: 22px;
+    }
+
+    .mc-mockup__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mc-mockup__card:last-child {
+        display: none;
+    }
+
+    .mc-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mc-btn--large {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+    }
+}
+
+/* ============================================
+   Smooth reveal animation
+   ============================================ */
+
+.mc-section__inner {
+    animation: mc-fade-up 0.6s ease-out;
+}
+
+@keyframes mc-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

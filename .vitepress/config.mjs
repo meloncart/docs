@@ -10,8 +10,13 @@ const merchantSidebar = [
         items: [
             { text: 'Categories', link: '/merchant/product/categories' },
             { text: 'Products', link: '/merchant/product/products' },
+            { text: 'Product Types', link: '/merchant/product/product-types' },
             { text: 'Variants', link: '/merchant/product/variants' },
+            { text: 'Bundles', link: '/merchant/product/bundles' },
             { text: 'Inventory', link: '/merchant/product/inventory' },
+            { text: 'Manufacturers', link: '/merchant/product/manufacturers' },
+            { text: 'Custom Groups', link: '/merchant/product/custom-groups' },
+            { text: 'Reviews', link: '/merchant/product/reviews' },
             { text: 'Discounts', link: '/merchant/product/discounts' }
         ]
     },
@@ -29,6 +34,8 @@ const merchantSidebar = [
             { text: 'Orders', link: '/merchant/order/orders' },
             { text: 'Payments', link: '/merchant/order/payments' },
             { text: 'Shipping', link: '/merchant/order/shipping' },
+            { text: 'Tracking', link: '/merchant/order/tracking' },
+            { text: 'Digital Downloads', link: '/merchant/order/downloads' },
             { text: 'Refunds', link: '/merchant/order/refunds' }
         ]
     },
@@ -53,6 +60,7 @@ const developerSidebar = [
             { text: 'Cart', link: '/developer/components/cart' },
             { text: 'Catalog', link: '/developer/components/catalog' },
             { text: 'Checkout', link: '/developer/components/checkout' },
+            { text: 'Reviews', link: '/developer/components/reviews' },
             { text: 'Session', link: '/developer/components/session' },
             { text: 'Registration', link: '/developer/components/registration' },
             { text: 'Authentication', link: '/developer/components/authentication' },
@@ -64,9 +72,25 @@ const developerSidebar = [
         ]
     },
     {
+        text: "Models",
+        items: [
+            { text: 'Product', link: '/developer/models/product' },
+            { text: 'Order', link: '/developer/models/order' },
+            { text: 'Catalog', link: '/developer/models/category' }
+        ]
+    },
+    {
         text: "Hooks & Events",
         items: [
             { text: 'Events', link: '/developer/hooks/events' }
+        ]
+    },
+    {
+        text: "Extending",
+        items: [
+            { text: 'Payment Gateways', link: '/developer/extending/payment-gateways' },
+            { text: 'Shipping Types', link: '/developer/extending/shipping-types' },
+            { text: 'Price Rules', link: '/developer/extending/price-rules' }
         ]
     },
     {

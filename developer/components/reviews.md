@@ -16,7 +16,7 @@ productId = "{{ :id }}"
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `productId` | `string` | The product to display reviews for. Accepts a baseid or primary key. Default: `{{ :id }}`. |
+| `productId` | `string` | The product to display reviews for. Accepts a baseid or primary key. Default: <code v-pre>{{ :id }}</code>. |
 
 ## Twig API
 

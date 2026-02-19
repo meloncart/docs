@@ -86,11 +86,36 @@ If a variant's stock field is left empty, stock tracking falls back to the produ
 
 For more details on inventory management, see the [Inventory](./inventory) documentation.
 
+## Variant Images
+
+Each variant can have its own set of images. When a variant has images uploaded, the storefront displays those images instead of the product's default images when the customer selects that variant's option combination.
+
+If a variant has no images, the product's default images are used as a fallback. This means you only need to upload variant-specific images for variants that look different from the base product — for example, uploading red product photos for the "Red" variant while other color variants fall back to the default images.
+
+## How Variants Look on the Storefront
+
+When a customer visits a product page with variants enabled, the option selectors (dropdowns for Size, Color, etc.) are interactive. Changing any option triggers an automatic update of the product page without a full page reload. The following elements update dynamically:
+
+- **Price** — The displayed price changes to reflect the selected variant's price.
+- **Images** — The product gallery switches to the variant's images (if the variant has its own images).
+- **Availability** — If the selected variant is disabled or out of stock, a warning message replaces the add-to-cart button:
+  - **Disabled variant** — "This product combination is currently unavailable."
+  - **Out of stock** — "This product is temporarily out of stock." with an expected availability date if one is set.
+  - **Invalid combination** — "This product combination is not available." if no variant matches the selected options.
+
+This means customers always see accurate pricing and availability before adding the product to their cart.
+
 ## How Variant Resolution Works
 
 When a customer selects options on the product page and adds the product to the cart, the system identifies the correct variant by computing a hash from the selected option combination. This lookup is instant regardless of how many variants exist.
 
 If no variant matches the selected combination, or if the matching variant is disabled, the customer receives an error message and the item is not added to the cart.
+
+## How Variants Appear in the Cart and Orders
+
+When a variant product is in the cart, the variant name (e.g., "Red / Large") is shown below the product name, making it clear which combination was selected. The cart uses the variant's resolved price automatically — no additional configuration is needed.
+
+In order records, the variant is stored alongside the order item. The order detail view shows the variant name below the product name, just like in the cart.
 
 ## Default Variant
 

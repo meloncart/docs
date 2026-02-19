@@ -75,6 +75,7 @@ Adds a product to the cart. This is the primary handler for product pages and qu
 | `product_extras[]` | array | No | Selected extras as `extraHash => 1` pairs |
 | `item_data[]` | array | No | Custom data fields (keys must start with `x_`) |
 | `cart_name` | string | No | Target cart name (default: `main`) |
+| `bundle_items[]` | array | No | Bundle slot selections (see [Bundle Parameters](#bundle-parameters) below) |
 
 **Quick-add from a product card** — passes only the product ID:
 
@@ -131,9 +132,23 @@ Adds a product to the cart. This is the primary handler for product pages and qu
 When a product with the same options and extras is already in the cart, the quantity is increased rather than creating a duplicate entry.
 :::
 
+#### Bundle Parameters
+
+When adding a bundle product to the cart, the `bundle_items` array contains selections for each bundle slot. Each entry is keyed by the bundle item ID and contains the following fields:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `bundle_items[ID][product_id]` | integer | Selected product ID (for dropdown/radio control types) |
+| `bundle_items[ID][products][PRODUCT_ID]` | integer | Selected product IDs (for checkbox control type) |
+| `bundle_items[ID][options][PRODUCT_ID][HASH]` | string | Product options for the selected bundle product |
+| `bundle_items[ID][extras][PRODUCT_ID][HASH]` | string | Product extras for the selected bundle product |
+| `bundle_items[ID][quantity][PRODUCT_ID]` | integer | Quantity for the selected bundle product |
+
+When a bundle product is added, the master product becomes one cart item and each selected bundle child becomes a separate linked cart item. Removing the master item automatically removes all its bundle children.
+
 ### onRemoveFromCart
 
-Removes a single item from the cart by its key.
+Removes a single item from the cart by its key. When removing a bundle master item, all linked bundle child items are automatically removed as well.
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -263,6 +278,39 @@ All prices are integers in cents.
 | `final_line_price` | integer | `final_price × quantity` |
 | `discount` | integer | Per-unit discount amount without tax |
 | `final_discount` | integer | Per-unit discount amount with tax |
+
+### Bundle Properties
+
+These properties are set on cart items that belong to a product bundle.
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `bundleMasterCartKey` | string\|null | Key of the master bundle cart item (set on child items) |
+| `bundleMasterItemId` | integer\|null | Bundle slot definition ID |
+| `bundleMasterItemProductId` | integer\|null | Bundle item product ID |
+
+### Bundle Methods
+
+| Method | Return | Description |
+| --- | --- | --- |
+| `isBundleItem()` | boolean | Whether this item is a bundle child |
+| `getBundleMasterItem(items)` | CartItem\|null | Get the master bundle item from the items collection |
+| `getBundleChildItems(items)` | array | Get all child items belonging to this bundle master |
+| `getBundleTotalPrice(items)` | integer | Total price of master + all children |
+
+```twig
+{# Display bundle grouping in cart #}
+{% set items = cart.listActiveItems %}
+{% for item in items %}
+    {% if item.isBundleItem() %}
+        <div class="bundle-child-item">
+            {{ item.product.name }} — {{ item.final_line_price|currency }}
+        </div>
+    {% else %}
+        <div>{{ item.product.name }} — {{ item.final_line_price|currency }}</div>
+    {% endif %}
+{% endfor %}
+```
 
 ### Weight and Dimensions
 

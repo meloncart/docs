@@ -43,15 +43,37 @@ Within each bundle slot, click **Add Product Choice** to add products that the c
 
 You can reorder product choices by dragging them within the slot.
 
+## How Bundles Look on the Storefront
+
+On the product detail page, bundle products display differently from standard products. Instead of showing product options and extras directly, the page shows each bundle slot with its name, description, and the available product choices.
+
+Each bundle slot's products are presented using the control type you configured:
+
+- **Dropdown** — A select menu where the customer picks one product. Selecting a product reveals its image, options, extras, and quantity controls below the dropdown.
+- **Radio** — Radio buttons with all choices visible. For non-required slots, a "No, thank you" option is included. Selecting a radio button shows the corresponding product's details.
+- **Checkbox** — Checkboxes allowing multiple selections. Each checked product reveals its details inline.
+
+When a child product has its own options (e.g., a "Memory" choice that comes in 8GB and 16GB), those options appear as dropdowns within the bundle slot. Similarly, if a child product has extras, they appear as checkboxes with pricing.
+
+If **Allow Manual Quantity** is enabled for a product choice, the customer can adjust the quantity. Otherwise, the default quantity is shown as read-only.
+
+The effective price for each child product is shown based on the price mode — customers see the actual price they will pay for that choice, not necessarily the product's standard price.
+
 ## How Bundles Work in the Cart
 
-When a customer adds a bundle to the cart, each selected product choice becomes a separate line item linked to the master bundle product. The cart displays the master product with its child items grouped beneath it, each showing the slot name as a prefix (e.g., "[Processor] Intel Core i7").
+When a customer adds a bundle to the cart, each selected product choice becomes a separate line item linked to the master bundle product. The cart displays the master product with its child items grouped beneath it, visually indented with a subtle background.
+
+Bundle child items in the cart have these behaviors:
+
+- **Locked quantity** — Child item quantities cannot be changed independently. They are linked to the master product's quantity.
+- **No individual removal** — The remove button only appears on the master product. Removing the master automatically removes all its children.
+- **Bundle total** — A "Bundle Total" row appears below the last child item, showing the combined price of the master product and all its children.
 
 The total price of the bundle is the sum of the master product's price plus all selected child product prices (calculated according to their price modes).
 
 ## How Bundles Appear in Orders
 
-When an order is placed, bundle child items are stored as separate order items linked to the master item. Each child item records the bundle slot name for display purposes. The order detail view shows bundle children with their slot name prefix, making it clear which products belong to which bundle.
+When an order is placed, bundle child items are stored as separate order items linked to the master item. Each child item records the bundle slot name for display purposes. The order detail view shows bundle children indented beneath the master item, with the slot name shown in italics above the product name (e.g., *Processor* — Intel Core i7).
 
 ::: tip
 Bundle products work best with a dedicated product type. Create a product type with only the **Enable Bundles** flag checked (and optionally **Enable Shipping** for physical bundles) to keep the product form focused on bundle configuration.

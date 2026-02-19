@@ -106,6 +106,37 @@ Finds a custom group by its code and returns it. Custom groups are named collect
 {% endif %}
 ```
 
+## AJAX Handlers
+
+### onAction
+
+A generic AJAX handler that re-runs the page cycle, making all page variables (product, category, etc.) available again. This is used to refresh page content without a full page reload — most commonly for updating product displays when variant options change.
+
+When a customer changes a product option on a variant-enabled product, the `onAction` handler re-runs the page, allowing partials to re-resolve the selected variant and update pricing, images, and availability:
+
+```twig
+{# Product option with AJAX variant update #}
+<select
+    name="product_options[{{ option.hash }}]"
+    class="form-select"
+    data-request="catalog::onAction"
+    data-request-update="{ 'shop/product-view': '#productPage' }">
+    {% for value in option.values %}
+        <option
+            value="{{ value }}"
+            {{ post('product_options.' ~ option.hash) == value ? 'selected' }}>
+            {{ value }}
+        </option>
+    {% endfor %}
+</select>
+```
+
+When the select changes, `onAction` fires, the page cycle re-runs, and the `shop/product-view` partial is re-rendered with the new POST data. Inside that partial, `product.resolveVariantSafe(post('product_options', {}))` resolves the matching variant for the selected options, allowing the template to display the correct variant price, images, and stock status.
+
+::: tip
+The `catalog::onAction` prefix ensures the request targets the Catalog component specifically, which is important when multiple components are on the same page.
+:::
+
 ## URL Routing Patterns
 
 The Catalog component works with October CMS URL parameters. The URL pattern in your page definition determines which parameters are available for the identifier lookup.

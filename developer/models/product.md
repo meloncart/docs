@@ -139,7 +139,8 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
 | `getCompiledRulePrice($qty, $groupId)` | `int\|null` | Catalog rule price (null if none) |
 | `getAverageRating()` | `float` | Cached average review rating |
 | `getReviewsCount()` | `int` | Cached approved review count |
-| `resolveVariant($options)` | `ProductVariant\|null` | Find variant matching options |
+| `resolveVariant($options)` | `ProductVariant\|null` | Find variant matching options (throws on mismatch) |
+| `resolveVariantSafe($options)` | `ProductVariant\|null` | Find variant matching options (returns null on mismatch) |
 
 ### Complete Example
 
@@ -416,6 +417,7 @@ Variants are specific combinations of product options, each with its own SKU, pr
 | `product` | `Product` | Parent product |
 | `variant_options` | `Collection<ProductVariantOption>` | Selected option values |
 | `variant_prices` | `Collection<VariantPrice>` | Tier/group pricing overrides |
+| `images` | `Collection<File>` | Variant-specific images (falls back to product images if empty) |
 
 ### Methods
 
@@ -445,6 +447,31 @@ When a customer submits `product_options` with `onAddToCart`, the cart component
 2. The hash is looked up in the variants table.
 3. If found and enabled, the variant's price, SKU, and stock are used.
 4. If not found, an exception is thrown.
+
+For template use, `resolveVariantSafe()` is the preferred method — it returns `null` instead of throwing when the variant is not found or not available. This is useful when displaying price and availability on the product page while the customer is still selecting options:
+
+```twig
+{# Resolve variant from posted options (safe — returns null on mismatch) #}
+{% set postedOptions = post('product_options', {}) %}
+{% set variant = product.resolveVariantSafe(postedOptions) %}
+
+{# Variant-aware price display #}
+{% if variant %}
+    {{ variant.getCompiledPrice(1)|currency }}
+{% else %}
+    {{ product.final_sale_price|currency }}
+{% endif %}
+
+{# Variant-aware images (falls back to product images) #}
+{% set images = (variant and variant.images is not empty) ? variant.images : product.images %}
+
+{# Variant availability check #}
+{% if variant and not variant.is_enabled %}
+    <div class="alert">This combination is currently unavailable.</div>
+{% elseif variant and variant.isOutOfStock() %}
+    <div class="alert">Out of stock.</div>
+{% endif %}
+```
 
 ```twig
 {# Variant info in cart/order context #}

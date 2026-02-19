@@ -310,6 +310,7 @@ Each line item within an order, representing a purchased product with its quanti
 |----------|------|-------------|
 | `id` | `int` | Primary key |
 | `quantity` | `int` | Quantity ordered |
+| `variant_id` | `int\|null` | Selected variant ID (null if no variant) |
 
 ### Price Properties
 
@@ -448,6 +449,26 @@ The `outputProductName()` method accepts an options array:
         <span class="text-muted">Download limit reached</span>
     {% endif %}
 {% endif %}
+```
+
+### Displaying Variant and Bundle Info
+
+```twig
+{% for item in order.items %}
+    <div class="{{ item.isBundleItem() ? 'bundle-child-item' }}">
+        {# Bundle child slot name #}
+        {% if item.bundle_master_bundle_item_name %}
+            <em class="text-muted">{{ item.bundle_master_bundle_item_name }}</em>
+        {% endif %}
+
+        <strong>{{ item.product.name }}</strong>
+
+        {# Variant name #}
+        {% if item.variant_id %}
+            <span class="text-muted">{{ item.variant.name }}</span>
+        {% endif %}
+    </div>
+{% endfor %}
 ```
 
 ---

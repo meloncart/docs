@@ -78,21 +78,28 @@ The commerce theme separates its UI into small, focused partials. This makes it 
 
 | Partial | Purpose |
 | --- | --- |
-| `shop/product-view` | Full product detail layout |
-| `shop/product-images` | Product image gallery |
-| `shop/product-options` | Product option selectors (size, color) |
+| `shop/product-view` | Full product detail layout (variant-aware pricing and availability) |
+| `shop/product-images` | Product image gallery (variant-specific images) |
+| `shop/product-options` | Product option selectors with AJAX variant updates |
 | `shop/product-extras` | Product extras with pricing |
 | `shop/product-attributes` | Product specifications table |
 | `shop/product-card` | Product card for grid/list views |
-| `shop/add-to-cart-control` | Add-to-cart form with quantity selector |
+| `shop/add-to-cart-control` | Add-to-cart form with variant-aware pricing |
+| `shop/bundle` | Bundle slot container for bundle products |
+| `shop/bundle-item-products` | Product selection per bundle slot (dropdown/radio/checkbox) |
+| `shop/bundle-product-parameters` | Bundle child product detail (image, options, extras, quantity) |
+| `shop/bundle-product-options` | Options for a bundle child product |
+| `shop/bundle-product-extras` | Extras for a bundle child product |
+| `shop/bundle-product-quantity` | Quantity and price for a bundle child product |
 | `shop/cart-view` | Full cart page layout |
-| `shop/cart-list` | Cart item listing |
+| `shop/cart-list` | Cart item listing (bundle grouping, variant name display) |
 | `shop/cart-summary` | Cart totals and checkout button |
 | `shop/mini-cart` | Mini cart badge in navigation |
 | `shop/checkout-step-details` | Checkout contact/address step |
 | `shop/checkout-step-shipping` | Shipping method selection |
 | `shop/checkout-step-payment` | Payment method selection |
-| `shop/order-summary` | Order total breakdown |
+| `shop/order-summary` | Order total breakdown (bundle grouping, variant name display) |
+| `shop/order-items` | Order item listing (bundle grouping, variant name display) |
 | `shop/payment-form` | Payment gateway form |
 | `shop/shipping-estimator` | Cart shipping cost estimator |
 | `shop/breadcrumb` | Category/product breadcrumbs |

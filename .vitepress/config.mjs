@@ -42,7 +42,8 @@ const merchantSidebar = [
     {
         text: "Settings",
         items: [
-            { text: 'Store Configuration', link: '/merchant/settings/store' }
+            { text: 'Store Configuration', link: '/merchant/settings/store' },
+            { text: 'Multi-Store Setup', link: '/merchant/settings/multi-store' }
         ]
     }
 ];

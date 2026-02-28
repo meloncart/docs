@@ -114,6 +114,7 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
 | `all_extras` | `Collection<ProductExtra>` | Combined local extras + extra set extras |
 | `properties` | `Collection<ProductProperty>` | Specifications (Material, Weight) |
 | `price_tiers` | `Collection<PriceTier>` | Volume pricing tiers |
+| `visible_price_tiers` | `Collection<PriceTier>` | Tiers filtered for the current user's group (falls back to generic tiers) |
 | `variants` | `Collection<ProductVariant>` | Product variants |
 | `bundle_items` | `Collection<ProductBundleItem>` | Bundle slots |
 | `reviews` | `Collection<ProductReview>` | Product reviews |
@@ -168,10 +169,15 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
     {% endif %}
 
     {# Tier pricing #}
-    {% if product.allow_price_tiers and product.price_tiers is not empty %}
+    {% set visibleTiers = product.visible_price_tiers %}
+    {% if visibleTiers is not empty %}
         <table class="tier-pricing">
             <tr><th>Quantity</th><th>Price</th></tr>
-            {% for tier in product.price_tiers %}
+            <tr>
+                <td>1+</td>
+                <td>{{ product.final_price|currency }}</td>
+            </tr>
+            {% for tier in visibleTiers %}
                 <tr>
                     <td>{{ tier.quantity_label }}</td>
                     <td>{{ tier.price|currency }}</td>
@@ -505,15 +511,22 @@ Price tiers provide volume-based pricing. When a customer adds a quantity that m
 
 ### Displaying Tier Pricing
 
+Use `visible_price_tiers` to display tiers appropriate for the current user. This attribute automatically shows user-group-specific tiers when available, falling back to generic tiers otherwise.
+
 ```twig
-{% if product.allow_price_tiers and product.price_tiers is not empty %}
+{% set visibleTiers = product.visible_price_tiers %}
+{% if visibleTiers is not empty %}
     <h4>Volume Pricing</h4>
     <table>
         <thead>
             <tr><th>Quantity</th><th>Unit Price</th></tr>
         </thead>
         <tbody>
-            {% for tier in product.price_tiers %}
+            <tr>
+                <td>1+</td>
+                <td>{{ product.final_price|currency }}</td>
+            </tr>
+            {% for tier in visibleTiers %}
                 <tr>
                     <td>{{ tier.quantity_label }}</td>
                     <td>{{ tier.price|currency }}</td>

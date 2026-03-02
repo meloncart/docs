@@ -36,16 +36,27 @@
     children:
         - introduction
 -
-    title: Components
+    title: Catalog
+    collapsable: false
+    children:
+        - components/catalog
+        - components/catalog-filtering
+        - components/reviews
+        - components/wishlist
+-
+    title: Checkout
     collapsable: false
     children:
         - components/cart
-        - components/catalog
-        - components/catalog-filtering
         - components/checkout
+-
+    title: Customer
+    collapsable: false
+    children:
         - components/session
         - components/registration
         - components/authentication
         - components/new-password
         - components/profile-details
         - components/security-details
+        - components/order-history

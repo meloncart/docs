@@ -44,6 +44,7 @@ Categories organize products into a browsable hierarchy with unlimited nesting d
 | `pageUrl($pageName)` | `string` | CMS page URL for this category |
 | `countProducts()` | `int` | Number of products in this category |
 | `listProducts($options)` | `Paginator` | Paginated product listing |
+| `priceRange()` | `array` | `{min, max}` base values (cents) for products in this category |
 | `getBreadcrumbPath()` | `array\|null` | Parent chain for breadcrumbs |
 | `getParents()` | `array` | All ancestor categories |
 
@@ -63,8 +64,22 @@ The `listProducts()` method returns a paginated collection with these options:
 | `perPage` | `int` | `30` | Products per page |
 | `sorting` | `string` | `created_at` | Sort field: `created_at`, `price`, `name`, `random` |
 | `search` | `string` | `''` | Search term |
+| `manufacturers` | `array\|null` | `null` | Manufacturer IDs to filter by |
+| `ratings` | `array\|null` | `null` | Star ratings to filter by (e.g., `[4, 5]`) |
+| `priceMin` | `int\|null` | `null` | Minimum price in base value (cents) |
+| `priceMax` | `int\|null` | `null` | Maximum price in base value (cents) |
 
 Sorting supports direction: `'price desc'`, `'name asc'`.
+
+### priceRange
+
+Returns the minimum and maximum product price within the category as base values (cents). Useful for initializing a price filter slider.
+
+```twig
+{% set priceRange = category.priceRange() %}
+{# priceRange.min = 999 (i.e., $9.99) #}
+{# priceRange.max = 29999 (i.e., $299.99) #}
+```
 
 ### Complete Examples
 

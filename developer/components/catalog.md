@@ -307,6 +307,12 @@ The `listProducts()` method accepts an options array:
 | `perPage` | integer | `30` | Products per page |
 | `sorting` | string | `created_at` | Sort column (e.g., `name`, `price asc`, `price desc`) |
 | `search` | string | `''` | Search query to filter products |
+| `manufacturers` | array\|null | `null` | Array of manufacturer IDs to filter by |
+| `ratings` | array\|null | `null` | Array of star ratings to filter by (e.g., `[4, 5]` for 4+ stars) |
+| `priceMin` | integer\|null | `null` | Minimum price in base value (cents) |
+| `priceMax` | integer\|null | `null` | Maximum price in base value (cents) |
+
+Rating values match products whose `reviews_rating` falls within the star range (e.g., rating `4` matches products rated 4.00–4.99).
 
 ## Complete Examples
 
@@ -458,7 +464,13 @@ The category products partial demonstrates AJAX-powered sorting and view mode to
     'price asc': 'Price (low to high)'
 } %}
 
-{% set products = category.listProducts({ sorting: sortingPreference }) %}
+{% set products = category.listProducts({
+    sorting: sortingPreference,
+    manufacturers: post('manufacturers'),
+    ratings: post('ratings'),
+    priceMin: post('priceMin'),
+    priceMax: post('priceMax')
+}) %}
 
 <div class="d-flex justify-content-between mb-3">
     <p>Found <strong>{{ products.total }}</strong> products</p>

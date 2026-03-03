@@ -56,19 +56,30 @@ const developerSidebar = [
         ]
     },
     {
-        text: "Components",
+        text: "Catalog",
+        items: [
+            { text: 'Catalog', link: '/developer/components/catalog' },
+            { text: 'Catalog Filtering', link: '/developer/components/catalog-filtering' },
+            { text: 'Reviews', link: '/developer/components/reviews' },
+            { text: 'Wishlist', link: '/developer/components/wishlist' }
+        ]
+    },
+    {
+        text: "Checkout",
         items: [
             { text: 'Cart', link: '/developer/components/cart' },
-            { text: 'Catalog', link: '/developer/components/catalog' },
-            { text: 'Checkout', link: '/developer/components/checkout' },
-            { text: 'Reviews', link: '/developer/components/reviews' },
+            { text: 'Checkout', link: '/developer/components/checkout' }
+        ]
+    },
+    {
+        text: "Customer",
+        items: [
             { text: 'Session', link: '/developer/components/session' },
             { text: 'Registration', link: '/developer/components/registration' },
             { text: 'Authentication', link: '/developer/components/authentication' },
             { text: 'New Password', link: '/developer/components/new-password' },
             { text: 'Profile Details', link: '/developer/components/profile-details' },
             { text: 'Security Details', link: '/developer/components/security-details' },
-            { text: 'Wishlist', link: '/developer/components/wishlist' },
             { text: 'Order History', link: '/developer/components/order-history' }
         ]
     },

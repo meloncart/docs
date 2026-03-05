@@ -32,8 +32,8 @@ The `Product` model is the central model for all product data. It is typically a
 |----------|------|-------------|
 | `price` | `int` | Raw base price (no tax, no rules) |
 | `cost` | `int` | Cost/wholesale price |
-| `is_on_sale` | `bool` | Whether a discount applies (manual sale, catalog rules, or both) |
-| `sale_price_or_discount` | `string` | Manual sale value: `"5000"` (fixed), `"20%"` (percent), or `"-500"` (offset) |
+| `is_on_sale` | `bool` | Whether a manual sale price is set |
+| `sale_price` | `int` | Manual sale price (in base currency units) |
 | `original_price` | `int` | Base price without tax — respects tier pricing and quantity |
 | `original_sale_price` | `int` | Sale price without tax — checks manual sale, then catalog rules |
 | `final_price` | `int` | Display price with tax (if tax display is enabled) |
@@ -413,6 +413,9 @@ Variants are specific combinations of product options, each with its own SKU, pr
 | `units_in_stock` | `int\|null` | Variant-specific stock |
 | `stock_alert_threshold` | `int\|null` | Low stock threshold |
 | `barcode` | `string` | Barcode/UPC |
+| `is_on_sale` | `bool` | Whether a manual sale price is set on this variant |
+| `sale_price` | `int\|null` | Manual sale price (in base currency units) |
+| `on_sale` | `bool` | Whether the variant is on sale (checks variant, then product) |
 | `is_enabled` | `bool` | Whether variant is available |
 | `is_default` | `bool` | Default variant selection |
 
@@ -429,7 +432,8 @@ Variants are specific combinations of product options, each with its own SKU, pr
 
 | Method | Returns | Description |
 |--------|---------|-------------|
-| `getCompiledPrice($qty, $groupId)` | `int` | Resolved price with tiers and user groups |
+| `getCompiledPrice($qty, $groupId)` | `int` | Resolved price with tiers, user groups, catalog rules, and sale prices |
+| `getEffectivePrice()` | `int` | Base price before sale (variant price or product price fallback) |
 | `getEffectiveWeight()` | `float` | Variant weight or product fallback |
 | `getEffectiveWidth()` | `float` | Variant width or product fallback |
 | `getEffectiveHeight()` | `float` | Variant height or product fallback |
@@ -463,7 +467,10 @@ For template use, `resolveVariantSafe()` is the preferred method — it returns 
 
 {# Variant-aware price display #}
 {% if variant %}
-    {{ variant.getCompiledPrice(1)|currency }}
+    <span>{{ variant.getCompiledPrice(1)|currency }}</span>
+    {% if variant.on_sale %}
+        <del>{{ variant.getEffectivePrice()|currency }}</del>
+    {% endif %}
 {% else %}
     {{ product.final_sale_price|currency }}
 {% endif %}
@@ -478,6 +485,10 @@ For template use, `resolveVariantSafe()` is the preferred method — it returns 
     <div class="alert">Out of stock.</div>
 {% endif %}
 ```
+
+::: tip Sale Price Resolution
+The `on_sale` property checks the variant's own `is_on_sale` flag first, then falls back to the product's `on_sale` status. Similarly, `getCompiledPrice()` applies the variant's `sale_price` if set, otherwise the product's `sale_price` — returning the lower of the sale price and the compiled price. Use `getEffectivePrice()` for the pre-sale base price (strikethrough display).
+:::
 
 ```twig
 {# Variant info in cart/order context #}
@@ -575,8 +586,7 @@ Each product choice within a bundle slot, with optional price overrides.
 | `allow_manual_quantity` | `bool` | Let customer change quantity |
 | `is_default` | `bool` | Pre-selected by default |
 | `is_active` | `bool` | Visible to customers |
-| `price_override_mode` | `string` | Price mode: `default`, `fixed`, `fixed-discount`, `percentage-discount` |
-| `price_or_discount` | `int` | Amount for the price mode (in cents) |
+| `price` | `int` | Override price (null = use product's own price) |
 | `sort_order` | `int` | Display order |
 
 ### Methods

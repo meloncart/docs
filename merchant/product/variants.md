@@ -43,6 +43,7 @@ Each variant appears as a row in the variants list. Click a variant to edit its 
 
 - **SKU** — A unique SKU for this specific variant. If left empty, the product's base SKU is used.
 - **Price** — A variant-specific price. If left empty, the product's base price is used.
+- **On Sale / Sale Price** — A variant-specific sale price. When checked, the sale price is applied to this variant. If not set, the product's sale price is used as a fallback.
 - **Cost** — The cost price for this variant.
 - **Compare Price** — An optional comparison price displayed alongside the variant price.
 - **Weight** — The shipping weight for this variant. Falls back to the product's weight if empty.
@@ -75,8 +76,8 @@ When a customer adds a product to the cart with a specific option combination, t
 1. **Variant-specific tier price** — If the variant has tier pricing and the quantity qualifies, the tier price is used.
 2. **Variant base price** — If the variant has a price set, that price is used.
 3. **Product base price** — If the variant has no price, the product's base price is used.
-
-Catalog price rules (set up under **Shop → Price Rules**) are also factored in. If a catalog rule produces a lower price than the resolved variant price, the rule price is used instead.
+4. **Catalog price rules** — If a catalog rule (set up under **Shop → Price Rules**) produces a lower price than the resolved price, the rule price is used instead.
+5. **Sale price** — If the variant has its own sale price set (with **On Sale** checked), it is compared to the resolved price and the lower value is used. If the variant has no sale price, the product's sale price is checked as a fallback.
 
 ## Variant Stock
 

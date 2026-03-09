@@ -69,11 +69,12 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
 | Property | Type | Description |
 |----------|------|-------------|
 | `track_inventory` | `bool` | Whether stock is tracked |
-| `units_in_stock` | `int` | Current stock quantity |
 | `hide_if_out_of_stock` | `bool` | Hide product when out of stock |
 | `allow_negative_stock` | `bool` | Allow stock to go below zero |
 | `stock_alert_threshold` | `int` | Low stock notification threshold |
 | `allow_pre_order` | `bool` | Accept orders when out of stock |
+
+Stock quantities are managed through the [Inventory](./inventory) system using warehouses. Use `getSalableQuantity()` and `isOutOfStock()` to check availability.
 
 ### Visibility Properties
 
@@ -123,6 +124,7 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
 | `user_groups` | `Collection<UserGroup>` | Visible-to user groups |
 | `site_definitions` | `Collection<SiteDefinition>` | Visible-on sites (when `is_visible_site` is enabled) |
 | `extra_sets` | `Collection<ProductExtraSet>` | Assigned extra option sets |
+| `inventory_stocks` | `Collection<InventoryStock>` | [Per-warehouse stock records](./inventory) |
 
 ### Methods
 
@@ -133,7 +135,11 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
 | `getPrimaryCategory()` | `Category\|null` | First associated category |
 | `isVisible()` | `bool` | Whether product is enabled and not archived |
 | `isVisibleOnSite($siteId)` | `bool` | Whether product is visible on a specific site (defaults to current site) |
-| `isOutOfStock()` | `bool` | Whether stock is below threshold |
+| `isOutOfStock()` | `bool` | Whether stock is below threshold (across [warehouses](./inventory)) |
+| `getSalableQuantity($siteId)` | `int` | Total salable stock across warehouses for a site (defaults to current site) |
+| `reserveStock($quantity)` | `void` | Reserve stock across warehouses for current site |
+| `decreaseStock($quantity)` | `void` | Decrement physical stock and release reservation |
+| `releaseStock($quantity)` | `void` | Release reservation without changing physical stock |
 | `getOriginalPrice($qty, $groupId)` | `int` | Base price with tier pricing |
 | `getOriginalSalePrice($qty, $groupId)` | `int` | Sale price (manual or catalog rules) |
 | `getFinalPrice($qty, $groupId)` | `int` | Display price with tax |
@@ -239,7 +245,7 @@ The scope automatically applies `applyVisible` and `applySiteVisibility`, so cal
                 <span class="badge">Out of Stock</span>
             {% endif %}
         {% else %}
-            <span>{{ product.units_in_stock }} in stock</span>
+            <span>In Stock</span>
         {% endif %}
     {% endif %}
 
@@ -454,8 +460,6 @@ Variants are specific combinations of product options, each with its own SKU, pr
 | `width` | `float\|null` | Override width |
 | `height` | `float\|null` | Override height |
 | `depth` | `float\|null` | Override depth |
-| `units_in_stock` | `int\|null` | Variant-specific stock |
-| `stock_alert_threshold` | `int\|null` | Low stock threshold |
 | `barcode` | `string` | Barcode/UPC |
 | `is_on_sale` | `bool` | Whether a manual sale price is set on this variant |
 | `sale_price` | `int\|null` | Manual sale price (in base currency units) |
@@ -471,6 +475,7 @@ Variants are specific combinations of product options, each with its own SKU, pr
 | `variant_options` | `Collection<ProductVariantOption>` | Selected option values |
 | `variant_prices` | `Collection<VariantPrice>` | Tier/group pricing overrides |
 | `images` | `Collection<File>` | Variant-specific images (falls back to product images if empty) |
+| `inventory_stocks` | `Collection<InventoryStock>` | [Per-warehouse stock records](./inventory) |
 
 ### Methods
 
@@ -483,8 +488,11 @@ Variants are specific combinations of product options, each with its own SKU, pr
 | `getEffectiveHeight()` | `float` | Variant height or product fallback |
 | `getEffectiveDepth()` | `float` | Variant depth or product fallback |
 | `getEffectiveSku()` | `string` | Variant SKU or product fallback |
-| `getEffectiveUnitsInStock()` | `int` | Variant stock or product fallback |
+| `getSalableQuantity($siteId)` | `int` | Total salable stock across [warehouses](./inventory) for a site |
 | `isOutOfStock()` | `bool` | Whether variant is out of stock |
+| `reserveStock($quantity)` | `void` | Reserve stock across warehouses |
+| `decreaseStock($quantity)` | `void` | Decrement physical stock and release reservation |
+| `releaseStock($quantity)` | `void` | Release reservation without changing physical stock |
 
 ### Static Methods
 

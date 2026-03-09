@@ -88,6 +88,7 @@ const developerSidebar = [
         items: [
             { text: 'Product', link: '/developer/models/product' },
             { text: 'Order', link: '/developer/models/order' },
+            { text: 'Inventory', link: '/developer/models/inventory' },
             { text: 'Catalog', link: '/developer/models/category' }
         ]
     },

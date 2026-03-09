@@ -198,21 +198,30 @@ Event::listen('shop.beforeUpdateOrderStatus', function($record, $order, $statusI
 
 ### shop.order.stockChanged
 
-Fires before stock is decreased when an order is marked as paid. Return `false` to prevent stock reduction, useful if you manage inventory externally.
+Fires before a stock operation is performed as part of the order status lifecycle. This event fires on three status transitions: **New** (reserve), **Shipped** (decrement), and **Cancelled** (release). Return `false` to prevent the default stock operation, useful if you manage inventory externally.
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `$order` | Order | The order model |
-| `$statusPaid` | boolean | Whether the new status represents a paid state |
+| `$status` | OrderStatus | The status triggering the stock action |
 
-**Return:** Return `false` to prevent stock from being decreased.
+**Return:** Return `false` to prevent the default stock operation.
+
+The `$status->code` indicates which stock action would occur:
+- `new` — `$order->reserveStockValues()` (reserve stock for all items)
+- `shipped` — `$order->decreaseStockValues()` (decrement physical stock, release reservation)
+- `cancelled` — `$order->releaseStockValues()` (release reservation, restore salable qty)
 
 ```php
-Event::listen('shop.order.stockChanged', function($order, $statusPaid) {
+Event::listen('shop.order.stockChanged', function($order, $status) {
     // Handle stock externally via warehouse API
-    WarehouseApi::decreaseStock($order->items);
+    match ($status->code) {
+        'new' => ExternalWarehouse::reserve($order->items),
+        'shipped' => ExternalWarehouse::fulfill($order->items),
+        'cancelled' => ExternalWarehouse::release($order->items),
+    };
 
-    // Prevent Meloncart from also decreasing stock
+    // Prevent Meloncart from also modifying stock
     return false;
 });
 ```
@@ -638,7 +647,7 @@ Event::listen('shop.categories.extendListToolbar', function($controller) {
 | `shop.order.getNotificationVars` | `$order` | No | Order |
 | `shop.order.itemDisplayDetails` | `$item`, `$plainText` | No | Order |
 | `shop.beforeUpdateOrderStatus` | `$record`, `$order`, `$statusId`, `$prevStatus` | **Yes** | Status |
-| `shop.order.stockChanged` | `$order`, `$statusPaid` | **Yes** | Status |
+| `shop.order.stockChanged` | `$order`, `$status` | **Yes** | Status |
 | `shop.order.updateStatus` | `$order`, `$status`, `$prevStatus` | No | Status |
 | `shop.beforeOrderInternalStatusNotification` | `$order`, `$status` | **Yes** | Status |
 | `shop.cart.beforeAddProduct` | `$product`, `$options` | No | Cart |

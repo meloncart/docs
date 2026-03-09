@@ -490,10 +490,25 @@ Represents an order status in the workflow system.
 
 ### Constants
 
-```
-OrderStatus::STATUS_NEW = 'new'
-OrderStatus::STATUS_PAID = 'paid'
-```
+| Constant | Value | Stock Action |
+|----------|-------|-------------|
+| `STATUS_NEW` | `new` | Reserves stock |
+| `STATUS_PAID` | `paid` | Marks payment processed (no stock action) |
+| `STATUS_SHIPPED` | `shipped` | Decrements stock and releases reservation |
+| `STATUS_CANCELLED` | `cancelled` | Releases reservation |
+| `STATUS_REFUNDED` | `refunded` | No stock action |
+
+See [Inventory — Stock Lifecycle](./inventory#stock-lifecycle) for details on how status changes trigger stock operations.
+
+### Static Helpers
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `getNewStatus()` | `OrderStatus` | Find the "new" status |
+| `getPaidStatus()` | `OrderStatus` | Find the "paid" status |
+| `getShippedStatus()` | `OrderStatus` | Find the "shipped" status |
+| `getCancelledStatus()` | `OrderStatus` | Find the "cancelled" status |
+| `getRefundedStatus()` | `OrderStatus` | Find the "refunded" status |
 
 ### Displaying Status
 

@@ -1,81 +1,151 @@
 ---
-subtitle: Track and manage product stock levels.
+subtitle: Track and manage product stock levels across warehouses.
 ---
 # Inventory
 
-Meloncart includes a built-in inventory system that tracks stock levels, prevents overselling, and sends low-stock notifications. Inventory tracking is optional and can be configured per product.
+Meloncart includes a warehouse-based inventory system that tracks stock levels across multiple locations, prevents overselling through stock reservations, and sends low-stock notifications. Inventory tracking is optional and can be configured per product.
 
 ## Enabling Inventory Tracking
 
 Inventory tracking is available when the product type has the **Has Inventory** feature enabled. On the product form, check the **Track Inventory** checkbox to activate stock management for that product.
 
-Once enabled, the following fields become available:
+Once enabled, the Inventory tab shows the warehouse stock table and the following settings:
 
-- **Units in Stock** — The current number of units available for sale. This field is required when inventory tracking is enabled.
-- **Stock Alert Threshold** — An optional stock level that triggers a low-stock notification. When stock falls to or below this number, store managers are notified by email.
+- **Hidden When Out Of Stock** — Automatically hides the product from the storefront when it goes out of stock.
+- **Allow Negative Stock** — Allows the stock count to go below zero, useful for accepting orders beyond current inventory.
+- **Out Of Stock Threshold** — An optional stock level that triggers a low-stock notification. When salable stock falls to or below this number, store managers are notified by email.
+- **Allow Pre-Order** — Allows customers to purchase the product even when it is out of stock.
 
-## Stock Behavior
+## Warehouses
 
-### Automatic Stock Reduction
+Warehouses represent physical locations where inventory is stored — such as fulfillment centers, retail stores, or third-party logistics providers. Manage warehouses under **Shop → Warehouses** in the backend.
 
-When an order is placed, the stock count for each purchased product is automatically reduced by the ordered quantity. This happens during order processing, not at the moment the item is added to the cart.
+### Creating a Warehouse
 
-### Out-of-Stock Products
+Each warehouse has the following fields:
 
-A product is considered out of stock when its **Units in Stock** reaches zero (or falls to or below the **Stock Alert Threshold**, if one is set).
+- **Name** — A descriptive name (e.g., "Buho Logistics Mexico").
+- **Code** — A unique identifier (e.g., `mx-buho`).
+- **Enabled** — Whether the warehouse is active for fulfillment.
+- **Description** — Optional internal notes about the warehouse.
+- **Sites** — Which storefronts this warehouse fulfills orders for (see below).
+- **Address** — The warehouse's physical address (address, city, postal code, country, state).
+- **Contact** — Contact person details (name, email, phone).
 
-Out-of-stock behavior depends on the product's settings:
+### Assigning Warehouses to Sites
 
-- **Hide if Out of Stock** — When enabled, the product is automatically hidden from the storefront when it goes out of stock.
-- **Allow Pre-Order** — When enabled, customers can still purchase the product even when it is out of stock. This is useful for upcoming products or items with a known restock date.
-- **Allow Negative Stock** — When enabled, the stock count can go below zero. This is useful when you want to accept orders beyond your current inventory and fulfill them when new stock arrives.
+Each warehouse can be assigned to one or more sites. This controls which warehouses are used to calculate available stock for customers visiting a particular storefront.
+
+For example, a multi-country store might have:
+
+| Warehouse | Assigned Sites | Priority |
+|-----------|---------------|----------|
+| Buho Logistics Mexico | Mexico (ES), Mexico (EN) | 1 |
+| Bogota Warehouse | Colombia (ES) | 1 |
+| Buho Logistics Mexico | Colombia (ES) | 2 (backup) |
+
+When multiple warehouses serve the same site, stock from all assigned warehouses is combined. The **priority** on each assignment determines which warehouse is drawn from first when fulfilling orders — lower priority numbers are used first.
 
 ::: tip
-If none of these options are enabled and a product goes out of stock, it remains visible on the storefront but cannot be added to the cart.
+If you operate a single warehouse, simply create one warehouse and assign it to all your sites. The system will work identically to a single-location inventory.
 :::
+
+## Managing Stock
+
+Stock is managed on the product form in the **Inventory** tab. When inventory tracking is enabled and warehouses exist, the tab displays a stock table showing each warehouse with its quantity, reserved units, and salable amount.
+
+Click **Add Stock** to add inventory for a warehouse:
+
+- **Warehouse** — Select the warehouse where this stock is held.
+- **Quantity** — The number of physical units on hand at this warehouse.
+- **Reserved** — Units held by pending orders (managed automatically by the system).
+
+The **salable quantity** shown to customers on the storefront is calculated as:
+
+```
+Salable = Quantity − Reserved
+```
+
+This is summed across all enabled warehouses assigned to the customer's site.
 
 ## Per-Variant Stock Tracking
 
-When a product uses [variants](./variants), each variant can track its own stock independently. Set the **Units in Stock** field on an individual variant to manage that combination's inventory separately.
+When a product uses [variants](./variants), each variant tracks its own stock per warehouse independently. Set the stock for each variant in the variant's **Inventory** tab.
 
-If a variant's stock field is left empty, inventory tracking falls back to the product level. This means you can mix approaches within the same product — some variants with their own stock counts, and others sharing the product's stock.
+When a variant-specific combination is purchased, only that variant's stock is affected — other variants and the product-level stock remain unchanged.
 
-When a variant has its own stock:
-- The variant's stock is decreased when that specific combination is purchased.
-- Low-stock alerts are triggered based on the variant's stock level and threshold.
-- The variant fires its own out-of-stock event independently of the product.
+## Stock and Order Lifecycle
 
-When a variant defers to the product:
-- The product's stock is decreased instead.
-- Alerts and out-of-stock behavior follow the product's settings.
+Stock changes follow a two-phase reservation lifecycle tied to order statuses:
+
+### 1. Order Placed (New)
+
+When a customer places an order, stock is **reserved** for all items in the order. The physical quantity stays the same, but the reserved count increases — reducing the salable quantity visible to other customers. This prevents overselling when multiple customers are shopping simultaneously.
+
+### 2. Order Shipped
+
+When the order status changes to **Shipped**, the physical stock is **decreased** and the reservation is **released**. At this point, the units have left the warehouse.
+
+### 3. Order Cancelled
+
+If an order is cancelled before shipment, the reservation is **released** without changing the physical stock. The salable quantity is restored, making those units available for other customers.
+
+### 4. Order Refunded
+
+If an order is refunded after shipment, no automatic stock adjustment occurs — the units have already left the warehouse. If the items are physically returned, you can manually increase the stock on the product form.
+
+::: info
+The order status flow for inventory is: **New** (reserve) → **Paid** (no stock action) → **Shipped** (decrease) or **Cancelled** (release). The **Paid** status is a billing milestone and does not affect stock.
+:::
+
+### Priority-Based Fulfillment
+
+When multiple warehouses serve the same site, stock operations follow the warehouse priority order. If the highest-priority warehouse has insufficient stock, the remainder spills to the next warehouse. For example:
+
+| Warehouse | Priority | Quantity | Reserved |
+|-----------|----------|----------|----------|
+| Primary Warehouse | 1 | 10 | 0 |
+| Backup Warehouse | 2 | 50 | 0 |
+
+If a customer orders 15 units, the system reserves 10 from Primary Warehouse and 5 from Backup Warehouse.
 
 ## Low-Stock Notifications
 
-When a product or variant goes out of stock (or falls below its stock alert threshold), Meloncart sends an email notification to all backend users in the **store-managers** admin group.
+When a product goes out of stock (or falls below its stock alert threshold), Meloncart sends an email notification to all backend users in the **store-managers** admin group.
 
 To receive low-stock notifications:
 
 1. Create a backend user group with the code `store-managers` under **Settings → Administrators → Groups** (if it does not already exist).
 2. Add the backend users who should receive notifications to this group.
 
-The notification email includes details about the product that triggered the alert, allowing store managers to take action such as reordering from suppliers or disabling the product.
-
 ::: info
 The low-stock email template can be customized under **Settings → Mail Templates** by editing the `shop:low_stock_internal` template.
 :::
 
-## Stock and Order Lifecycle
+## Out-of-Stock Behavior
 
-Stock changes are tied to the order lifecycle:
+A product is considered out of stock when its total salable quantity across all warehouses for the current site reaches zero (or falls to or below the **Out Of Stock Threshold**, if one is set).
 
-1. **Customer places an order** — Stock is decreased for all items in the order.
-2. **Low-stock check** — After stock is decreased, the system checks whether any products have fallen below their alert threshold and sends notifications if so.
-3. **Order cancellation or refund** — Stock can be manually restored through the order management interface when an order is cancelled or refunded.
+Out-of-stock behavior depends on the product's settings:
 
-::: warning
-Stock is not reserved when items are added to the cart. Two customers can add the last unit of a product to their carts simultaneously. The first to complete checkout receives the item; the second may encounter an out-of-stock condition at checkout time.
+- **Hidden When Out Of Stock** — The product is automatically hidden from the storefront when it goes out of stock.
+- **Allow Pre-Order** — Customers can still purchase the product even when it is out of stock. This is useful for upcoming products or items with a known restock date.
+- **Allow Negative Stock** — The stock count can go below zero, allowing orders to be accepted beyond current inventory.
+
+::: tip
+If none of these options are enabled and a product goes out of stock, it remains visible on the storefront but cannot be added to the cart.
 :::
 
 ## Products Without Inventory Tracking
 
 When the **Track Inventory** checkbox is not enabled, the product is treated as always in stock. No stock fields are shown, no stock decreases occur on purchase, and no low-stock notifications are sent. This is appropriate for digital products, services, or items with unlimited availability.
+
+## Multi-Store Inventory
+
+Warehouses use the same [multi-store](../settings/multi-store) site group scoping as other shop data. Each site group (store) has its own set of warehouses. Within a store, warehouses are assigned to specific sites to control which locations fulfill for which storefronts.
+
+This enables scenarios like:
+
+- **Country-specific fulfillment** — A Mexico warehouse serves the Mexico site, a Colombia warehouse serves the Colombia site.
+- **Shared warehouses** — A central warehouse serves multiple regional sites, with the same stock visible to all.
+- **Backup fulfillment** — A primary warehouse is preferred, with a secondary warehouse as overflow.

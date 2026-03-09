@@ -56,20 +56,20 @@ Categories organize products into a browsable hierarchy with unlimited nesting d
 
 ### listProducts Options
 
-The `listProducts()` method returns a paginated collection with these options:
+The `listProducts()` method is a convenience proxy for [`Product::listFrontEnd()`](./product#listfrontend) with this category pre-filled. It accepts the same options:
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `page` | `int` | `1` | Page number |
 | `perPage` | `int` | `30` | Products per page |
-| `sorting` | `string` | `created_at` | Sort field: `created_at`, `price`, `name`, `random` |
+| `sort` | `string` | `created_at desc` | Sort field with direction (e.g., `name asc`, `price desc`, `random`) |
 | `search` | `string` | `''` | Search term |
 | `manufacturers` | `array\|null` | `null` | Manufacturer IDs to filter by |
 | `ratings` | `array\|null` | `null` | Star ratings to filter by (e.g., `[4, 5]`) |
 | `priceMin` | `int\|null` | `null` | Minimum price in base value (cents) |
 | `priceMax` | `int\|null` | `null` | Maximum price in base value (cents) |
 
-Sorting supports direction: `'price desc'`, `'name asc'`.
+Visibility and site filtering are applied automatically.
 
 ### priceRange
 
@@ -143,7 +143,7 @@ Returns the minimum and maximum product price within the category as base values
 {% set products = category.listProducts({
     page: pagination,
     perPage: 12,
-    sorting: 'price asc'
+    sort: 'price asc'
 }) %}
 
 <div class="product-grid">

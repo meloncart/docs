@@ -82,6 +82,7 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
 | `is_visible_search` | `bool` | Show in search results |
 | `is_visible_catalog` | `bool` | Show in catalog listings |
 | `is_visible_user_group` | `bool` | Restrict visibility to specific user groups |
+| `is_visible_site` | `bool` | Restrict visibility to specific sites |
 
 ### Review Properties
 
@@ -120,6 +121,7 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
 | `reviews` | `Collection<ProductReview>` | Product reviews |
 | `custom_groups` | `Collection<CustomGroup>` | Custom product groups |
 | `user_groups` | `Collection<UserGroup>` | Visible-to user groups |
+| `site_definitions` | `Collection<SiteDefinition>` | Visible-on sites (when `is_visible_site` is enabled) |
 | `extra_sets` | `Collection<ProductExtraSet>` | Assigned extra option sets |
 
 ### Methods
@@ -130,6 +132,7 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
 | `getBreadcrumbPath()` | `array\|null` | Parent category chain for breadcrumbs |
 | `getPrimaryCategory()` | `Category\|null` | First associated category |
 | `isVisible()` | `bool` | Whether product is enabled and not archived |
+| `isVisibleOnSite($siteId)` | `bool` | Whether product is visible on a specific site (defaults to current site) |
 | `isOutOfStock()` | `bool` | Whether stock is below threshold |
 | `getOriginalPrice($qty, $groupId)` | `int` | Base price with tier pricing |
 | `getOriginalSalePrice($qty, $groupId)` | `int` | Sale price (manual or catalog rules) |
@@ -142,6 +145,47 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
 | `getReviewsCount()` | `int` | Cached approved review count |
 | `resolveVariant($options)` | `ProductVariant\|null` | Find variant matching options (throws on mismatch) |
 | `resolveVariantSafe($options)` | `ProductVariant\|null` | Find variant matching options (returns null on mismatch) |
+
+### Scopes
+
+| Scope | Description |
+|-------|-------------|
+| `applyVisible` | Filters out disabled and archived products |
+| `applySiteVisibility` | Filters by per-site visibility for the active site |
+| `listFrontEnd($options)` | Paginated listing with filtering, sorting, search, and visibility |
+
+### listFrontEnd
+
+The `listFrontEnd` scope is the primary entry point for querying products on the frontend. It automatically applies visibility and site filtering, and returns a paginated result.
+
+```php
+Product::listFrontEnd([
+    'category' => $categoryId,
+    'search' => 'blue widget',
+    'sort' => 'price asc',
+    'perPage' => 12,
+])
+```
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `page` | `int` | `1` | Page number |
+| `perPage` | `int` | `30` | Products per page |
+| `sort` | `string` | `created_at desc` | Sort field with direction (e.g., `name asc`, `price desc`, `random`) |
+| `search` | `string` | `''` | Search query |
+| `categories` | `array\|null` | `null` | Array of category IDs to filter by |
+| `category` | `int\|null` | `null` | Single category ID (includes child categories) |
+| `manufacturers` | `array\|null` | `null` | Array of manufacturer IDs |
+| `ratings` | `array\|null` | `null` | Star ratings to filter by (e.g., `[4, 5]`) |
+| `priceMin` | `int\|null` | `null` | Minimum price in base value (cents) |
+| `priceMax` | `int\|null` | `null` | Maximum price in base value (cents) |
+| `exceptProduct` | `mixed` | `null` | Product ID(s) or slug(s) to exclude |
+
+The scope automatically applies `applyVisible` and `applySiteVisibility`, so callers do not need to add these constraints manually.
+
+::: tip
+`Category::listProducts($options)` is a convenience proxy that calls `Product::listFrontEnd` with the category pre-filled. Both produce the same result.
+:::
 
 ### Complete Example
 

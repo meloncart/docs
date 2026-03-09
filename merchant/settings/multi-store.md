@@ -110,6 +110,81 @@ Some data is shared globally across all stores and is not scoped by site group:
 - **Product Types** — Product type definitions are shared.
 - **Countries & States** — Location data is global.
 
+## Multi-Currency Pricing
+
+Meloncart supports displaying and managing prices in different currencies across your stores using the [Currency](https://octobercms.com/plugin/responsiv-currency) plugin. Each site can have its own display currency, and prices are automatically converted using exchange rates — or you can set fixed price overrides for specific currencies.
+
+### Currency Tiers
+
+The currency system uses three tiers, each falling back to the one above it:
+
+| Currency | Scope | Set In | Purpose |
+|----------|-------|--------|---------|
+| **Default** | Global | Settings → Currencies | Anchor for all conversions; used when no other currency is configured |
+| **Base** | Site Group | Settings → Site Groups | Stored currency for all sites in a group; defaults to the global default |
+| **Site** | Site Definition | Settings → Site Definitions | Display currency for customers visiting that site; defaults to the base |
+
+### Setting Up Currencies
+
+1. **Create currencies** — Navigate to **Settings → Currencies** and create the currencies your stores will use. Mark one as the **Default**.
+
+2. **Configure exchange rates** — Navigate to **Settings → Exchange Rates** and set up currency pairs. You can set fixed rates manually or use an automated provider (such as Fixer.io or FastForex) for real-time rates.
+
+3. **Set a base currency per store** — If your stores use different base currencies (e.g. US Store in USD, EU Store in EUR), navigate to **Settings → Site Groups** and select a **Base Currency** for each group. This step is optional — when left unset, the global default is used.
+
+4. **Set a display currency per site** — Navigate to **Settings → Site Definitions** and set the **Currency** for each site. This determines what currency customers see on the storefront.
+
+For example:
+
+| Site | Locale | Currency |
+|------|--------|----------|
+| US Store (English) | `en` | USD |
+| EU Store (English) | `en` | EUR |
+| EU Store (French) | `fr` | EUR |
+| UK Store (English) | `en` | GBP |
+
+### How Prices Work
+
+Product prices are always stored in the store's base currency. When a customer visits a site with a different display currency, prices are automatically converted using exchange rates.
+
+For example, if a product costs **USD 100** in the US Store and the USD → EUR exchange rate is 0.92, customers on the EU Store see **EUR 92.00** automatically.
+
+### Fixed Price Overrides
+
+Sometimes exchange-rate conversion is not ideal — you may want to set round numbers or market-specific prices. Meloncart supports fixed price overrides for any currency.
+
+When editing a product on a non-base currency site, each price field shows the auto-converted value in a disabled input. Use the **Override** link to enter a fixed price for that currency. Use the **Clear** link to remove the override and revert to automatic conversion.
+
+::: tip
+Fixed overrides are stored separately from the base price. Clearing an override does not affect the base price — it simply reverts to using the exchange rate.
+:::
+
+### Displaying Prices on the Storefront
+
+Use the `currency` Twig filter with the `site` option to display prices in the visitor's currency:
+
+```twig
+{{ product.price|currency({ site: true }) }}
+```
+
+The current site's currency code is available as:
+
+```twig
+{{ this.site.currency_code }}
+```
+
+## Per-Site Product Visibility
+
+Within a store, all sites share the same product catalog by default. However, you can control which products appear on which sites using per-site visibility.
+
+To restrict a product to specific sites, edit the product and navigate to the **Visibility** tab. Check **Limit Visibility to Specific Sites**, then select the sites where the product should appear. Products with this setting unchecked remain visible on all sites in the store.
+
+This works bidirectionally — you can hide products on the primary site while showing them on a regional site, or vice versa. For example, a store with English, French, and Colombian sites might show 12 products on the English site but 14 on the Colombian site.
+
+::: tip
+Per-site visibility uses an opt-in model. When you add a new site to a store, restricted products will not appear on the new site until you explicitly add it to the product's visibility list.
+:::
+
 ## Migrating an Existing Store
 
 If you have an existing single-store installation and want to add a second store:

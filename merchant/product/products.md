@@ -168,6 +168,14 @@ A product can be enabled but hidden from search or catalog listings. This is use
 
 You can restrict product visibility to specific customer groups. When user group visibility is enabled, only customers belonging to the selected groups can see the product on the storefront. This is useful for wholesale-only products, member-exclusive items, or products restricted to certain customer segments.
 
+### Site Visibility
+
+In a [multi-store setup](../settings/multi-store), you can restrict product visibility to specific sites within the same store. Check **Limit Visibility to Specific Sites** and select which sites should display the product.
+
+When this setting is unchecked (the default), the product is visible on all sites in the store. When checked, the product only appears on the selected sites. This is an opt-in model — new sites will not display the product until explicitly added to the list.
+
+This is useful when different sites within the same store need different product assortments. For example, a store serving multiple regions might offer 14 products on its Colombia site but only 12 on the main site.
+
 ## Custom Groups
 
 Custom groups are user-defined collections of products used to create curated product sets on the storefront — for example, "Featured Products", "New Arrivals", or "Best Sellers". Custom groups are managed under **Shop → Groups**.

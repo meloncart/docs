@@ -11,7 +11,7 @@ The filtering system uses three layers:
 
 1. **Sidebar filter controls** — Twig partials with checkboxes and a price slider
 2. **The `catalog-form` JavaScript control** — Collects filter state and sends AJAX requests
-3. **The `listProducts()` method** — Accepts filter parameters and returns matching products
+3. **The `listProducts()` method** — Proxies to `Product::listFrontEnd()` with filter parameters and returns matching products
 
 When a customer interacts with any filter, the `catalog-form` control gathers all active filters and sends a single AJAX request to refresh the product listing.
 
@@ -187,7 +187,7 @@ The category products partial reads the filter values from the POST data and pas
 ```twig
 {# partials/shop-category/category-products.htm #}
 {% set products = category.listProducts({
-    sorting: sortingPreference,
+    sort: sortPreference,
     manufacturers: post('manufacturers'),
     ratings: post('ratings'),
     priceMin: post('priceMin'),
@@ -202,7 +202,7 @@ To add a new filter type:
 1. **Create a sidebar partial** with inputs that have a `data-filter-*` attribute
 2. **Add a listener** in `catalog-form.js` for the new attribute
 3. **Collect values** in the `onFilterProducts()` method and add to the `data` object
-4. **Add the option** to `Category::listProducts()` with the corresponding query logic
+4. **Add the option** to `Product::listFrontEnd()` with the corresponding query logic
 5. **Pass the value** in the category products partial via `post('yourFilter')`
 
 For example, to add a "In Stock" toggle:
@@ -227,7 +227,7 @@ if (inStock) {
 ```
 
 ```php
-// In Category::listProducts()
+// In Product\HasScopes::scopeListFrontEnd()
 if ($inStock) {
     $query->where('units_in_stock', '>', 0);
 }

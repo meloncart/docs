@@ -254,6 +254,7 @@ All prices are integers in cents.
 | `is_enabled` | boolean | Whether the product is active |
 | `is_visible_search` | boolean | Whether visible in search results |
 | `is_visible_catalog` | boolean | Whether visible in category listings |
+| `is_visible_site` | boolean | Whether restricted to specific sites |
 
 ### Methods
 
@@ -262,6 +263,8 @@ All prices are integers in cents.
 | `pageUrl('page-name')` | string | CMS page URL for this product |
 | `breadcrumbPath` | array\|null | Chain of parent categories for breadcrumbs |
 | `primaryCategory` | Category\|null | The first assigned category |
+| `isVisible()` | boolean | Whether the product is enabled and not archived |
+| `isVisibleOnSite($siteId)` | boolean | Whether the product is visible on a specific site |
 | `isOutOfStock()` | boolean | Whether the product is out of stock |
 
 ## Category Model Properties
@@ -299,20 +302,20 @@ All prices are integers in cents.
 
 ### listProducts Options
 
-The `listProducts()` method accepts an options array:
+The `listProducts()` method is a convenience proxy for `Product::listFrontEnd()` with the category pre-filled. It accepts these options:
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
 | `page` | integer | `1` | Page number for pagination |
 | `perPage` | integer | `30` | Products per page |
-| `sorting` | string | `created_at` | Sort column (e.g., `name`, `price asc`, `price desc`) |
+| `sort` | string | `created_at desc` | Sort field with direction (e.g., `name asc`, `price desc`, `random`) |
 | `search` | string | `''` | Search query to filter products |
 | `manufacturers` | array\|null | `null` | Array of manufacturer IDs to filter by |
 | `ratings` | array\|null | `null` | Array of star ratings to filter by (e.g., `[4, 5]` for 4+ stars) |
 | `priceMin` | integer\|null | `null` | Minimum price in base value (cents) |
 | `priceMax` | integer\|null | `null` | Maximum price in base value (cents) |
 
-Rating values match products whose `reviews_rating` falls within the star range (e.g., rating `4` matches products rated 4.00–4.99).
+Rating values match products whose `reviews_rating` falls within the star range (e.g., rating `4` matches products rated 4.00–4.99). Visibility and site filtering are applied automatically.
 
 ## Complete Examples
 
@@ -448,24 +451,24 @@ The category products partial demonstrates AJAX-powered sorting and view mode to
 
 ```twig
 {# partials/shop/category-products.htm #}
-{% if post('sorting') %}
-    {% do this.session.put('cat_sorting_' ~ category.id, post('sorting')) %}
+{% if post('sort') %}
+    {% do this.session.put('cat_sort_' ~ category.id, post('sort')) %}
 {% endif %}
 {% if post('view_mode') %}
     {% do this.session.put('cat_view_' ~ category.id, post('view_mode')) %}
 {% endif %}
 
-{% set sortingPreference = this.session.get('cat_sorting_' ~ category.id, 'name') %}
+{% set sortPreference = this.session.get('cat_sort_' ~ category.id, 'name') %}
 {% set viewMode = this.session.get('cat_view_' ~ category.id, 'list') %}
 
-{% set sortingOptions = {
+{% set sortOptions = {
     name: 'Name',
     'price desc': 'Price (high to low)',
     'price asc': 'Price (low to high)'
 } %}
 
 {% set products = category.listProducts({
-    sorting: sortingPreference,
+    sort: sortPreference,
     manufacturers: post('manufacturers'),
     ratings: post('ratings'),
     priceMin: post('priceMin'),
@@ -474,11 +477,11 @@ The category products partial demonstrates AJAX-powered sorting and view mode to
 
 <div class="d-flex justify-content-between mb-3">
     <p>Found <strong>{{ products.total }}</strong> products</p>
-    <select name="sorting" class="form-select w-auto"
+    <select name="sort" class="form-select w-auto"
         data-request="onAjax"
         data-request-update="{ _self: true }">
-        {% for key, label in sortingOptions %}
-            <option value="{{ key }}" {{ sortingPreference == key ? 'selected' }}>{{ label }}</option>
+        {% for key, label in sortOptions %}
+            <option value="{{ key }}" {{ sortPreference == key ? 'selected' }}>{{ label }}</option>
         {% endfor %}
     </select>
 </div>

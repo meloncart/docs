@@ -72,9 +72,11 @@ Use `final_price` and `final_sale_price` for storefront display — they automat
 | `hide_if_out_of_stock` | `bool` | Hide product when out of stock |
 | `allow_negative_stock` | `bool` | Allow stock to go below zero |
 | `stock_alert_threshold` | `int` | Low stock notification threshold |
+| `units_in_stock` | `int\|null` | Physical units on hand |
+| `units_reserved` | `int` | Units held by pending orders |
 | `allow_pre_order` | `bool` | Accept orders when out of stock |
 
-Stock quantities are managed through the [Inventory](./inventory) system using warehouses. Use `getSalableQuantity()` and `isOutOfStock()` to check availability.
+Use `getSalableQuantity()` and `isOutOfStock()` to check availability. See [Inventory](./inventory) for the stock lifecycle.
 
 ### Visibility Properties
 
@@ -124,7 +126,6 @@ Stock quantities are managed through the [Inventory](./inventory) system using w
 | `user_groups` | `Collection<UserGroup>` | Visible-to user groups |
 | `site_definitions` | `Collection<SiteDefinition>` | Visible-on sites (when `is_visible_site` is enabled) |
 | `extra_sets` | `Collection<ProductExtraSet>` | Assigned extra option sets |
-| `inventory_stocks` | `Collection<InventoryStock>` | [Per-warehouse stock records](./inventory) |
 
 ### Methods
 
@@ -135,9 +136,9 @@ Stock quantities are managed through the [Inventory](./inventory) system using w
 | `getPrimaryCategory()` | `Category\|null` | First associated category |
 | `isVisible()` | `bool` | Whether product is enabled and not archived |
 | `isVisibleOnSite($siteId)` | `bool` | Whether product is visible on a specific site (defaults to current site) |
-| `isOutOfStock()` | `bool` | Whether stock is below threshold (across [warehouses](./inventory)) |
-| `getSalableQuantity($siteId)` | `int` | Total salable stock across warehouses for a site (defaults to current site) |
-| `reserveStock($quantity)` | `void` | Reserve stock across warehouses for current site |
+| `isOutOfStock()` | `bool` | Whether stock is below threshold |
+| `getSalableQuantity($siteId)` | `int` | Available stock (physical minus reserved) |
+| `reserveStock($quantity)` | `void` | Atomically increment reserved units |
 | `decreaseStock($quantity)` | `void` | Decrement physical stock and release reservation |
 | `releaseStock($quantity)` | `void` | Release reservation without changing physical stock |
 | `getOriginalPrice($qty, $groupId)` | `int` | Base price with tier pricing |
@@ -475,7 +476,6 @@ Variants are specific combinations of product options, each with its own SKU, pr
 | `variant_options` | `Collection<ProductVariantOption>` | Selected option values |
 | `variant_prices` | `Collection<VariantPrice>` | Tier/group pricing overrides |
 | `images` | `Collection<File>` | Variant-specific images (falls back to product images if empty) |
-| `inventory_stocks` | `Collection<InventoryStock>` | [Per-warehouse stock records](./inventory) |
 
 ### Methods
 
@@ -488,9 +488,9 @@ Variants are specific combinations of product options, each with its own SKU, pr
 | `getEffectiveHeight()` | `float` | Variant height or product fallback |
 | `getEffectiveDepth()` | `float` | Variant depth or product fallback |
 | `getEffectiveSku()` | `string` | Variant SKU or product fallback |
-| `getSalableQuantity($siteId)` | `int` | Total salable stock across [warehouses](./inventory) for a site |
+| `getSalableQuantity($siteId)` | `int` | Available stock (physical minus reserved) |
 | `isOutOfStock()` | `bool` | Whether variant is out of stock |
-| `reserveStock($quantity)` | `void` | Reserve stock across warehouses |
+| `reserveStock($quantity)` | `void` | Atomically increment reserved units |
 | `decreaseStock($quantity)` | `void` | Decrement physical stock and release reservation |
 | `releaseStock($quantity)` | `void` | Release reservation without changing physical stock |
 

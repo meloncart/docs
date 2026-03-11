@@ -365,7 +365,16 @@ Use the `sensitive` field type for API keys and secrets. This encrypts the value
 
 ## Payment Form Partial
 
-The `payment-form.htm` file is rendered on the payment page when this method is selected. It has access to two variables:
+The `payment-form.htm` file in the class directory serves as a **template**. When a new payment method is set up in the backend, the system automatically creates a theme partial based on this template. The partial name is derived from the class name — for example, `PayPalPayment` generates a partial at **pay/paypalpayment.htm** in the active theme.
+
+The partial is only created if it doesn't already exist, allowing merchants to customize the form without it being overwritten. To regenerate the default partial, delete it from the theme and revisit the **Payment Methods** page.
+
+There are two common approaches for the payment form:
+
+- **Redirection method** — The form redirects the customer to a secure payment page hosted by the payment provider (e.g., Stripe Checkout). The gateway's `processPaymentForm()` returns a `Redirect` to the external URL.
+- **Client-side method** — The form uses JavaScript to communicate with the gateway API directly from the browser (e.g., PayPal Buttons). On success, the `onPay` AJAX handler is called to complete the transaction.
+
+The payment form partial has access to two variables:
 
 | Variable | Type | Description |
 |----------|------|-------------|

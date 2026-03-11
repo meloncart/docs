@@ -72,6 +72,20 @@ An order's payment status is determined by whether the `payment_processed_at` ti
 The payment status is set automatically when the payment gateway confirms the transaction. You generally do not need to manage this manually. However, for offline payment methods (bank transfer, etc.), transitioning the order to the "Paid" status in the backend will mark the payment as processed.
 :::
 
+### Pending Payments
+
+Some payment gateways (such as PayPal) may not confirm a transaction immediately. When this occurs, the invoice status is set to **Approved**, indicating the customer has submitted their payment but final confirmation is still pending.
+
+While an invoice is in the Approved state:
+
+- The payment page displays a "Your payment is being processed" message instead of showing payment methods, preventing the customer from paying twice.
+- When the customer revisits the payment page, the system automatically polls the payment gateway to check if the payment has since been confirmed. If it has, the invoice is marked as paid immediately.
+- If the gateway supports webhooks, the payment will also be confirmed asynchronously when the gateway sends a completion notification.
+
+::: tip
+If a payment remains in the Approved state for an extended period, you can check the payment log on the associated invoice for details about the gateway's response. The payment gateway's dashboard (e.g., PayPal or Stripe) will have the definitive status of the transaction.
+:::
+
 ## Payment Log
 
 Each order's payment history can be viewed through the associated invoice. The payment log records all interactions with the payment gateway, including successful charges, failed attempts, and refund transactions. This is useful for troubleshooting payment issues.

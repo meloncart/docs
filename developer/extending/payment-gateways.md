@@ -500,6 +500,7 @@ The `$invoice` object provides methods for payment processing:
 | `$invoice->getReceiptUrl()` | URL to the receipt/thank-you page |
 | `$invoice->isPaymentProcessed()` | Check if already paid |
 | `$invoice->markAsPaymentProcessed()` | Mark the invoice as paid |
+| `$invoice->updateInvoiceStatus($code)` | Update the invoice status (e.g., `approved`, `paid`) |
 | `$invoice->getPaymentMethod()` | Get the PaymentMethod model |
 | `$invoice->logPaymentAttempt(...)` | Log a payment attempt |
 | `$invoice->items` | Collection of invoice line items |
@@ -531,6 +532,44 @@ if ($response->json('status') === 'completed') {
     $invoice->markAsPaymentProcessed();
 }
 ```
+
+## Pending Payments
+
+Some gateways don't confirm transactions immediately. For example, PayPal may return a `PENDING` capture status when the seller's account requires manual review. In these cases, update the invoice status to `approved` rather than marking it as paid:
+
+```php
+use Responsiv\Pay\Models\InvoiceStatus;
+
+if ($captureStatus === 'COMPLETED') {
+    $invoice->markAsPaymentProcessed();
+}
+elseif ($captureStatus === 'PENDING') {
+    $invoice->updateInvoiceStatus(InvoiceStatus::STATUS_APPROVED);
+}
+```
+
+When the invoice is in `approved` status, the payment page shows a "payment is being processed" message and hides payment methods, preventing double payments.
+
+### Polling for Status Updates
+
+Gateways can implement `checkPaymentStatus()` to poll the payment provider when the customer revisits the payment page. The `Payment` component calls this automatically when an invoice has been submitted but not yet confirmed.
+
+```php
+public function checkPaymentStatus($invoice): bool
+{
+    // Look up the transaction on your gateway
+    $response = Http::get("https://api.example.com/transactions/{$transactionId}");
+
+    if ($response->successful() && $response->json('status') === 'completed') {
+        $invoice->markAsPaymentProcessed();
+        return true;
+    }
+
+    return false;
+}
+```
+
+Return `true` if the payment was confirmed, `false` otherwise. Exceptions are caught silently — the payment page renders normally even if the check fails.
 
 ## Lifecycle Hooks
 
@@ -602,6 +641,7 @@ public function payFromProfile($invoice)
 | `getHostObject()` | `PaymentMethod` | Access the payment method model |
 | `getPartialPath()` | `string` | Path to the gateway config directory |
 | `renderPaymentScripts()` | `string` | Inject global scripts |
+| `checkPaymentStatus($invoice)` | `bool` | Poll gateway for pending payment confirmation |
 | `payOfflineMessage()` | `string` | Offline payment instructions |
 | `hasPaymentForm()` | `bool` | Whether gateway uses a payment form |
 | `hasReceiptPage()` | `bool` | Whether gateway supports receipt pages |

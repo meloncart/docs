@@ -3,7 +3,7 @@ subtitle: Build custom shipping rate providers.
 ---
 # Shipping Types
 
-Shipping types calculate shipping costs during checkout. Meloncart ships with a **Table Rate** shipping type that uses a configurable rate table, but you can build your own to integrate with carrier APIs (FedEx, UPS, etc.) or implement custom pricing logic. This guide covers everything you need to create a shipping type from scratch.
+Shipping types calculate shipping costs during checkout. Meloncart ships with a **Table Rate** shipping type and several carrier integrations (Australia Post, Canada Post, FedEx, DHL Express, UPS), but you can build your own to integrate with additional carrier APIs or implement custom pricing logic. This guide covers everything you need to create a shipping type from scratch.
 
 ## How It Works
 
@@ -22,13 +22,13 @@ When a customer enters their shipping address during checkout:
 plugins/acme/shipping/
 ├── Plugin.php
 └── shippingtypes/
+    ├── MyShipping.php           ← shipping type class
     └── myshipping/
-        ├── MyShipping.php
-        ├── fields.yaml
+        ├── fields.yaml          ← configuration fields
         └── _setup_help.php      ← optional
 ```
 
-The shipping type class and its config directory follow a naming convention: the directory name is the **lowercase** version of the class name. The `fields.yaml` defines backend configuration fields, and `_setup_help.php` is an optional partial displayed in a Help tab.
+The shipping type class lives directly inside `shippingtypes/`, and its configuration directory is a **lowercase** version of the class name alongside it. The `fields.yaml` defines backend configuration fields, and `_setup_help.php` is an optional partial displayed in a Help tab.
 
 ## Creating a Shipping Type
 
@@ -71,9 +71,9 @@ The `getQuote()` method receives an array describing the destination and cart co
 | `stateCode` | `string\|null` | State/province code (e.g., `CA`) |
 | `zip` | `string\|null` | Postal/ZIP code |
 | `city` | `string\|null` | City name |
-| `totalPrice` | `int` | Cart total in cents |
+| `totalPrice` | `int` | Cart subtotal in base currency units (cents) |
 | `totalVolume` | `float` | Total volume of items |
-| `totalWeight` | `float` | Total weight of items |
+| `totalWeight` | `float` | Total weight in the store's configured weight unit |
 | `totalItems` | `int` | Number of items in the cart |
 | `orderItems` | `array` | Array of cart item objects (with `product` and `quantity`) |
 | `isBusiness` | `bool` | Whether the address is a business |
@@ -84,7 +84,7 @@ The `getQuote()` method supports three return formats:
 
 ### Single Price
 
-Return an integer for a single shipping rate. Prices are always in **base currency cents**.
+Return a numeric value for a single shipping rate. Prices are always in **base currency units** (e.g., cents for USD — 500 = $5.00).
 
 ```php
 // $5.00 flat rate
@@ -93,7 +93,7 @@ return 500;
 
 ### Multiple Options
 
-Return an array to offer child options (e.g., Standard vs Express). Each option needs an `id` and `quote`:
+Return an array to offer child options (e.g., Standard vs Express). Each option needs an `id` and a `quote` in base currency units:
 
 ```php
 return [
@@ -241,17 +241,17 @@ class WeightZone extends ShippingTypeBase
 
 ## Full Example: Carrier API Integration
 
-This example shows how to integrate with an external shipping API:
+This example shows how to integrate with an external shipping API. It uses `ShippingSetting` to read the shipping origin and unit configuration, and the `Http` facade with October's callback pattern for API calls.
 
 ```php
 <?php namespace Acme\Shipping\ShippingTypes;
 
 use Http;
-use Cache;
+use Log;
 use Meloncart\Shop\Classes\ShippingTypeBase;
+use Meloncart\Shop\Models\ShippingSetting;
 use RainLab\Location\Models\Country;
 use RainLab\Location\Models\State;
-use Exception;
 
 class CarrierApi extends ShippingTypeBase
 {
@@ -279,38 +279,55 @@ class CarrierApi extends ShippingTypeBase
         }
 
         $host = $this->getHostObject();
+        if (!$host->api_token) {
+            return null;
+        }
+
         $country = Country::findByKey($countryId);
         $state = State::findByKey($stateId);
 
-        try {
-            $response = Http::withToken($host->api_token)
-                ->post('https://api.carrier.com/v1/rates', [
-                    'origin_zip' => $host->origin_zip,
-                    'dest_country' => $country?->code,
-                    'dest_state' => $state?->code,
-                    'dest_zip' => $zip,
-                    'weight' => $totalWeight,
-                    'weight_unit' => 'lb',
-                ]);
+        // Read origin address and units from Shipping Settings
+        $settings = ShippingSetting::instance();
+        $originCountry = Country::findByKey($settings->country_id);
 
-            if (!$response->successful()) {
+        try {
+            $response = Http::post(
+                'https://api.carrier.com/v1/rates',
+                function($http) use ($host, $settings, $originCountry, $country, $state, $zip, $totalWeight) {
+                    $http->header('Content-Type', 'application/json');
+                    $http->header('Authorization', 'Bearer ' . $host->api_token);
+                    $http->setOption(CURLOPT_POSTFIELDS, json_encode([
+                        'origin_zip' => $settings->zip,
+                        'origin_country' => $originCountry?->code,
+                        'dest_country' => $country?->code,
+                        'dest_state' => $state?->code,
+                        'dest_zip' => $zip,
+                        'weight' => $totalWeight,
+                        'weight_unit' => $settings->weight_unit,
+                    ]));
+                }
+            );
+
+            if ($response->code !== 200) {
+                Log::warning('Carrier API error: HTTP ' . $response->code);
                 return null;
             }
 
             // Build child options from API response
-            $rates = $response->json('rates');
+            $data = json_decode($response->body, true);
             $result = [];
 
-            foreach ($rates as $rate) {
+            foreach ($data['rates'] ?? [] as $rate) {
                 $result[$rate['service_name']] = [
                     'id' => $rate['service_code'],
-                    'quote' => (int) round($rate['total_price'] * 100)
+                    'quote' => (int) round($rate['total_price'] * 100),
                 ];
             }
 
-            return !empty($result) ? $result : null;
+            return $result ?: null;
         }
-        catch (Exception $ex) {
+        catch (\Exception $ex) {
+            Log::warning('Carrier API exception: ' . $ex->getMessage());
             return null;
         }
     }
@@ -376,6 +393,43 @@ public function getDataTableOptions($attribute, $field, $data)
     }
 
     return [];
+}
+```
+
+## Shipping Settings
+
+Carrier-based shipping types need the shipping origin address and units of measurement configured in **Settings → Shipping & Measurements**. Access these values through the `ShippingSetting` singleton:
+
+```php
+use Meloncart\Shop\Models\ShippingSetting;
+use RainLab\Location\Models\Country;
+use RainLab\Location\Models\State;
+
+$settings = ShippingSetting::instance();
+
+// Origin address
+$originCountry = Country::findByKey($settings->country_id);
+$originState = State::findByKey($settings->state_id);
+$originCity = $settings->city;
+$originZip = $settings->zip;
+$originAddress = $settings->address_line1;
+
+// Units of measurement
+$weightUnit = $settings->weight_unit;       // 'lb' or 'kg'
+$dimensionUnit = $settings->dimension_unit; // 'in' or 'cm'
+
+// Sender details (for shipping labels)
+$senderName = $settings->sender_first_name . ' ' . $settings->sender_last_name;
+$senderCompany = $settings->sender_company;
+$senderPhone = $settings->sender_phone;
+```
+
+The `totalWeight` passed to `getQuote()` is always in the store's configured weight unit. If a carrier API requires a specific unit (e.g., Australia Post requires kilograms), convert from the store's unit:
+
+```php
+$weight = $totalWeight;
+if ($settings->weight_unit === 'lb') {
+    $weight = $totalWeight * 0.453592; // Convert to kg
 }
 ```
 
@@ -491,3 +545,8 @@ public function validateDriverHost($host)
 | Type | Alias | Description |
 |------|-------|-------------|
 | `TableRateShipping` | `table-rate` | Configurable rate table with location, weight, volume, subtotal, and item count matching |
+| `AustraliaPostShipping` | `australia-post` | Australia Post PAC API for domestic and international parcel rates |
+| `CanadaPostShipping` | `canada-post` | Canada Post Rating API for domestic, US, and international rates |
+| `FedExShipping` | `fedex` | FedEx REST API with OAuth 2.0 for domestic and international rates |
+| `DhlExpressShipping` | `dhl-express` | DHL Express MyDHL API for international express rates |
+| `UpsShipping` | `ups` | UPS Rating REST API with OAuth 2.0, supports negotiated rates |

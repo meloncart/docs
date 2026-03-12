@@ -25,7 +25,25 @@ The built-in **Table Rate** driver calculates shipping costs based on configurab
 
 This is the most commonly used driver for stores that manage their own shipping rates rather than integrating with a carrier API.
 
-Additional shipping drivers can be installed through plugins to support real-time rate calculation from carriers such as UPS, FedEx, or Australia Post.
+#### Carrier Integrations
+
+Meloncart includes built-in drivers for real-time rate calculation from major shipping carriers. Each carrier driver connects to the carrier's API to return live shipping quotes based on the package weight, dimensions, and destination.
+
+| Driver | Description |
+|--------|-------------|
+| **Australia Post** | Domestic and international rates via the PAC API. Requires an API key from the Australia Post Developer Centre. |
+| **Canada Post** | Domestic, US, and international rates via the Rating API. Requires a Canada Post Developer Program account. |
+| **FedEx** | Domestic and international rates via the FedEx REST API with OAuth 2.0. Requires a FedEx Developer Portal account. |
+| **DHL Express** | International express rates via the MyDHL API. Requires a DHL Express API key. Works globally. |
+| **UPS** | Domestic and international rates via the UPS Rating REST API with OAuth 2.0. Supports negotiated (account-specific) rates. |
+
+Carrier drivers typically return multiple child options (e.g., "UPS Ground", "UPS Next Day Air") so the customer can choose their preferred service level. Each driver's configuration includes fields for API credentials, allowed services, and default package dimensions.
+
+::: info
+Carrier drivers use the origin address and units of measurement configured under **Settings → Shipping & Measurements** to calculate rates. Make sure this is configured before enabling a carrier-based shipping method.
+:::
+
+Additional shipping drivers can also be registered through plugins. See the [Shipping Types](../../developer/extending/shipping-types) developer documentation for details.
 
 ### Handling Fees
 

@@ -31,11 +31,12 @@ Meloncart includes built-in drivers for real-time rate calculation from major sh
 
 | Driver | Description |
 |--------|-------------|
-| **Australia Post** | Domestic and international rates via the PAC API. Requires an API key from the Australia Post Developer Centre. |
+| **Australia Post** | Domestic and international rates via the PAC API. Requires an API key from the Australia Post Developer Centre. Supports [carrier label generation](shipping-labels#carrier-labels) with an eParcel contract. |
 | **Canada Post** | Domestic, US, and international rates via the Rating API. Requires a Canada Post Developer Program account. |
 | **FedEx** | Domestic and international rates via the FedEx REST API with OAuth 2.0. Requires a FedEx Developer Portal account. |
 | **DHL Express** | International express rates via the MyDHL API. Requires a DHL Express API key. Works globally. |
 | **UPS** | Domestic and international rates via the UPS Rating REST API with OAuth 2.0. Supports negotiated (account-specific) rates. |
+| **USPS** | Domestic and international rates via the USPS REST API v3 with OAuth 2.0. Supports [carrier label generation](shipping-labels#carrier-labels) with a USPS Enterprise Payment Account. |
 
 Carrier drivers typically return multiple child options (e.g., "UPS Ground", "UPS Next Day Air") so the customer can choose their preferred service level. Each driver's configuration includes fields for API credentials, allowed services, and default package dimensions.
 

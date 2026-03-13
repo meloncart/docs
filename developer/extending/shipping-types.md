@@ -622,8 +622,9 @@ public function validateDriverHost($host)
 | Type | Alias | Description |
 |------|-------|-------------|
 | `TableRateShipping` | `table-rate` | Configurable rate table with location, weight, volume, subtotal, and item count matching |
-| `AustraliaPostShipping` | `australia-post` | Australia Post PAC API for domestic and international parcel rates |
+| `AustraliaPostShipping` | `australia-post` | Australia Post PAC API for domestic and international parcel rates. Supports carrier labels via the Shipping & Tracking API (eParcel contract required). |
 | `CanadaPostShipping` | `canada-post` | Canada Post Rating API for domestic, US, and international rates |
 | `FedExShipping` | `fedex` | FedEx REST API with OAuth 2.0 for domestic and international rates |
 | `DhlExpressShipping` | `dhl-express` | DHL Express MyDHL API for international express rates |
 | `UpsShipping` | `ups` | UPS Rating REST API with OAuth 2.0, supports negotiated rates |
+| `UspsShipping` | `usps` | USPS REST API v3 with OAuth 2.0 for domestic and international rates. Supports carrier labels with Enterprise Payment Account. |

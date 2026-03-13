@@ -112,21 +112,95 @@ The default CSS is designed for 4-inch-wide label stock with a print-friendly la
 
 ## Carrier Labels
 
-Some shipping types (such as USPS) support generating carrier labels directly from the carrier's API. Carrier labels include barcodes, postage, and tracking numbers — they are ready to affix to packages without additional postage.
+Some shipping types support generating carrier labels directly from the carrier's API. Carrier labels include barcodes, postage, and tracking numbers — they are ready to affix to packages without additional postage.
 
-Carrier label support depends on the shipping type used for the order. When a shipping type supports labels, the `supportsShippingLabels()` method returns `true`. See the [Shipping Types](../../developer/extending/shipping-types) developer documentation for details on implementing carrier label generation.
+### Supported Carriers
+
+Carrier label generation is currently supported by the following built-in shipping types:
+
+| Carrier | Requirements |
+|---------|-------------|
+| **USPS** | Enterprise Payment Account (EPS), CRID, and Mailer ID. Enable under **Label Generation** in the shipping method config. |
+| **Australia Post** | eParcel or StarTrack contract. Requires separate Shipping & Tracking API credentials. Enable under **Label Generation** in the shipping method config. |
+
+Label generation is **opt-in** — it must be enabled in the shipping method's configuration. This is because generating a carrier label purchases postage, and not all merchants have the required carrier accounts.
+
+### Enabling Carrier Labels
+
+To enable carrier label generation for a shipping method:
+
+1. Navigate to **Shop → Shipping Options** and edit the shipping method.
+2. Open the **Label Generation** tab.
+3. Check **Enable Carrier Label Generation**.
+4. Enter the required credentials for your carrier (these are separate from the rate quoting credentials).
+5. Save the shipping method.
+
+Once enabled, the **Generate Carrier Label** button appears on order preview pages that use this shipping method.
+
+### Generating a Label
+
+Open an order preview and click the **Generate Carrier Label** button in the toolbar. A popup appears with:
+
+- **Carrier-specific options** — such as label format (PDF/ZPL), label size, and package weight. These fields vary by carrier.
+- **A warning** — reminding you that generating a label will purchase postage from the carrier and charge your account.
+
+Review the options and click **Generate Label**. The system calls the carrier's API, purchases postage, and stores the label. A tracking number is automatically created for the order.
+
+::: warning
+Generating a carrier label purchases postage. The charge is applied to your carrier account (e.g., USPS Enterprise Payment Account or Australia Post eParcel account). Labels are stored so they can be reprinted without re-purchasing.
+:::
+
+### Viewing and Reprinting Labels
+
+After a label has been generated, a **View Carrier Labels** button appears in the order toolbar. Click it to open a popup showing all labels generated for that order.
+
+Each label displays:
+
+- **Tracking number** — the carrier-assigned tracking number.
+- **Format and date** — when the label was generated and in what format.
+- **Postage amount** — the cost charged for the label (if available).
+- **Label preview** — PDF labels are previewed inline; image labels are shown directly.
+- **Download button** — download the label file for printing or archival.
+
+Labels are stored permanently and can be viewed or reprinted at any time without calling the carrier API again or incurring additional charges.
+
+### USPS Configuration
+
+The USPS shipping type uses the USPS REST API v3 with OAuth 2.0. To enable label generation:
+
+- **Client ID and Client Secret** — from the USPS Developer Portal (also used for rate quoting).
+- **Account Type** — EPS (Enterprise Payment System) or PERMIT.
+- **Account Number** — your USPS account number.
+- **CRID** — Customer Registration ID, required for label payment authorization.
+- **MID** — Mailer ID, required for label payment authorization.
+
+USPS labels support **PDF** and **ZPL** (thermal printer) formats in **4×6** or **6×4** sizes. For international shipments, you will be prompted for customs content type and non-delivery instructions.
+
+### Australia Post Configuration
+
+The Australia Post shipping type uses the Shipping & Tracking API for labels, which is separate from the PAC API used for rate quoting. To enable label generation:
+
+- **Shipping API Key** — a UUID-format API key from Australia Post (different from the PAC API key).
+- **Shipping API Password** — the password for the Shipping API key.
+- **Account Number** — your 10-digit eParcel account number (left-padded with zeros).
+
+Australia Post labels are generated as **PDF** in configurable layouts: A4 with 1 or 4 labels per page, or thermal A6 for label printers. You can also choose whether to include Australia Post branding on the label.
 
 ### Template Labels vs Carrier Labels
 
 | Aspect | Template Labels | Carrier Labels |
 |--------|----------------|----------------|
-| Availability | All orders, always | Only when the shipping type supports it |
+| Availability | All orders, always | Only when enabled and the shipping type supports it |
 | Content | Sender/recipient addresses | Barcode, postage, tracking number |
-| Output | HTML rendered in browser | Binary data (PDF, PNG, ZPL) from carrier API |
+| Cost | Free | Postage is purchased from the carrier |
+| Output | HTML rendered in browser | PDF or ZPL from carrier API |
 | Customization | Fully editable templates | Carrier-defined format |
+| Tracking | Not included | Tracking number automatically created |
 
 Both types can be used for the same order — for example, you might use carrier labels for domestic shipments and template labels for international orders where your carrier doesn't provide label generation.
 
 ::: tip
 Template labels do not include postage. If you need prepaid labels with barcodes and tracking, use a shipping type that supports carrier label generation, or purchase postage separately.
 :::
+
+For developers building custom shipping types with carrier label support, see the [Shipping Types](../../developer/extending/shipping-types#carrier-shipping-labels) developer documentation.

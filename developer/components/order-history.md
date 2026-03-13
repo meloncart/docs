@@ -9,7 +9,7 @@ The `orders` component displays customer order history with pagination and singl
 
 | Property | Description | Default |
 | --- | --- | --- |
-| `orderId` | Look up a single order by ID. Use a URL parameter like `{{ :id }}`. | (empty) |
+| `orderId` | Look up a single order by ID. Use a URL parameter like <code v-pre>{{ :id }}</code>. | (empty) |
 | `perPage` | Number of orders per page. | `20` |
 
 ## How It Works

@@ -21,7 +21,7 @@ features:
       title: Elegant & Lightweight
       details: A flexible PHP framework that lets you build and customize every part of your eCommerce store. Easy to learn for both clients and developers.
     - icon: 🎨
-      title: Born to Customize
+      title: Built to Customize
       details: Design your own front-end and back-end without modifying the core. A powerful API and templating engine let you build any functionality you need.
     - icon: ⚡
       title: Powerful Features
@@ -36,7 +36,7 @@ features:
 <div class="mc-section mc-section--elegant">
     <div class="mc-section__inner">
         <div class="mc-section__content">
-            <h2>Complex Requirements Need Elegant Solutions</h2>
+            <h2>An Elegant Solution to Complex Requirements</h2>
             <p>A flexible PHP framework that lets you build and customize every part of your eCommerce store. Easy to pick up for clients and developers alike.</p>
             <VPButton theme="brand" size="medium" text="Learn More" href="/merchant/introduction" />
         </div>
@@ -56,7 +56,7 @@ features:
 <div class="mc-section mc-section--customize mc-section--reverse">
     <div class="mc-section__inner">
         <div class="mc-section__content">
-            <h2>Born to Customize</h2>
+            <h2>Built to Customize</h2>
             <p>Design your own front-end and back-end without having to modify the core. With a powerful API and templating engine, you can build any functionality you need.</p>
             <VPButton theme="alt" size="medium" text="Developer Docs" href="/developer/introduction" />
         </div>

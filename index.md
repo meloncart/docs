@@ -46,7 +46,7 @@ features:
                     <span></span><span></span><span></span>
                 </div>
                 <div class="mc-mockup__screen">
-                    <img src="/editor-html.webp" alt="Meloncart admin panel" />
+                    <img src="/screenshot-orders.png" alt="Meloncart admin panel" />
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@ features:
                     <span></span><span></span><span></span>
                 </div>
                 <div class="mc-mockup__screen">
-                    <img src="/editor.webp" alt="Meloncart template editor" />
+                    <img src="/screenshot-editor.png" alt="Meloncart template editor" />
                 </div>
             </div>
         </div>

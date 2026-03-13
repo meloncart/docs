@@ -3,20 +3,23 @@ subtitle: Display customer order history.
 ---
 # Order History
 
-Meloncart does not require a dedicated order history component. Instead, customer orders are accessed through the `user.orders` relationship that Meloncart adds to the User model. Combined with the [Session](./session) component for authentication, you can build complete order list and order detail pages using only Twig.
+The `orders` component displays customer order history with pagination and single-order detail views. Combined with the [Session](./session) component for authentication, you can build complete order list and order detail pages.
+
+## Component Properties
+
+| Property | Description | Default |
+| --- | --- | --- |
+| `orderId` | Look up a single order by ID. Use a URL parameter like `{{ :id }}`. | (empty) |
+| `perPage` | Number of orders per page. | `20` |
 
 ## How It Works
 
-When the Meloncart plugin is installed, it extends the RainLab.User model with a `hasMany` relationship to the Order model:
+The component provides two page variables:
 
-```php
-$user->hasMany['orders'] = [
-    \Meloncart\Shop\Models\Order::class,
-    'order' => 'id desc'
-];
-```
+- **`orders`** — A paginated collection of the authenticated user's orders, ordered by creation date descending.
+- **`order`** — A single order record, available when the `orderId` property is set.
 
-This means any page that has access to the authenticated `user` object (via the [Session](./session) component) can access the customer's orders through `user.orders`.
+For the order list page, include the component with no properties. For the order detail page, pass the URL parameter to `orderId`.
 
 ## Order Model Properties
 
@@ -161,12 +164,14 @@ title = "Orders"
 [session]
 security = "user"
 redirect = "account/login"
+
+[orders]
 ==
 <div class="page-account">
-    <h2 class="mb-4">My Orders</h2>
+    <h2 class="mb-4">
+        My Orders
+    </h2>
 
-    {% set orders = user.orders %}
-    {% do orders.load('status') %}
     {% if orders is not empty %}
         <div class="table-responsive border-0">
             <table class="table mb-0 text-nowrap table-centered">
@@ -208,6 +213,11 @@ redirect = "account/login"
                 </tbody>
             </table>
         </div>
+        {% if orders.lastPage > 1 %}
+            <nav class="mt-4" aria-label="Pagination">
+                {{ pager(orders) }}
+            </nav>
+        {% endif %}
     {% else %}
         <div class="text-center">
             <p>No orders yet</p>
@@ -218,10 +228,6 @@ redirect = "account/login"
     {% endif %}
 </div>
 ```
-
-::: tip
-Use `{% do orders.load('status') %}` to eager-load the status relationship and avoid N+1 queries when iterating over orders.
-:::
 
 ### Order Detail Page
 
@@ -235,8 +241,10 @@ title = "Order"
 [session]
 security = "user"
 redirect = "account/login"
+
+[orders]
+orderId = "{{ :id }}"
 ==
-{% set order = user.orders().find(this.param.id) %}
 {% if not order %}
     {% do abort(404) %}
 {% endif %}
@@ -250,7 +258,9 @@ redirect = "account/login"
 <div class="page-account">
     <div class="row align-items-center mb-3">
         <div class="col-4">
-            <h2 class="m-0">Order #{{ order.orderNumber }}</h2>
+            <h2 class="m-0">
+                Order #{{ order.orderNumber }}
+            </h2>
         </div>
         <div class="col-8 text-end">
             <p class="text-muted m-0">
@@ -272,7 +282,9 @@ redirect = "account/login"
                         <i class="bi bi-bag-x text-danger" style="font-size:32px"></i>
                     </div>
                     <div>
-                        <h5 class="cart-title m-0">This Order is Unpaid</h5>
+                        <h5 class="cart-title m-0">
+                            This Order is Unpaid
+                        </h5>
                     </div>
                     <div class="ms-auto">
                         {% if order.invoice %}
@@ -292,31 +304,31 @@ redirect = "account/login"
         <div class="card-body pb-0">
             <div class="row">
                 <div class="col-6">
-                    <h5 class="fw-bold">Shipping Address</h5>
+                    <h5 class="fw-bold">
+                        Shipping Address
+                    </h5>
                     <p>
                         {{ order.shipping_first_name }} {{ order.shipping_last_name }}<br />
                         {{ order.shipping_address_line1 }}<br />
                         {% if order.shipping_address_line2 %}
                             {{ order.shipping_address_line2 }}<br />
                         {% endif %}
-                        {{ order.shipping_city }}
-                        {{ order.shipping_state.code }}
-                        {{ order.shipping_zip }}<br />
+                        {{ order.shipping_city }} {{ order.shipping_state.code }} {{ order.shipping_zip }}<br />
                         {{ order.shipping_country.name }}<br />
                         {{ order.shipping_phone }}
                     </p>
                 </div>
                 <div class="col-6">
-                    <h5 class="fw-bold">Billing Address</h5>
+                    <h5 class="fw-bold">
+                        Billing Address
+                    </h5>
                     <p>
                         {{ order.billing_first_name }} {{ order.billing_last_name }}<br />
                         {{ order.billing_address_line1 }}<br />
                         {% if order.billing_address_line2 %}
                             {{ order.billing_address_line2 }}<br />
                         {% endif %}
-                        {{ order.billing_city }}
-                        {{ order.billing_state.code }}
-                        {{ order.billing_zip }}<br />
+                        {{ order.billing_city }} {{ order.billing_state.code }} {{ order.billing_zip }}<br />
                         {{ order.billing_country.name }}<br />
                         {{ order.billing_phone }}
                     </p>
@@ -327,8 +339,8 @@ redirect = "account/login"
 </div>
 ```
 
-::: warning
-The order detail page uses `user.orders().find(this.param.id)` to look up the order. This ensures the customer can only access their own orders — not orders belonging to other users.
+::: tip
+The component scopes orders to the authenticated user, so customers can only view their own orders.
 :::
 
 ### Order Items Partial

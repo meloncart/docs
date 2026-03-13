@@ -55,6 +55,8 @@ Common syntax field types:
 | `{text}` | Single-line text input |
 | `{textarea}` | Multi-line text input |
 
+<div v-pre>
+
 #### Twig Variables
 
 Recipient address data is populated from the order's shipping details:
@@ -70,6 +72,8 @@ Recipient address data is populated from the order's shipping details:
 | `{{ order.shipping_state.code }}` | State/province code |
 | `{{ order.shipping_country.name }}` | Country name |
 | `{{ css }}` | The template's CSS content |
+
+</div>
 
 #### Default Template
 

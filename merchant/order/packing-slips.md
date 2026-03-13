@@ -51,6 +51,8 @@ Common syntax field types:
 | `{richeditor}` | Rich text editor |
 | `{fileupload}` | File upload (e.g., for a logo) |
 
+<div v-pre>
+
 ### Twig Variables
 
 Order data is available through Twig variables. These are populated dynamically when the packing slip is rendered for a specific order.
@@ -114,6 +116,8 @@ Loop through items with `{% for item in order.items %}`:
 | Variable | Description |
 |----------|-------------|
 | `{{ css }}` | The template's CSS content, for embedding in a `<style>` tag |
+
+</div>
 
 ### Default Template
 

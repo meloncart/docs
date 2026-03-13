@@ -461,20 +461,95 @@ When `ShippingMethod::listApplicable()` runs during checkout:
 
 You don't need to handle handling fees, taxes, or per-product costs in your `getQuote()` method — those are applied automatically.
 
-## Shipping Labels
+## Carrier Shipping Labels
 
-Shipping types can optionally support label generation for order fulfillment:
+Shipping types can optionally support carrier label generation — producing labels with barcodes, postage, and tracking numbers directly from the carrier's API. This is separate from the [template-based shipping labels](../../merchant/order/shipping-labels) that merchants design themselves.
+
+### Enabling Label Support
+
+Override `supportsShippingLabels()` to indicate your shipping type supports carrier labels:
 
 ```php
-public function supportsShippingLabels()
+public function supportsShippingLabels(): bool
 {
     return true;
 }
+```
+
+### Generating Labels
+
+Implement `generateShippingLabels()` to call the carrier API and return label data. Returns `null` if labels cannot be generated, or an array of label results:
+
+```php
+use Meloncart\Shop\Models\Order;
 
 public function generateShippingLabels(Order $order, array $options = [])
 {
-    // Call carrier API to generate labels
-    // Return label data (PDF binary, URL, etc.)
+    // Call carrier API to generate label
+    $response = $this->callCarrierLabelApi($order, $options);
+
+    if (!$response) {
+        return null;
+    }
+
+    return [
+        [
+            'tracking_number' => $response['tracking'],
+            'label_content' => base64_encode($response['label_data']),
+            'label_format' => 'pdf',
+        ],
+    ];
+}
+```
+
+Each item in the returned array represents one label with:
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `tracking_number` | `string` | Carrier tracking number |
+| `label_content` | `string` | Base64-encoded label data |
+| `label_format` | `string` | Format: `pdf`, `png`, `gif`, or `zpl` |
+
+### Label Form Fields
+
+Some carriers require additional parameters when generating labels (e.g., container type, insurance options, image format). Override `buildLabelFormFields()` to define a form that collects these parameters:
+
+```php
+public function buildLabelFormFields(Order $order): array
+{
+    return [
+        'image_type' => [
+            'label' => 'Label Format',
+            'type' => 'dropdown',
+            'options' => ['pdf' => 'PDF', 'png' => 'PNG'],
+            'default' => 'pdf',
+        ],
+        'container' => [
+            'label' => 'Container Type',
+            'type' => 'dropdown',
+            'options' => [
+                'VARIABLE' => 'Variable',
+                'FLAT_RATE_BOX' => 'Flat Rate Box',
+                'FLAT_RATE_ENVELOPE' => 'Flat Rate Envelope',
+            ],
+        ],
+    ];
+}
+```
+
+The field definitions follow the standard [form field format](https://docs.octobercms.com/4.x/element/form-fields.html). The collected values are passed as the `$options` array to `generateShippingLabels()`.
+
+### Default Label Parameters
+
+Override `getDefaultLabelParameters()` to pre-populate label form fields with sensible defaults:
+
+```php
+public function getDefaultLabelParameters(Order $order): array
+{
+    return [
+        'image_type' => 'pdf',
+        'container' => 'VARIABLE',
+    ];
 }
 ```
 
@@ -535,8 +610,10 @@ public function validateDriverHost($host)
 | `getHostObject()` | `ShippingMethod` | Access the shipping method model and config |
 | `getPartialPath()` | `string` | Path to the config directory |
 | `getDataTableOptions($attr, $field, $data)` | `array` | Dynamic options for datatable dropdowns |
-| `supportsShippingLabels()` | `bool` | Whether label generation is supported |
-| `generateShippingLabels($order, $options)` | `mixed` | Generate shipping labels for an order |
+| `supportsShippingLabels()` | `bool` | Whether carrier label generation is supported |
+| `generateShippingLabels($order, $options)` | `array\|null` | Generate carrier labels for an order |
+| `buildLabelFormFields($order)` | `array` | Form field definitions for label generation parameters |
+| `getDefaultLabelParameters($order)` | `array` | Default values for label generation parameters |
 | `initDriverHost($host)` | `void` | Initialize driver on model |
 | `validateDriverHost($host)` | `void` | Validate config before save |
 

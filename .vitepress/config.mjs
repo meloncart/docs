@@ -34,6 +34,8 @@ const merchantSidebar = [
             { text: 'Orders', link: '/merchant/order/orders' },
             { text: 'Payments', link: '/merchant/order/payments' },
             { text: 'Shipping', link: '/merchant/order/shipping' },
+            { text: 'Shipping Labels', link: '/merchant/order/shipping-labels' },
+            { text: 'Packing Slips', link: '/merchant/order/packing-slips' },
             { text: 'Tracking', link: '/merchant/order/tracking' },
             { text: 'Digital Downloads', link: '/merchant/order/downloads' },
             { text: 'Refunds', link: '/merchant/order/refunds' }

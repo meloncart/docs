@@ -3,7 +3,7 @@ subtitle: Configure your store settings.
 ---
 # Store Configuration
 
-Meloncart's store-wide settings are organized into several settings pages, all accessible under **Settings** in the backend navigation. These settings control tax behavior, shipping parameters, company information, and review policies.
+Meloncart's store-wide settings are organized into several settings pages, all accessible under **Settings** in the backend navigation. These settings control tax behavior, shipping parameters, document templates, and review policies.
 
 ## eCommerce Settings
 
@@ -54,14 +54,14 @@ The origin address defines where your products ship from. This information is pa
 The shipping origin is required for carrier-based shipping methods (such as UPS or FedEx integrations) to calculate accurate rates. For table rate shipping, the origin address is not used in rate calculations.
 :::
 
-## Company Information
+## Document Templates
 
-Navigate to **Settings → Company Information** to configure your company details for invoices and packing slips.
+Meloncart provides customizable templates for shipping labels and packing slips, managed through their own settings pages:
 
-- **Company Name** — Your business name as it appears on invoices and order documents.
-- **Address & Contact Details** — Your company address and contact information, displayed on generated invoices and packing slips.
+- **Settings → Shipping Label Templates** — Design and manage address label templates for printing. See [Shipping Labels](../order/shipping-labels) for details.
+- **Settings → Packing Slip Templates** — Design and manage packing slip templates for order fulfillment. See [Packing Slips](../order/packing-slips) for details.
 
-These details are used when generating printed or PDF documents for orders. Ensure they are accurate and match your business registration.
+Company details (name, address) are embedded directly in each template using editable syntax fields, so they can be customized per-template without a separate settings page.
 
 ## Review Settings
 

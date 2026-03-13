@@ -61,6 +61,35 @@ Invoices track:
 - **Payment Status** — Whether the invoice has been paid.
 - **Payment Log** — A record of all payment attempts and transactions.
 
+### Invoice Templates
+
+Invoice templates control the layout and content of printed invoices. Navigate to **Settings → Invoice Templates** (provided by the Responsiv.Pay plugin) to manage your templates. A default template is created during installation.
+
+Each template has:
+
+- **Name** — A descriptive name for the template.
+- **Code** — A unique identifier.
+- **Is Default** — Whether this is the default template used for new invoices.
+
+Templates use the same syntax field system as [shipping labels](./shipping-labels) and [packing slips](./packing-slips). The **HTML** and **CSS** tabs contain the template markup and styles. Syntax fields embedded in the HTML (such as `{text name="company_name"}`) are extracted on save and appear as editable form fields in the **Invoice** tab.
+
+The default template includes:
+
+- **Company logo** — Uploaded via a file upload syntax field.
+- **Company name and address** — Editable text fields for your business details.
+- **Company registration number** — For displaying ABN, VAT, or other registration numbers.
+- **Customer details** — Populated from the invoice's billing address.
+- **Invoice items table** — Description, quantity, unit price, and total for each line item.
+- **Totals** — Subtotal, tax, and total amount due.
+
+#### Printing an Invoice
+
+From an order's preview page, click **View Invoice** to navigate to the invoice preview. The invoice preview page displays the rendered invoice and includes a **Print Invoice** button that opens your browser's print dialog.
+
+#### Selecting a Template
+
+Each invoice has a template dropdown where you can select which template to use. If left as "Use Default", the template marked as default will be used. You can create multiple templates for different purposes (e.g., a formal template for business clients and a simpler one for retail customers).
+
 ## Payment Status
 
 An order's payment status is determined by whether the `payment_processed_at` timestamp has been set:

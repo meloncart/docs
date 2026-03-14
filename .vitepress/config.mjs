@@ -1,12 +1,3 @@
-const getStartedSidebar = [
-    {
-        text: "Get Started",
-        items: [
-            { text: 'Installation', link: '/get-started/installation' }
-        ]
-    }
-];
-
 const featuresSidebar = [
     {
         text: "Features",
@@ -87,7 +78,9 @@ const developerSidebar = [
     {
         text: "Getting Started",
         items: [
-            { text: 'Introduction', link: '/developer/introduction' }
+            { text: 'Introduction', link: '/developer/introduction' },
+            { text: 'Installation', link: '/developer/installation' },
+            { text: 'Quick Start', link: '/developer/getting-started' }
         ]
     },
     {
@@ -164,14 +157,12 @@ export default {
             dark: '/logo-dark.svg'
         },
         nav: [
-            { text: 'Get Started', link: '/get-started/installation' },
             { text: 'Features', link: '/features/' },
             { text: 'Merchant', link: '/merchant/introduction' },
             { text: 'Developer', link: '/developer/introduction' },
             { text: 'GitHub', link: 'https://github.com/meloncart' }
         ],
         sidebar: {
-            '/get-started/': getStartedSidebar,
             '/features/': featuresSidebar,
             '/merchant/': merchantSidebar,
             '/developer/': developerSidebar

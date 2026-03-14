@@ -70,5 +70,5 @@ The migration creates all necessary database tables and seeds default data, incl
 Once the sync completes, a new **Shop** menu appears in the backend navigation. From here you can start adding products, configuring shipping and payment methods, and customizing your store.
 
 - [Merchant Guide](/merchant/introduction) — learn how to manage your store day-to-day
-- [Developer Guide](/developer/introduction) — build and customize your storefront with components and templates
+- [Quick Start](/developer/getting-started) — build your first storefront in 5 minutes
 - [Features](/features/) — explore everything Meloncart can do

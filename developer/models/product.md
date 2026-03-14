@@ -464,9 +464,25 @@ Variants are specific combinations of product options, each with its own SKU, pr
 | `barcode` | `string` | Barcode/UPC |
 | `is_on_sale` | `bool` | Whether a manual sale price is set on this variant |
 | `sale_price` | `int\|null` | Manual sale price (in base currency units) |
-| `on_sale` | `bool` | Whether the variant is on sale (checks variant, then product) |
 | `is_enabled` | `bool` | Whether variant is available |
 | `is_default` | `bool` | Default variant selection |
+
+### Display Attributes
+
+These attributes mirror Product's API, enabling a unified template interface where `item` can be either a Product or a ProductVariant.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `on_sale` | `bool` | Whether the original and sale prices differ |
+| `final_price` | `int` | Base price with tax display adjustment |
+| `final_sale_price` | `int` | Best price with tax display adjustment |
+| `original_price` | `int` | Raw base price without tax or sale adjustment |
+| `original_sale_price` | `int` | Raw best price without tax adjustment |
+| `sale_price_reduction` | `int` | Amount saved: `original_price - original_sale_price` |
+
+::: tip
+Use `final_price` and `final_sale_price` for storefront display — they automatically apply tax display settings, just like their Product counterparts.
+:::
 
 ### Relationships
 
@@ -481,8 +497,8 @@ Variants are specific combinations of product options, each with its own SKU, pr
 
 | Method | Returns | Description |
 |--------|---------|-------------|
-| `getCompiledPrice($qty, $groupId)` | `int` | Resolved price with tiers, user groups, catalog rules, and sale prices |
-| `getEffectivePrice()` | `int` | Base price before sale (variant price or product price fallback) |
+| `getCompiledPrice($qty, $groupId)` | `int` | Resolved price with tiers, user groups, catalog rules, sale prices, and tax display adjustment |
+| `getEffectivePrice()` | `int` | Base price before sale with tax display adjustment (variant price or product price fallback) |
 | `getEffectiveWeight()` | `float` | Variant weight or product fallback |
 | `getEffectiveWidth()` | `float` | Variant width or product fallback |
 | `getEffectiveHeight()` | `float` | Variant height or product fallback |
@@ -517,14 +533,12 @@ For template use, `resolveVariantSafe()` is the preferred method — it returns 
 {% set postedOptions = post('product_options', {}) %}
 {% set variant = product.resolveVariantSafe(postedOptions) %}
 
-{# Variant-aware price display #}
-{% if variant %}
-    <span>{{ variant.getCompiledPrice(1)|currency }}</span>
-    {% if variant.on_sale %}
-        <del>{{ variant.getEffectivePrice()|currency }}</del>
-    {% endif %}
-{% else %}
-    {{ product.final_sale_price|currency }}
+{# Unified price display — works for both products and variants #}
+{% set item = variant ?: product %}
+<span>{{ item.final_sale_price|currency }}</span>
+{% if item.on_sale %}
+    <del>{{ item.final_price|currency }}</del>
+    <span>Save {{ item.sale_price_reduction|currency }}</span>
 {% endif %}
 
 {# Variant-aware images (falls back to product images) #}
@@ -538,8 +552,10 @@ For template use, `resolveVariantSafe()` is the preferred method — it returns 
 {% endif %}
 ```
 
-::: tip Sale Price Resolution
-The `on_sale` property checks the variant's own `is_on_sale` flag first, then falls back to the product's `on_sale` status. Similarly, `getCompiledPrice()` applies the variant's `sale_price` if set, otherwise the product's `sale_price` — returning the lower of the sale price and the compiled price. Use `getEffectivePrice()` for the pre-sale base price (strikethrough display).
+::: tip Unified Template API
+Product and ProductVariant share the same display attributes (`final_price`, `final_sale_price`, `on_sale`, `original_price`, `original_sale_price`, `sale_price_reduction`), so you can use `{% set item = variant ?: product %}` and write pricing markup once. Both include tax display adjustments automatically.
+
+For quantity-aware pricing (e.g., tier pricing), use the methods directly: `variant.getCompiledPrice(qty, groupId)`.
 :::
 
 ```twig

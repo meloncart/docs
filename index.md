@@ -11,7 +11,7 @@ hero:
           link: /merchant/introduction
         - theme: alt
           text: Installation Guide
-          link: /developer/introduction
+          link: /get-started/installation
     image:
         src: /hero-cart.png
         alt: Meloncart Shopping Cart
@@ -108,7 +108,7 @@ features:
         <p>Try the free demo to see Meloncart in action, or purchase a license to get started.</p>
         <div class="mc-cta-buttons">
             <VPButton theme="brand" size="big" text="Try the Demo" href="/merchant/introduction" />
-            <VPButton theme="alt" size="big" text="Installation Guide" href="/developer/introduction" />
+            <VPButton theme="alt" size="big" text="Installation Guide" href="/get-started/installation" />
         </div>
     </div>
 </div>

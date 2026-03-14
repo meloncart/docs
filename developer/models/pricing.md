@@ -112,6 +112,20 @@ The `applyTaxDisplay()` method handles this automatically on every model. You ne
 The tax class is resolved from the product's `tax_class_id`. If no tax class is assigned, prices are returned unchanged.
 :::
 
+::: warning Important for PHP Callers
+The `display_price` attribute relies on global tax context that is auto-initialized on web requests via `CheckoutData::ensureTaxContext()`. If you access `display_price` outside a web request (CLI commands, queue jobs, API endpoints), you must set context explicitly:
+
+```php
+use Meloncart\Shop\Models\TaxClass;
+
+TaxClass::withContext($address, $pricesIncludeTax, function() use ($product) {
+    $price = $product->display_price; // Correctly resolved
+});
+```
+
+Within templates and component handlers, this is handled automatically — no action needed.
+:::
+
 ---
 
 ## Sale Prices

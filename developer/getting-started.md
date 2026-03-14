@@ -43,7 +43,7 @@ lookup = "category"
 ```
 
 Key points:
-- `product.display_price` is the best price for the customer, always tax-aware
+- `product.display_price` is the best price for the customer, automatically adjusted for your store's [tax display settings](/developer/models/pricing#tax-display)
 - `product.compare_price` is the original/strikethrough price
 - `product.on_sale` is `true` when a sale or catalog discount applies
 - See the [Pricing guide](/developer/models/pricing) for the full vocabulary

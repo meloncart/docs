@@ -405,7 +405,7 @@
 
 .mc-editor__body code {
     display: block;
-    color: #cdd6f4;
+    color: #cdd6f4 !important;
     background: none !important;
     padding: 0 !important;
     font-size: 14px;
@@ -514,6 +514,344 @@
         width: 100%;
         max-width: 280px;
         text-align: center;
+    }
+}
+
+/* ============================================
+   Features Landing Page
+   ============================================ */
+
+.mc-features-page {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Hero header */
+.mc-features-hero {
+    text-align: center;
+    padding: 48px 24px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.mc-features-hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--vp-c-text-1);
+    margin: 0 0 16px;
+    border-top: none;
+    padding-top: 0;
+}
+
+.mc-features-hero p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--vp-c-text-2);
+    margin: 0 0 4px;
+}
+
+/* Card grid body */
+.mc-features-body {
+    padding: 40px 24px 60px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.mc-features-grid-2col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Feature card */
+.mc-fcard {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 24px;
+    background: var(--vp-c-bg);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 10px;
+    text-decoration: none !important;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+
+.mc-fcard:hover {
+    border-color: var(--mc-green);
+    box-shadow: 0 4px 20px rgba(0, 104, 56, 0.08);
+    transform: translateY(-2px);
+}
+
+.mc-fcard__icon {
+    font-size: 36px;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mc-fcard__text h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--vp-c-text-1);
+}
+
+.mc-fcard__text p {
+    font-size: 14px;
+    color: var(--vp-c-text-2);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* CTA section */
+.mc-features-cta {
+    text-align: center;
+    padding: 40px 24px 80px;
+}
+
+.mc-features-cta .VPButton {
+    text-decoration: none !important;
+}
+
+/* Features page responsive */
+@media (max-width: 639px) {
+    .mc-features-hero h1 {
+        font-size: 32px;
+    }
+
+    .mc-features-grid-2col {
+        grid-template-columns: 1fr;
+    }
+
+    .mc-fcard {
+        padding: 18px 20px;
+    }
+}
+
+/* ============================================
+   Feature Detail Pages (customization, etc.)
+   ============================================ */
+
+/* Back link */
+.mc-back-link {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 16px 24px 0;
+}
+
+.mc-back-link a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--vp-c-brand-1);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.mc-back-link a:hover {
+    color: var(--vp-c-brand-2);
+}
+
+.mc-detail-body {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Hero visual (code editor below title) */
+.mc-detail-hero-visual {
+    max-width: 720px;
+    margin: 0 auto 20px;
+    padding: 0 24px;
+}
+
+.mc-detail-hero-caption {
+    text-align: center;
+    font-size: 15px;
+    color: var(--vp-c-text-2);
+    margin: 20px 0 0;
+    line-height: 1.6;
+}
+
+/* Section rows — text left, visual right */
+.mc-detail-section {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    padding: 48px 0;
+    border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.mc-detail-section:last-child {
+    border-bottom: none;
+}
+
+.mc-detail-section__text {
+    flex: 1;
+    min-width: 0;
+}
+
+.mc-detail-section__text h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--vp-c-text-1);
+    border-top: none;
+    padding-top: 0;
+    line-height: 1.3;
+}
+
+.mc-detail-section__text p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--vp-c-text-2);
+    margin: 0;
+}
+
+.mc-detail-section__visual {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Small editor variant */
+.mc-editor--small .mc-editor__body {
+    padding: 14px 18px;
+}
+
+.mc-editor--small .mc-editor__body code {
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Line numbers in code */
+.mc-code-ln {
+    color: #585b70;
+    margin-right: 12px;
+    user-select: none;
+}
+
+/* Badge rows (frameworks, tools) */
+.mc-badge-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.mc-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: var(--vp-c-bg);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vp-c-text-1);
+}
+
+/* Icon badge circles */
+.mc-badge-row--icons {
+    gap: 12px;
+}
+
+.mc-icon-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mc-icon-badge--red {
+    background: #fce4ec;
+    color: #c62828;
+}
+
+.mc-icon-badge--orange {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.mc-icon-badge--green {
+    background: #e8f5e9;
+    color: #006838;
+}
+
+.mc-icon-badge--blue {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.mc-icon-badge--teal {
+    background: #e0f2f1;
+    color: #00695c;
+}
+
+.dark .mc-icon-badge--red {
+    background: rgba(198, 40, 40, 0.15);
+}
+
+.dark .mc-icon-badge--orange {
+    background: rgba(230, 81, 0, 0.15);
+}
+
+.dark .mc-icon-badge--green {
+    background: rgba(0, 104, 56, 0.15);
+}
+
+.dark .mc-icon-badge--blue {
+    background: rgba(21, 101, 192, 0.15);
+}
+
+.dark .mc-icon-badge--teal {
+    background: rgba(0, 105, 92, 0.15);
+}
+
+/* Placeholder illustrations */
+.mc-placeholder-illustration {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+/* Mockup placeholder screen */
+.mc-mockup__screen--placeholder {
+    padding: 0;
+    background: var(--vp-c-bg);
+}
+
+.mc-mockup__screen--placeholder svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Feature pages: expand doc layout content area */
+.mc-features-page + .VPDocFooter {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+/* Detail page responsive */
+@media (max-width: 959px) {
+    .mc-detail-section {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+    }
+
+    .mc-detail-section__text h2 {
+        font-size: 22px;
     }
 }
 

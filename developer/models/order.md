@@ -5,7 +5,9 @@ subtitle: Order, OrderItem, OrderStatus, OrderNote, and OrderTrackingCode model 
 
 This reference documents all Twig-accessible properties and methods for order-related models. All prices are stored as integers in **base currency units (cents)** — use the `|currency` filter for display.
 
-Orders are typically accessed through the user relationship (`user.orders`) or the [Checkout component](../components/checkout) during order placement.
+Orders are **computed records** — their totals are calculated from cart items, price rules, tax classes, and shipping methods. Prices are stored per-unit with separate tax-inclusive and tax-exclusive variants to support both pricing modes. Discounts are tracked per-unit (from price rules) with an additional `line_discount` field for rounding-safe line totals.
+
+Orders are typically accessed through the user relationship (`user.orders`) or the [Checkout component](../components/checkout) during order placement. For the simpler accounting-oriented model, see [Invoice Models](./invoice).
 
 ## Order
 
@@ -27,22 +29,24 @@ The `Order` model represents a completed or in-progress customer order.
 
 ### Financial Properties
 
+All prices are stored as integers in **base currency units (cents)**.
+
 | Property | Type | Description |
 |----------|------|-------------|
-| `subtotal` | `int` | Items subtotal (before discount and shipping) |
-| `original_subtotal` | `int` | `subtotal - discount` |
-| `final_subtotal` | `int` | Subtotal with tax display applied |
-| `discount` | `int` | Total discount amount (no tax) |
-| `discount_tax` | `int` | Tax on discount |
-| `final_discount` | `int` | `discount + discount_tax` |
-| `shipping_quote` | `int` | Shipping cost |
+| `subtotal` | `int` | Items subtotal after discounts, before tax and shipping. Formula: `sum(qty × original_price - line_discount)` |
+| `original_subtotal` | `int` | Pre-discount subtotal: `subtotal + discount` |
+| `final_subtotal` | `int` | Display subtotal. Tax-inclusive: `subtotal`. Tax-exclusive: `subtotal + sales_tax` |
+| `discount` | `int` | Total discount amount across all items (excluding tax) |
+| `discount_tax` | `int` | Tax portion of the total discount |
+| `final_discount` | `int` | Total discount with tax: `discount + discount_tax` |
+| `shipping_quote` | `int` | Shipping cost (excluding tax) |
 | `shipping_tax` | `int` | Tax on shipping |
-| `final_shipping_quote` | `int` | Shipping with tax display applied |
+| `final_shipping_quote` | `int` | Display shipping. Tax-inclusive: `shipping_quote`. Tax-exclusive: `shipping_quote + shipping_tax`. Free: `0` |
 | `shipping_is_free` | `bool` | Whether shipping is free (from price rules) |
-| `sales_tax` | `int` | Total sales tax |
-| `total_tax` | `int` | Total tax (sales + shipping) |
-| `total` | `int` | Final order total |
-| `total_cost` | `int` | Total cost price |
+| `sales_tax` | `int` | Tax on product items (excludes shipping tax) |
+| `total_tax` | `int` | Total tax: `sales_tax + shipping_tax - discount_tax` |
+| `total` | `int` | Final order total: `final_subtotal + final_shipping_quote` |
+| `total_cost` | `int` | Total cost of goods: `sum(qty × cost)` |
 
 ### Tax Properties
 
@@ -312,38 +316,50 @@ Each line item within an order, representing a purchased product with its quanti
 | `quantity` | `int` | Quantity ordered |
 | `variant_id` | `int\|null` | Selected variant ID (null if no variant) |
 
-### Price Properties
+### Price Properties (Per-Unit)
+
+All per-unit values represent a single unit. The `price` field stores the discounted per-unit price. Multiply by `quantity` for line totals — or use the computed line price properties below.
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `price` | `int` | Unit price after discount (no tax) |
-| `price_less_tax` | `int` | Unit price excluding tax |
-| `price_with_tax` | `int` | Unit price including tax |
-| `discount` | `int` | Discount per unit (no tax) |
-| `discount_less_tax` | `int` | Discount excluding tax |
-| `discount_with_tax` | `int` | Discount including tax |
-| `cost` | `int` | Cost price per unit |
-| `tax` | `int` | Tax amount per unit |
-| `subtotal` | `int` | Line subtotal: `quantity × (price - discount)` |
+| `price` | `int` | Per-unit price after discount (excluding tax) |
+| `price_less_tax` | `int` | Per-unit price excluding tax |
+| `price_with_tax` | `int` | Per-unit price including tax |
+| `discount` | `int` | Per-unit discount amount (excluding tax) |
+| `discount_less_tax` | `int` | Per-unit discount excluding tax |
+| `discount_with_tax` | `int` | Per-unit discount including tax |
+| `line_discount` | `int` | Exact total line discount across all units. Avoids rounding errors when per-unit discount doesn't divide evenly |
+| `cost` | `int` | Per-unit cost of goods (for margin reporting) |
+| `extras_price` | `int` | Per-unit extras price (excluding tax) |
+| `extras_price_less_tax` | `int` | Per-unit extras price excluding tax |
+| `extras_price_with_tax` | `int` | Per-unit extras price including tax |
+
+### Price Properties (Line-Level)
+
+Line-level values represent the total for the entire row (all units combined).
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `tax` | `int` | Total line tax: `unit_tax × quantity` |
+| `subtotal` | `int` | Line subtotal: `quantity × original_price - line_discount` |
 | `total` | `int` | Line total: `subtotal + tax` |
-| `extras_price` | `int` | Extras price total (no tax) |
-| `extras_price_less_tax` | `int` | Extras excluding tax |
-| `extras_price_with_tax` | `int` | Extras including tax |
 
 ### Computed Price Properties
 
+These are calculated on-the-fly and not stored in the database.
+
 | Property | Type | Description |
 |----------|------|-------------|
-| `original_price` | `int` | `price + discount` (before discount) |
-| `original_line_price` | `int` | `quantity × original_price` |
-| `unit_price` | `int` | Same as `price` |
-| `unit_line_price` | `int` | `quantity × unit_price` |
-| `final_price` | `int` | Same as `price_with_tax` |
-| `final_line_price` | `int` | `quantity × final_price` |
-| `final_discount` | `int` | Same as `discount_with_tax` |
-| `total_cost` | `int` | `quantity × cost` |
-| `total_weight` | `float` | `quantity × product.weight` |
-| `total_volume` | `float` | `quantity × product.volume` |
+| `original_price` | `int` | Pre-discount unit price: `price + discount` |
+| `original_line_price` | `int` | Pre-discount line total: `quantity × original_price` |
+| `unit_price` | `int` | Alias for `price` |
+| `unit_line_price` | `int` | Line total after discount (no tax): `quantity × original_price - line_discount` |
+| `final_price` | `int` | Alias for `price_with_tax` |
+| `final_line_price` | `int` | Line total with tax: `unit_line_price + tax` |
+| `final_discount` | `int` | Alias for `discount_with_tax` |
+| `total_cost` | `int` | Line cost: `quantity × cost` |
+| `total_weight` | `float` | Line weight: `quantity × product.weight` |
+| `total_volume` | `float` | Line volume: `quantity × product.volume` |
 
 ### Options and Extras
 

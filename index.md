@@ -23,15 +23,23 @@ features:
     - icon: 🛍️
       title: Elegant & Lightweight
       details: A flexible PHP framework that lets you build and customize every part of your eCommerce store. Easy to learn for both clients and developers.
+      link: /features/
+      linkText: Explore Features
     - icon: 🎨
       title: Built to Customize
       details: Design your own front-end and back-end without modifying the core. A powerful API and templating engine let you build any functionality you need.
+      link: /features/customization
+      linkText: Learn More
     - icon: ⚡
       title: Powerful Features
       details: Ship faster with built-in product management, order management, and payment & shipping integrations. Expand capabilities with Marketplace plugins.
+      link: /features/product-management
+      linkText: Learn More
     - icon: 📦
       title: Modern Stack
       details: Built on Laravel with a clean architecture. Twig templates, Composer packages, and artisan commands — familiar tools you already know.
+      link: /features/performance
+      linkText: Learn More
 ---
 
 <div class="mc-landing">
@@ -41,7 +49,8 @@ features:
         <div class="mc-section__content">
             <h2>An Elegant Solution to Complex Requirements</h2>
             <p>A flexible PHP framework that lets you build and customize every part of your eCommerce store. Easy to pick up for clients and developers alike.</p>
-            <VPButton theme="brand" size="medium" text="Learn More" href="/merchant/introduction" />
+            <VPButton theme="brand" size="medium" text="Explore Features" href="/features/" />
+            <VPButton theme="alt" size="medium" text="Merchant Guide" href="/merchant/introduction" />
         </div>
         <div class="mc-section__visual">
             <div class="mc-mockup">
@@ -61,6 +70,7 @@ features:
         <div class="mc-section__content">
             <h2>Built to Customize</h2>
             <p>Design your own front-end and back-end without having to modify the core. With a powerful API and templating engine, you can build any functionality you need.</p>
+            <VPButton theme="alt" size="medium" text="Customization Features" href="/features/customization" />
             <VPButton theme="alt" size="medium" text="Developer Docs" href="/developer/introduction" />
         </div>
         <div class="mc-section__visual">
@@ -81,26 +91,29 @@ features:
         <h2>Everything You Need Out of the Box</h2>
         <p class="mc-section__subtitle">Products, orders, payments, and shipping are all built in. Need more? Browse the Marketplace for plugins or roll your own!</p>
         <div class="mc-features-grid">
-            <div class="mc-feature">
+            <a href="/features/product-management" class="mc-feature">
                 <div class="mc-feature__icon">📦</div>
                 <h3>Product Management</h3>
                 <p>Categories, variants, inventory tracking, and discounts — all included.</p>
-            </div>
-            <div class="mc-feature">
+            </a>
+            <a href="/features/order-management" class="mc-feature">
                 <div class="mc-feature__icon">🛒</div>
                 <h3>Order Management</h3>
                 <p>The full order lifecycle from cart to delivery, with refunds and status tracking.</p>
-            </div>
-            <div class="mc-feature">
+            </a>
+            <a href="/features/payments" class="mc-feature">
                 <div class="mc-feature__icon">💳</div>
                 <h3>Payments & Shipping</h3>
                 <p>Connect your payment gateway and shipping provider with minimal setup.</p>
-            </div>
-            <div class="mc-feature">
+            </a>
+            <a href="/features/marketplace" class="mc-feature">
                 <div class="mc-feature__icon">🔌</div>
                 <h3>Extensible</h3>
                 <p>Hook into events, install Marketplace plugins, or write your own.</p>
-            </div>
+            </a>
+        </div>
+        <div style="margin-top: 2rem;">
+            <VPButton theme="alt" size="medium" text="View All Features" href="/features/" />
         </div>
     </div>
 </div>

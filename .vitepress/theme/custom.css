@@ -428,11 +428,14 @@
 }
 
 .mc-feature {
+    display: block;
     background: var(--vp-c-bg-soft);
     border: 1px solid var(--vp-c-divider);
     border-radius: 12px;
     padding: 32px 24px;
     text-align: center;
+    text-decoration: none;
+    color: inherit;
     transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
 }
 

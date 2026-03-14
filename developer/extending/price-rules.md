@@ -48,7 +48,7 @@ The system discovers actions and conditions using `PluginManager::getRegistratio
 
 ## Cart Rule Actions
 
-Cart rule actions discount the shopping cart during checkout. Extend `CartRuleActionBase` and implement `evalDiscount()`.
+Cart rule actions discount the shopping cart during checkout. Extend `CartRuleActionBase` and implement `evalDiscountWithContext()`.
 
 ### Base Class
 
@@ -56,6 +56,7 @@ Cart rule actions discount the shopping cart during checkout. Extend `CartRuleAc
 <?php namespace Acme\Pricing\PriceRules;
 
 use Meloncart\Shop\Classes\CartRuleActionBase;
+use Meloncart\Shop\Classes\CartRuleContext;
 
 class MyCartAction extends CartRuleActionBase
 {
@@ -71,13 +72,8 @@ class MyCartAction extends CartRuleActionBase
         ];
     }
 
-    public function evalDiscount(
-        &$params,
-        $hostObj,
-        &$itemDiscountMap,
-        &$itemDiscountTaxInclMap,
-        $productConditions
-    ) {
+    protected function evalDiscountWithContext(CartRuleContext $context)
+    {
         // Calculate and return the total discount
         return 0;
     }
@@ -88,17 +84,19 @@ class MyCartAction extends CartRuleActionBase
 Cart actions automatically return `TYPE_CART` from `getActionType()` — you don't need to override it.
 :::
 
-### evalDiscount Parameters
+### CartRuleContext Properties
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$params` | `array` | Cart state — see parameters table below |
-| `$hostObj` | `CartPriceRule` | The rule model with your config values (e.g., `$hostObj->discount_amount`) |
-| `$itemDiscountMap` | `array` | Discount per cart item key (updated by your action) |
-| `$itemDiscountTaxInclMap` | `array` | Tax-inclusive discount per item key |
-| `$productConditions` | `RuleConditionBase\|null` | Product filter conditions from the rule's Products tab |
+The `CartRuleContext` object passed to `evalDiscountWithContext()` provides all evaluation state:
 
-**Cart Parameters (`$params`):**
+| Property | Type | Description |
+|----------|------|-------------|
+| `$context->params` | `array` | Cart state — see parameters table below |
+| `$context->hostObj` | `CartPriceRule` | The rule model with your config values (e.g., `$context->hostObj->discount_amount`) |
+| `$context->itemDiscountMap` | `array` | Per-unit discount per cart item key (read/write) |
+| `$context->itemDiscountTaxInclMap` | `array` | Per-unit tax-inclusive discount per item key (read/write) |
+| `$context->productConditions` | `RuleConditionBase\|null` | Product filter conditions from the rule's Products tab |
+
+**Cart Parameters (`$context->params`):**
 
 | Key | Type | Description |
 |-----|------|-------------|
@@ -108,6 +106,10 @@ Cart actions automatically return `TYPE_CART` from `getActionType()` — you don
 | `coupon` | `Coupon\|null` | Applied coupon code |
 | `shipping_address` | `CheckoutAddress\|null` | Shipping address |
 | `prices_include_tax` | `bool` | Whether display prices include tax |
+
+::: tip Migration Note
+The older `evalDiscount(&$params, $hostObj, &$itemDiscountMap, &$itemDiscountTaxInclMap, $productConditions)` method is still supported as a backward-compatible shim. It builds a `CartRuleContext` internally and delegates to `evalDiscountWithContext()`. New actions should use `evalDiscountWithContext()` directly.
+:::
 
 ### Cart-Wide vs Per-Product
 
@@ -135,9 +137,9 @@ Use the `isActiveForProduct()` helper to check whether an item matches the rule'
 
 ```php
 foreach ($cartItems as $item) {
-    $currentPrice = $item->totalSinglePrice() - $itemDiscountMap[$item->key];
+    $currentPrice = $item->totalSinglePrice() - $context->itemDiscountMap[$item->key];
 
-    if (!$this->isActiveForProduct($item->product, $productConditions, $currentPrice)) {
+    if (!$this->isActiveForProduct($item->product, $context->productConditions, $currentPrice)) {
         continue;
     }
 
@@ -163,29 +165,24 @@ class CartPercentageCap extends CartRuleActionBase
         ];
     }
 
-    public function evalDiscount(
-        &$params,
-        $hostObj,
-        &$itemDiscountMap,
-        &$itemDiscountTaxInclMap,
-        $productConditions
-    ) {
-        $discount = $params['current_subtotal'] * $hostObj->discount_amount / 100;
-        $discount = min($discount, $hostObj->max_discount);
+    protected function evalDiscountWithContext(CartRuleContext $context)
+    {
+        $discount = $context->params['current_subtotal'] * $context->hostObj->discount_amount / 100;
+        $discount = min($discount, $context->hostObj->max_discount);
 
         // Distribute across items
-        $cartItems = $params['cart_items'];
+        $cartItems = $context->params['cart_items'];
         $totalDiscount = 0;
         $remainder = $discount;
 
         foreach ($cartItems as $item) {
             $currentPrice = max(
-                $item->totalSinglePrice() - $itemDiscountMap[$item->key],
+                $item->totalSinglePrice() - $context->itemDiscountMap[$item->key],
                 0
             );
 
             $perUnit = min($remainder / $item->quantity, $currentPrice);
-            $itemDiscountMap[$item->key] += $perUnit;
+            $context->itemDiscountMap[$item->key] += $perUnit;
             $totalDiscount += $perUnit * $item->quantity;
             $remainder -= $perUnit * $item->quantity;
 
@@ -221,32 +218,27 @@ class ProductFixedDiscount extends CartRuleActionBase
         return true;
     }
 
-    public function evalDiscount(
-        &$params,
-        $hostObj,
-        &$itemDiscountMap,
-        &$itemDiscountTaxInclMap,
-        $productConditions
-    ) {
-        $cartItems = $params['cart_items'];
+    protected function evalDiscountWithContext(CartRuleContext $context)
+    {
+        $cartItems = $context->params['cart_items'];
         $totalDiscount = 0;
 
         foreach ($cartItems as $item) {
             $currentPrice = max(
-                $item->totalSinglePrice() - $itemDiscountMap[$item->key],
+                $item->totalSinglePrice() - $context->itemDiscountMap[$item->key],
                 0
             );
 
             if (!$this->isActiveForProduct(
                 $item->product,
-                $productConditions,
+                $context->productConditions,
                 $currentPrice
             )) {
                 continue;
             }
 
-            $discount = min($hostObj->discount_amount, $currentPrice);
-            $itemDiscountMap[$item->key] += $discount;
+            $discount = min($context->hostObj->discount_amount, $currentPrice);
+            $context->itemDiscountMap[$item->key] += $discount;
             $totalDiscount += $discount * $item->quantity;
         }
 
@@ -554,7 +546,7 @@ Inherits all `RuleActionBase` methods, plus:
 
 | Method | Returns | Description |
 |--------|---------|-------------|
-| `evalDiscount(&$params, $hostObj, &$itemDiscountMap, &$itemDiscountTaxInclMap, $productConditions)` | `float` | Calculate the discount |
+| `evalDiscountWithContext(CartRuleContext $context)` | `float` | Calculate the discount (see [CartRuleContext Properties](#cartrulecontext-properties)) |
 | `isPerProductAction()` | `bool` | Whether discount is per-product or cart-wide |
 | `isActiveForProduct($product, $productConditions, $currentPrice, $ruleParams, $item)` | `bool` | Check product against conditions |
 

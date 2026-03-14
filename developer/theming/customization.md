@@ -191,7 +191,7 @@ The commerce theme includes reusable JavaScript controls built on the [`oc.Contr
 Manages the multi-step checkout form interactions. Automatically updates shipping options, payment methods, and order totals when the customer changes their address or selections.
 
 ```twig
-<form data-control="checkout-form" data-request="onAction">
+<form data-control="checkout-form" data-request="onRefreshCheckout">
     <!-- Checkout form fields -->
 </form>
 ```
@@ -283,12 +283,12 @@ Both use the same `[checkout]` component and AJAX handlers. The difference is in
 
 ### Custom Checkout Flow
 
-The `checkout-form` JavaScript control coordinates updates between checkout steps. When a customer changes their address, the control automatically calls `onAction` to refresh the shipping and payment sections.
+The `checkout-form` JavaScript control coordinates updates between checkout steps. When a customer changes their address, the control automatically calls `onRefreshCheckout` to refresh the shipping and payment sections.
 
 To customize the checkout flow, you can:
 
 1. **Rearrange partials** — Move sections around, combine steps, or split them differently
-2. **Add custom fields** — Include extra fields in the checkout form (they will be submitted with `onAction`)
+2. **Add custom fields** — Include extra fields in the checkout form (they will be submitted with `onRefreshCheckout`)
 3. **Override partial content** — Replace individual step partials with your own designs
 4. **Skip the control** — Build your own JavaScript to manage step interactions
 

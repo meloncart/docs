@@ -165,7 +165,7 @@ The `catalog-form` JavaScript control (`assets/js/controls/catalog-form.js`) tie
 On any filter change, it collects all active filter values and sends a single AJAX request:
 
 ```js
-oc.request(this.element, 'onAction', {
+oc.request(this.element, 'onRefreshCatalog', {
     data: {
         manufacturers: [1, 3],    // checked manufacturer IDs
         ratings: [4, 5],          // checked star values

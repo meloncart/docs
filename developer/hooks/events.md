@@ -570,6 +570,63 @@ Event::listen('shop.checkout.beforeSetCouponCode', function(&$code) {
 });
 ```
 
+## Shipping Events
+
+### shop.shipping.beforeGetQuote
+
+Fires before a shipping quote is evaluated. Return a non-null value to override the driver quote entirely.
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `$shippingMethod` | ShippingMethod | The shipping method model |
+| `$options` | array | Quote options — see options table below |
+
+**Return:** Return any non-null value to use as the quote result, bypassing the driver.
+
+**Quote Options:**
+
+| Key | Type | Description |
+|-----|------|-------------|
+| `countryId` | int | Destination country ID |
+| `stateId` | int | Destination state ID |
+| `zip` | string | Destination postal code |
+| `totalPrice` | int | Cart total in base value |
+| `totalVolume` | int | Total volume of items |
+| `totalWeight` | int | Total weight of items |
+| `totalItems` | int | Number of items |
+| `orderItems` | array | Cart item details |
+| `isBusiness` | bool | Whether this is a business address |
+
+```php
+Event::listen('shop.shipping.beforeGetQuote', function($shippingMethod, $options) {
+    // Block shipping to a specific country
+    if ($options['countryId'] === 999) {
+        return null; // No shipping available
+    }
+});
+```
+
+### shop.shipping.afterGetQuote
+
+Fires after a shipping quote is evaluated, including handling fees. Return a value to override the result.
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `$shippingMethod` | ShippingMethod | The shipping method model |
+| `$result` | int\|array | The calculated quote — int for a single rate, array for multiple options |
+| `$options` | array | The original quote options |
+
+**Return:** Return any non-null value to override the quote result.
+
+```php
+Event::listen('shop.shipping.afterGetQuote', function($shippingMethod, $result, $options) {
+    // Add a $5 surcharge to all quotes
+    if (is_int($result)) {
+        return $result + 500;
+    }
+});
+```
+
 ## Backend UI Events
 
 These events are fired in the admin panel and can be used to extend backend pages.
@@ -665,6 +722,8 @@ Event::listen('shop.categories.extendListToolbar', function($controller) {
 | `shop.variantOutOfStock` | `$variant` | No | Product |
 | `shop.product.getNotificationVars` | `$product` | No | Product |
 | `shop.checkout.beforeSetCouponCode` | `&$code` | No | Checkout |
+| `shop.shipping.beforeGetQuote` | `$shippingMethod`, `$options` | **Yes** | Shipping |
+| `shop.shipping.afterGetQuote` | `$shippingMethod`, `$result`, `$options` | **Yes** | Shipping |
 | `shop.orders.extendPreviewTabs` | -- | No | Backend |
 | `shop.products.extendPreviewTabs` | -- | No | Backend |
 | `shop.orders.extendListToolbar` | `$controller` | No | Backend |

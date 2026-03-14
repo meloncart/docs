@@ -108,18 +108,18 @@ Finds a custom group by its code and returns it. Custom groups are named collect
 
 ## AJAX Handlers
 
-### onAction
+### onRefreshCatalog
 
-A generic AJAX handler that re-runs the page cycle, making all page variables (product, category, etc.) available again. This is used to refresh page content without a full page reload — most commonly for updating product displays when variant options change.
+An AJAX handler that re-runs the page cycle, making all page variables (product, category, etc.) available again. This is used to refresh page content without a full page reload — most commonly for updating product displays when variant options change.
 
-When a customer changes a product option on a variant-enabled product, the `onAction` handler re-runs the page, allowing partials to re-resolve the selected variant and update pricing, images, and availability:
+When a customer changes a product option on a variant-enabled product, the `onRefreshCatalog` handler re-runs the page, allowing partials to re-resolve the selected variant and update pricing, images, and availability:
 
 ```twig
 {# Product option with AJAX variant update #}
 <select
     name="product_options[{{ option.hash }}]"
     class="form-select"
-    data-request="catalog::onAction"
+    data-request="catalog::onRefreshCatalog"
     data-request-update="{ 'shop/product-view': '#productPage' }">
     {% for value in option.values %}
         <option
@@ -131,10 +131,10 @@ When a customer changes a product option on a variant-enabled product, the `onAc
 </select>
 ```
 
-When the select changes, `onAction` fires, the page cycle re-runs, and the `shop/product-view` partial is re-rendered with the new POST data. Inside that partial, `product.resolveVariantSafe(post('product_options', {}))` resolves the matching variant for the selected options, allowing the template to display the correct variant price, images, and stock status.
+When the select changes, `onRefreshCatalog` fires, the page cycle re-runs, and the `shop/product-view` partial is re-rendered with the new POST data. Inside that partial, `product.resolveVariantSafe(post('product_options', {}))` resolves the matching variant for the selected options, allowing the template to display the correct variant price, images, and stock status.
 
 ::: tip
-The `catalog::onAction` prefix ensures the request targets the Catalog component specifically, which is important when multiple components are on the same page.
+The `catalog::onRefreshCatalog` prefix ensures the request targets the Catalog component specifically, which is important when multiple components are on the same page.
 :::
 
 ## URL Routing Patterns
@@ -216,13 +216,12 @@ All prices are integers in cents.
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `price` | integer | Base price as entered in the backend |
-| `final_price` | integer | Price with tax (no sale discount) |
-| `final_sale_price` | integer | Customer-facing price with sales, tier pricing, catalog rules, and tax |
-| `original_price` | integer | Base price without tax |
-| `original_sale_price` | integer | Sale price without tax |
+| `display_price` | integer | Customer-facing price with sales, tier pricing, catalog rules, and tax |
+| `compare_price` | integer | Price with tax (no sale discount) — the "was" price |
 | `on_sale` | boolean | Whether a sale price is active |
-| `sale_price_reduction` | integer | Amount saved off the regular price |
+| `display_discount` | integer | Amount saved (`compare_price - display_price`) |
+| `price` | integer | Base price as entered in the backend |
+| `original_price` | integer | Base price without tax |
 
 ### Relationships
 
@@ -364,10 +363,10 @@ identifier = "baseid"
             <h1>{{ product.title ? product.title : product.name }}</h1>
 
             <div class="fs-4">
-                <span class="fw-bold">{{ product.final_sale_price|currency }}</span>
+                <span class="fw-bold">{{ product.display_price|currency }}</span>
                 {% if product.on_sale %}
                     <span class="text-decoration-line-through text-muted">
-                        {{ product.final_price|currency }}
+                        {{ product.compare_price|currency }}
                     </span>
                 {% endif %}
             </div>
@@ -531,10 +530,10 @@ A reusable product card for grid and list views:
         </h2>
         <div class="d-flex justify-content-between align-items-center mt-3">
             <div>
-                <span>{{ product.final_sale_price|currency }}</span>
+                <span>{{ product.display_price|currency }}</span>
                 {% if product.on_sale %}
                     <span class="text-decoration-line-through text-muted">
-                        {{ product.final_price|currency }}
+                        {{ product.compare_price|currency }}
                     </span>
                 {% endif %}
             </div>

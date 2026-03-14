@@ -199,8 +199,8 @@ The `status` object has these properties:
                 <tr>
                     <td>{{ item.outputProductName()|raw }}</td>
                     <td>{{ item.quantity }}</td>
-                    <td>{{ item.final_price|currency }}</td>
-                    <td>{{ item.final_line_price|currency }}</td>
+                    <td>{{ item.display_price|currency }}</td>
+                    <td>{{ item.display_line_price|currency }}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -348,14 +348,23 @@ Line-level values represent the total for the entire row (all units combined).
 
 These are calculated on-the-fly and not stored in the database.
 
+::: tip Unified Vocabulary
+OrderItem supports the same unified price vocabulary as Product, ProductVariant, and CartItem. For Twig templates, prefer `display_price`, `compare_price`, `on_sale`, `display_discount`, and `display_line_price`. See [Pricing](./pricing) for details.
+:::
+
 | Property | Type | Description |
 |----------|------|-------------|
+| `display_price` | `int` | Customer-facing unit price with tax |
+| `compare_price` | `int` | Pre-discount unit price with tax (the "was" price) |
+| `on_sale` | `bool` | Whether the item has a discount |
+| `display_discount` | `int` | Amount saved per unit: `compare_price - display_price` |
+| `display_line_price` | `int` | Line total with tax: `unit_line_price + tax` |
 | `original_price` | `int` | Pre-discount unit price: `price + discount` |
 | `original_line_price` | `int` | Pre-discount line total: `quantity × original_price` |
 | `unit_price` | `int` | Alias for `price` |
 | `unit_line_price` | `int` | Line total after discount (no tax): `quantity × original_price - line_discount` |
 | `final_price` | `int` | Alias for `price_with_tax` |
-| `final_line_price` | `int` | Line total with tax: `unit_line_price + tax` |
+| `final_line_price` | `int` | Alias for `display_line_price` |
 | `final_discount` | `int` | Alias for `discount_with_tax` |
 | `total_cost` | `int` | Line cost: `quantity × cost` |
 | `total_weight` | `float` | Line weight: `quantity × product.weight` |

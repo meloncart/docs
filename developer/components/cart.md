@@ -42,7 +42,7 @@ Returns a `CartItemCollection` containing all active items (items not saved for 
 ```twig
 {% set items = cart.listActiveItems %}
 {% for item in items %}
-    <p>{{ item.product.name }} — {{ item.final_line_price|currency }}</p>
+    <p>{{ item.product.name }} — {{ item.display_line_price|currency }}</p>
 {% endfor %}
 ```
 
@@ -266,7 +266,23 @@ Each item in the cart is a `CartItem` object. These are the properties available
 
 ### Price Properties
 
-All prices are integers in cents.
+All prices are integers in cents. See the [Pricing](../models/pricing) guide for details on how prices are calculated.
+
+**Display Properties (Recommended)**
+
+Use these in Twig templates for customer-facing prices. They match the unified vocabulary across Product, ProductVariant, CartItem, and OrderItem.
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `display_price` | integer | Customer-facing unit price with tax, after all discounts |
+| `compare_price` | integer | Original unit price with tax (the "was" price) |
+| `on_sale` | boolean | Whether the item has an active discount |
+| `display_discount` | integer | Amount saved per unit: `compare_price - display_price` |
+| `display_line_price` | integer | Line total with tax: `display_price × quantity` |
+
+**Internal Properties**
+
+These are available for PHP-level calculations or backward compatibility. Prefer display properties in templates.
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -274,10 +290,10 @@ All prices are integers in cents.
 | `original_line_price` | integer | `original_price × quantity` |
 | `unit_price` | integer | Single unit price after discounts, without tax |
 | `unit_line_price` | integer | `unit_price × quantity` |
-| `final_price` | integer | Single unit price after discounts, with tax |
-| `final_line_price` | integer | `final_price × quantity` |
+| `final_price` | integer | Alias for `display_price` |
+| `final_line_price` | integer | Alias for `display_line_price` |
 | `discount` | integer | Per-unit discount amount without tax |
-| `final_discount` | integer | Per-unit discount amount with tax |
+| `final_discount` | integer | Alias for `display_discount` |
 
 ### Bundle Properties
 
@@ -304,10 +320,10 @@ These properties are set on cart items that belong to a product bundle.
 {% for item in items %}
     {% if item.isBundleItem() %}
         <div class="bundle-child-item">
-            {{ item.product.name }} — {{ item.final_line_price|currency }}
+            {{ item.product.name }} — {{ item.display_line_price|currency }}
         </div>
     {% else %}
-        <div>{{ item.product.name }} — {{ item.final_line_price|currency }}</div>
+        <div>{{ item.product.name }} — {{ item.display_line_price|currency }}</div>
     {% endif %}
 {% endfor %}
 ```
@@ -441,11 +457,11 @@ title = "Cart"
                                     <br />+ {{ extra.description }}
                                 {% endfor %}
                                 <div class="small mt-1">
-                                    {% if item.final_discount > 0 %}
-                                        <span class="text-success">{{ (item.final_price - item.final_discount)|currency }}</span>
-                                        <span class="text-decoration-line-through text-muted">{{ item.final_price|currency }}</span>
+                                    {% if item.on_sale %}
+                                        <span class="text-success">{{ item.display_price|currency }}</span>
+                                        <span class="text-decoration-line-through text-muted">{{ item.compare_price|currency }}</span>
                                     {% else %}
-                                        <span>{{ item.final_price|currency }}</span>
+                                        <span>{{ item.display_price|currency }}</span>
                                     {% endif %}
                                 </div>
                             </div>
@@ -469,7 +485,7 @@ title = "Cart"
                                 </div>
                             </div>
                             <div class="col-2 text-end">
-                                {{ item.final_line_price|currency }}
+                                {{ item.display_line_price|currency }}
                             </div>
                         </div>
                     </li>

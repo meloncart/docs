@@ -102,7 +102,7 @@ The `baseid` is stable and does not change if the product's slug is updated, mak
 All prices in Meloncart are stored and calculated as **integers in cents** (e.g., `1999` = $19.99). This avoids floating-point rounding issues. When displaying prices in templates, use the [`|currency`](https://docs.octobercms.com/4.x/markup/filter/currency.html) Twig filter, which formats the value according to the store's currency settings:
 
 ```twig
-{{ product.final_sale_price|currency }}
+{{ product.display_price|currency }}
 {# Output: $19.99 #}
 
 {{ cart.totalPrice|currency({ format: 'long' }) }}
@@ -111,17 +111,16 @@ All prices in Meloncart are stored and calculated as **integers in cents** (e.g.
 
 ### Product Price Properties
 
-Products expose several price-related properties in Twig, each representing a different stage of price calculation:
+Products expose several price-related properties in Twig. See the [Pricing](./models/pricing) guide for details on how these are calculated.
 
 | Property | Description |
 | --- | --- |
-| `price` | The base price as entered in the backend (in cents) |
-| `final_price` | Base price with tax applied (no sale discount) |
-| `final_sale_price` | Final customer-facing price — includes sale discounts, catalog price rules, tier pricing, and tax |
-| `original_price` | Base price without tax |
-| `original_sale_price` | Sale price without tax |
+| `display_price` | Customer-facing price — includes sale discounts, catalog price rules, tier pricing, and tax |
+| `compare_price` | The original "was" price when a sale is active — base price with tax (no discount) |
 | `on_sale` | Boolean — true if the product has an active sale price or catalog price rule |
-| `sale_price_reduction` | The amount saved (difference between `final_price` and `final_sale_price`) |
+| `display_discount` | The amount saved (difference between `compare_price` and `display_price`) |
+| `price` | The base price as entered in the backend (in cents) |
+| `original_price` | Base price without tax |
 
 ### Image Handling
 

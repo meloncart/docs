@@ -75,7 +75,7 @@ One approach is to create a dedicated partial that lists the wishlist items:
                             {% endif %}
                             <h5>{{ product.name }}</h5>
                         </a>
-                        <p>{{ product.final_sale_price|currency }}</p>
+                        <p>{{ product.display_price|currency }}</p>
 
                         <button
                             data-request="onAddToCart"

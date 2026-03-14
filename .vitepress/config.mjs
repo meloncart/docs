@@ -125,7 +125,8 @@ const developerSidebar = [
     {
         text: "Hooks & Events",
         items: [
-            { text: 'Events', link: '/developer/hooks/events' }
+            { text: 'Events', link: '/developer/hooks/events' },
+            { text: 'Error Handling', link: '/developer/error-handling' }
         ]
     },
     {

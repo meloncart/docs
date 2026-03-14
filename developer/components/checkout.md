@@ -60,22 +60,22 @@ Returns `true` if the cart has no items. Use this to show an empty cart message 
 
 ## AJAX Handlers
 
-### onAction
+### onRefreshCheckout
 
-The generic checkout action handler. It processes any pending checkout step data from the POST request, then refreshes the page variables. This is the primary handler used for navigating between checkout steps.
+The primary checkout handler. It processes any pending checkout step data from the POST request, then refreshes the page variables. This is the handler used for navigating between checkout steps.
 
-When called, `onAction` processes all `post_*` flags found in the request (see [POST Parameters](#post-parameters) below), updates the checkout session, and returns the updated page variables for partial rendering.
+When called, `onRefreshCheckout` processes all `post_*` flags found in the request (see [POST Parameters](#post-parameters) below), updates the checkout session, and returns the updated page variables for partial rendering.
 
 ```html
 <button
-    data-request="onAction"
+    data-request="onRefreshCheckout"
     data-request-data="{ checkout_step: 'shipping' }"
     data-request-update="{ 'shop/checkout-view': '#shopCheckoutView' }">
     Continue to Shipping
 </button>
 ```
 
-If the cart contents have changed since the checkout started, `onAction` triggers a page refresh to recalculate totals. If the order has already been paid, it redirects to the receipt page.
+If the cart contents have changed since the checkout started, `onRefreshCheckout` triggers a page refresh to recalculate totals. If the order has already been paid, it redirects to the receipt page.
 
 ### onPlaceOrder
 
@@ -256,7 +256,7 @@ These parameters are processed during order placement:
 
 ## Checkout Flow
 
-The Commerce Theme implements a three-step checkout flow. Each step submits its data to the `onAction` handler, which stores it in the session and returns updated page variables.
+The Commerce Theme implements a three-step checkout flow. Each step submits its data to the `onRefreshCheckout` handler, which stores it in the session and returns updated page variables.
 
 ```
 Step 1: Contact Details & Address
@@ -279,7 +279,7 @@ When navigating backward between steps (e.g., "Return to Details"), pass `skip_v
 
 ```html
 <a href="javascript:;"
-    data-request="onAction"
+    data-request="onRefreshCheckout"
     data-request-data="{ checkout_step: 'details', skip_validation: true }"
     data-request-update="{ 'shop/checkout-view': '#shopCheckoutView' }">
     Return to Details
@@ -342,7 +342,7 @@ The checkout view partial acts as a step router, displaying different content ba
                 {% partial 'shop/checkout-step-details' %}
                 <input type="hidden" name="post_contact_details" value="true" />
                 <button
-                    data-request="onAction"
+                    data-request="onRefreshCheckout"
                     data-request-data="{ checkout_step: 'shipping' }"
                     data-request-update="{ 'shop/checkout-view': '#shopCheckoutView' }"
                     data-attach-loading
@@ -354,13 +354,13 @@ The checkout view partial acts as a step router, displaying different content ba
                 {% partial 'shop/checkout-step-shipping' %}
                 <input type="hidden" name="post_shipping_method" value="true" />
                 <a href="javascript:;"
-                    data-request="onAction"
+                    data-request="onRefreshCheckout"
                     data-request-data="{ checkout_step: 'details', skip_validation: true }"
                     data-request-update="{ 'shop/checkout-view': '#shopCheckoutView' }">
                     Return to Details
                 </a>
                 <a href="javascript:;"
-                    data-request="onAction"
+                    data-request="onRefreshCheckout"
                     data-request-data="{ checkout_step: 'payment' }"
                     data-request-update="{ 'shop/checkout-view': '#shopCheckoutView' }"
                     data-attach-loading
@@ -372,7 +372,7 @@ The checkout view partial acts as a step router, displaying different content ba
                 {% partial 'shop/checkout-step-payment' %}
                 <input type="hidden" name="post_payment_method" value="true" />
                 <a href="javascript:;"
-                    data-request="onAction"
+                    data-request="onRefreshCheckout"
                     data-request-data="{ checkout_step: 'shipping', skip_validation: true }"
                     data-request-update="{ 'shop/checkout-view': '#shopCheckoutView' }">
                     Return to Shipping
@@ -617,7 +617,7 @@ The checkout view partial acts as a step router, displaying different content ba
                     </div>
                 </div>
                 <div class="col-3 text-end small">
-                    {{ item.final_line_price|currency }}
+                    {{ item.display_line_price|currency }}
                 </div>
             </div>
         </li>

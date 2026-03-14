@@ -10,7 +10,10 @@ hero:
           text: Try the Demo
           link: /merchant/introduction
         - theme: alt
-          text: Installation Guide
+          text: Developer Guide
+          link: /developer/getting-started
+        - theme: alt
+          text: Installation
           link: /developer/installation
     image:
         src: /hero-cart.png

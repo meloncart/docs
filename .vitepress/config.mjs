@@ -11,7 +11,22 @@ const featuresSidebar = [
     {
         text: "Features",
         items: [
-            { text: 'Overview', link: '/features/' }
+            { text: 'Overview', link: '/features/' },
+            { text: 'Customization', link: '/features/customization' },
+            { text: 'Product Management', link: '/features/product-management' },
+            { text: 'Customer Management', link: '/features/customer-management' },
+            { text: 'Order Management', link: '/features/order-management' },
+            { text: 'Payments', link: '/features/payments' },
+            { text: 'Shipping', link: '/features/shipping' },
+            { text: 'Checkout', link: '/features/checkout' },
+            { text: 'Marketing & Promotion', link: '/features/marketing' },
+            { text: 'Reporting & Analytics', link: '/features/reporting' },
+            { text: 'Software Updates', link: '/features/updates' },
+            { text: 'Security', link: '/features/security' },
+            { text: 'Performance', link: '/features/performance' },
+            { text: 'Customer Support', link: '/features/support' },
+            { text: 'Multi-Store', link: '/features/multi-store' },
+            { text: 'Marketplace', link: '/features/marketplace' }
         ]
     }
 ];
@@ -107,6 +122,7 @@ const developerSidebar = [
         text: "Models",
         items: [
             { text: 'Product', link: '/developer/models/product' },
+            { text: 'Pricing', link: '/developer/models/pricing' },
             { text: 'Order', link: '/developer/models/order' },
             { text: 'Invoice', link: '/developer/models/invoice' },
             { text: 'Inventory', link: '/developer/models/inventory' },

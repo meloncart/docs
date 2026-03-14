@@ -34,23 +34,24 @@ The `Product` model is the central model for all product data. It is typically a
 | `cost` | `int` | Cost/wholesale price |
 | `is_on_sale` | `bool` | Whether a manual sale price is set |
 | `sale_price` | `int` | Manual sale price (in base currency units) |
-| `original_price` | `int` | Base price without tax — respects tier pricing and quantity |
-| `original_sale_price` | `int` | Sale price without tax — checks manual sale, then catalog rules |
-| `final_price` | `int` | Display price with tax (if tax display is enabled) |
-| `final_sale_price` | `int` | Sale price with tax (if tax display is enabled) |
-| `sale_price_reduction` | `int` | Amount saved: `original_price - original_sale_price` |
+| `display_price` | `int` | Best display price with tax (sale or catalog rule applied) |
+| `compare_price` | `int` | Base display price with tax (for strikethrough comparison) |
+| `on_sale` | `bool` | Whether the product has a price reduction (manual or catalog rule) |
+| `display_discount` | `int` | Amount saved: `compare_price - display_price` |
+| `in_stock` | `bool` | Whether the product is available for purchase |
+| `has_variants` | `bool` | Whether the product uses variants |
 
 ::: tip
-Use `final_price` and `final_sale_price` for storefront display — they automatically apply tax display settings. Use `original_price` and `original_sale_price` when you need raw values without tax.
+Use `display_price` for storefront display and `compare_price` for strikethrough pricing — both automatically apply tax display settings.
 :::
 
 ```twig
-{{ product.final_price|currency }}
+{{ product.display_price|currency }}
 
-{% if product.is_on_sale %}
-    <del>{{ product.final_price|currency }}</del>
-    <ins>{{ product.final_sale_price|currency }}</ins>
-    <span>Save {{ product.sale_price_reduction|currency }}</span>
+{% if product.on_sale %}
+    <del>{{ product.compare_price|currency }}</del>
+    <ins>{{ product.display_price|currency }}</ins>
+    <span>Save {{ product.display_discount|currency }}</span>
 {% endif %}
 ```
 
@@ -212,11 +213,11 @@ The scope automatically applies `applyVisible` and `applySiteVisibility`, so cal
     {% endif %}
 
     {# Pricing #}
-    {% if product.is_on_sale %}
-        <del>{{ product.final_price|currency }}</del>
-        <strong>{{ product.final_sale_price|currency }}</strong>
+    {% if product.on_sale %}
+        <del>{{ product.compare_price|currency }}</del>
+        <strong>{{ product.display_price|currency }}</strong>
     {% else %}
-        <strong>{{ product.final_price|currency }}</strong>
+        <strong>{{ product.display_price|currency }}</strong>
     {% endif %}
 
     {# Tier pricing #}
@@ -226,7 +227,7 @@ The scope automatically applies `applyVisible` and `applySiteVisibility`, so cal
             <tr><th>Quantity</th><th>Price</th></tr>
             <tr>
                 <td>1+</td>
-                <td>{{ product.final_price|currency }}</td>
+                <td>{{ product.display_price|currency }}</td>
             </tr>
             {% for tier in visibleTiers %}
                 <tr>
@@ -267,8 +268,8 @@ The scope automatically applies `applyVisible` and `applySiteVisibility`, so cal
         <label>
             <input type="checkbox" name="product_extras[{{ extra.id }}]" />
             {{ extra.description }}
-            {% if extra.final_price > 0 %}
-                (+{{ extra.final_price|currency }})
+            {% if extra.display_price > 0 %}
+                (+{{ extra.display_price|currency }})
             {% endif %}
         </label>
     {% endfor %}
@@ -361,8 +362,7 @@ Extras are paid or free add-ons that customers can optionally select, such as gi
 | `description` | `string` | Extra label/description |
 | `group_name` | `string` | Group name for organizing extras |
 | `price` | `int` | Raw price in cents |
-| `original_price` | `int` | Price without tax |
-| `final_price` | `int` | Price with tax (if tax display is enabled) |
+| `display_price` | `int` | Price with tax (if tax display is enabled) |
 | `weight` | `float` | Additional weight |
 | `width` | `float` | Width |
 | `height` | `float` | Height |
@@ -390,8 +390,8 @@ Always use `product.all_extras` to display extras on the storefront.
             <strong>{{ extra.group_name }}:</strong>
         {% endif %}
         {{ extra.description }}
-        {% if extra.final_price > 0 %}
-            (+{{ extra.final_price|currency }})
+        {% if extra.display_price > 0 %}
+            (+{{ extra.display_price|currency }})
         {% else %}
             (Free)
         {% endif %}
@@ -401,11 +401,11 @@ Always use `product.all_extras` to display extras on the storefront.
 
 ### Extras in Cart/Order Context
 
-When retrieved from a cart item or order item, extras have `originalPrice` and `finalPrice` properties set from the time of purchase:
+When retrieved from a cart item or order item, extras have `displayPrice` properties set from the time of purchase:
 
 ```twig
 {% for extra in item.extras %}
-    <span>+ {{ extra.description }}: {{ extra.finalPrice|currency }}</span>
+    <span>+ {{ extra.description }}: {{ extra.displayPrice|currency }}</span>
 {% endfor %}
 ```
 
@@ -474,14 +474,12 @@ These attributes mirror Product's API, enabling a unified template interface whe
 | Property | Type | Description |
 |----------|------|-------------|
 | `on_sale` | `bool` | Whether the original and sale prices differ |
-| `final_price` | `int` | Base price with tax display adjustment |
-| `final_sale_price` | `int` | Best price with tax display adjustment |
-| `original_price` | `int` | Raw base price without tax or sale adjustment |
-| `original_sale_price` | `int` | Raw best price without tax adjustment |
-| `sale_price_reduction` | `int` | Amount saved: `original_price - original_sale_price` |
+| `display_price` | `int` | Best price with tax display adjustment |
+| `compare_price` | `int` | Base price with tax display adjustment |
+| `display_discount` | `int` | Amount saved: `compare_price - display_price` |
 
 ::: tip
-Use `final_price` and `final_sale_price` for storefront display — they automatically apply tax display settings, just like their Product counterparts.
+Use `display_price` and `compare_price` for storefront display — they automatically apply tax display settings, just like their Product counterparts.
 :::
 
 ### Relationships
@@ -535,10 +533,10 @@ For template use, `resolveVariantSafe()` is the preferred method — it returns 
 
 {# Unified price display — works for both products and variants #}
 {% set item = variant ?: product %}
-<span>{{ item.final_sale_price|currency }}</span>
+<span>{{ item.display_price|currency }}</span>
 {% if item.on_sale %}
-    <del>{{ item.final_price|currency }}</del>
-    <span>Save {{ item.sale_price_reduction|currency }}</span>
+    <del>{{ item.compare_price|currency }}</del>
+    <span>Save {{ item.display_discount|currency }}</span>
 {% endif %}
 
 {# Variant-aware images (falls back to product images) #}
@@ -553,7 +551,7 @@ For template use, `resolveVariantSafe()` is the preferred method — it returns 
 ```
 
 ::: tip Unified Template API
-Product and ProductVariant share the same display attributes (`final_price`, `final_sale_price`, `on_sale`, `original_price`, `original_sale_price`, `sale_price_reduction`), so you can use `{% set item = variant ?: product %}` and write pricing markup once. Both include tax display adjustments automatically.
+Product and ProductVariant share the same display attributes (`display_price`, `compare_price`, `on_sale`, `display_discount`), so you can use `{% set item = variant ?: product %}` and write pricing markup once. Both include tax display adjustments automatically.
 
 For quantity-aware pricing (e.g., tier pricing), use the methods directly: `variant.getCompiledPrice(qty, groupId)`.
 :::
@@ -603,7 +601,7 @@ Use `visible_price_tiers` to display tiers appropriate for the current user. Thi
         <tbody>
             <tr>
                 <td>1+</td>
-                <td>{{ product.final_price|currency }}</td>
+                <td>{{ product.display_price|currency }}</td>
             </tr>
             {% for tier in visibleTiers %}
                 <tr>

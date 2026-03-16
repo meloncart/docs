@@ -108,17 +108,7 @@ aside: false
         <p>Each store can display prices in a different <strong>currency</strong>. Prices are stored in a base currency and automatically converted using exchange rates — or you can set fixed price overrides for specific currencies when you need round numbers or market-specific pricing.</p>
     </div>
     <div class="mc-detail-section__visual">
-        <div class="mc-badge-row mc-badge-row--icons">
-            <div class="mc-icon-badge mc-icon-badge--green">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--orange">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-2 0H3V6h14v8zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm13 0v11c0 1.1-.9 2-2 2H4v-2h17V7h2z" fill="currentColor"/></svg>
-            </div>
-        </div>
+        <img src="/features/feat-multi-currency.png" alt="Multi-currency pricing" />
     </div>
 </div>
 
@@ -176,17 +166,7 @@ aside: false
         <p>Your theme is shared across all stores and sites. The same pages, partials and layouts render content from whichever store the current request belongs to. No theme <strong>duplication</strong> needed — just build once and let Meloncart handle the rest.</p>
     </div>
     <div class="mc-detail-section__visual">
-        <div class="mc-badge-row mc-badge-row--icons">
-            <div class="mc-icon-badge mc-icon-badge--green">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-1.01 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--orange">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" fill="currentColor"/></svg>
-            </div>
-        </div>
+        <img src="/features/feat-one-theme.png" alt="One theme, every store" />
     </div>
 </div>
 
@@ -196,17 +176,7 @@ aside: false
         <p>Already running a single store? Adding a second is straightforward. Create a new site group, assign your existing site to the first group, and your current data stays <strong>intact</strong>. Then start building your second store alongside the first.</p>
     </div>
     <div class="mc-detail-section__visual">
-        <div class="mc-badge-row mc-badge-row--icons">
-            <div class="mc-icon-badge mc-icon-badge--green">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6a5.87 5.87 0 01-2.8-.7l-1.46 1.46A7.93 7.93 0 0012 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46A7.93 7.93 0 0012 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--orange">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
-            </div>
-        </div>
+        <img src="/features/feat-easy-migration.png" alt="Easy migration" />
     </div>
 </div>
 

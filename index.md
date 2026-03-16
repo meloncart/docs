@@ -20,22 +20,26 @@ hero:
         alt: Meloncart Shopping Cart
 
 features:
-    - icon: 🛍️
+    - icon:
+          src: /icons/icon-elegant.png
       title: Elegant & Lightweight
       details: A flexible PHP framework that lets you build and customize every part of your eCommerce store. Easy to learn for both clients and developers.
       link: /features/
       linkText: Explore Features
-    - icon: 🎨
+    - icon:
+          src: /icons/icon-customize.png
       title: Built to Customize
       details: Design your own front-end and back-end without modifying the core. A powerful API and templating engine let you build any functionality you need.
       link: /features/customization
       linkText: Learn More
-    - icon: ⚡
+    - icon:
+          src: /icons/icon-powerful.png
       title: Powerful Features
       details: Ship faster with built-in product management, order management, and payment & shipping integrations. Expand capabilities with Marketplace plugins.
       link: /features/product-management
       linkText: Learn More
-    - icon: 📦
+    - icon:
+          src: /icons/icon-modern-stack.png
       title: Modern Stack
       details: Built on Laravel with a clean architecture. Twig templates, Composer packages, and artisan commands — familiar tools you already know.
       link: /features/performance
@@ -86,28 +90,49 @@ features:
     </div>
 </div>
 
+<div class="mc-section mc-section--ecosystem">
+    <div class="mc-section__inner">
+        <div class="mc-section__content">
+            <h2>Ready to Go, Ready to Grow</h2>
+            <p>Products, orders, payments, shipping, and a complete admin panel are built in from the start. When a project needs something more, a powerful framework and CMS give you the tools to build it the way you want.</p>
+            <VPButton theme="brand" size="medium" text="Browse the Marketplace" href="/features/marketplace" />
+            <VPButton theme="alt" size="medium" text="See All Features" href="/features/" />
+        </div>
+        <div class="mc-section__visual">
+            <div class="mc-mockup">
+                <div class="mc-mockup__bar">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="mc-mockup__screen">
+                    <img src="/screenshot-theme.png" alt="Meloncart Fresh Theme storefront" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="mc-section mc-section--features">
     <div class="mc-section__inner mc-section__inner--centered">
         <h2>Everything You Need Out of the Box</h2>
         <p class="mc-section__subtitle">Products, orders, payments, and shipping are all built in. Need more? Browse the Marketplace for plugins or roll your own!</p>
         <div class="mc-features-grid">
             <a href="/features/product-management" class="mc-feature">
-                <div class="mc-feature__icon">📦</div>
+                <div class="mc-feature__icon"><img src="/icons/icon-products.png" alt="Product Management" /></div>
                 <h3>Product Management</h3>
                 <p>Categories, variants, inventory tracking, and discounts — all included.</p>
             </a>
             <a href="/features/order-management" class="mc-feature">
-                <div class="mc-feature__icon">🛒</div>
+                <div class="mc-feature__icon"><img src="/icons/icon-orders.png" alt="Order Management" /></div>
                 <h3>Order Management</h3>
                 <p>The full order lifecycle from cart to delivery, with refunds and status tracking.</p>
             </a>
             <a href="/features/payments" class="mc-feature">
-                <div class="mc-feature__icon">💳</div>
+                <div class="mc-feature__icon"><img src="/icons/icon-payments.png" alt="Payments & Shipping" /></div>
                 <h3>Payments & Shipping</h3>
                 <p>Connect your payment gateway and shipping provider with minimal setup.</p>
             </a>
             <a href="/features/marketplace" class="mc-feature">
-                <div class="mc-feature__icon">🔌</div>
+                <div class="mc-feature__icon"><img src="/icons/icon-extensible.png" alt="Extensible" /></div>
                 <h3>Extensible</h3>
                 <p>Hook into events, install Marketplace plugins, or write your own.</p>
             </a>

@@ -175,17 +175,7 @@ aside: false
         <p>Every <strong>report</strong> can be exported to CSV for use in spreadsheets, accounting software or business intelligence tools.</p>
     </div>
     <div class="mc-detail-section__visual">
-        <div class="mc-badge-row mc-badge-row--icons">
-            <div class="mc-icon-badge mc-icon-badge--green">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--orange">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" fill="currentColor"/></svg>
-            </div>
-        </div>
+        <img src="/features/feat-data-export.png" alt="Data export" />
     </div>
 </div>
 

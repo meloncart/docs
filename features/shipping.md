@@ -159,17 +159,7 @@ aside: false
         <p>Generate and print <strong>shipping labels</strong> directly from the order screen. <strong>Label</strong> printing supports carrier-specific options like insurance amounts, package types and service levels, so you can handle everything without leaving the admin panel.</p>
     </div>
     <div class="mc-detail-section__visual">
-        <div class="mc-badge-row mc-badge-row--icons">
-            <div class="mc-icon-badge mc-icon-badge--green">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--orange">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z" fill="currentColor"/></svg>
-            </div>
-        </div>
+        <img src="/features/feat-shipping-labels.png" alt="Shipping labels" />
     </div>
 </div>
 

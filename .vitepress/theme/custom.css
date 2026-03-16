@@ -450,6 +450,14 @@
     margin-bottom: 16px;
 }
 
+.mc-feature__icon img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .mc-feature h3 {
     font-size: 17px;
     font-weight: 600;

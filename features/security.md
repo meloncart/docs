@@ -148,17 +148,7 @@ aside: false
         <p>Sensitive data stored in the database is automatically <strong>encrypted</strong> by Meloncart. In the event of a database breach, encrypted fields remain protected.</p>
     </div>
     <div class="mc-detail-section__visual">
-        <div class="mc-badge-row mc-badge-row--icons">
-            <div class="mc-icon-badge mc-icon-badge--green">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--orange">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" fill="currentColor"/></svg>
-            </div>
-        </div>
+        <img src="/features/feat-data-encryption.png" alt="Data encryption" />
     </div>
 </div>
 
@@ -169,17 +159,7 @@ aside: false
         <p>This minimizes your <strong>PCI compliance</strong> scope and reduces risk.</p>
     </div>
     <div class="mc-detail-section__visual">
-        <div class="mc-badge-row mc-badge-row--icons">
-            <div class="mc-icon-badge mc-icon-badge--green">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--orange">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/></svg>
-            </div>
-        </div>
+        <img src="/features/feat-payment-security.png" alt="Payment security" />
     </div>
 </div>
 

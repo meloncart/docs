@@ -63,17 +63,7 @@ aside: false
         <p>Meloncart inherits Laravel's performance characteristics: <strong>Eloquent ORM</strong> with eager loading to avoid N+1 queries, a robust queue system for offloading heavy tasks like email notifications and report generation, and route caching for fast request handling.</p>
     </div>
     <div class="mc-detail-section__visual">
-        <div class="mc-badge-row mc-badge-row--icons">
-            <div class="mc-icon-badge mc-icon-badge--green">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.73-2.56 6.86-6 7.75v2.02c4.97-.93 8.75-5.3 8.75-9.77 0-4.83-3.44-8.87-8.75-9.95zm-2 0C6.05 3.03 2.25 7.4 2.25 12.18c0 4.47 3.78 8.84 8.75 9.77v-2.02c-3.44-.89-6-4.02-6-7.75 0-4.08 3.06-7.44 7-7.93V2.05zM12 8l-4 4h3v4h2v-4h3l-4-4z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--blue">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19.14 12.94a7.015 7.015 0 00.06-.94c0-.32-.02-.64-.06-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.49.49 0 00-.59-.22l-2.39.96a7.04 7.04 0 00-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84a.484.484 0 00-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 00-.59.22L2.74 8.87a.49.49 0 00.12.61l2.03 1.58c-.04.3-.06.63-.06.94s.02.64.06.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.57 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 00-.12-.61l-2.03-1.58zM12 15.6A3.6 3.6 0 1115.6 12 3.611 3.611 0 0112 15.6z" fill="currentColor"/></svg>
-            </div>
-            <div class="mc-icon-badge mc-icon-badge--orange">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6h-6z" fill="currentColor"/></svg>
-            </div>
-        </div>
+        <img src="/features/feat-laravel.png" alt="Built on Laravel" />
     </div>
 </div>
 

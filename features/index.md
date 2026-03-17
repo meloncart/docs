@@ -65,6 +65,13 @@ prev: false
                 <p>A fully customizable checkout experience</p>
             </div>
         </a>
+        <a href="./multi-store" class="mc-fcard">
+            <div class="mc-fcard__icon"><img src="/icons/icon-multi-store.png" alt="Multi-Store" /></div>
+            <div class="mc-fcard__text">
+                <h3>Multi-Store</h3>
+                <p>Run multiple storefronts from a single installation</p>
+            </div>
+        </a>
         <a href="./marketing" class="mc-fcard">
             <div class="mc-fcard__icon"><img src="/icons/icon-marketing.png" alt="Marketing & Promotion" /></div>
             <div class="mc-fcard__text">
@@ -105,13 +112,6 @@ prev: false
             <div class="mc-fcard__text">
                 <h3>Customer Support</h3>
                 <p>Get help through multiple channels</p>
-            </div>
-        </a>
-        <a href="./multi-store" class="mc-fcard">
-            <div class="mc-fcard__icon"><img src="/icons/icon-multi-store.png" alt="Multi-Store" /></div>
-            <div class="mc-fcard__text">
-                <h3>Multi-Store</h3>
-                <p>Run multiple storefronts from a single installation</p>
             </div>
         </a>
         <a href="./marketplace" class="mc-fcard">

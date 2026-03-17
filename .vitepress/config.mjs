@@ -140,7 +140,8 @@ const developerSidebar = [
     {
         text: "Theming",
         items: [
-            { text: 'Customization', link: '/developer/theming/customization' }
+            { text: 'Customization', link: '/developer/theming/customization' },
+            { text: 'Digital Downloads', link: '/developer/theming/downloads' }
         ]
     }
 ];

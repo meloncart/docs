@@ -176,6 +176,18 @@ When this setting is unchecked (the default), the product is visible on all site
 
 This is useful when different sites within the same store need different product assortments. For example, a store serving multiple regions might offer 14 products on its Colombia site but only 12 on the main site.
 
+### Custom Product Page
+
+You can assign a **Custom Product Page** to override the default product page layout for a specific product. This field uses the page finder to select a CMS page from your active theme.
+
+When a custom page is set, all links to this product throughout the storefront (listings, search results, cart, etc.) will automatically point to the custom page instead of the default product page. This is useful for:
+
+- **Flagship products** that need a unique landing page design
+- **Seasonal promotions** with a special product layout
+- **Premium products** requiring a more detailed presentation
+
+The custom CMS page must be set up by your theme developer with the appropriate product lookup configuration. Contact your developer to create custom product page templates.
+
 ## Custom Groups
 
 Custom groups are user-defined collections of products used to create curated product sets on the storefront — for example, "Featured Products", "New Arrivals", or "Best Sellers". Custom groups are managed under **Shop → Groups**.

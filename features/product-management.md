@@ -1,4 +1,6 @@
 ---
+title: Product Management
+description: Meloncart provides a full suite of tools for managing your product catalog through the backend admin panel.
 layout: doc
 aside: false
 ---
@@ -7,7 +9,7 @@ aside: false
 
 <div class="mc-features-hero">
     <h1>Product Management</h1>
-    <p>Meloncart provides a full suite of tools for managing your product catalog — through the backend <strong>admin panel</strong>.</p>
+    <p>Meloncart provides a full suite of tools for managing your product catalog through the backend <strong>admin panel</strong>.</p>
 </div>
 
 <div class="mc-detail-body">
@@ -17,63 +19,8 @@ aside: false
         <div class="mc-mockup__bar">
             <span></span><span></span><span></span>
         </div>
-        <div class="mc-mockup__screen mc-mockup__screen--placeholder">
-            <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
-                <rect width="600" height="280" fill="#fafafa"/>
-                <rect x="16" y="16" width="20" height="20" rx="3" fill="#e2e8f0"/>
-                <rect x="44" y="18" width="100" height="14" rx="3" fill="#e2e8f0"/>
-                <rect x="340" y="16" width="100" height="24" rx="4" fill="#e8f5e9"/>
-                <rect x="450" y="16" width="120" height="24" rx="4" fill="#006838"/>
-                <rect x="16" y="56" width="120" height="10" rx="2" fill="#e2e8f0"/>
-                <rect x="16" y="74" width="100" height="8" rx="2" fill="#f1f5f9"/>
-                <rect x="16" y="88" width="80" height="8" rx="2" fill="#f1f5f9"/>
-                <rect x="16" y="102" width="90" height="8" rx="2" fill="#f1f5f9"/>
-                <rect x="16" y="116" width="100" height="8" rx="2" fill="#f1f5f9"/>
-                <rect x="16" y="130" width="70" height="8" rx="2" fill="#f1f5f9"/>
-                <rect x="16" y="144" width="85" height="8" rx="2" fill="#f1f5f9"/>
-                <rect x="150" y="56" width="434" height="1" fill="#e2e8f0"/>
-                <rect x="150" y="70" width="80" height="8" rx="2" fill="#cbd5e1"/>
-                <rect x="260" y="70" width="70" height="8" rx="2" fill="#cbd5e1"/>
-                <rect x="360" y="70" width="40" height="8" rx="2" fill="#cbd5e1"/>
-                <rect x="420" y="70" width="40" height="8" rx="2" fill="#cbd5e1"/>
-                <rect x="480" y="70" width="50" height="8" rx="2" fill="#cbd5e1"/>
-                <rect x="550" y="70" width="34" height="8" rx="2" fill="#cbd5e1"/>
-                <rect x="150" y="86" width="434" height="1" fill="#f1f5f9"/>
-                <rect x="150" y="96" width="70" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="260" y="96" width="90" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="360" y="96" width="40" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="420" y="96" width="40" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="480" y="96" width="50" height="16" rx="4" fill="#e8f5e9"/>
-                <rect x="550" y="96" width="34" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="150" y="120" width="434" height="1" fill="#f1f5f9"/>
-                <rect x="150" y="130" width="50" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="260" y="130" width="80" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="360" y="130" width="40" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="420" y="130" width="40" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="480" y="130" width="50" height="16" rx="4" fill="#fff3e0"/>
-                <rect x="550" y="130" width="34" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="150" y="154" width="434" height="1" fill="#f1f5f9"/>
-                <rect x="150" y="164" width="60" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="260" y="164" width="75" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="360" y="164" width="40" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="420" y="164" width="40" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="480" y="164" width="50" height="16" rx="4" fill="#e8f5e9"/>
-                <rect x="550" y="164" width="34" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="150" y="188" width="434" height="1" fill="#f1f5f9"/>
-                <rect x="150" y="198" width="65" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="260" y="198" width="100" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="360" y="198" width="40" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="420" y="198" width="40" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="480" y="198" width="50" height="16" rx="4" fill="#fce4ec"/>
-                <rect x="550" y="198" width="34" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="150" y="222" width="434" height="1" fill="#f1f5f9"/>
-                <rect x="150" y="232" width="55" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="260" y="232" width="85" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="360" y="232" width="40" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="420" y="232" width="40" height="8" rx="2" fill="#e2e8f0"/>
-                <rect x="480" y="232" width="50" height="16" rx="4" fill="#e8f5e9"/>
-                <rect x="550" y="232" width="34" height="8" rx="2" fill="#e2e8f0"/>
-            </svg>
+        <div class="mc-mockup__screen">
+            <img src="/screenshots/products-hero.png" alt="Product management admin panel" />
         </div>
     </div>
 </div>
@@ -116,7 +63,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Product Images</h2>
-        <p>Each product supports an <strong>unlimited number</strong> of images. Meloncart's built-in image processing generates thumbnails, handles cropping and provides zoom-ready photos — all rendered however your theme requires.</p>
+        <p>Each product supports an <strong>unlimited number</strong> of images. Built-in image processing generates thumbnails, handles cropping and provides zoom-ready photos, all rendered however your theme requires.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">
@@ -134,7 +81,7 @@ aside: false
     <div class="mc-detail-section__text">
         <h2>Flexible Categories and Groups</h2>
         <p>Organize products into a <strong>hierarchical</strong> category tree with unlimited depth. A single product can belong to multiple categories, giving you full control over how your catalog is structured.</p>
-        <p><strong>Custom groups</strong> offer a second layer of organization, independent of categories. Use them to curate collections like "Staff Picks", "New Arrivals" or "Sale Items" — whatever your store needs.</p>
+        <p><strong>Custom groups</strong> offer a second layer of organization, independent of categories. Use them to curate collections like "Staff Picks", "New Arrivals" or "Sale Items".</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">
@@ -151,8 +98,8 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Variants</h2>
-        <p>Sell products with multiple options — size, color, material — and track each combination independently. Meloncart generates all variant combinations automatically from your option values, and each variant can have its own SKU, price, sale price, weight, barcode and stock level.</p>
-        <p><strong>Variant</strong> specific images update in real time when a customer changes their selection on the storefront.</p>
+        <p>Sell products with multiple options like size, color and material, and track each combination independently. Meloncart generates all variant combinations automatically from your option values. Each variant can have its own SKU, price, sale price, weight, barcode and stock level.</p>
+        <p>Variant-specific images update in real time when a customer changes their selection on the storefront.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">
@@ -169,9 +116,8 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Options and Extras</h2>
-        <p>Product options define configurable attributes customers build their own combination. Define slots (e.g. Processor, Memory, Storage).</p>
-        <p><strong>Extras</strong> are optional paid add-ons — gift wrapping, extended warranty, engraving — each with their own pricing.</p>
-        <p>Built-in reusable sets, so you define them once and apply them across multiple products.</p>
+        <p>Product options let customers build their own combination from configurable attributes. Define slots like Processor, Memory and Storage, each with their own values.</p>
+        <p><strong>Extras</strong> are optional paid add-ons like gift wrapping, extended warranty or engraving, each with their own pricing. Built-in reusable sets let you define options once and apply them across multiple products.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">

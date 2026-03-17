@@ -57,6 +57,14 @@ The **Hidden** checkbox controls whether a category is visible on the frontend. 
 Hiding a category is useful for seasonal categories, categories under construction, or categories used only for internal organization.
 :::
 
+### Custom Category Page
+
+You can assign a **Custom Category Page** to override the default category page layout for a specific category. This field uses the page finder to select a CMS page from your active theme.
+
+When a custom page is set, all links to this category throughout the storefront (navigation menus, breadcrumbs, sidebar links, etc.) will automatically point to the custom page instead of the default category page. This is useful for seasonal promotions, featured category landing pages, or categories that need a unique presentation.
+
+The custom CMS page must be set up by your theme developer with the appropriate category lookup configuration.
+
 ## Reordering Categories
 
 To change the display order of categories, click the **Reorder** button on the category list page. This opens a drag-and-drop interface where you can:

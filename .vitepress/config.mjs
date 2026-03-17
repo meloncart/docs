@@ -10,13 +10,13 @@ const featuresSidebar = [
             { text: 'Payments', link: '/features/payments' },
             { text: 'Shipping', link: '/features/shipping' },
             { text: 'Checkout', link: '/features/checkout' },
+            { text: 'Multi-Store', link: '/features/multi-store' },
             { text: 'Marketing & Promotion', link: '/features/marketing' },
             { text: 'Reporting & Analytics', link: '/features/reporting' },
             { text: 'Software Updates', link: '/features/updates' },
             { text: 'Security', link: '/features/security' },
             { text: 'Performance', link: '/features/performance' },
             { text: 'Customer Support', link: '/features/support' },
-            { text: 'Multi-Store', link: '/features/multi-store' },
             { text: 'Marketplace', link: '/features/marketplace' }
         ]
     }

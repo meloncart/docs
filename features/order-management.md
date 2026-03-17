@@ -1,4 +1,6 @@
 ---
+title: Order Management
+description: A complete set of tools to manage the full order lifecycle, from checkout through to fulfillment and beyond.
 layout: doc
 aside: false
 ---
@@ -7,7 +9,7 @@ aside: false
 
 <div class="mc-features-hero">
     <h1>Order Management</h1>
-    <p>Meloncart gives you a complete set of tools to manage the full <strong>order lifecycle</strong> — from the moment a customer checks out through to fulfillment and beyond.</p>
+    <p>Meloncart gives you a complete set of tools to manage the full <strong>order lifecycle</strong>, from the moment a customer checks out through to fulfillment and beyond.</p>
 </div>
 
 <div class="mc-detail-body">
@@ -52,7 +54,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Customer Notifications</h2>
-        <p>Keep customers informed automatically. Meloncart sends email notifications based on order events — status changes, shipping confirmations, refund processing — using customizable email templates.</p>
+        <p>Keep customers informed automatically. Meloncart sends email notifications for order events like status changes, shipping confirmations and refund processing, all using customizable email templates.</p>
         <p>You can also send one-off messages to a customer directly from the order screen, with every message logged against that order for future reference.</p>
     </div>
     <div class="mc-detail-section__visual">
@@ -63,7 +65,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Refunds</h2>
-        <p>Process full or partial refunds directly through your payment gateway — Stripe, PayPal and others handle the money movement automatically. Refund status is tracked in the payment log, and you control whether stock is restored for returned items.</p>
+        <p>Process full or partial refunds directly through your payment gateway. Stripe, PayPal and others handle the money movement automatically. Refund status is tracked in the payment log, and you control whether stock is restored for returned items.</p>
     </div>
     <div class="mc-detail-section__visual">
         <img src="/features/feat-refunds.png" alt="Refunds" />
@@ -83,7 +85,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Order Editing</h2>
-        <p>Need to adjust an order after it's been placed? Add or remove line items, change addresses, override prices and apply discounts — all from the order detail screen. Invoices update automatically to reflect any changes.</p>
+        <p>Need to adjust an order after it's been placed? Add or remove line items, change addresses, override prices and apply discounts, all from the order detail screen. Invoices update automatically to reflect any changes.</p>
     </div>
     <div class="mc-detail-section__visual">
         <img src="/features/feat-order-editing.png" alt="Order editing" />

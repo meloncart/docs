@@ -189,6 +189,34 @@ When using `baseid` as the identifier, the slug portion of the URL is cosmetic. 
 
 This pattern checks if the slug in the URL matches the product's current slug. If not, it issues a 301 redirect to the correct URL.
 
+### Custom Page Override
+
+Products and categories can each have a **custom page** set in the backend (via the pagefinder widget). When a custom page is assigned, `pageUrl()` automatically resolves to that CMS page instead of the default. Theme templates don't need any changes — the override is transparent.
+
+For example, if a product has its custom page set to `shop/product-landing`, all calls to `product.pageUrl('shop/product')` will generate a URL for `shop/product-landing` instead.
+
+The custom CMS page must include the `[catalog]` component with the same lookup configuration and a compatible URL pattern:
+
+```ini
+{# Custom product page #}
+url = "/shop/product-landing/:slug*/:baseid"
+
+[catalog]
+lookup = "product"
+identifier = "baseid"
+```
+
+```ini
+{# Custom category page #}
+url = "/shop/category-landing/:fullslug*?/:baseid?"
+
+[catalog]
+lookup = "category"
+identifier = "baseid"
+```
+
+This feature is useful for creating unique layouts for flagship products, seasonal landing categories, or promotional pages.
+
 ## Product Model Properties
 
 These properties are available on Product objects in Twig templates.
@@ -254,12 +282,13 @@ All prices are integers in cents.
 | `is_visible_search` | boolean | Whether visible in search results |
 | `is_visible_catalog` | boolean | Whether visible in category listings |
 | `is_visible_site` | boolean | Whether restricted to specific sites |
+| `custom_page` | string\|null | Custom CMS page override (pagefinder reference) |
 
 ### Methods
 
 | Method | Return | Description |
 | --- | --- | --- |
-| `pageUrl('page-name')` | string | CMS page URL for this product |
+| `pageUrl('page-name')` | string | CMS page URL for this product (respects `custom_page` override) |
 | `breadcrumbPath` | array\|null | Chain of parent categories for breadcrumbs |
 | `primaryCategory` | Category\|null | The first assigned category |
 | `isVisible()` | boolean | Whether the product is enabled and not archived |
@@ -280,6 +309,7 @@ All prices are integers in cents.
 | `title` | string | Display title (if different from name) |
 | `description` | string | Full description |
 | `short_description` | string | Brief description |
+| `custom_page` | string\|null | Custom CMS page override (pagefinder reference) |
 
 ### Relationships
 
@@ -294,7 +324,7 @@ All prices are integers in cents.
 
 | Method | Return | Description |
 | --- | --- | --- |
-| `pageUrl('page-name')` | string | CMS page URL for this category |
+| `pageUrl('page-name')` | string | CMS page URL for this category (respects `custom_page` override) |
 | `countProducts()` | integer | Number of products in this category |
 | `listProducts(options)` | Paginator | Paginated product listing |
 | `breadcrumbPath` | array\|null | Chain of parent categories |

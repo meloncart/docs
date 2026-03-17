@@ -87,6 +87,7 @@ Use `getSalableQuantity()` and `isOutOfStock()` to check availability. See [Inve
 | `is_visible_catalog` | `bool` | Show in catalog listings |
 | `is_visible_user_group` | `bool` | Restrict visibility to specific user groups |
 | `is_visible_site` | `bool` | Restrict visibility to specific sites |
+| `custom_page` | `string\|null` | Custom CMS page override (pagefinder reference) |
 
 ### Review Properties
 
@@ -132,7 +133,7 @@ Use `getSalableQuantity()` and `isOutOfStock()` to check availability. See [Inve
 
 | Method | Returns | Description |
 |--------|---------|-------------|
-| `pageUrl($pageName)` | `string` | CMS page URL for the product |
+| `pageUrl($pageName)` | `string` | CMS page URL for the product (respects `custom_page` override) |
 | `getBreadcrumbPath()` | `array\|null` | Parent category chain for breadcrumbs |
 | `getPrimaryCategory()` | `Category\|null` | First associated category |
 | `isVisible()` | `bool` | Whether product is enabled and not archived |
@@ -305,6 +306,26 @@ The scope automatically applies `applyVisible` and `applySiteVisibility`, so cal
     <div class="description">{{ product.description|raw }}</div>
 </div>
 ```
+
+### Custom Product Page
+
+Individual products can override the default product page by setting the `custom_page` field (a pagefinder reference) in the Visibility tab. When set, `pageUrl()` automatically resolves to the custom CMS page instead of the default — no theme template changes needed.
+
+The custom CMS page must include the `[catalog]` component with `lookup = "product"` and a matching URL pattern. For example:
+
+```ini
+url = "/shop/product-landing/:slug*/:baseid"
+
+[catalog]
+lookup = "product"
+identifier = "baseid"
+```
+
+This is useful for flagship products, seasonal landing pages, or any product that needs a unique layout while keeping the same URL parameter structure.
+
+::: tip
+Theme templates that call `product.pageUrl('shop/product')` will automatically use the custom page when one is set. The override is transparent — you don't need to check for it in your templates.
+:::
 
 ---
 

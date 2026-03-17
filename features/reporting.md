@@ -1,4 +1,6 @@
 ---
+title: Reporting and Analytics
+description: Built-in reporting tools to help you understand how your store is performing, from high-level sales trends to individual product statistics.
 layout: doc
 aside: false
 ---
@@ -7,7 +9,7 @@ aside: false
 
 <div class="mc-features-hero">
     <h1>Reporting and Analytics</h1>
-    <p><strong>Meloncart</strong> includes built-in reporting tools to help you understand how your store is performing — from high-level sales trends to individual product statistics.</p>
+    <p><strong>Meloncart</strong> includes built-in reporting tools to help you understand how your store is performing, from high-level sales trends to individual product statistics.</p>
 </div>
 
 <div class="mc-detail-body">
@@ -15,58 +17,15 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Dashboard Overview</h2>
-        <p>The admin dashboard provides a snapshot of your store's activity: recent orders, revenue trends and key metrics at a glance.</p>
-        <p>Connect an analytics service for additional insights like traffic sources, bounce rates and visitor behavior.</p>
+        <p>The admin dashboard provides a snapshot of your store's activity: visitor activity, recent orders, revenue trends and key metrics at a glance. Use the built-in analytics or connect the <strong>Google Analytics</strong> plugin for deeper insights.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">
             <div class="mc-mockup__bar">
                 <span></span><span></span><span></span>
             </div>
-            <div class="mc-mockup__screen mc-mockup__screen--placeholder">
-                <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="400" height="220" fill="#fafafa"/>
-                    <!-- Header -->
-                    <rect x="16" y="12" width="20" height="20" rx="10" fill="#e8f5e9"/>
-                    <rect x="42" y="14" width="70" height="14" rx="3" fill="#e2e8f0"/>
-                    <rect x="290" y="12" width="44" height="20" rx="4" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
-                    <rect x="340" y="12" width="44" height="20" rx="4" fill="#006838"/>
-                    <!-- Stat cards -->
-                    <rect x="16" y="44" width="116" height="44" rx="6" fill="#f1f5f9"/>
-                    <rect x="26" y="50" width="60" height="8" rx="2" fill="#cbd5e1"/>
-                    <rect x="26" y="66" width="50" height="14" rx="3" fill="#e2e8f0"/>
-                    <rect x="84" y="70" width="30" height="8" rx="2" fill="#e2e8f0"/>
-                    <rect x="142" y="44" width="116" height="44" rx="6" fill="#f1f5f9"/>
-                    <rect x="152" y="50" width="70" height="8" rx="2" fill="#cbd5e1"/>
-                    <rect x="152" y="66" width="50" height="14" rx="3" fill="#e2e8f0"/>
-                    <rect x="210" y="70" width="30" height="8" rx="2" fill="#e2e8f0"/>
-                    <rect x="268" y="44" width="116" height="44" rx="6" fill="#f1f5f9"/>
-                    <rect x="278" y="50" width="60" height="8" rx="2" fill="#cbd5e1"/>
-                    <rect x="278" y="66" width="50" height="14" rx="3" fill="#e2e8f0"/>
-                    <rect x="336" y="70" width="30" height="8" rx="2" fill="#e2e8f0"/>
-                    <!-- Chart label -->
-                    <rect x="16" y="100" width="80" height="8" rx="2" fill="#cbd5e1"/>
-                    <!-- Y-axis labels -->
-                    <rect x="16" y="118" width="16" height="6" rx="1" fill="#f1f5f9"/>
-                    <rect x="16" y="138" width="16" height="6" rx="1" fill="#f1f5f9"/>
-                    <rect x="16" y="158" width="16" height="6" rx="1" fill="#f1f5f9"/>
-                    <rect x="16" y="178" width="16" height="6" rx="1" fill="#f1f5f9"/>
-                    <!-- Chart line -->
-                    <line x1="40" y1="170" x2="90" y2="155" stroke="#006838" stroke-width="2" fill="none"/>
-                    <line x1="90" y1="155" x2="140" y2="160" stroke="#006838" stroke-width="2" fill="none"/>
-                    <line x1="140" y1="160" x2="190" y2="140" stroke="#006838" stroke-width="2" fill="none"/>
-                    <line x1="190" y1="140" x2="240" y2="130" stroke="#006838" stroke-width="2" fill="none"/>
-                    <line x1="240" y1="130" x2="290" y2="125" stroke="#006838" stroke-width="2" fill="none"/>
-                    <line x1="290" y1="125" x2="340" y2="115" stroke="#006838" stroke-width="2" fill="none"/>
-                    <line x1="340" y1="115" x2="384" y2="118" stroke="#006838" stroke-width="2" fill="none"/>
-                    <!-- X-axis -->
-                    <rect x="16" y="190" width="368" height="1" fill="#e2e8f0"/>
-                    <rect x="40" y="196" width="20" height="6" rx="1" fill="#f1f5f9"/>
-                    <rect x="115" y="196" width="20" height="6" rx="1" fill="#f1f5f9"/>
-                    <rect x="190" y="196" width="20" height="6" rx="1" fill="#f1f5f9"/>
-                    <rect x="265" y="196" width="20" height="6" rx="1" fill="#f1f5f9"/>
-                    <rect x="340" y="196" width="20" height="6" rx="1" fill="#f1f5f9"/>
-                </svg>
+            <div class="mc-mockup__screen">
+                <img src="/screenshots/reporting-dashboard.png" alt="Dashboard overview" />
             </div>
         </div>
     </div>
@@ -74,10 +33,8 @@ aside: false
 
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
-        <h2>Sales and Product Reports</h2>
-        <p>Generate visual reports across a range of metrics — revenue, tax collected, shipping charges, top-selling products and most popular categories.</p>
-        <p>Reports can be viewed as line graphs, bar charts or pie charts, and filtered to any date range.</p>
-        <p>Use filters to drill down further: narrow results by category, manufacturer, shipping country, billing region or specific products to get exactly the data you need.</p>
+        <h2>Sales and Product Reports <span class="mc-badge-coming-soon">Coming Soon</span></h2>
+        <p>Generate visual reports across a range of metrics including revenue, tax collected, shipping charges, top-selling products and most popular categories.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">
@@ -123,7 +80,7 @@ aside: false
 
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
-        <h2>Product Statistics</h2>
+        <h2>Product Statistics <span class="mc-badge-coming-soon">Coming Soon</span></h2>
         <p>Need a quick performance check on a <strong>single product</strong>? Each product's detail page includes an overview of total orders and revenue with a visual breakdown over time.</p>
     </div>
     <div class="mc-detail-section__visual">
@@ -171,8 +128,8 @@ aside: false
 
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
-        <h2>Data Export</h2>
-        <p>Every <strong>report</strong> can be exported to CSV for use in spreadsheets, accounting software or business intelligence tools.</p>
+        <h2>Data Export <span class="mc-badge-coming-soon">Coming Soon</span></h2>
+        <p>Every report can be exported to CSV for use in spreadsheets like <strong>Google Sheets</strong> or <strong>Microsoft Excel</strong>, accounting software or business intelligence tools.</p>
     </div>
     <div class="mc-detail-section__visual">
         <img src="/features/feat-data-export.png" alt="Data export" />

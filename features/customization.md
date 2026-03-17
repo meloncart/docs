@@ -1,4 +1,6 @@
 ---
+title: Customization
+description: Full control over your storefront. Write your own HTML, CSS and JavaScript, choose any frontend framework and customize every aspect of the shopping experience.
 layout: doc
 aside: false
 ---
@@ -7,7 +9,7 @@ aside: false
 
 <div class="mc-features-hero">
     <h1>Customization</h1>
-    <p>Meloncart gives you full control over your storefront code with <strong>unlimited flexibility</strong>.</p>
+    <p>Meloncart gives you full control over your storefront. Write your own HTML, CSS and JavaScript, choose any frontend framework and customize every aspect of the shopping experience.</p>
 </div>
 
 <div class="mc-detail-body">
@@ -35,7 +37,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Theme-Driven Architecture</h2>
-        <p>Define your store's design and behavior entirely in your CMS theme.</p>
+        <p>Your store's design and behavior are defined entirely in your CMS theme using pages, partials and layouts. There are no rigid templates to work around. Use any CSS framework, any JavaScript library and any markup structure you like.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-badge-row">
@@ -58,7 +60,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Start From Scratch or Use a Theme</h2>
-        <p>Build from a blank slate or customize the <em>Fresh Theme</em> to fit your needs.</p>
+        <p>Build your storefront from a blank slate for complete creative control, or start with the included <strong>Fresh Theme</strong> and customize it to fit your needs. The Fresh Theme provides a fully working checkout, product catalog, customer accounts and more out of the box.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">
@@ -75,7 +77,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Built-In Content Editing</h2>
-        <p>Easily update page content in the visual editor — no developer needed.</p>
+        <p>Store owners can update page content, banners and static text directly from the admin panel without touching code. The built-in editor supports HTML and rich text, so day-to-day content changes don't require a developer.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">
@@ -92,7 +94,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>A Clean API</h2>
-        <p>Access products, categories, and orders with our powerful <strong>API</strong>.</p>
+        <p>Access products, categories, orders and customers through a well-documented <strong>component API</strong>. Drop components into your theme templates and use Twig to render data exactly how you want it. The API is consistent and predictable, so building custom storefronts is straightforward.</p>
     </div>
     <div class="mc-detail-section__visual">
         <img src="/features/feat-clean-api.png" alt="A clean API for products, categories and orders" />
@@ -101,8 +103,8 @@ aside: false
 
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
-        <h2>Events &amp; Hooks</h2>
-        <p>50+ event hooks to customize and extend store behavior.</p>
+        <h2>Events and Hooks</h2>
+        <p>Over 50 event hooks let you customize and extend store behavior from your own plugins. Intercept order placement, modify pricing calculations, adjust shipping rates, trigger external integrations and more without modifying core code.</p>
     </div>
     <div class="mc-detail-section__visual">
         <img src="/features/feat-events-hooks.png" alt="Events and hooks system" />
@@ -111,37 +113,8 @@ aside: false
 
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
-        <h2>Wishlist &amp; Save for Later</h2>
-        <p>Built-in wishlists and save-for-later functionality.</p>
-    </div>
-    <div class="mc-detail-section__visual">
-        <div class="mc-mockup">
-            <div class="mc-mockup__bar">
-                <span></span><span></span><span></span>
-            </div>
-            <div class="mc-mockup__screen mc-mockup__screen--placeholder">
-                <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="16" y="16" width="90" height="12" rx="3" fill="#e2e8f0"/>
-                    <rect x="16" y="40" width="176" height="72" rx="6" fill="#f1f5f9"/>
-                    <rect x="208" y="40" width="176" height="72" rx="6" fill="#f1f5f9"/>
-                    <rect x="16" y="124" width="176" height="60" rx="6" fill="#f1f5f9"/>
-                    <rect x="208" y="124" width="176" height="60" rx="6" fill="#f1f5f9"/>
-                    <rect x="28" y="52" width="60" height="48" rx="4" fill="#e2e8f0"/>
-                    <rect x="96" y="52" width="84" height="8" rx="2" fill="#e2e8f0"/>
-                    <rect x="96" y="66" width="60" height="6" rx="2" fill="#e2e8f0"/>
-                    <rect x="220" y="52" width="60" height="48" rx="4" fill="#e2e8f0"/>
-                    <rect x="288" y="52" width="84" height="8" rx="2" fill="#e2e8f0"/>
-                    <rect x="288" y="66" width="60" height="6" rx="2" fill="#e2e8f0"/>
-                </svg>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="mc-detail-section">
-    <div class="mc-detail-section__text">
         <h2>Extend with Plugins</h2>
-        <p>Add new features and integrations with powerful plugins.</p>
+        <p>Add new features by building custom plugins or installing existing ones from the Marketplace. Plugins can add payment gateways, shipping providers, product types, admin pages, frontend components and anything else your store needs.</p>
     </div>
     <div class="mc-detail-section__visual">
         <img src="/features/feat-extend-plugins.png" alt="Extend with plugins" />
@@ -150,8 +123,8 @@ aside: false
 
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
-        <h2>File-Based Templates &amp; Version Control</h2>
-        <p>Edit with your favorite tools and manage with Git.</p>
+        <h2>File-Based Templates and Version Control</h2>
+        <p>All theme files live on disk as plain HTML, CSS and JavaScript. Edit them with your favorite code editor, track changes with <strong>Git</strong> and deploy using your existing workflow. No database-driven templates or locked-in editors to work around.</p>
     </div>
     <div class="mc-detail-section__visual">
         <img src="/features/feat-file-templates.png" alt="File-based templates and version control" />

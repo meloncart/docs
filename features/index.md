@@ -1,4 +1,6 @@
 ---
+title: Features
+description: Explore the full feature set of Meloncart, a modern eCommerce toolkit built on Laravel and October CMS.
 layout: doc
 aside: false
 prev: false

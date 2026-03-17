@@ -1,4 +1,6 @@
 ---
+title: Customer Management
+description: Manage customers with full accounts, flexible group-based pricing, tax exemptions and self-service account management.
 layout: doc
 aside: false
 ---
@@ -7,7 +9,7 @@ aside: false
 
 <div class="mc-features-hero">
     <h1>Customer Management</h1>
-    <p>Meloncart gives you a clear view of your customers and the tools to manage them effectively. Full customer accounts, flexible <strong>group-based pricing</strong>, tax exemptions, and self-service account management — all built in.</p>
+    <p>Meloncart gives you a clear view of your customers and the tools to manage them effectively, including full customer accounts, flexible <strong>group-based pricing</strong>, tax exemptions and self-service account management.</p>
 </div>
 
 <div class="mc-detail-body">
@@ -35,9 +37,9 @@ aside: false
         <h2>Customer Groups</h2>
         <p>Organize customers into <strong>groups</strong> to tailor their shopping experience. Groups let you:</p>
         <ul>
-            <li>Offer group-specific pricing — set different price tiers or volume discounts per group</li>
-            <li>Control access to payment and shipping methods — restrict certain options to specific groups</li>
-            <li>Target promotions — apply discount rules and price rules to particular customer segments</li>
+            <li>Offer group-specific pricing with different price tiers or volume discounts per group</li>
+            <li>Control access to payment and shipping methods by restricting certain options to specific groups</li>
+            <li>Target promotions by applying discount rules and price rules to particular customer segments</li>
         </ul>
         <p>Common use cases include wholesale vs. retail pricing, VIP loyalty tiers, and trade account access.</p>
     </div>
@@ -58,7 +60,7 @@ aside: false
         <h2>Customer Accounts</h2>
         <p>Customers get a full self-service account on your storefront: registration, login, password recovery, order history, saved addresses and profile management.</p>
         <p>Two-factor authentication with authenticator apps and recovery codes is built in for customers who want extra security.</p>
-        <p>An address book lets returning customers save multiple shipping and billing addresses, speeding up <strong>repeat purchases</strong>. Guest checkout is also supported — customers can buy without creating an account.</p>
+        <p>An address book lets returning customers save multiple shipping and billing addresses, speeding up <strong>repeat purchases</strong>. Guest checkout is also supported so customers can buy without creating an account.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">

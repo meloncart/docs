@@ -23,6 +23,7 @@ Categories organize products into a browsable hierarchy with unlimited nesting d
 | `description` | `string` | Full description (HTML) |
 | `short_description` | `string` | Brief summary |
 | `is_hidden` | `bool` | Whether hidden from frontend |
+| `custom_page` | `string\|null` | Custom CMS page override (pagefinder reference) |
 | `sort_order` | `int` | Display order |
 | `parent_id` | `int\|null` | Parent category ID |
 | `created_at` | `Carbon` | Creation date |
@@ -41,7 +42,7 @@ Categories organize products into a browsable hierarchy with unlimited nesting d
 
 | Method | Returns | Description |
 |--------|---------|-------------|
-| `pageUrl($pageName)` | `string` | CMS page URL for this category |
+| `pageUrl($pageName)` | `string` | CMS page URL for this category (respects `custom_page` override) |
 | `countProducts()` | `int` | Number of products in this category |
 | `listProducts($options)` | `Paginator` | Paginated product listing |
 | `priceRange()` | `array` | `{min, max}` base values (cents) for products in this category |
@@ -176,6 +177,24 @@ Returns the minimum and maximum product price within the category as base values
     </nav>
 {% endif %}
 ```
+
+#### Custom Category Page
+
+Individual categories can override the default category page by setting the `custom_page` field (a pagefinder reference) in the backend. When set, `pageUrl()` automatically resolves to the custom CMS page — no theme template changes needed.
+
+The custom CMS page must include the `[catalog]` component with `lookup = "category"` and a matching URL pattern:
+
+```ini
+url = "/shop/category-landing/:fullslug*?/:baseid?"
+
+[catalog]
+lookup = "category"
+identifier = "baseid"
+```
+
+::: tip
+Theme templates that call `category.pageUrl('shop/category')` will automatically use the custom page when one is set. The override is transparent.
+:::
 
 ---
 

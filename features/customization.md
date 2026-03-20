@@ -60,7 +60,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Start From Scratch or Use a Theme</h2>
-        <p>Build your storefront from a blank slate for complete creative control, or start with the included <strong>Fresh Theme</strong> and customize it to fit your needs. The Fresh Theme provides a fully working checkout, product catalog, customer accounts and more out of the box.</p>
+        <p>Build your storefront from a blank slate for complete creative control, or start with the included <strong><a href="https://octobercms.com/theme/meloncart-fresh">Fresh Theme</a></strong> and customize it to fit your needs. The Fresh Theme provides a fully working checkout, product catalog, customer accounts and more out of the box.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">

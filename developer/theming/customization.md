@@ -62,7 +62,7 @@ require:
 
 ## Using the Commerce Theme
 
-The commerce theme is the recommended starting point for building a Meloncart storefront. You can use it in two ways:
+The [commerce theme](https://octobercms.com/theme/meloncart-fresh) is the recommended starting point for building a Meloncart storefront. You can use it in two ways:
 
 **Copy and modify** — Duplicate the entire `themes/commerce-theme/` directory as your own theme, then modify pages and partials to match your design.
 

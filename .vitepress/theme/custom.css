@@ -156,6 +156,12 @@
     min-width: 0;
 }
 
+.mc-section__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 .mc-section__visual {
     flex: 1;
     min-width: 0;

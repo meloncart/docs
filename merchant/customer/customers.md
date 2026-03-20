@@ -3,7 +3,7 @@ subtitle: Manage customer accounts, groups and order history.
 ---
 # Users
 
-Customer accounts in Meloncart are powered by the **RainLab.User** plugin. Every customer who registers on your storefront gets a user account that stores their profile details, addresses, and order history. You manage customers through the standard **Users** section in the backend.
+Customer accounts in Meloncart are powered by the **[RainLab.User](https://octobercms.com/plugin/rainlab-user)** plugin. Every customer who registers on your storefront gets a user account that stores their profile details, addresses, and order history. You manage customers through the standard **Users** section in the backend.
 
 ## Viewing Customers
 
@@ -12,7 +12,7 @@ Navigate to **Users** in the backend main navigation to see a list of all regist
 Click a customer to view their full profile, including:
 
 - **Name and email** — The customer's display name and login email address.
-- **Profile fields** — Extended profile information such as phone number, company name, and address details (provided by the RainLab.UserPlus plugin).
+- **Profile fields** — Extended profile information such as phone number, company name, and address details (provided by the [RainLab.UserPlus](https://octobercms.com/plugin/rainlab-userplus) plugin).
 - **Status** — Whether the account is activated, banned, or pending verification.
 
 ## Customer Order History

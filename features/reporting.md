@@ -17,7 +17,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Dashboard Overview</h2>
-        <p>The admin dashboard provides a snapshot of your store's activity: visitor activity, recent orders, revenue trends and key metrics at a glance. Use the built-in analytics or connect the <strong>Google Analytics</strong> plugin for deeper insights.</p>
+        <p>The admin dashboard provides a snapshot of your store's activity: visitor activity, recent orders, revenue trends and key metrics at a glance. Use the built-in analytics or connect the <strong><a href="https://octobercms.com/plugin/rainlab-googleanalytics">Google Analytics</a></strong> plugin for deeper insights.</p>
     </div>
     <div class="mc-detail-section__visual">
         <div class="mc-mockup">

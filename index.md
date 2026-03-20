@@ -8,12 +8,12 @@ hero:
     actions:
         - theme: brand
           text: Try the Demo
-          link: /merchant/introduction
+          link: https://octobercms.com/demo/meloncart
         - theme: alt
-          text: Developer Guide
-          link: /developer/getting-started
+          text: Explore Features
+          link: /features/
         - theme: alt
-          text: Installation
+          text: Install Guide
           link: /developer/installation
     image:
         src: /hero-cart.png
@@ -53,8 +53,10 @@ features:
         <div class="mc-section__content">
             <h2>An Elegant Solution to Complex Requirements</h2>
             <p>A flexible PHP framework that lets you build and customize every part of your eCommerce store. Easy to pick up for clients and developers alike.</p>
-            <VPButton theme="brand" size="medium" text="Explore Features" href="/features/" />
-            <VPButton theme="alt" size="medium" text="Merchant Guide" href="/merchant/introduction" />
+            <div class="mc-section__actions">
+                <VPButton theme="brand" size="medium" text="Merchant Guide" href="/merchant/introduction" />
+                <VPButton theme="alt" size="medium" text="Developer Guide" href="/developer/introduction" />
+            </div>
         </div>
         <div class="mc-section__visual">
             <div class="mc-mockup">
@@ -74,8 +76,10 @@ features:
         <div class="mc-section__content">
             <h2>Built to Customize</h2>
             <p>Design your own front-end and back-end without having to modify the core. With a powerful API and templating engine, you can build any functionality you need.</p>
-            <VPButton theme="alt" size="medium" text="Customization Features" href="/features/customization" />
-            <VPButton theme="alt" size="medium" text="Developer Docs" href="/developer/introduction" />
+            <div class="mc-section__actions">
+                <VPButton theme="brand" size="medium" text="Customization Features" href="/features/customization" />
+                <VPButton theme="alt" size="medium" text="Discover Themes" href="/developer/theming/customization" />
+            </div>
         </div>
         <div class="mc-section__visual">
             <div class="mc-mockup">
@@ -95,8 +99,10 @@ features:
         <div class="mc-section__content">
             <h2>Ready to Go, Ready to Grow</h2>
             <p>Products, orders, payments, shipping, and a complete admin panel are built in from the start. When a project needs something more, a powerful framework and CMS give you the tools to build it the way you want.</p>
-            <VPButton theme="brand" size="medium" text="Browse the Marketplace" href="/features/marketplace" />
-            <VPButton theme="alt" size="medium" text="See All Features" href="/features/" />
+            <div class="mc-section__actions">
+                <VPButton theme="brand" size="medium" text="Installation Guide" href="/developer/installation" />
+                <VPButton theme="alt" size="medium" text="Browse the Marketplace" href="https://octobercms.com/plugins/e-commerce" />
+            </div>
         </div>
         <div class="mc-section__visual">
             <div class="mc-mockup">
@@ -148,7 +154,7 @@ features:
         <h2>Start Building Your Custom Store Today!</h2>
         <p>Try the free demo to see Meloncart in action, or purchase a license to get started.</p>
         <div class="mc-cta-buttons">
-            <VPButton theme="brand" size="big" text="Try the Demo" href="/merchant/introduction" />
+            <VPButton theme="brand" size="big" text="Try the Demo" href="https://octobercms.com/demo/meloncart" />
             <VPButton theme="alt" size="big" text="Installation Guide" href="/developer/installation" />
         </div>
     </div>

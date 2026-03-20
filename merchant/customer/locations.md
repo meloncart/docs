@@ -3,7 +3,7 @@ subtitle: Manage countries and states used for shipping and taxes.
 ---
 # Locations
 
-Location data in Meloncart is provided by the **RainLab.Location** plugin. Countries and states are used throughout the store for shipping address validation, shipping method restrictions, tax zone calculations, and default store location settings.
+Location data in Meloncart is provided by the **[RainLab.Location](https://octobercms.com/plugin/rainlab-location)** plugin. Countries and states are used throughout the store for shipping address validation, shipping method restrictions, tax zone calculations, and default store location settings.
 
 ## Countries and States
 

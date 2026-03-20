@@ -3,7 +3,7 @@ subtitle: Configure tax classes and understand how taxes are calculated.
 ---
 # Taxes
 
-Tax calculation in Meloncart is handled by the **Responsiv.Pay** plugin. Taxes are configured through tax classes, which define rates based on the customer's location. Meloncart uses these tax classes to calculate taxes on both products and shipping.
+Tax calculation in Meloncart is handled by the **[Responsiv.Pay](https://octobercms.com/plugin/responsiv-pay)** plugin. Taxes are configured through tax classes, which define rates based on the customer's location. Meloncart uses these tax classes to calculate taxes on both products and shipping.
 
 ## Tax Classes
 

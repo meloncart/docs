@@ -3,7 +3,7 @@ subtitle: Configure payment methods and track payment status.
 ---
 # Payments
 
-Payment processing in Meloncart is handled by the **Responsiv.Pay** plugin. This plugin provides the payment gateway infrastructure, invoice management, and payment method configuration. Meloncart integrates with it to connect orders to payments seamlessly.
+Payment processing in Meloncart is handled by the **[Responsiv.Pay](https://octobercms.com/plugin/responsiv-pay)** plugin. This plugin provides the payment gateway infrastructure, invoice management, and payment method configuration. Meloncart integrates with it to connect orders to payments seamlessly.
 
 ## Payment Methods
 

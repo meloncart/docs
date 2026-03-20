@@ -35,7 +35,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Analytics Integration</h2>
-        <p>Connect your analytics platform to track visitor behavior, conversion rates and revenue. Drop your tracking snippet into the theme layout, or use a plugin for deeper integration with services like Google Analytics or Google Tag Manager.</p>
+        <p>Connect your analytics platform to track visitor behavior, conversion rates and revenue. Drop your tracking snippet into the theme layout, or use a plugin for deeper integration with services like <a href="https://octobercms.com/plugin/rainlab-googleanalytics">Google Analytics</a> or Google Tag Manager.</p>
     </div>
     <div class="mc-detail-section__visual">
         <img src="/features/feat-analytics.png" alt="Analytics integration" />

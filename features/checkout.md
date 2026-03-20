@@ -9,7 +9,7 @@ aside: false
 
 <div class="mc-features-hero">
     <h1>Checkout</h1>
-    <p>Meloncart doesn't impose a fixed checkout flow. You have complete control over the number of steps, the layout and the <strong>behavior</strong>. Start with the included <strong>Fresh Theme</strong> for a fully working checkout out of the box, or build your own from scratch using theme templates and <strong>components</strong>.</p>
+    <p>Meloncart doesn't impose a fixed checkout flow. You have complete control over the number of steps, the layout and the <strong>behavior</strong>. Start with the included <strong><a href="https://octobercms.com/theme/meloncart-fresh">Fresh Theme</a></strong> for a fully working checkout out of the box, or build your own from scratch using theme templates and <strong>components</strong>.</p>
 </div>
 
 <div class="mc-detail-body">

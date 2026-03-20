@@ -12,7 +12,7 @@ Before setting anything up, take Meloncart for a spin. The live demo gives you f
 This is the fastest way to confirm that Meloncart is the right fit for your project — no installation required.
 
 ::: tip
-Visit the [Meloncart demo](https://meloncart.com) to explore the platform before committing to an install.
+Visit the [Meloncart demo](https://octobercms.com/demo/meloncart) to explore the platform before committing to an install.
 :::
 
 ## 2. Install October CMS
@@ -47,8 +47,8 @@ This unlocks access to the full plugin and theme ecosystem, including free commu
 
 With your project connected, you're ready to install Meloncart. Head to the October CMS Marketplace, add Meloncart to your project, and choose the Fresh Theme to get a complete working storefront out of the box.
 
-- **Meloncart** — the core eCommerce plugin with products, orders, payments, shipping, and everything else
-- **Fresh Theme** — a fully functional reference storefront, ready to use as-is or customize to your needs
+- **[Meloncart](https://octobercms.com/plugin/meloncart-shop)** — the core eCommerce plugin with products, orders, payments, shipping, and everything else
+- **[Fresh Theme](https://octobercms.com/theme/meloncart-fresh)** — a fully functional reference storefront, ready to use as-is or customize to your needs
 
 All dependencies — payment processing, multi-currency support, customer accounts, and location data — are installed automatically. There's nothing extra to configure before you can start building.
 

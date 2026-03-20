@@ -18,7 +18,7 @@ Meloncart is built on October CMS. This guide assumes familiarity with these Oct
 
 A Meloncart storefront is built using [October CMS themes](https://docs.octobercms.com/4.x/cms/themes/themes.html). A theme contains pages, partials, layouts, and assets that together form your store's frontend. Meloncart provides CMS components that you drop into your theme pages to add commerce functionality — browsing products, managing a cart, and checking out.
 
-The recommended starting point is the **Commerce Theme**, a fully working reference implementation included with Meloncart. It demonstrates every component and pattern described in this guide. You can use it as-is, customize it, or study it while building your own theme from scratch.
+The recommended starting point is the **[Commerce Theme](https://octobercms.com/theme/meloncart-fresh)**, a fully working reference implementation included with Meloncart. It demonstrates every component and pattern described in this guide. You can use it as-is, customize it, or study it while building your own theme from scratch.
 
 ### Pages and Components
 

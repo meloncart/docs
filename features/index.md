@@ -10,7 +10,7 @@ prev: false
 
 <div class="mc-features-hero">
     <h1>Features</h1>
-    <p>Meloncart is a full-featured eCommerce toolkit built on Laravel and <strong>October CMS</strong>.</p>
+    <p>Meloncart is a full-featured eCommerce toolkit built on Laravel and <strong><a href="https://octobercms.com/">October CMS</a></strong>.</p>
     <p>Explore what's included.</p>
 </div>
 

@@ -3,13 +3,13 @@ subtitle: Learn how to manage products, configure your store and use reporting t
 ---
 # Merchant Guide
 
-Welcome to Meloncart, a full-featured e-commerce plugin for October CMS. This guide is written for store operators and covers everything you need to know about managing your online store through the backend administration panel.
+Welcome to Meloncart, a full-featured e-commerce plugin for [October CMS](https://octobercms.com/). This guide is written for store operators and covers everything you need to know about managing your online store through the backend administration panel.
 
 ## What is Meloncart
 
 Meloncart provides a complete e-commerce solution built natively for October CMS. It handles product catalogs, shopping carts, checkout, payments, shipping, inventory tracking, price rules, discount coupons, and customer management — all from within the familiar October CMS backend.
 
-The plugin is designed to be theme-driven, meaning your storefront's appearance and behavior are controlled entirely by your CMS theme. A reference Commerce Theme is available as a starting point for building your own storefront.
+The plugin is designed to be theme-driven, meaning your storefront's appearance and behavior are controlled entirely by your CMS theme. A reference [Commerce Theme](https://octobercms.com/theme/meloncart-fresh) is available as a starting point for building your own storefront.
 
 ## Plugin Dependencies
 
@@ -17,11 +17,11 @@ Meloncart builds on several established plugins to provide a complete commerce s
 
 | Plugin | Purpose |
 |--------|---------|
-| **Responsiv.Pay** | Payment gateway processing and invoicing |
-| **Responsiv.Currency** | Multi-currency display and formatting |
-| **RainLab.User** | Customer accounts and authentication |
-| **RainLab.UserPlus** | Extended customer profile fields |
-| **RainLab.Location** | Country and state data for shipping and taxes |
+| **[Responsiv.Pay](https://octobercms.com/plugin/responsiv-pay)** | Payment gateway processing and invoicing |
+| **[Responsiv.Currency](https://octobercms.com/plugin/responsiv-currency)** | Multi-currency display and formatting |
+| **[RainLab.User](https://octobercms.com/plugin/rainlab-user)** | Customer accounts and authentication |
+| **[RainLab.UserPlus](https://octobercms.com/plugin/rainlab-userplus)** | Extended customer profile fields |
+| **[RainLab.Location](https://octobercms.com/plugin/rainlab-location)** | Country and state data for shipping and taxes |
 
 ## Installation
 
@@ -88,7 +88,7 @@ Add a description and at least one product image, then save. Your product is now
 If you have the Commerce Theme (or a custom theme with catalog components) installed and active, navigate to your store's product listing page to see the product. Each product has a detail page accessible through its URL slug.
 
 ::: tip
-The Commerce Theme provides a complete, working storefront out of the box. It is the best way to get started quickly and serves as a reference for building a custom theme.
+The [Commerce Theme](https://octobercms.com/theme/meloncart-fresh) provides a complete, working storefront out of the box. It is the best way to get started quickly and serves as a reference for building a custom theme.
 :::
 
 ## Next Steps

@@ -535,6 +535,10 @@ See [Inventory — Stock Lifecycle](./inventory#stock-lifecycle) for details on 
 | `getCancelledStatus()` | `OrderStatus` | Find the "cancelled" status |
 | `getRefundedStatus()` | `OrderStatus` | Find the "refunded" status |
 
+::: warning
+These methods return `null` if the status record does not exist in the database. The **New** and **Paid** statuses are protected from deletion, but other statuses may be removed by store administrators. Always use null-safe access when calling these methods (e.g., `OrderStatus::getShippedStatus()?->getKey()`).
+:::
+
 ### Displaying Status
 
 ```twig

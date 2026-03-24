@@ -86,12 +86,21 @@ Every order has a status that reflects its current stage in your fulfillment wor
 
 ### Default Statuses
 
-Meloncart creates two essential statuses during installation:
+Meloncart creates the following statuses during installation. Each status has a unique code that the system uses internally to trigger automated actions such as stock management, payment processing, and refund handling.
 
-- **New** — Assigned to orders when they are first placed.
-- **Paid** — Assigned automatically when payment is confirmed.
+| Status | Code | Purpose |
+|--------|------|---------|
+| **New** | `new` | Assigned automatically when an order is first placed. Reserves stock for the ordered items. |
+| **Paid** | `paid` | Assigned automatically when payment is confirmed by the payment gateway. Marks the order as payment processed. |
+| **Shipped** | `shipped` | Indicates the order has been dispatched. Decreases stock levels and releases reservations. |
+| **Cancelled** | `cancelled` | Indicates the order has been cancelled. Releases reserved stock back to available inventory. |
+| **Refunded** | `refunded` | Assigned automatically when the associated invoice is refunded or voided. |
 
-You can create additional statuses to match your workflow, such as "Processing", "Shipped", "Delivered", "Cancelled", or "Refunded".
+::: warning
+The **New** and **Paid** statuses are system statuses and cannot be deleted. Other default statuses also cannot be deleted if they are currently assigned to any orders.
+:::
+
+You can create additional statuses to match your workflow, such as "Processing", "Delivered", or "Complete".
 
 ### Status Properties
 
@@ -131,7 +140,7 @@ When the status is changed:
 1. A status log entry is created, recording the previous status, new status, timestamp, the backend user who made the change, and any comment.
 2. If the new status has **Notify Customer** enabled, the customer receives an email notification.
 3. If the new status has **Notify Recipient** enabled, the configured admin groups receive a notification.
-4. If the new status is "Paid", the order is automatically marked as payment processed and stock levels are decreased.
+4. Automated actions are triggered based on the status code (see [Default Statuses](#default-statuses) above for details).
 
 ### Status Log
 
@@ -141,15 +150,20 @@ The status log provides a complete audit trail of all status changes for an orde
 
 A typical order follows this lifecycle:
 
-1. **Customer places order** — The order is created with a "New" status. An invoice is generated in the payment system.
-2. **Payment is processed** — When the payment gateway confirms payment, the order status automatically transitions to "Paid". Stock levels are decreased for all items in the order.
+1. **Customer places order** — The order is created with a "New" status. An invoice is generated in the payment system. Stock is reserved for the ordered items.
+2. **Payment is processed** — When the payment gateway confirms payment, the order status automatically transitions to "Paid". The order is marked as payment processed.
 3. **Order is fulfilled** — A backend user processes the order, picks and packs the items, and updates the status (e.g., to "Processing" or "Shipped"). Tracking codes are added when the shipment is dispatched.
-4. **Customer is notified** — At each status change (if configured), the customer receives an email with the order details and current status.
-5. **Order is complete** — The order reaches its final status (e.g., "Delivered" or "Complete").
+4. **Order is shipped** — When the status transitions to "Shipped", stock levels are decreased and reservations are released.
+5. **Customer is notified** — At each status change (if configured), the customer receives an email with the order details and current status.
+6. **Order is complete** — The order reaches its final status (e.g., "Delivered" or "Complete").
 
 ### Stock and Orders
 
-Stock levels are decreased when an order transitions to the "Paid" status, not when the order is first placed. This means stock is only committed once payment is confirmed.
+Stock is managed through the order status lifecycle:
+
+- **New** — Stock is reserved, reducing the salable quantity without decreasing the actual stock count.
+- **Shipped** — Reserved stock is released and actual stock levels are decreased.
+- **Cancelled** — Reserved stock is released back to available inventory.
 
 For more details on how stock interacts with orders, see the [Inventory](../product/inventory) documentation.
 

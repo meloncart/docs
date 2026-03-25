@@ -62,7 +62,8 @@ const merchantSidebar = [
             { text: 'Packing Slips', link: '/merchant/order/packing-slips' },
             { text: 'Tracking', link: '/merchant/order/tracking' },
             { text: 'Digital Downloads', link: '/merchant/order/downloads' },
-            { text: 'Refunds', link: '/merchant/order/refunds' }
+            { text: 'Refunds', link: '/merchant/order/refunds' },
+            { text: 'Store Credit', link: '/merchant/order/store-credit' }
         ]
     },
     {
@@ -118,6 +119,7 @@ const developerSidebar = [
             { text: 'Pricing', link: '/developer/models/pricing' },
             { text: 'Order', link: '/developer/models/order' },
             { text: 'Invoice', link: '/developer/models/invoice' },
+            { text: 'Credit Note', link: '/developer/models/credit-note' },
             { text: 'Inventory', link: '/developer/models/inventory' },
             { text: 'Catalog', link: '/developer/models/category' }
         ]

@@ -54,12 +54,21 @@ For partial refunds (refunding only some items or a portion of the order total):
 3. Update the order status to indicate it has been partially refunded.
 4. Restore stock manually for any items being returned.
 
+## Refunding to Store Credit
+
+If [store credit](./store-credit) is enabled, the **Mark Refunded** button on an invoice includes an option to issue the refund as store credit. Check "Issue store credit to customer" in the refund popup and specify the refund amount (defaults to the invoice total).
+
+This creates a credit note that increases the customer's store credit balance. The customer can then apply this balance to future orders. This is useful when you want to offer a refund without processing a return through the payment gateway.
+
+For orders that were partially paid with store credit, consider whether to restore the credit portion, refund through the gateway, or both. The refund-to-credit option and the gateway refund are independent — you can do one or both.
+
 ## Record Keeping
 
 All refund-related activity is tracked through several mechanisms:
 
 - **Status Log** — The order's status log records when the status was changed to a refund-related status, who made the change, and any comment provided.
 - **Payment Log** — The invoice's payment log records refund transactions processed through the payment gateway.
+- **Credit Notes** — When refunding to store credit, a credit note is created and linked to the invoice, visible on both the invoice's Credit Notes tab and the customer's Credit tab.
 - **Order Notes** — Use the notes feature on the order to add any additional context about why the refund was issued.
 
 Together, these records provide a complete audit trail for each refund.

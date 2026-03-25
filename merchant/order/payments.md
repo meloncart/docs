@@ -115,6 +115,37 @@ While an invoice is in the Approved state:
 If a payment remains in the Approved state for an extended period, you can check the payment log on the associated invoice for details about the gateway's response. The payment gateway's dashboard (e.g., PayPal or Stripe) will have the definitive status of the transaction.
 :::
 
+## Store Credit
+
+Store credit allows customers to apply a balance toward their order total at checkout. Credit is managed through the Responsiv.Pay plugin's credit note system, which uses a simple ledger model: credit notes (refunds, adjustments, promotions) increase the balance, and debit notes decrease it. The customer's available balance is the sum of all credits minus the sum of all debits.
+
+### Enabling Store Credit
+
+Store credit must be enabled in the Responsiv.Pay plugin settings. Navigate to **Settings → Payment Settings** and enable the **Store Credit** option. Once enabled, the checkout page will display the customer's available balance and an option to apply it.
+
+### How It Works at Checkout
+
+When a logged-in customer has store credit available, they can apply it to their order during checkout. The applied amount is the lesser of their available balance and the order total.
+
+- **Partial coverage** — If the credit doesn't cover the full order, the remaining amount is charged through the selected payment gateway. For example, a $100 order with $20 credit applied will charge $80 to the payment gateway.
+- **Full coverage** — If the credit covers the entire order total, the order is marked as paid immediately without involving the payment gateway. The customer is redirected to the receipt page after placing the order.
+
+### Viewing Credit on Orders
+
+When store credit has been applied to an order, the credit amount is visible on the order's associated invoice. The invoice shows:
+
+- **Total** — The full order amount before credit.
+- **Credit Applied** — The store credit amount deducted.
+- **Amount Due** — The outstanding balance sent to the payment gateway.
+
+### Issuing Store Credit
+
+Store credit can be issued to customers from the admin panel under the user's credit tab. Each credit note records an amount, currency, reason, and type (refund, adjustment, or promotion). The customer's balance updates immediately.
+
+### Credit Notes on Invoices
+
+When credit is applied to an order, a **debit** credit note is created and linked to the invoice. This provides a clear audit trail — you can see exactly which invoice each credit deduction was applied to. If an order is cancelled, a corresponding **credit** note can be issued to restore the customer's balance.
+
 ## Payment Log
 
 Each order's payment history can be viewed through the associated invoice. The payment log records all interactions with the payment gateway, including successful charges, failed attempts, and refund transactions. This is useful for troubleshooting payment issues.

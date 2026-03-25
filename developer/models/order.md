@@ -47,6 +47,8 @@ All prices are stored as integers in **base currency units (cents)**.
 | `total_tax` | `int` | Total tax: `sales_tax + shipping_tax - discount_tax` |
 | `total` | `int` | Final order total: `final_subtotal + final_shipping_quote` |
 | `total_cost` | `int` | Total cost of goods: `sum(qty × cost)` |
+| `credit_applied` | `int` | Store credit applied to this order (delegated from invoice) |
+| `amount_due` | `int` | Outstanding amount after credit: `max(0, total - credit_applied)` |
 
 ### Tax Properties
 
@@ -75,6 +77,9 @@ The tax breakdown arrays contain objects with `name` (tax class name) and `amoun
 |----------|------|-------------|
 | `status` | `OrderStatus` | Current status model |
 | `status_updated_at` | `Carbon` | When status last changed |
+| `is_paid` | `bool` | Whether the order status is "paid" or payment is processed |
+| `is_cancelled` | `bool` | Whether the order status is "cancelled" |
+| `is_refunded` | `bool` | Whether the order status is "refunded" |
 
 The `status` object has these properties:
 
@@ -232,6 +237,14 @@ The `status` object has these properties:
 
         <dt><strong>Total</strong></dt>
         <dd><strong>{{ order.total|currency }}</strong></dd>
+
+        {% if order.credit_applied > 0 %}
+            <dt>Store Credit</dt>
+            <dd>-{{ order.credit_applied|currency }}</dd>
+
+            <dt><strong>Amount Due</strong></dt>
+            <dd><strong>{{ order.amount_due|currency }}</strong></dd>
+        {% endif %}
     </dl>
 
     {# Addresses #}

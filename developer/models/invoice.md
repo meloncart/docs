@@ -44,6 +44,8 @@ All prices are stored as integers in **base currency units (cents)**.
 | `tax` | `int` | Total sales tax (gross, before discount adjustment) |
 | `total_tax` | `int` | Net tax: `tax - discount_tax` |
 | `total` | `int` | Final invoice total: `final_subtotal` |
+| `credit_applied` | `int` | Store credit applied to this invoice |
+| `amount_due` | `int` | Outstanding amount after credit: `max(0, total - credit_applied)` |
 | `taxes` | `array` | Breakdown of tax rates applied |
 
 ### Tax Properties
@@ -104,6 +106,7 @@ The tax breakdown array contains objects with `name` (tax class name) and `total
 | `payment_method` | `PaymentMethod` | Payment method used |
 | `template` | `InvoiceTemplate` | Invoice template for rendering |
 | `related` | `Model` | Polymorphic related object (e.g., Order) |
+| `credit_notes_from` | `Collection<CreditNote>` | Credit/debit notes linked to this invoice |
 
 ### Methods
 
@@ -175,6 +178,18 @@ The tax breakdown array contains objects with `name` (tax class name) and `total
                 {{ invoice.total|currency({ in: invoice.currency_code }) }}
             </strong>
         </dd>
+
+        {% if invoice.credit_applied > 0 %}
+            <dt>Store Credit</dt>
+            <dd>-{{ invoice.credit_applied|currency({ in: invoice.currency_code }) }}</dd>
+
+            <dt><strong>Amount Due</strong></dt>
+            <dd>
+                <strong>
+                    {{ invoice.amount_due|currency({ in: invoice.currency_code }) }}
+                </strong>
+            </dd>
+        {% endif %}
     </dl>
 
     {# Payment Status #}

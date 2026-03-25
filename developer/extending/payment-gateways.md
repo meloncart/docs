@@ -214,7 +214,7 @@ class HostedCheckout extends GatewayBase
             $returnUrl = $this->makeAccessPointLink('hosted_return');
 
             $response = Http::post('https://api.example.com/sessions', [
-                'amount' => (int) $totals['total'],
+                'amount' => (int) $totals['amount_due'],
                 'currency' => $totals['currency'] ?? 'USD',
                 'reference' => $invoice->getUniqueId(),
                 'return_url' => "{$returnUrl}/{$invoice->hash}",
@@ -504,7 +504,7 @@ The `$invoice` object provides methods for payment processing:
 | Method | Description |
 |--------|-------------|
 | `$invoice->hash` | Unique hash for URL identification |
-| `$invoice->getTotalDetails()` | Returns `['total' => int, 'currency' => string]` |
+| `$invoice->getTotalDetails()` | Returns `['total' => int, 'amount_due' => int, 'subtotal' => int, 'tax' => int, 'currency' => string]` |
 | `$invoice->getUniqueId()` | Unique identifier for the invoice |
 | `$invoice->getReceiptUrl()` | URL to the receipt/thank-you page |
 | `$invoice->isPaymentProcessed()` | Check if already paid |
@@ -513,6 +513,10 @@ The `$invoice` object provides methods for payment processing:
 | `$invoice->getPaymentMethod()` | Get the PaymentMethod model |
 | `$invoice->logPaymentAttempt(...)` | Log a payment attempt |
 | `$invoice->items` | Collection of invoice line items |
+
+::: warning
+When charging the customer, always use `amount_due` instead of `total`. The `total` is the gross invoice amount, while `amount_due` accounts for store credit that has already been applied. If the customer applied $20 of store credit to a $100 order, `total` is 10000 but `amount_due` is 8000. When `amount_due` is zero, the checkout component handles payment automatically — the gateway's `processPaymentForm()` will not be called.
+:::
 
 ### Logging Payment Attempts
 

@@ -36,6 +36,18 @@ The component sets these page variables on every page load and after each AJAX r
 | `hasPaymentMethod` | boolean | Whether a payment method is selected |
 | `allPaymentMethods` | Collection | All enabled payment methods |
 
+### Store Credit
+
+| Variable | Type | Description |
+| --- | --- | --- |
+| `creditBalance` | int | The logged-in customer's available store credit balance (0 if credit is disabled or guest) |
+
+### Coupon
+
+| Variable | Type | Description |
+| --- | --- | --- |
+| `couponCode` | string | The currently applied coupon code |
+
 ### Shipping
 
 | Variable | Type | Description |
@@ -91,7 +103,9 @@ Creates the order, generates an invoice, and redirects the customer to the payme
 
 Before creating the order, this handler processes any checkout step data in the request (contact details, addresses, methods). This allows you to submit all checkout data in a single request if desired.
 
-**Returns:** A redirect to the payment page by default. If `no_redirect` is posted, returns a JSON object instead:
+If store credit covers the full order total (i.e., `amount_due` is zero), the order is marked as paid immediately and the customer is redirected to the receipt page, bypassing the payment gateway entirely.
+
+**Returns:** A redirect to the payment page by default (or receipt page if fully covered by credit). If `no_redirect` is posted, returns a JSON object instead:
 
 ```json
 {
@@ -144,6 +158,32 @@ Processes the payment form submission on the payment page. This handler is used 
 ```
 
 On successful payment, the customer is redirected to the receipt page. The payment method driver may also return a custom redirect (e.g., to a third-party payment gateway).
+
+### onApplyCredit
+
+Applies the logged-in customer's store credit to the order. The amount applied is the lesser of the customer's available balance and the order total. Requires store credit to be enabled in the Responsiv.Pay settings and the customer to be logged in.
+
+```html
+<button
+    data-request="checkout::onApplyCredit"
+    data-request-update="{ 'shop-checkout/order-summary': '#shopCheckoutOrderSummary' }">
+    Apply Store Credit
+</button>
+```
+
+If the applied credit covers the full order total, `onPlaceOrder` will skip the payment gateway and mark the order as paid automatically.
+
+### onRemoveCredit
+
+Removes store credit from the current checkout session.
+
+```html
+<button
+    data-request="checkout::onRemoveCredit"
+    data-request-update="{ 'shop-checkout/order-summary': '#shopCheckoutOrderSummary' }">
+    Remove Store Credit
+</button>
+```
 
 ## POST Parameters
 

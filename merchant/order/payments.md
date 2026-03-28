@@ -14,7 +14,7 @@ Payment methods are configured under **Settings → Payment Methods** (provided 
 Click **New Payment Method** to add one. Each payment method has:
 
 - **Name** — The display name shown to customers at checkout (e.g., "Credit Card", "PayPal").
-- **Driver** — The payment gateway driver that handles the transaction (e.g., Stripe, PayPal, offline).
+- **Driver** — The payment gateway driver that handles the transaction (e.g., Stripe, PayPal, RazorPay, offline).
 - **Enabled** — Whether the method is available to customers.
 - **Configuration** — Driver-specific settings such as API keys, webhook URLs, and mode (test/live).
 

@@ -672,4 +672,5 @@ public function payFromProfile($invoice)
 |---------|-------|-------------|
 | `StripePayment` | `stripe` | Redirect to Stripe Checkout |
 | `PayPalPayment` | `paypal` | PayPal REST API with client-side buttons |
+| `RazorPayPayment` | `razorpay` | RazorPay checkout popup for Indian payments |
 | `CustomPayment` | `custom` | Offline/manual payment with custom instructions |

@@ -154,7 +154,7 @@ features:
             <a href="/features/product-management" class="mc-feature">
                 <div class="mc-feature__icon"><img src="/icons/icon-products.png" alt="Product Management" /></div>
                 <h3>Product Management</h3>
-                <p>Categories, variants, inventory tracking, and discounts — all included.</p>
+                <p>Categories, variants, inventory tracking, and discounts: all included.</p>
             </a>
             <a href="/features/order-management" class="mc-feature">
                 <div class="mc-feature__icon"><img src="/icons/icon-orders.png" alt="Order Management" /></div>

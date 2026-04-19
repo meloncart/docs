@@ -15,13 +15,13 @@ Bundles are controlled by the product type. Only products with a product type th
 
 Open a product with bundles enabled and navigate to the **Bundles** tab. Click **Add Bundle Slot** to create a new slot. Each slot represents a category of choice within the bundle.
 
-- **Name** — A descriptive name for the slot, such as "Processor" or "Memory". This is shown to the customer on the storefront.
-- **Control Type** — How the customer selects a product for this slot:
-  - **Dropdown** — A select menu showing all available products.
-  - **Radio** — Radio buttons, useful when you want all options visible at once.
-  - **Checkbox** — Checkboxes, allowing the customer to select multiple products for this slot.
-- **Required** — When checked, the customer must select a product for this slot before adding the bundle to the cart.
-- **Description** — An optional description to help the customer understand what this slot is for.
+- **Name**: A descriptive name for the slot, such as "Processor" or "Memory". This is shown to the customer on the storefront.
+- **Control Type**: How the customer selects a product for this slot:
+  - **Dropdown**: A select menu showing all available products.
+  - **Radio**: Radio buttons, useful when you want all options visible at once.
+  - **Checkbox**: Checkboxes, allowing the customer to select multiple products for this slot.
+- **Required**: When checked, the customer must select a product for this slot before adding the bundle to the cart.
+- **Description**: An optional description to help the customer understand what this slot is for.
 
 You can reorder slots by dragging them into the desired position.
 
@@ -29,17 +29,17 @@ You can reorder slots by dragging them into the desired position.
 
 Within each bundle slot, click **Add Product Choice** to add products that the customer can choose from. Each product choice has the following settings:
 
-- **Product** — The product to offer as a choice in this slot.
-- **Price Mode** — How the price is calculated for this choice:
-  - **Default Product Price** — Uses the product's normal price.
-  - **Fixed Price** — Overrides the price with a specific amount.
-  - **Fixed Discount** — Subtracts a fixed amount from the product's normal price.
-  - **Percentage Discount** — Subtracts a percentage from the product's normal price.
-- **Price / Discount Amount** — The amount used for the selected price mode. Only shown when the price mode is not Default.
-- **Default Quantity** — The quantity to use when this product is selected. Defaults to 1.
-- **Default Selection** — When checked, this product is pre-selected when the bundle is first shown to the customer.
-- **Active** — When unchecked, this product choice is hidden from the customer. Useful for temporarily removing a choice without deleting it.
-- **Allow Manual Quantity** — When checked, the customer can change the quantity for this product.
+- **Product**: The product to offer as a choice in this slot.
+- **Price Mode**: How the price is calculated for this choice:
+  - **Default Product Price**: Uses the product's normal price.
+  - **Fixed Price**: Overrides the price with a specific amount.
+  - **Fixed Discount**: Subtracts a fixed amount from the product's normal price.
+  - **Percentage Discount**: Subtracts a percentage from the product's normal price.
+- **Price / Discount Amount**: The amount used for the selected price mode. Only shown when the price mode is not Default.
+- **Default Quantity**: The quantity to use when this product is selected. Defaults to 1.
+- **Default Selection**: When checked, this product is pre-selected when the bundle is first shown to the customer.
+- **Active**: When unchecked, this product choice is hidden from the customer. Useful for temporarily removing a choice without deleting it.
+- **Allow Manual Quantity**: When checked, the customer can change the quantity for this product.
 
 You can reorder product choices by dragging them within the slot.
 
@@ -49,15 +49,15 @@ On the product detail page, bundle products display differently from standard pr
 
 Each bundle slot's products are presented using the control type you configured:
 
-- **Dropdown** — A select menu where the customer picks one product. Selecting a product reveals its image, options, extras, and quantity controls below the dropdown.
-- **Radio** — Radio buttons with all choices visible. For non-required slots, a "No, thank you" option is included. Selecting a radio button shows the corresponding product's details.
-- **Checkbox** — Checkboxes allowing multiple selections. Each checked product reveals its details inline.
+- **Dropdown**: A select menu where the customer picks one product. Selecting a product reveals its image, options, extras, and quantity controls below the dropdown.
+- **Radio**: Radio buttons with all choices visible. For non-required slots, a "No, thank you" option is included. Selecting a radio button shows the corresponding product's details.
+- **Checkbox**: Checkboxes allowing multiple selections. Each checked product reveals its details inline.
 
 When a child product has its own options (e.g., a "Memory" choice that comes in 8GB and 16GB), those options appear as dropdowns within the bundle slot. Similarly, if a child product has extras, they appear as checkboxes with pricing.
 
 If **Allow Manual Quantity** is enabled for a product choice, the customer can adjust the quantity. Otherwise, the default quantity is shown as read-only.
 
-The effective price for each child product is shown based on the price mode — customers see the actual price they will pay for that choice, not necessarily the product's standard price.
+The effective price for each child product is shown based on the price mode: customers see the actual price they will pay for that choice, not necessarily the product's standard price.
 
 ## How Bundles Work in the Cart
 
@@ -65,15 +65,15 @@ When a customer adds a bundle to the cart, each selected product choice becomes 
 
 Bundle child items in the cart have these behaviors:
 
-- **Locked quantity** — Child item quantities cannot be changed independently. They are linked to the master product's quantity.
-- **No individual removal** — The remove button only appears on the master product. Removing the master automatically removes all its children.
-- **Bundle total** — A "Bundle Total" row appears below the last child item, showing the combined price of the master product and all its children.
+- **Locked quantity**: Child item quantities cannot be changed independently. They are linked to the master product's quantity.
+- **No individual removal**: The remove button only appears on the master product. Removing the master automatically removes all its children.
+- **Bundle total**: A "Bundle Total" row appears below the last child item, showing the combined price of the master product and all its children.
 
 The total price of the bundle is the sum of the master product's price plus all selected child product prices (calculated according to their price modes).
 
 ## How Bundles Appear in Orders
 
-When an order is placed, bundle child items are stored as separate order items linked to the master item. Each child item records the bundle slot name for display purposes. The order detail view shows bundle children indented beneath the master item, with the slot name shown in italics above the product name (e.g., *Processor* — Intel Core i7).
+When an order is placed, bundle child items are stored as separate order items linked to the master item. Each child item records the bundle slot name for display purposes. The order detail view shows bundle children indented beneath the master item, with the slot name shown in italics above the product name (e.g., *Processor*: Intel Core i7).
 
 ::: tip
 Bundle products work best with a dedicated product type. Create a product type with only the **Enable Bundles** flag checked (and optionally **Enable Shipping** for physical bundles) to keep the product form focused on bundle configuration.

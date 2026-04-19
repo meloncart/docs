@@ -3,7 +3,7 @@ subtitle: Build custom payment gateway integrations.
 ---
 # Payment Gateways
 
-Payment gateways handle how customers pay for orders. Meloncart uses the Responsiv.Pay plugin for payment processing, and you can add your own gateway by extending the `GatewayBase` class. This guide walks through everything you need to build a custom payment gateway — from a simple offline method to a full hosted checkout integration.
+Payment gateways handle how customers pay for orders. Meloncart uses the Responsiv.Pay plugin for payment processing, and you can add your own gateway by extending the `GatewayBase` class. This guide walks through everything you need to build a custom payment gateway, from a simple offline method to a full hosted checkout integration.
 
 ## How It Works
 
@@ -30,7 +30,7 @@ plugins/acme/payment/
         └── payment-form.htm
 ```
 
-The gateway class and its config directory follow a naming convention: the directory name is the **lowercase** version of the class name. The `fields.yaml` file defines backend configuration fields, and `payment-form.htm` is the frontend payment form.
+The gateway class and its config directory follow a naming convention. The directory name is the **lowercase** version of the class name. The `fields.yaml` file defines backend configuration fields, and `payment-form.htm` is the frontend payment form.
 
 ## Creating a Gateway
 
@@ -66,8 +66,8 @@ Processes the payment when the customer submits the payment form:
 ```php
 public function processPaymentForm($data, $invoice)
 {
-    // $data — posted form data
-    // $invoice — Responsiv\Pay\Models\Invoice instance
+    // $data: posted form data
+    // $invoice: Responsiv\Pay\Models\Invoice instance
 }
 ```
 
@@ -365,14 +365,14 @@ Use the `sensitive` field type for API keys and secrets. This encrypts the value
 
 ## Payment Form Partial
 
-The `payment-form.htm` file in the class directory serves as a **template**. When a new payment method is set up in the backend, the system automatically creates a theme partial based on this template. The partial name is derived from the class name — for example, `PayPalPayment` generates a partial at **pay/paypalpayment.htm** in the active theme.
+The `payment-form.htm` file in the class directory serves as a **template**. When a new payment method is set up in the backend, the system automatically creates a theme partial based on this template. The partial name is derived from the class name. For example, `PayPalPayment` generates a partial at **pay/paypalpayment.htm** in the active theme.
 
 The partial is only created if it doesn't already exist, allowing merchants to customize the form without it being overwritten. To regenerate the default partial, delete it from the theme and revisit the **Payment Methods** page.
 
 There are two common approaches for the payment form:
 
-- **Redirection method** — The form redirects the customer to a secure payment page hosted by the payment provider (e.g., Stripe Checkout). The gateway's `processPaymentForm()` returns a `Redirect` to the external URL.
-- **Client-side method** — The form uses JavaScript to communicate with the gateway API directly from the browser (e.g., PayPal Buttons). On success, the `onPay` AJAX handler is called to complete the transaction.
+- **Redirection method**: The form redirects the customer to a secure payment page hosted by the payment provider (e.g., Stripe Checkout). The gateway's `processPaymentForm()` returns a `Redirect` to the external URL.
+- **Client-side method**: The form uses JavaScript to communicate with the gateway API directly from the browser (e.g., PayPal Buttons). On success, the `onPay` AJAX handler is called to complete the transaction.
 
 The payment form partial has access to two variables:
 
@@ -457,7 +457,7 @@ This method injects script tags into the page globally, separate from the paymen
 
 ## Access Points (Callbacks)
 
-Access points register hidden URL endpoints for handling gateway callbacks — return URLs after redirect, webhooks, and API endpoints used by client-side JavaScript.
+Access points register hidden URL endpoints for handling gateway callbacks, including return URLs after redirect, webhooks, and API endpoints used by client-side JavaScript.
 
 ```php
 public function registerAccessPoints()
@@ -515,7 +515,7 @@ The `$invoice` object provides methods for payment processing:
 | `$invoice->items` | Collection of invoice line items |
 
 ::: warning
-When charging the customer, always use `amount_due` instead of `total`. The `total` is the gross invoice amount, while `amount_due` accounts for store credit that has already been applied. If the customer applied $20 of store credit to a $100 order, `total` is 10000 but `amount_due` is 8000. When `amount_due` is zero, the checkout component handles payment automatically — the gateway's `processPaymentForm()` will not be called.
+When charging the customer, always use `amount_due` instead of `total`. The `total` is the gross invoice amount, while `amount_due` accounts for store credit that has already been applied. If the customer applied $20 of store credit to a $100 order, `total` is 10000 but `amount_due` is 8000. When `amount_due` is zero, the checkout component handles payment automatically and the gateway's `processPaymentForm()` will not be called.
 :::
 
 ### Logging Payment Attempts
@@ -582,7 +582,7 @@ public function checkPaymentStatus($invoice): bool
 }
 ```
 
-Return `true` if the payment was confirmed, `false` otherwise. Exceptions are caught silently — the payment page renders normally even if the check fails.
+Return `true` if the payment was confirmed, `false` otherwise. Exceptions are caught silently, so the payment page renders normally even if the check fails.
 
 ## Lifecycle Hooks
 
@@ -598,11 +598,11 @@ Return `true` if the payment was confirmed, `false` otherwise. Exceptions are ca
 Meloncart automatically extends payment gateways with additional form fields:
 
 **For gateways with a payment form** (`paymentForm: true`):
-- **Order Status** — dropdown to select which order status to assign after successful payment (defaults to Paid)
+- **Order Status**: dropdown to select which order status to assign after successful payment (defaults to Paid)
 
 **For gateways without a payment form** (`paymentForm: false`):
-- **Order Start Status** — dropdown to select a status to assign when this payment method is selected during checkout
-- **Suppress New Order Notification** — checkbox to disable new order emails for orders using this method
+- **Order Start Status**: dropdown to select a status to assign when this payment method is selected during checkout
+- **Suppress New Order Notification**: checkbox to disable new order emails for orders using this method
 
 These fields are added automatically and require no code in your gateway.
 

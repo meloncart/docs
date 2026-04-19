@@ -9,11 +9,11 @@ Meloncart provides a flexible shipping system that supports multiple shipping me
 
 Each shipping method represents a way to deliver products to customers. Click **New Shipping Method** to create one. Every shipping method has the following core settings:
 
-- **Name** — The display name shown to customers at checkout (e.g., "Standard Shipping", "Express Delivery").
-- **Code** — A unique internal identifier for the method.
-- **Description** — An optional description displayed to customers during shipping method selection.
-- **Enabled** — Whether the method is available to customers on the storefront.
-- **Enabled for Backend** — Whether the method is available when creating or editing orders in the backend. This allows you to have methods that are only available for admin-created orders or vice versa.
+- **Name**: The display name shown to customers at checkout (e.g., "Standard Shipping", "Express Delivery").
+- **Code**: A unique internal identifier for the method.
+- **Description**: An optional description displayed to customers during shipping method selection.
+- **Enabled**: Whether the method is available to customers on the storefront.
+- **Enabled for Backend**: Whether the method is available when creating or editing orders in the backend. This allows you to have methods that are only available for admin-created orders or vice versa.
 
 ### Shipping Drivers
 
@@ -54,8 +54,8 @@ Every shipping method can have a **Handling Fee** added on top of the calculated
 
 You can set weight limits on a shipping method:
 
-- **Minimum Weight** — The minimum total order weight required for this method to be available.
-- **Maximum Weight** — The maximum total order weight allowed for this method.
+- **Minimum Weight**: The minimum total order weight required for this method to be available.
+- **Maximum Weight**: The maximum total order weight allowed for this method.
 
 If the order's total weight falls outside these limits, the shipping method is not offered to the customer. This is useful for separating lightweight (letter post) and heavyweight (freight) shipping options.
 
@@ -83,7 +83,7 @@ The **Taxable** checkbox determines whether tax is calculated on the shipping co
 
 ## Child Shipping Options
 
-Some shipping methods support child options — multiple shipping tiers within a single method. For example, a carrier integration might offer both "Standard" and "Express" options under the same method.
+Some shipping methods support child options: multiple shipping tiers within a single method. For example, a carrier integration might offer both "Standard" and "Express" options under the same method.
 
 When a shipping method has child options, the customer sees them as separate selectable choices at checkout, each with its own rate. The selected child option is recorded on the order so you know which tier the customer chose.
 
@@ -91,11 +91,11 @@ When a shipping method has child options, the customer sees them as separate sel
 
 When a customer reaches the shipping step during checkout, the system calculates shipping quotes for all applicable methods:
 
-1. **Filter methods** — Only enabled methods that match the customer's country, user group, and order weight are considered.
-2. **Get quotes** — Each applicable method's driver calculates a shipping rate based on the order details (items, weight, dimensions, destination, order total).
-3. **Add handling fees** — Handling fees are added to each quote.
-4. **Calculate shipping tax** — If the method is taxable, shipping tax is calculated and included.
-5. **Display to customer** — The available methods and their prices are presented for the customer to choose from.
+1. **Filter methods**: Only enabled methods that match the customer's country, user group, and order weight are considered.
+2. **Get quotes**: Each applicable method's driver calculates a shipping rate based on the order details (items, weight, dimensions, destination, order total).
+3. **Add handling fees**: Handling fees are added to each quote.
+4. **Calculate shipping tax**: If the method is taxable, shipping tax is calculated and included.
+5. **Display to customer**: The available methods and their prices are presented for the customer to choose from.
 
 ::: tip
 If a shipping method's driver returns no quote (for example, the carrier API is unavailable or the destination is not serviceable), that method is silently excluded from the options shown to the customer.
@@ -105,9 +105,9 @@ If a shipping method's driver returns no quote (for example, the carrier API is 
 
 Free shipping can be applied in several ways:
 
-- **Cart price rules** — Use the "Apply free shipping to the cart products" cart rule action to waive shipping costs when conditions are met (e.g., orders over $100).
-- **Manual override** — When editing an order in the backend, you can toggle the free shipping flag to waive the shipping cost.
-- **Shipping quote override** — Set a manual shipping quote of zero on an order to override the calculated rate.
+- **Cart price rules**: Use the "Apply free shipping to the cart products" cart rule action to waive shipping costs when conditions are met (e.g., orders over $100).
+- **Manual override**: When editing an order in the backend, you can toggle the free shipping flag to waive the shipping cost.
+- **Shipping quote override**: Set a manual shipping quote of zero on an order to override the calculated rate.
 
 When free shipping is active, the shipping cost displays as zero regardless of the calculated rate.
 
@@ -123,7 +123,7 @@ In addition to method-level rates, individual products can have their own shippi
 
 ## Shipping Origin
 
-The shipping origin address — where your products ship from — is configured under **Settings → Shipping & Measurements**. This address is provided to carrier-based shipping drivers when calculating real-time rates. It includes:
+The shipping origin address: where your products ship from: is configured under **Settings → Shipping & Measurements**. This address is provided to carrier-based shipping drivers when calculating real-time rates. It includes:
 
 - Sender name and company
 - Street address, city, ZIP code

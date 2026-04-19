@@ -64,9 +64,9 @@ require:
 
 The [commerce theme](https://octobercms.com/theme/meloncart-fresh) is the recommended starting point for building a Meloncart storefront. You can use it in two ways:
 
-**Copy and modify** — Duplicate the entire `themes/commerce-theme/` directory as your own theme, then modify pages and partials to match your design.
+**Copy and modify**: Duplicate the entire `themes/commerce-theme/` directory as your own theme, then modify pages and partials to match your design.
 
-**Reference implementation** — Build your theme from scratch, referencing the commerce theme's pages and partials to understand how components and AJAX handlers are used.
+**Reference implementation**: Build your theme from scratch, referencing the commerce theme's pages and partials to understand how components and AJAX handlers are used.
 
 The commerce theme includes complete implementations of every Meloncart feature, including multi-step checkout, product galleries, cart management, account pages, and order history.
 
@@ -126,9 +126,9 @@ The commerce theme separates its UI into small, focused partials. This makes it 
 
 Beyond theming, you can extend Meloncart's core functionality by building custom payment gateways, shipping providers, and discount rules. Each has a dedicated guide:
 
-- [Payment Gateways](../extending/payment-gateways) — Build custom payment integrations by extending `GatewayBase`
-- [Shipping Types](../extending/shipping-types) — Build custom shipping rate providers by extending `ShippingTypeBase`
-- [Price Rules](../extending/price-rules) — Build custom discount actions and conditions for the price rule engine
+- [Payment Gateways](../extending/payment-gateways): Build custom payment integrations by extending `GatewayBase`
+- [Shipping Types](../extending/shipping-types): Build custom shipping rate providers by extending `ShippingTypeBase`
+- [Price Rules](../extending/price-rules): Build custom discount actions and conditions for the price rule engine
 
 ## Mail Templates
 
@@ -284,8 +284,8 @@ js[] = "controls/my-control.js"
 
 The commerce theme includes two checkout page implementations:
 
-- `checkout.htm` — Multi-step checkout with separate sections for contact details, shipping, and payment
-- `checkout-single.htm` — Single-page checkout with all steps visible at once
+- `checkout.htm`: Multi-step checkout with separate sections for contact details, shipping, and payment
+- `checkout-single.htm`: Single-page checkout with all steps visible at once
 
 Both use the same `[checkout]` component and AJAX handlers. The difference is in how the page partials are arranged. You can choose either approach or design your own layout.
 
@@ -295,10 +295,10 @@ The `checkout-form` JavaScript control coordinates updates between checkout step
 
 To customize the checkout flow, you can:
 
-1. **Rearrange partials** — Move sections around, combine steps, or split them differently
-2. **Add custom fields** — Include extra fields in the checkout form (they will be submitted with `onRefreshCheckout`)
-3. **Override partial content** — Replace individual step partials with your own designs
-4. **Skip the control** — Build your own JavaScript to manage step interactions
+1. **Rearrange partials**: Move sections around, combine steps, or split them differently
+2. **Add custom fields**: Include extra fields in the checkout form (they will be submitted with `onRefreshCheckout`)
+3. **Override partial content**: Replace individual step partials with your own designs
+4. **Skip the control**: Build your own JavaScript to manage step interactions
 
 ### Payment Page
 

@@ -110,7 +110,7 @@ Finds a custom group by its code and returns it. Custom groups are named collect
 
 ### onRefreshCatalog
 
-An AJAX handler that re-runs the page cycle, making all page variables (product, category, etc.) available again. This is used to refresh page content without a full page reload — most commonly for updating product displays when variant options change.
+An AJAX handler that re-runs the page cycle, making all page variables (product, category, etc.) available again. This is used to refresh page content without a full page reload, most commonly for updating product displays when variant options change.
 
 When a customer changes a product option on a variant-enabled product, the `onRefreshCatalog` handler re-runs the page, allowing partials to re-resolve the selected variant and update pricing, images, and availability:
 
@@ -191,7 +191,7 @@ This pattern checks if the slug in the URL matches the product's current slug. I
 
 ### Custom Page Override
 
-Products and categories can each have a **custom page** set in the backend (via the pagefinder widget). When a custom page is assigned, `pageUrl()` automatically resolves to that CMS page instead of the default. Theme templates don't need any changes — the override is transparent.
+Products and categories can each have a **custom page** set in the backend (via the pagefinder widget). When a custom page is assigned, `pageUrl()` automatically resolves to that CMS page instead of the default. Theme templates don't need any changes. The override is transparent.
 
 For example, if a product has its custom page set to `shop/product-landing`, all calls to `product.pageUrl('shop/product')` will generate a URL for `shop/product-landing` instead.
 
@@ -245,7 +245,7 @@ All prices are integers in cents.
 | Property | Type | Description |
 | --- | --- | --- |
 | `display_price` | integer | Customer-facing price with sales, tier pricing, catalog rules, and tax |
-| `compare_price` | integer | Price with tax (no sale discount) — the "was" price |
+| `compare_price` | integer | Price with tax (no sale discount): the "was" price |
 | `on_sale` | boolean | Whether a sale price is active |
 | `display_discount` | integer | Amount saved (`compare_price - display_price`) |
 | `price` | integer | Base price as entered in the backend |
@@ -597,7 +597,7 @@ A reusable product card for grid and list views:
 </nav>
 ```
 
-The `object` parameter can be either a Product or a Category — both provide a `breadcrumbPath` property.
+The `object` parameter can be either a Product or a Category: both provide a `breadcrumbPath` property.
 
 ### Shop Homepage with Custom Groups
 

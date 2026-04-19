@@ -16,8 +16,8 @@ The `orders` component displays customer order history with pagination and singl
 
 The component provides two page variables:
 
-- **`orders`** — A paginated collection of the authenticated user's orders, ordered by creation date descending.
-- **`order`** — A single order record, available when the `orderId` property is set.
+- **`orders`**: A paginated collection of the authenticated user's orders, ordered by creation date descending.
+- **`order`**: A single order record, available when the `orderId` property is set.
 
 For the order list page, include the component with no properties. For the order detail page, pass the URL parameter to `orderId`.
 
@@ -472,7 +472,7 @@ Display the order's status change history:
 {% endif %}
 ```
 
-### Unpaid Order — Pay Now Link
+### Unpaid Order: Pay Now Link
 
 If an order is unpaid and has an associated invoice, you can link the customer to the payment page:
 

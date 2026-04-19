@@ -11,17 +11,17 @@ Navigate to **Shop → Categories** to manage your category tree.
 
 Click **New Category** to create a new category. The following fields are available:
 
-- **Name** — The display name of the category, shown on the storefront and in the backend. This is the only required field.
-- **Code** — An optional internal identifier for referencing the category in custom logic or integrations.
-- **Parent** — Select a parent category to nest this category within. Leave empty for a top-level category.
+- **Name**: The display name of the category, shown on the storefront and in the backend. This is the only required field.
+- **Code**: An optional internal identifier for referencing the category in custom logic or integrations.
+- **Parent**: Select a parent category to nest this category within. Leave empty for a top-level category.
 
 ### Content Fields
 
 Each category has several content fields for display on the storefront:
 
-- **Title** — An optional page title, often used in the browser tab. Defaults to the category name if left empty.
-- **Description** — A long-form description displayed on the category page. Supports rich text formatting.
-- **Short Description** — A brief summary used in category listings or previews.
+- **Title**: An optional page title, often used in the browser tab. Defaults to the category name if left empty.
+- **Description**: A long-form description displayed on the category page. Supports rich text formatting.
+- **Short Description**: A brief summary used in category listings or previews.
 
 ### URL Slug
 
@@ -35,9 +35,9 @@ Categories support unlimited nesting depth. A top-level category with no parent 
 
 The hierarchy serves several purposes:
 
-- **Navigation** — Your theme can render the category tree as a multi-level navigation menu.
-- **Breadcrumbs** — The parent chain is used to generate breadcrumb navigation on product and category pages.
-- **Full Slugs** — The complete URL path is built from the parent chain (e.g., `electronics/phones/smartphones`).
+- **Navigation**: Your theme can render the category tree as a multi-level navigation menu.
+- **Breadcrumbs**: The parent chain is used to generate breadcrumb navigation on product and category pages.
+- **Full Slugs**: The complete URL path is built from the parent chain (e.g., `electronics/phones/smartphones`).
 
 To move a category within the tree, you can either change its **Parent** field when editing, or use the **Reorder** button on the category list to drag and drop categories into the desired position.
 

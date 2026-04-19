@@ -7,7 +7,7 @@ Shipping types calculate shipping costs during checkout. Meloncart ships with a 
 
 ## How It Works
 
-Shipping types follow the **driver pattern**. A `ShippingMethod` model stores the configuration (name, handling fee, country restrictions, etc.), and a shipping type class provides the behavior — specifically, the `getQuote()` method that calculates the shipping cost.
+Shipping types follow the **driver pattern**. A `ShippingMethod` model stores the configuration (name, handling fee, country restrictions, etc.), and a shipping type class provides the behavior, specifically the `getQuote()` method that calculates the shipping cost.
 
 When a customer enters their shipping address during checkout:
 
@@ -84,7 +84,7 @@ The `getQuote()` method supports three return formats:
 
 ### Single Price
 
-Return a numeric value for a single shipping rate. Prices are always in **base currency units** (e.g., cents for USD — 500 = $5.00).
+Return a numeric value for a single shipping rate. Prices are always in **base currency units** (e.g., cents for USD: 500 = $5.00).
 
 ```php
 // $5.00 flat rate
@@ -440,7 +440,7 @@ Your shipping type is attached to a `ShippingMethod` model that provides these b
 | Feature | Description |
 |---------|-------------|
 | **Handling fee** | Fixed amount added to every quote automatically |
-| **Weight limits** | Min/max weight filters — methods outside range are excluded |
+| **Weight limits** | Min/max weight filters: methods outside range are excluded |
 | **Country restrictions** | Limit to specific countries (methods with no countries apply to all) |
 | **User group restrictions** | Limit to specific user groups |
 | **Taxable shipping** | Whether tax is calculated on the shipping cost |
@@ -459,11 +459,11 @@ When `ShippingMethod::listApplicable()` runs during checkout:
 5. Calculates shipping taxes if the method is taxable
 6. Returns methods with `quote`, `quoteOriginal`, and `quoteFinal` properties set
 
-You don't need to handle handling fees, taxes, or per-product costs in your `getQuote()` method — those are applied automatically.
+You don't need to handle handling fees, taxes, or per-product costs in your `getQuote()` method. Those are applied automatically.
 
 ## Carrier Shipping Labels
 
-Shipping types can optionally support carrier label generation — producing labels with barcodes, postage, and tracking numbers directly from the carrier's API. This is separate from the [template-based shipping labels](../../merchant/order/shipping-labels) that merchants design themselves.
+Shipping types can optionally support carrier label generation: producing labels with barcodes, postage, and tracking numbers directly from the carrier's API. This is separate from the [template-based shipping labels](../../merchant/order/shipping-labels) that merchants design themselves.
 
 ### Enabling Label Support
 

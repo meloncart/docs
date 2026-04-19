@@ -9,18 +9,18 @@ Products are the core of your store. Each product represents an item you sell, c
 
 Click **New Product** to create a product. The following fields are required:
 
-- **Name** — The display name shown to customers.
-- **SKU** — A unique stock keeping unit code used for internal tracking and order fulfillment.
-- **Price** — The base selling price of the product.
-- **Tax Class** — The tax class used to calculate tax on this product.
-- **Categories** — At least one category must be assigned.
+- **Name**: The display name shown to customers.
+- **SKU**: A unique stock keeping unit code used for internal tracking and order fulfillment.
+- **Price**: The base selling price of the product.
+- **Tax Class**: The tax class used to calculate tax on this product.
+- **Categories**: At least one category must be assigned.
 
 Additional fields on the product form include:
 
-- **Cost** — The wholesale or cost price, used for margin reporting. Not displayed to customers.
-- **Description** — A detailed product description shown on the product detail page.
-- **Short Description** — A brief summary used in product listings and search results.
-- **URL Slug** — Automatically generated from the product name, used in the product's frontend URL.
+- **Cost**: The wholesale or cost price, used for margin reporting. Not displayed to customers.
+- **Description**: A detailed product description shown on the product detail page.
+- **Short Description**: A brief summary used in product listings and search results.
+- **URL Slug**: Automatically generated from the product name, used in the product's frontend URL.
 
 ## Product Types
 
@@ -36,7 +36,7 @@ Every product is assigned a **Product Type** that controls which features are av
 | **Has Bundles** | Product can include bundled items |
 | **Has Variants** | Variant combinations can be generated from options |
 
-A default product type is created during installation. You can create additional types to suit different product categories — for example, a "Digital Download" type with files enabled but shipping and inventory disabled.
+A default product type is created during installation. You can create additional types to suit different product categories: for example, a "Digital Download" type with files enabled but shipping and inventory disabled.
 
 ::: tip
 Product types are a powerful way to simplify the product form. When a feature is disabled on the product type, its related fields and tabs are hidden from the product form entirely.
@@ -50,7 +50,7 @@ Use the **Images** section to upload product photos. Multiple images can be uplo
 
 ### Downloadable Files
 
-If the product type has the **Has Files** feature enabled, a **Files** section appears where you can upload downloadable files. These are delivered to customers after purchase — useful for digital products like software, e-books, or media.
+If the product type has the **Has Files** feature enabled, a **Files** section appears where you can upload downloadable files. These are delivered to customers after purchase: useful for digital products like software, e-books, or media.
 
 ## Categories
 
@@ -68,8 +68,8 @@ Options let customers choose between variations of a product, such as size, colo
 
 To add options, open the **Options** tab on the product form and click **Add New Option**. Each option has:
 
-- **Name** — The option label shown to customers (e.g., "Size", "Color").
-- **Values** — A list of available choices, entered one per line (e.g., "Small", "Medium", "Large").
+- **Name**: The option label shown to customers (e.g., "Size", "Color").
+- **Values**: A list of available choices, entered one per line (e.g., "Small", "Medium", "Large").
 
 Options can be reordered by dragging them into the desired display order.
 
@@ -83,15 +83,15 @@ If you frequently use the same set of options across multiple products, you can 
 
 ## Product Extras
 
-Extras are optional paid add-ons that customers can select when purchasing a product. Unlike options, extras have their own price and weight — for example, gift wrapping, extended warranty, or engraving.
+Extras are optional paid add-ons that customers can select when purchasing a product. Unlike options, extras have their own price and weight: for example, gift wrapping, extended warranty, or engraving.
 
 To add extras, open the **Extras** tab and click **Add New Extra**. Each extra has:
 
-- **Group Name** — An optional label to group related extras together (e.g., "Gift Options").
-- **Description** — The name or description shown to the customer (e.g., "Gift Wrapping").
-- **Price** — The additional cost added when the extra is selected.
-- **Weight** — Optional additional weight for shipping calculations.
-- **Images** — Optional images for the extra.
+- **Group Name**: An optional label to group related extras together (e.g., "Gift Options").
+- **Description**: The name or description shown to the customer (e.g., "Gift Wrapping").
+- **Price**: The additional cost added when the extra is selected.
+- **Weight**: Optional additional weight for shipping calculations.
+- **Images**: Optional images for the extra.
 
 ### Extra Sets
 
@@ -99,12 +99,12 @@ Similar to option sets, you can create **Extra Sets** to reuse the same extras a
 
 ## Product Properties
 
-Properties are informational specifications displayed on the product detail page — for example, "Material: Cotton" or "Capacity: 500ml". Unlike options, properties are not selectable by the customer; they are descriptive attributes.
+Properties are informational specifications displayed on the product detail page: for example, "Material: Cotton" or "Capacity: 500ml". Unlike options, properties are not selectable by the customer; they are descriptive attributes.
 
 To add properties, open the **Properties** tab and click **Add New Property**. Each property has:
 
-- **Name** — The specification label (e.g., "Material", "Dimensions").
-- **Value** — The specification value (e.g., "Stainless Steel", "10 x 5 x 3 cm"). Previously used values for the same property name are suggested for consistency.
+- **Name**: The specification label (e.g., "Material", "Dimensions").
+- **Value**: The specification value (e.g., "Stainless Steel", "10 x 5 x 3 cm"). Previously used values for the same property name are suggested for consistency.
 
 ### Property Sets
 
@@ -112,7 +112,7 @@ To add properties, open the **Properties** tab and click **Add New Property**. E
 
 ## Related Products
 
-The **Related Products** relation lets you link products together. Related products are displayed on the product detail page as suggestions, helping customers discover similar or complementary items. Relationships are one-directional — if Product A lists Product B as related, Product B does not automatically list Product A.
+The **Related Products** relation lets you link products together. Related products are displayed on the product detail page as suggestions, helping customers discover similar or complementary items. Relationships are one-directional. If Product A lists Product B as related, Product B does not automatically list Product A.
 
 ## Bundle Items
 
@@ -144,9 +144,9 @@ Price tiers allow you to offer volume-based discounts. When the **Allow Price Ti
 
 Each tier has:
 
-- **Quantity** — The minimum quantity required to qualify for this price.
-- **Price** — The per-unit price at this quantity.
-- **User Group** — Optionally restrict this tier to a specific customer group.
+- **Quantity**: The minimum quantity required to qualify for this price.
+- **Price**: The per-unit price at this quantity.
+- **User Group**: Optionally restrict this tier to a specific customer group.
 
 For example, you might set a price of $10 for quantities of 1–9, $8 for 10–49, and $6 for 50 or more. The best matching tier for the customer's quantity is automatically applied.
 
@@ -158,9 +158,9 @@ Every product must be assigned a **Tax Class**. Tax classes determine how tax is
 
 Several settings control where and how a product appears:
 
-- **Enabled** — When unchecked, the product is completely hidden from the frontend. Disabled products do not appear in any listings or search results.
-- **Visible in Search** — Controls whether the product appears in search results.
-- **Visible in Catalog** — Controls whether the product appears in category listings and browsing pages.
+- **Enabled**: When unchecked, the product is completely hidden from the frontend. Disabled products do not appear in any listings or search results.
+- **Visible in Search**: Controls whether the product appears in search results.
+- **Visible in Catalog**: Controls whether the product appears in category listings and browsing pages.
 
 A product can be enabled but hidden from search or catalog listings. This is useful for products that should only be accessible via a direct link.
 
@@ -172,7 +172,7 @@ You can restrict product visibility to specific customer groups. When user group
 
 In a [multi-store setup](../settings/multi-store), you can restrict product visibility to specific sites within the same store. Check **Limit Visibility to Specific Sites** and select which sites should display the product.
 
-When this setting is unchecked (the default), the product is visible on all sites in the store. When checked, the product only appears on the selected sites. This is an opt-in model — new sites will not display the product until explicitly added to the list.
+When this setting is unchecked (the default), the product is visible on all sites in the store. When checked, the product only appears on the selected sites. This is an opt-in model: new sites will not display the product until explicitly added to the list.
 
 This is useful when different sites within the same store need different product assortments. For example, a store serving multiple regions might offer 14 products on its Colombia site but only 12 on the main site.
 
@@ -190,7 +190,7 @@ The custom CMS page must be set up by your theme developer with the appropriate 
 
 ## Custom Groups
 
-Custom groups are user-defined collections of products used to create curated product sets on the storefront — for example, "Featured Products", "New Arrivals", or "Best Sellers". Custom groups are managed under **Shop → Groups**.
+Custom groups are user-defined collections of products used to create curated product sets on the storefront: for example, "Featured Products", "New Arrivals", or "Best Sellers". Custom groups are managed under **Shop → Groups**.
 
 To assign a product to a custom group, use the **Custom Groups** relation on the product form. Products within a custom group can be reordered to control their display sequence.
 
@@ -200,7 +200,7 @@ Your theme developer can then query these groups to display them in specific are
 
 The product list supports bulk operations through CSV import and export. Use the **Import** and **Export** buttons on the product list toolbar to:
 
-- **Export** — Download your entire product catalog or a filtered selection as a CSV file.
-- **Import** — Upload a CSV file to create or update products in bulk.
+- **Export**: Download your entire product catalog or a filtered selection as a CSV file.
+- **Import**: Upload a CSV file to create or update products in bulk.
 
 This is useful for migrating products from another platform, performing bulk price updates, or syncing with external inventory systems.

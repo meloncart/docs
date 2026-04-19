@@ -3,7 +3,7 @@ subtitle: Create custom product groups for featured sections and promotions.
 ---
 # Custom Groups
 
-Custom groups let you create curated collections of products for use on the storefront. Unlike categories, which provide a browsable hierarchy, custom groups are flat, code-referenced collections designed for specific sections of your site — such as a "Featured Products" slider on the homepage, a "New Arrivals" section, or a "Best Sellers" list.
+Custom groups let you create curated collections of products for use on the storefront. Unlike categories, which provide a browsable hierarchy, custom groups are flat, code-referenced collections designed for specific sections of your site: such as a "Featured Products" slider on the homepage, a "New Arrivals" section, or a "Best Sellers" list.
 
 Custom groups are accessed from the Products page toolbar. Click the **Product Groups** button (copy icon) on the Products list page to open the groups list.
 
@@ -11,8 +11,8 @@ Custom groups are accessed from the Products page toolbar. Click the **Product G
 
 Click **New Group** to create a custom group. The following fields are available:
 
-- **Group Name** — A descriptive name for the group (e.g., "Featured Products", "Staff Picks", "Holiday Gift Guide").
-- **API Code** — A unique code used to reference this group in your theme templates. Automatically generated from the name, but can be customized. For example, a group with the code `featured-products` can be retrieved in Twig using `catalog.findCustomGroup('featured-products')`.
+- **Group Name**: A descriptive name for the group (e.g., "Featured Products", "Staff Picks", "Holiday Gift Guide").
+- **API Code**: A unique code used to reference this group in your theme templates. Automatically generated from the name, but can be customized. For example, a group with the code `featured-products` can be retrieved in Twig using `catalog.findCustomGroup('featured-products')`.
 
 ## Managing Products in a Group
 

@@ -42,9 +42,9 @@ Creates a new user account. On success, the user is automatically logged in and 
 
 **Validation rules:**
 
-- `first_name` — required, string, max 255 characters
-- `email` — required, valid email, unique across non-guest users
-- `password` — required, must meet the configured password strength rules
+- `first_name`: required, string, max 255 characters
+- `email`: required, valid email, unique across non-guest users
+- `password`: required, must meet the configured password strength rules
 
 **Behavior:**
 
@@ -159,5 +159,5 @@ During checkout, Meloncart can register a guest customer automatically. See the 
 
 The following events are fired during registration:
 
-- `rainlab.user.beforeRegister` — Before the user record is created. Return a User model to override the default creation logic.
-- `rainlab.user.register` — After the user is created and logged in. Return a response to override the default redirect.
+- `rainlab.user.beforeRegister`: Before the user record is created. Return a User model to override the default creation logic.
+- `rainlab.user.register`: After the user is created and logged in. Return a response to override the default redirect.

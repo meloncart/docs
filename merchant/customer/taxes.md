@@ -15,8 +15,8 @@ Every product must be assigned a tax class. The tax class determines how tax is 
 
 Click **New Tax Class** to create one. A tax class consists of:
 
-- **Name** — A descriptive name for the class (e.g., "Standard Rate", "Reduced Rate", "Zero Rate").
-- **Tax Rates** — One or more rates, each associated with a specific country and optionally a state. Each rate defines a percentage that is applied when the customer's address matches the location.
+- **Name**: A descriptive name for the class (e.g., "Standard Rate", "Reduced Rate", "Zero Rate").
+- **Tax Rates**: One or more rates, each associated with a specific country and optionally a state. Each rate defines a percentage that is applied when the customer's address matches the location.
 
 For example, a "Standard Rate" tax class might have:
 - 20% for United Kingdom
@@ -44,8 +44,8 @@ When a customer has not yet entered an address (for example, when browsing the c
 
 Meloncart supports two tax display modes, configured under **Settings → eCommerce Settings**:
 
-- **Prices include tax** — Product prices entered in the backend include tax. The system calculates the tax component from the inclusive price. This is common in regions where consumer-facing prices must include tax (e.g., most of Europe, Australia).
-- **Prices exclude tax** — Product prices entered in the backend do not include tax. Tax is calculated and added on top of the product price. This is common in regions where tax is added at the point of sale (e.g., United States, Canada).
+- **Prices include tax**: Product prices entered in the backend include tax. The system calculates the tax component from the inclusive price. This is common in regions where consumer-facing prices must include tax (e.g., most of Europe, Australia).
+- **Prices exclude tax**: Product prices entered in the backend do not include tax. Tax is calculated and added on top of the product price. This is common in regions where tax is added at the point of sale (e.g., United States, Canada).
 
 The **Display Prices with Tax** setting controls whether prices shown on the storefront include the tax component. This can differ from how prices are entered. For example, you might enter prices excluding tax but display them including tax on the storefront.
 
@@ -85,9 +85,9 @@ When a user group has the **Force Tax Exclusive Display** flag enabled, customer
 
 Each order stores a detailed tax breakdown:
 
-- **Sales Taxes** — A breakdown of taxes on product items, grouped by tax name (e.g., "VAT 20%: $12.00", "GST 10%: $5.00").
-- **Shipping Taxes** — A separate breakdown of taxes on the shipping cost.
-- **Total Tax** — The combined total of all sales and shipping taxes, minus any discount-related tax adjustments.
+- **Sales Taxes**: A breakdown of taxes on product items, grouped by tax name (e.g., "VAT 20%: $12.00", "GST 10%: $5.00").
+- **Shipping Taxes**: A separate breakdown of taxes on the shipping cost.
+- **Total Tax**: The combined total of all sales and shipping taxes, minus any discount-related tax adjustments.
 
 This breakdown is visible on the order detail page in the backend and is used when generating invoices and financial reports.
 

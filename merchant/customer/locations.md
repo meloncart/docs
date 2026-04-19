@@ -37,7 +37,7 @@ For more details, see the [Taxes](./taxes) documentation.
 
 ### Default Store Location
 
-Your store has a default location configured under **Settings → eCommerce Settings**. This default country, state, city, and ZIP code are used as the fallback location for tax calculations when a customer has not yet entered their address — for example, when browsing the catalog before checkout.
+Your store has a default location configured under **Settings → eCommerce Settings**. This default country, state, city, and ZIP code are used as the fallback location for tax calculations when a customer has not yet entered their address: for example, when browsing the catalog before checkout.
 
 For more details, see the [Store Configuration](../settings/store) documentation.
 

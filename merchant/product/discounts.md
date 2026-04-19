@@ -3,7 +3,7 @@ subtitle: Set up price rules, discount coupons and promotional pricing.
 ---
 # Discounts
 
-Meloncart provides two pricing rule systems — **cart price rules** and **catalog price rules** — along with **coupon codes** that can be attached to cart rules. Together, these tools let you run promotions, offer volume discounts, apply automatic markdowns, and create coupon-based campaigns.
+Meloncart provides two pricing rule systems: **cart price rules** and **catalog price rules**: along with **coupon codes** that can be attached to cart rules. Together, these tools let you run promotions, offer volume discounts, apply automatic markdowns, and create coupon-based campaigns.
 
 ## Cart Price Rules
 
@@ -11,11 +11,11 @@ Cart price rules apply discounts at checkout time, based on the contents of the 
 
 Click **New Discount** to create a rule. Each rule has the following settings:
 
-- **Name** — An internal name for the rule (e.g., "Summer Sale 20% Off").
-- **Active** — Whether the rule is currently in effect.
-- **Sort Order** — Controls the order in which rules are evaluated. Lower numbers are evaluated first.
-- **Date Start / Date End** — Optional date range during which the rule is active. Leave both empty for an always-active rule.
-- **Terminate** — When enabled, no further cart rules are evaluated after this one matches. Useful for ensuring only one promotion applies.
+- **Name**: An internal name for the rule (e.g., "Summer Sale 20% Off").
+- **Active**: Whether the rule is currently in effect.
+- **Sort Order**: Controls the order in which rules are evaluated. Lower numbers are evaluated first.
+- **Date Start / Date End**: Optional date range during which the rule is active. Leave both empty for an always-active rule.
+- **Terminate**: When enabled, no further cart rules are evaluated after this one matches. Useful for ensuring only one promotion applies.
 
 ### Cart Rule Actions
 
@@ -51,9 +51,9 @@ Meloncart provides five condition types:
 
 The condition builder uses a tree structure where conditions can be combined with **AND** or **OR** logic. Click **Add Condition** to add a new rule to the tree. Each condition consists of three parts:
 
-1. **Attribute** — What to check (e.g., cart subtotal, product category).
-2. **Operator** — How to compare (e.g., equals, greater than, less than, is one of).
-3. **Value** — The target value to compare against.
+1. **Attribute**: What to check (e.g., cart subtotal, product category).
+2. **Operator**: How to compare (e.g., equals, greater than, less than, is one of).
+3. **Value**: The target value to compare against.
 
 For example, to create a rule that applies only when the cart subtotal exceeds $100, add a **Shopping cart attribute** condition with the attribute set to "subtotal", the operator set to "equals or greater", and the value set to your threshold.
 
@@ -73,11 +73,11 @@ Catalog price rules modify the displayed price of products across your storefron
 
 Click **New Price Rule** to create a rule. The settings are similar to cart rules:
 
-- **Name** — An internal name for the rule.
-- **Active** — Whether the rule is in effect.
-- **Sort Order** — Evaluation order (lower first).
-- **Date Start / Date End** — Optional active date range.
-- **Terminate** — Stop evaluating further rules after this one matches.
+- **Name**: An internal name for the rule.
+- **Active**: Whether the rule is in effect.
+- **Sort Order**: Evaluation order (lower first).
+- **Date Start / Date End**: Optional active date range.
+- **Terminate**: Stop evaluating further rules after this one matches.
 
 ### Catalog Rule Actions
 
@@ -102,7 +102,7 @@ Catalog rules use the **Product attribute** condition type to determine which pr
 
 ### How Catalog Rules Are Applied
 
-Catalog price rules are compiled and cached. When you save a catalog rule, the system recalculates the affected product prices and stores the results. This means catalog rules do not add overhead to page load times — the compiled prices are read directly.
+Catalog price rules are compiled and cached. When you save a catalog rule, the system recalculates the affected product prices and stores the results. This means catalog rules do not add overhead to page load times because the compiled prices are read directly.
 
 Rules are evaluated in sort order. If multiple rules match a product, each rule's action is applied to the result of the previous rule. When a rule has the **Terminate** flag enabled, no further rules are evaluated for that product.
 
@@ -118,11 +118,11 @@ Coupons provide a code that customers enter at checkout to activate a cart price
 
 Each coupon has:
 
-- **Code** — The code customers enter (e.g., "SAVE20", "WELCOME10").
-- **Enabled** — Whether the coupon is currently active.
-- **Expires At** — An optional expiration date after which the coupon is no longer valid.
-- **Usage Limit** — The maximum number of times the coupon can be used across all customers. Leave empty for unlimited use.
-- **Times Used** — A counter that tracks how many times the coupon has been redeemed. This increments automatically when an order using the coupon is completed.
+- **Code**: The code customers enter (e.g., "SAVE20", "WELCOME10").
+- **Enabled**: Whether the coupon is currently active.
+- **Expires At**: An optional expiration date after which the coupon is no longer valid.
+- **Usage Limit**: The maximum number of times the coupon can be used across all customers. Leave empty for unlimited use.
+- **Times Used**: A counter that tracks how many times the coupon has been redeemed. This increments automatically when an order using the coupon is completed.
 
 ### Linking Coupons to Rules
 
@@ -147,7 +147,7 @@ If validation fails, the customer sees an error message and the discount is not 
 Both cart and catalog rules are evaluated in the order defined by their **Sort Order** field. This matters when multiple rules could apply:
 
 1. Rules with a lower sort order are evaluated first.
-2. Each rule's conditions are checked — if they match, the action is applied.
+2. Each rule's conditions are checked. If they match, the action is applied.
 3. If a rule has the **Terminate** flag enabled and its conditions match, no further rules of the same type are evaluated.
 
 For cart rules, this means you can create a priority system where more specific promotions take precedence over general ones by giving them a lower sort order and enabling the terminate flag.

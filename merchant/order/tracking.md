@@ -9,14 +9,14 @@ Tracking codes let you record shipment information on orders and provide custome
 
 Open an order and navigate to the **Tracking** tab. Click **Add** to create a new tracking code with the following fields:
 
-- **Carrier** — Select the shipping carrier from the dropdown:
+- **Carrier**: Select the shipping carrier from the dropdown:
   - **FedEx**
   - **UPS**
   - **USPS**
   - **DHL**
-  - **Other** — For carriers not in the predefined list.
-- **Tracking Number** — The tracking number provided by the carrier. This is a required field.
-- **Shipped Date** — The date the shipment was sent. Use the date picker to select the date, or leave it empty if the shipment hasn't been dispatched yet.
+  - **Other**: For carriers not in the predefined list.
+- **Tracking Number**: The tracking number provided by the carrier. This is a required field.
+- **Shipped Date**: The date the shipment was sent. Use the date picker to select the date, or leave it empty if the shipment hasn't been dispatched yet.
 
 Click **Create** to save the tracking code.
 

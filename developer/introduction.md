@@ -8,15 +8,15 @@ This guide covers everything you need to build a storefront with Meloncart. It e
 ::: info Foundation Topics
 Meloncart is built on October CMS. This guide assumes familiarity with these October CMS concepts:
 
-- [Themes](https://docs.octobercms.com/4.x/cms/themes/themes.html) — Pages, partials, layouts, and content blocks
-- [Components](https://docs.octobercms.com/4.x/cms/themes/components.html) — Dropping functionality into theme pages
-- [AJAX Framework](https://docs.octobercms.com/4.x/cms/ajax/introduction.html) — Data attributes, handlers, and partial updates
-- [Twig Markup](https://docs.octobercms.com/4.x/markup/templating.html) — Template syntax, filters, and functions
+- [Themes](https://docs.octobercms.com/4.x/cms/themes/themes.html): Pages, partials, layouts, and content blocks
+- [Components](https://docs.octobercms.com/4.x/cms/themes/components.html): Dropping functionality into theme pages
+- [AJAX Framework](https://docs.octobercms.com/4.x/cms/ajax/introduction.html): Data attributes, handlers, and partial updates
+- [Twig Markup](https://docs.octobercms.com/4.x/markup/templating.html): Template syntax, filters, and functions
 :::
 
 ## Theme Architecture
 
-A Meloncart storefront is built using [October CMS themes](https://docs.octobercms.com/4.x/cms/themes/themes.html). A theme contains pages, partials, layouts, and assets that together form your store's frontend. Meloncart provides CMS components that you drop into your theme pages to add commerce functionality — browsing products, managing a cart, and checking out.
+A Meloncart storefront is built using [October CMS themes](https://docs.octobercms.com/4.x/cms/themes/themes.html). A theme contains pages, partials, layouts, and assets that together form your store's frontend. Meloncart provides CMS components that you drop into your theme pages to add commerce functionality like browsing products, managing a cart, and checking out.
 
 The recommended starting point is the **[Commerce Theme](https://octobercms.com/theme/meloncart-fresh)**, a fully working reference implementation included with Meloncart. It demonstrates every component and pattern described in this guide. You can use it as-is, customize it, or study it while building your own theme from scratch.
 
@@ -35,9 +35,9 @@ identifier = "baseid"
 
 Components provide:
 
-- **Page variables** — Data set during `onRun()` that your Twig templates can access (e.g., `product`, `category`).
-- **Twig methods** — Methods callable from templates (e.g., `cart.totalItems()`, `catalog.allCategories()`).
-- **AJAX handlers** — Server-side handlers triggered by `data-request` attributes (e.g., `onAddToCart`, `onPlaceOrder`).
+- **Page variables**: Data set during `onRun()` that your Twig templates can access (e.g., `product`, `category`).
+- **Twig methods**: Methods callable from templates (e.g., `cart.totalItems()`, `catalog.allCategories()`).
+- **AJAX handlers**: Server-side handlers triggered by `data-request` attributes (e.g., `onAddToCart`, `onPlaceOrder`).
 
 ### Partials and AJAX Updates
 
@@ -61,7 +61,7 @@ Meloncart registers four CMS components:
 
 | Component | Alias | Description |
 | --- | --- | --- |
-| [Cart](./components/cart) | `cart` | Shopping cart management — add, remove, update items, estimate shipping |
+| [Cart](./components/cart) | `cart` | Shopping cart management: add, remove, update items, estimate shipping |
 | [Catalog](./components/catalog) | `catalog` | Product and category lookups, queries, and navigation |
 | [Checkout](./components/checkout) | `checkout` | Multi-step checkout flow, order placement, and payment processing |
 | Reviews | `reviews` | Product review submission and display |
@@ -88,7 +88,7 @@ And for order-related pages:
 
 ### Base Identifiers
 
-Many Meloncart models (products, categories, manufacturers, orders) use a **base identifier** (`baseid`) — a short, unique, URL-safe string generated automatically when the record is created. Base IDs are used in URL routing to identify records without exposing sequential database IDs:
+Many Meloncart models (products, categories, manufacturers, orders) use a **base identifier** (`baseid`), a short, unique, URL-safe string generated automatically when the record is created. Base IDs are used in URL routing to identify records without exposing sequential database IDs:
 
 ```
 /shop/product/blue-widget/a1b2c3d4
@@ -115,9 +115,9 @@ Products expose several price-related properties in Twig. See the [Pricing](./mo
 
 | Property | Description |
 | --- | --- |
-| `display_price` | Customer-facing price — includes sale discounts, catalog price rules, tier pricing, and tax |
-| `compare_price` | The original "was" price when a sale is active — base price with tax (no discount) |
-| `on_sale` | Boolean — true if the product has an active sale price or catalog price rule |
+| `display_price` | Customer-facing price: includes sale discounts, catalog price rules, tier pricing, and tax |
+| `compare_price` | The original "was" price when a sale is active: base price with tax (no discount) |
+| `on_sale` | Boolean: true if the product has an active sale price or catalog price rule |
 | `display_discount` | The amount saved (difference between `compare_price` and `display_price`) |
 | `price` | The base price as entered in the backend (in cents) |
 | `original_price` | Base price without tax |
@@ -164,7 +164,7 @@ Products and categories provide a `breadcrumbPath` property that returns the cha
 
 ## JavaScript Controls
 
-The Commerce Theme includes several JavaScript controls that enhance the shopping experience. These are optional — you can use them in your own theme or replace them with your own implementations.
+The Commerce Theme includes several JavaScript controls that enhance the shopping experience. These are optional. You can use them in your own theme or replace them with your own implementations.
 
 ### checkout-form.js
 
@@ -207,8 +207,8 @@ These singletons are used internally by the CMS components. You generally intera
 
 ## Next Steps
 
-- [Cart Component](./components/cart) — Learn how to add products to the cart, display cart contents, and estimate shipping.
-- [Catalog Component](./components/catalog) — Learn how to display products, categories, and build navigation.
-- [Checkout Component](./components/checkout) — Learn how to implement the full checkout flow from address entry through payment.
-- [Events](./hooks/events) — Hook into order, cart, and product events for custom behavior.
-- [Customization](./theming/customization) — Extend Meloncart with custom shipping types, price rules, and mail templates.
+- [Cart Component](./components/cart): Learn how to add products to the cart, display cart contents, and estimate shipping.
+- [Catalog Component](./components/catalog): Learn how to display products, categories, and build navigation.
+- [Checkout Component](./components/checkout): Learn how to implement the full checkout flow from address entry through payment.
+- [Events](./hooks/events): Hook into order, cart, and product events for custom behavior.
+- [Customization](./theming/customization): Extend Meloncart with custom shipping types, price rules, and mail templates.

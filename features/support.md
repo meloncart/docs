@@ -19,10 +19,10 @@ aside: false
         <h2>Support Channels</h2>
         <p>Get help through the channel that suits you best:</p>
         <ul>
-            <li><strong><a href="https://octobercms.com/contact">October CMS Support</a></strong> — submit a request and get a response from the team</li>
-            <li><strong><a href="https://github.com/meloncart/docs/issues">GitHub Issues</a></strong> — report bugs or request features on the project repository</li>
-            <li><strong><a href="https://talk.octobercms.com/">Community Forum</a></strong> — ask questions and share knowledge at talk.octobercms.com</li>
-            <li><strong><a href="https://discord.gg/gEKgwSZ">Discord</a></strong> — join the community for real-time discussion and help</li>
+            <li><strong><a href="https://octobercms.com/contact">October CMS Support</a></strong>: submit a request and get a response from the team</li>
+            <li><strong><a href="https://github.com/meloncart/docs/issues">GitHub Issues</a></strong>: report bugs or request features on the project repository</li>
+            <li><strong><a href="https://talk.octobercms.com/">Community Forum</a></strong>: ask questions and share knowledge at talk.octobercms.com</li>
+            <li><strong><a href="https://discord.gg/gEKgwSZ">Discord</a></strong>: join the community for real-time discussion and help</li>
         </ul>
     </div>
     <div class="mc-detail-section__visual">

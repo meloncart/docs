@@ -3,9 +3,9 @@ subtitle: Order, OrderItem, OrderStatus, OrderNote, and OrderTrackingCode model 
 ---
 # Order Models
 
-This reference documents all Twig-accessible properties and methods for order-related models. All prices are stored as integers in **base currency units (cents)** — use the `|currency` filter for display.
+This reference documents all Twig-accessible properties and methods for order-related models. All prices are stored as integers in **base currency units (cents)**: use the `|currency` filter for display.
 
-Orders are **computed records** — their totals are calculated from cart items, price rules, tax classes, and shipping methods. Prices are stored per-unit with separate tax-inclusive and tax-exclusive variants to support both pricing modes. Discounts are tracked per-unit (from price rules) with an additional `line_discount` field for rounding-safe line totals.
+Orders are **computed records**: their totals are calculated from cart items, price rules, tax classes, and shipping methods. Prices are stored per-unit with separate tax-inclusive and tax-exclusive variants to support both pricing modes. Discounts are tracked per-unit (from price rules) with an additional `line_discount` field for rounding-safe line totals.
 
 Orders are typically accessed through the user relationship (`user.orders`) or the [Checkout component](../components/checkout) during order placement. For the simpler accounting-oriented model, see [Invoice Models](./invoice).
 
@@ -287,7 +287,7 @@ The `status` object has these properties:
                     {{ code.tracking_number }}
                 {% endif %}
                 {% if code.shipped_at %}
-                    — shipped {{ code.shipped_at|date('M d, Y') }}
+                   : shipped {{ code.shipped_at|date('M d, Y') }}
                 {% endif %}
             </div>
         {% endfor %}
@@ -331,7 +331,7 @@ Each line item within an order, representing a purchased product with its quanti
 
 ### Price Properties (Per-Unit)
 
-All per-unit values represent a single unit. The `price` field stores the discounted per-unit price. Multiply by `quantity` for line totals — or use the computed line price properties below.
+All per-unit values represent a single unit. The `price` field stores the discounted per-unit price. Multiply by `quantity` for line totals, or use the computed line price properties below.
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -536,7 +536,7 @@ Represents an order status in the workflow system.
 | `STATUS_CANCELLED` | `cancelled` | Releases reservation |
 | `STATUS_REFUNDED` | `refunded` | No stock action |
 
-See [Inventory — Stock Lifecycle](./inventory#stock-lifecycle) for details on how status changes trigger stock operations.
+See [Inventory: Stock Lifecycle](./inventory#stock-lifecycle) for details on how status changes trigger stock operations.
 
 ### Static Helpers
 

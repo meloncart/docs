@@ -11,10 +11,10 @@ Inventory tracking is available when the product type has the **Has Inventory** 
 
 Once enabled, the Inventory tab shows the **Units in Stock** field and the following settings:
 
-- **Hidden When Out Of Stock** — Automatically hides the product from the storefront when it goes out of stock.
-- **Allow Negative Stock** — Allows the stock count to go below zero, useful for accepting orders beyond current inventory.
-- **Out Of Stock Threshold** — An optional stock level that triggers a low-stock notification. When salable stock falls to or below this number, store managers are notified by email.
-- **Allow Pre-Order** — Allows customers to purchase the product even when it is out of stock.
+- **Hidden When Out Of Stock**: Automatically hides the product from the storefront when it goes out of stock.
+- **Allow Negative Stock**: Allows the stock count to go below zero, useful for accepting orders beyond current inventory.
+- **Out Of Stock Threshold**: An optional stock level that triggers a low-stock notification. When salable stock falls to or below this number, store managers are notified by email.
+- **Allow Pre-Order**: Allows customers to purchase the product even when it is out of stock.
 
 ## Managing Stock
 
@@ -26,13 +26,13 @@ The **salable quantity** shown to customers is calculated as:
 Salable = Units in Stock − Units Reserved
 ```
 
-**Units Reserved** is managed automatically by the system — when customers place orders, stock is reserved to prevent overselling.
+**Units Reserved** is managed automatically by the system: when customers place orders, stock is reserved to prevent overselling.
 
 ## Per-Variant Stock Tracking
 
 When a product uses [variants](./variants), each variant tracks its own stock independently. Set the **Units in Stock** for each variant in the variant's **Inventory** tab.
 
-When a variant-specific combination is purchased, only that variant's stock is affected — other variants and the product-level stock remain unchanged.
+When a variant-specific combination is purchased, only that variant's stock is affected: other variants and the product-level stock remain unchanged.
 
 ## Stock and Order Lifecycle
 
@@ -40,7 +40,7 @@ Stock changes follow a two-phase reservation lifecycle tied to order statuses:
 
 ### 1. Order Placed (New)
 
-When a customer places an order, stock is **reserved** for all items in the order. The physical quantity stays the same, but the reserved count increases — reducing the salable quantity visible to other customers. This prevents overselling when multiple customers are shopping simultaneously.
+When a customer places an order, stock is **reserved** for all items in the order. The physical quantity stays the same, but the reserved count increases: reducing the salable quantity visible to other customers. This prevents overselling when multiple customers are shopping simultaneously.
 
 ### 2. Order Shipped
 
@@ -52,7 +52,7 @@ If an order is cancelled before shipment, the reservation is **released** withou
 
 ### 4. Order Refunded
 
-If an order is refunded after shipment, no automatic stock adjustment occurs — the units have already left the warehouse. If the items are physically returned, you can manually increase the stock on the product form.
+If an order is refunded after shipment, no automatic stock adjustment occurs because the units have already left the warehouse. If the items are physically returned, you can manually increase the stock on the product form.
 
 ::: info
 The order status flow for inventory is: **New** (reserve) → **Paid** (no stock action) → **Shipped** (decrease) or **Cancelled** (release). The **Paid** status is a billing milestone and does not affect stock.
@@ -77,9 +77,9 @@ A product is considered out of stock when its salable quantity reaches zero (or 
 
 Out-of-stock behavior depends on the product's settings:
 
-- **Hidden When Out Of Stock** — The product is automatically hidden from the storefront when it goes out of stock.
-- **Allow Pre-Order** — Customers can still purchase the product even when it is out of stock. This is useful for upcoming products or items with a known restock date.
-- **Allow Negative Stock** — The stock count can go below zero, allowing orders to be accepted beyond current inventory.
+- **Hidden When Out Of Stock**: The product is automatically hidden from the storefront when it goes out of stock.
+- **Allow Pre-Order**: Customers can still purchase the product even when it is out of stock. This is useful for upcoming products or items with a known restock date.
+- **Allow Negative Stock**: The stock count can go below zero, allowing orders to be accepted beyond current inventory.
 
 ::: tip
 If none of these options are enabled and a product goes out of stock, it remains visible on the storefront but cannot be added to the cart.

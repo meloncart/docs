@@ -7,7 +7,7 @@ Welcome to Meloncart, a full-featured e-commerce plugin for [October CMS](https:
 
 ## What is Meloncart
 
-Meloncart provides a complete e-commerce solution built natively for October CMS. It handles product catalogs, shopping carts, checkout, payments, shipping, inventory tracking, price rules, discount coupons, and customer management — all from within the familiar October CMS backend.
+Meloncart provides a complete e-commerce solution built natively for October CMS. It handles product catalogs, shopping carts, checkout, payments, shipping, inventory tracking, price rules, discount coupons, and customer management: all from within the familiar October CMS backend.
 
 The plugin is designed to be theme-driven, meaning your storefront's appearance and behavior are controlled entirely by your CMS theme. A reference [Commerce Theme](https://octobercms.com/theme/meloncart-fresh) is available as a starting point for building your own storefront.
 
@@ -43,21 +43,21 @@ This creates all the necessary database tables and seeds the default data, inclu
 
 Once installed, a new **Shop** menu appears in the backend main navigation. It contains the following sections:
 
-- **Categories** — Organize products into a hierarchical category tree
-- **Products** — Create and manage your product catalog
-- **Orders** — View and process customer orders
-- **Shipping Options** — Configure shipping methods and rates
-- **Price Rules** — Set up catalog-level pricing rules that affect product display prices
-- **Discounts** — Create cart-level discount rules and coupon codes
-- **Reviews** — Moderate customer product reviews and ratings
+- **Categories**: Organize products into a hierarchical category tree
+- **Products**: Create and manage your product catalog
+- **Orders**: View and process customer orders
+- **Shipping Options**: Configure shipping methods and rates
+- **Price Rules**: Set up catalog-level pricing rules that affect product display prices
+- **Discounts**: Create cart-level discount rules and coupon codes
+- **Reviews**: Moderate customer product reviews and ratings
 
 Store-wide settings are found under **Settings** in the backend, grouped under the **Shop** category:
 
-- **Order Routes** — Define order statuses, transitions, and notification rules
-- **Shipping & Measurements** — Set weight and dimension units, and the shipping origin address
-- **Company Information** — Your company name, address, and logo for invoices and packing slips
-- **eCommerce Settings** — Tax display preferences and default location settings
-- **Review Settings** — Configure review moderation and rating options
+- **Order Routes**: Define order statuses, transitions, and notification rules
+- **Shipping & Measurements**: Set weight and dimension units, and the shipping origin address
+- **Company Information**: Your company name, address, and logo for invoices and packing slips
+- **eCommerce Settings**: Tax display preferences and default location settings
+- **Review Settings**: Configure review moderation and rating options
 
 ## Quick Start
 
@@ -75,11 +75,11 @@ Go to **Shop → Categories** and click **New Category**. Enter a name such as "
 
 Go to **Shop → Products** and click **New Product**. Fill in the required fields:
 
-- **Name** — The display name of the product
-- **SKU** — A unique stock keeping unit identifier
-- **Price** — The base selling price
-- **Tax Class** — Select the tax class you created
-- **Categories** — Assign the product to your category
+- **Name**: The display name of the product
+- **SKU**: A unique stock keeping unit identifier
+- **Price**: The base selling price
+- **Tax Class**: Select the tax class you created
+- **Categories**: Assign the product to your category
 
 Add a description and at least one product image, then save. Your product is now in the catalog.
 
@@ -95,8 +95,8 @@ The [Commerce Theme](https://octobercms.com/theme/meloncart-fresh) provides a co
 
 Continue reading to learn more about the specifics of managing your store:
 
-- [Categories](./product/categories) — Organize your products with a hierarchical category tree
-- [Products](./product/products) — Create and configure products with options, extras, and pricing
-- [Variants](./product/variants) — Set up product variations like size and color combinations
-- [Inventory](./product/inventory) — Track stock levels and manage availability
-- [Discounts](./product/discounts) — Create price rules and coupon-based discounts
+- [Categories](./product/categories): Organize your products with a hierarchical category tree
+- [Products](./product/products): Create and configure products with options, extras, and pricing
+- [Variants](./product/variants): Set up product variations like size and color combinations
+- [Inventory](./product/inventory): Track stock levels and manage availability
+- [Discounts](./product/discounts): Create price rules and coupon-based discounts

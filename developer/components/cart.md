@@ -3,7 +3,7 @@ subtitle: Manage shopping cart.
 ---
 # Cart
 
-The `cart` component provides shopping cart functionality for your storefront. It handles adding products, updating quantities, removing items, and estimating shipping rates — all through AJAX handlers that can update page partials without a full reload.
+The `cart` component provides shopping cart functionality for your storefront. It handles adding products, updating quantities, removing items, and estimating shipping rates: all through AJAX handlers that can update page partials without a full reload.
 
 ## Component Declaration
 
@@ -42,7 +42,7 @@ Returns a `CartItemCollection` containing all active items (items not saved for 
 ```twig
 {% set items = cart.listActiveItems %}
 {% for item in items %}
-    <p>{{ item.product.name }} — {{ item.display_line_price|currency }}</p>
+    <p>{{ item.product.name }}: {{ item.display_line_price|currency }}</p>
 {% endfor %}
 ```
 
@@ -77,7 +77,7 @@ Adds a product to the cart. This is the primary handler for product pages and qu
 | `cart_name` | string | No | Target cart name (default: `main`) |
 | `bundle_items[]` | array | No | Bundle slot selections (see [Bundle Parameters](#bundle-parameters) below) |
 
-**Quick-add from a product card** — passes only the product ID:
+**Quick-add from a product card**: passes only the product ID:
 
 ```html
 <button
@@ -89,7 +89,7 @@ Adds a product to the cart. This is the primary handler for product pages and qu
 </button>
 ```
 
-**Full product page form** — includes quantity and options:
+**Full product page form**: includes quantity and options:
 
 ```html
 <form>
@@ -227,7 +227,7 @@ After the request completes, the updated partial receives an `availableOptions` 
     <ul>
         {% for option in availableOptions %}
             <li>
-                {{ option.name }} —
+                {{ option.name }}:
                 {% if option.isFree %}
                     Free
                 {% else %}
@@ -320,10 +320,10 @@ These properties are set on cart items that belong to a product bundle.
 {% for item in items %}
     {% if item.isBundleItem() %}
         <div class="bundle-child-item">
-            {{ item.product.name }} — {{ item.display_line_price|currency }}
+            {{ item.product.name }}: {{ item.display_line_price|currency }}
         </div>
     {% else %}
-        <div>{{ item.product.name }} — {{ item.display_line_price|currency }}</div>
+        <div>{{ item.product.name }}: {{ item.display_line_price|currency }}</div>
     {% endif %}
 {% endfor %}
 ```
@@ -360,8 +360,8 @@ All aggregate methods exclude postponed items.
 
 How cart data is stored depends on whether the customer is logged in:
 
-- **Guest customers** — Cart items are stored in the session (`SessionCart`). If the session expires, the cart is lost.
-- **Logged-in customers** — Cart items are stored in the database (`UserCart`), persisting across sessions and devices.
+- **Guest customers**: Cart items are stored in the session (`SessionCart`). If the session expires, the cart is lost.
+- **Logged-in customers**: Cart items are stored in the database (`UserCart`), persisting across sessions and devices.
 
 When a guest customer logs in, their session cart is merged with any existing database cart automatically.
 
@@ -578,9 +578,9 @@ A collapsible shipping rate estimator for the cart page:
 
 The cart system fires several events that you can listen to in your plugins. See the [Events](../hooks/events) documentation for the complete list, including:
 
-- `shop.cart.beforeAddProduct` — Before an item is added to the cart.
-- `shop.cart.addProduct` — After an item is added.
-- `shop.cart.beforeRemoveItem` — Before an item is removed.
-- `shop.cart.beforeSetQuantity` / `shop.cart.setQuantity` — Before and after quantity changes.
-- `shop.cart.getPrice` — Override item price calculations.
-- `shop.cart.processCustomData` — Modify custom data during add-to-cart.
+- `shop.cart.beforeAddProduct`: Before an item is added to the cart.
+- `shop.cart.addProduct`: After an item is added.
+- `shop.cart.beforeRemoveItem`: Before an item is removed.
+- `shop.cart.beforeSetQuantity` / `shop.cart.setQuantity`: Before and after quantity changes.
+- `shop.cart.getPrice`: Override item price calculations.
+- `shop.cart.processCustomData`: Modify custom data during add-to-cart.

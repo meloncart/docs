@@ -17,7 +17,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Payment Gateways</h2>
-        <p>Stripe, <strong>PayPal</strong> and <strong>RazorPay</strong> are included as built-in gateways, covering the vast majority of online transactions worldwide. All support the full payment lifecycle: authorization, capture, <strong>refunds</strong> and voids, all manageable from the order screen.</p>
+        <p>Stripe, <strong>PayPal</strong> and <strong>RazorPay</strong> are included as built-in gateways, covering the vast majority of online transactions worldwide. All support the full payment lifecycle, including authorization, capture, <strong>refunds</strong> and voids, all manageable from the order screen.</p>
         <p>Additional gateways can be added through the Marketplace or by building your own using Meloncart's <strong>payment gateway API</strong>.</p>
     </div>
     <div class="mc-detail-section__visual">

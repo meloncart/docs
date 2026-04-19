@@ -208,9 +208,9 @@ Fires before a stock operation is performed as part of the order status lifecycl
 **Return:** Return `false` to prevent the default stock operation.
 
 The `$status->code` indicates which stock action would occur:
-- `new` — `$order->reserveStockValues()` (reserve stock for all items)
-- `shipped` — `$order->decreaseStockValues()` (decrement physical stock, release reservation)
-- `cancelled` — `$order->releaseStockValues()` (release reservation, restore salable qty)
+- `new`: `$order->reserveStockValues()` (reserve stock for all items)
+- `shipped`: `$order->decreaseStockValues()` (decrement physical stock, release reservation)
+- `cancelled`: `$order->releaseStockValues()` (release reservation, restore salable qty)
 
 ```php
 Event::listen('shop.order.stockChanged', function($order, $status) {
@@ -579,7 +579,7 @@ Fires before a shipping quote is evaluated. Return a non-null value to override 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `$shippingMethod` | ShippingMethod | The shipping method model |
-| `$options` | array | Quote options — see options table below |
+| `$options` | array | Quote options: see options table below |
 
 **Return:** Return any non-null value to use as the quote result, bypassing the driver.
 
@@ -613,7 +613,7 @@ Fires after a shipping quote is evaluated, including handling fees. Return a val
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `$shippingMethod` | ShippingMethod | The shipping method model |
-| `$result` | int\|array | The calculated quote — int for a single rate, array for multiple options |
+| `$result` | int\|array | The calculated quote: int for a single rate, array for multiple options |
 | `$options` | array | The original quote options |
 
 **Return:** Return any non-null value to override the quote result.

@@ -180,7 +180,7 @@ Returns the minimum and maximum product price within the category as base values
 
 #### Custom Category Page
 
-Individual categories can override the default category page by setting the `custom_page` field (a pagefinder reference) in the backend. When set, `pageUrl()` automatically resolves to the custom CMS page — no theme template changes needed.
+Individual categories can override the default category page by setting the `custom_page` field (a pagefinder reference) in the backend. When set, `pageUrl()` automatically resolves to the custom CMS page: no theme template changes needed.
 
 The custom CMS page must include the `[catalog]` component with `lookup = "category"` and a matching URL pattern:
 
@@ -333,7 +333,7 @@ identifier = "slug"
 
 ## CustomGroup
 
-Custom groups are curated, flat collections of products used for specific sections of your site — featured products, new arrivals, best sellers, etc. Products within a group can be manually sorted.
+Custom groups are curated, flat collections of products used for specific sections of your site: featured products, new arrivals, best sellers, etc. Products within a group can be manually sorted.
 
 ### Core Properties
 

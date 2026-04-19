@@ -7,16 +7,16 @@ Meloncart's price rule system supports two types of extensions: **actions** (wha
 
 There are two categories of price rules:
 
-- **Cart rules** — Applied during checkout, discount the shopping cart (e.g., "10% off orders over $100")
-- **Catalog rules** — Applied at display time, modify product prices before the cart (e.g., "20% off all electronics")
+- **Cart rules**: Applied during checkout, discount the shopping cart (e.g., "10% off orders over $100")
+- **Catalog rules**: Applied at display time, modify product prices before the cart (e.g., "20% off all electronics")
 
 ## How It Works
 
 Price rules are configured in the backend under **Shop > Price Rules** (cart) and **Shop > Catalog Rules** (catalog). Each rule has:
 
-1. An **action** — the discount logic (percentage off, fixed amount, buy-M-get-N-free, etc.)
-2. **Conditions** — when the rule applies (cart subtotal, product category, customer group, etc.)
-3. **Configuration** — action-specific settings (discount amount, max cap, etc.)
+1. An **action**: the discount logic (percentage off, fixed amount, buy-M-get-N-free, etc.)
+2. **Conditions**: when the rule applies (cart subtotal, product category, customer group, etc.)
+3. **Configuration**: action-specific settings (discount amount, max cap, etc.)
 
 When evaluating rules:
 
@@ -81,7 +81,7 @@ class MyCartAction extends CartRuleActionBase
 ```
 
 ::: info
-Cart actions automatically return `TYPE_CART` from `getActionType()` — you don't need to override it.
+Cart actions automatically return `TYPE_CART` from `getActionType()`: you don't need to override it.
 :::
 
 ### CartRuleContext Properties
@@ -90,7 +90,7 @@ The `CartRuleContext` object passed to `evalDiscountWithContext()` provides all 
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `$context->params` | `array` | Cart state — see parameters table below |
+| `$context->params` | `array` | Cart state: see parameters table below |
 | `$context->hostObj` | `CartPriceRule` | The rule model with your config values (e.g., `$context->hostObj->discount_amount`) |
 | `$context->itemDiscountMap` | `array` | Per-unit discount per cart item key (read/write) |
 | `$context->itemDiscountTaxInclMap` | `array` | Per-unit tax-inclusive discount per item key (read/write) |
@@ -115,7 +115,7 @@ The older `evalDiscount(&$params, $hostObj, &$itemDiscountMap, &$itemDiscountTax
 
 Cart actions come in two flavors:
 
-**Cart-wide** — Discount the entire cart (default). The action distributes the discount across items.
+**Cart-wide**: Discount the entire cart (default). The action distributes the discount across items.
 
 ```php
 public function isPerProductAction()
@@ -124,7 +124,7 @@ public function isPerProductAction()
 }
 ```
 
-**Per-product** — Discount individual items that match product conditions.
+**Per-product**: Discount individual items that match product conditions.
 
 ```php
 public function isPerProductAction()
@@ -249,7 +249,7 @@ class ProductFixedDiscount extends CartRuleActionBase
 
 ## Catalog Rule Actions
 
-Catalog rule actions modify product prices at display time — before items are added to the cart. Extend `RuleActionBase` with `TYPE_PRODUCT` and implement `evalAmount()`.
+Catalog rule actions modify product prices at display time: before items are added to the cart. Extend `RuleActionBase` with `TYPE_PRODUCT` and implement `evalAmount()`.
 
 ### Base Class
 

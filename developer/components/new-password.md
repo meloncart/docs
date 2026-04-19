@@ -277,5 +277,5 @@ The account profile page uses `onChangePassword` in a collapsible editor partial
 
 ## Events
 
-- `rainlab.user.passwordReset` — After a password is reset via token. Receives the user model.
-- `rainlab.user.update` — After a password is changed for a logged-in user.
+- `rainlab.user.passwordReset`: After a password is reset via token. Receives the user model.
+- `rainlab.user.update`: After a password is changed for a logged-in user.

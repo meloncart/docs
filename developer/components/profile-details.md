@@ -128,7 +128,7 @@ Creates, updates, or deletes an address in the user's address book. This handler
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | `address_id` | integer | Yes | ID of the address to update |
-| (address fields) | — | — | Same fields as create |
+| (address fields) |: |: | Same fields as create |
 
 **Delete an address:**
 
@@ -587,5 +587,5 @@ redirect = "account/login"
 
 ## Events
 
-- `rainlab.user.beforeUpdate` — Before the user profile is updated.
-- `rainlab.user.update` — After the user profile is updated.
+- `rainlab.user.beforeUpdate`: Before the user profile is updated.
+- `rainlab.user.update`: After the user profile is updated.

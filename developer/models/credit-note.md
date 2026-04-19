@@ -55,7 +55,7 @@ $balance = CreditNote::getBalanceForUser($user, 'USD');
 | `$user` | `User` | Customer account |
 | `$currencyCode` | `string\|null` | Currency code (defaults to active currency) |
 
-**Returns:** `int` — Balance in base currency units (cents). Always >= 0.
+**Returns:** `int`: Balance in base currency units (cents). Always >= 0.
 
 ### getHistoryForUser
 
@@ -140,7 +140,7 @@ $note = CreditNote::applyToInvoice($user, $invoice, $requestedAmount);
 | `$invoice` | `Invoice` | Target invoice |
 | `$requestedAmount` | `int` | Amount to apply in cents |
 
-**Returns:** `CreditNote` — The debit note created.
+**Returns:** `CreditNote`: The debit note created.
 
 **Throws:** `ApplicationException` if the balance is insufficient or the amount is invalid.
 
@@ -159,7 +159,7 @@ $note = CreditNote::removeFromInvoice($user, $invoice);
 | `$user` | `User` | Customer account |
 | `$invoice` | `Invoice` | Target invoice |
 
-**Returns:** `CreditNote|null` — The adjustment note, or `null` if no credit was applied.
+**Returns:** `CreditNote|null`: The adjustment note, or `null` if no credit was applied.
 
 ## Query Scopes
 

@@ -3,7 +3,7 @@ subtitle: Manages user security tools.
 ---
 # Security Details
 
-The `account` component also provides security management functionality — two-factor authentication (2FA) setup, browser session management, and account deletion. These handlers are part of the same `account` component used for [Profile Details](./profile-details), documented separately here for clarity.
+The `account` component also provides security management functionality: two-factor authentication (2FA) setup, browser session management, and account deletion. These handlers are part of the same `account` component used for [Profile Details](./profile-details), documented separately here for clarity.
 
 This component comes from the **RainLab.User** plugin.
 
@@ -168,7 +168,7 @@ redirect = "account/login"
 
 ### Two-Factor Authentication Partial
 
-This partial handles the full 2FA lifecycle — enabling with QR code, confirming with a code, viewing and regenerating recovery codes, and disabling:
+This partial handles the full 2FA lifecycle: enabling with QR code, confirming with a code, viewing and regenerating recovery codes, and disabling:
 
 ```twig
 {# partials/account/field-two-factor-auth.htm #}
@@ -497,7 +497,7 @@ This partial handles the full 2FA lifecycle — enabling with QR code, confirmin
 
 ## Events
 
-- `rainlab.user.twoFactorEnabled` — After 2FA is confirmed and enabled.
-- `rainlab.user.twoFactorDisabled` — After 2FA is disabled.
-- `rainlab.user.sessionDeleted` — After other browser sessions are logged out.
-- `rainlab.user.deactivate` — After the user account is soft-deleted.
+- `rainlab.user.twoFactorEnabled`: After 2FA is confirmed and enabled.
+- `rainlab.user.twoFactorDisabled`: After 2FA is disabled.
+- `rainlab.user.sessionDeleted`: After other browser sessions are logged out.
+- `rainlab.user.deactivate`: After the user account is soft-deleted.

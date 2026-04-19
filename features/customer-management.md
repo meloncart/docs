@@ -58,7 +58,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Customer Accounts</h2>
-        <p>Customers get a full self-service account on your storefront: registration, login, password recovery, order history, saved addresses and profile management.</p>
+        <p>Customers get a full self-service account on your storefront, including registration, login, password recovery, order history, saved addresses and profile management.</p>
         <p>Two-factor authentication with authenticator apps and recovery codes is built in for customers who want extra security.</p>
         <p>An address book lets returning customers save multiple shipping and billing addresses, speeding up <strong>repeat purchases</strong>. Guest checkout is also supported so customers can buy without creating an account.</p>
     </div>

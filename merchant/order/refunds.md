@@ -13,9 +13,9 @@ If the order was paid through an online payment method (such as Stripe or PayPal
 
 The specific refund process depends on the payment gateway being used:
 
-- **Stripe** — Refunds can typically be initiated from the Stripe dashboard or through the payment log in Responsiv.Pay.
-- **PayPal** — Refunds are managed through the PayPal seller dashboard.
-- **Offline methods** — For orders paid via bank transfer or similar methods, refunds are handled outside the system (e.g., manual bank transfer back to the customer).
+- **Stripe**: Refunds can typically be initiated from the Stripe dashboard or through the payment log in Responsiv.Pay.
+- **PayPal**: Refunds are managed through the PayPal seller dashboard.
+- **Offline methods**: For orders paid via bank transfer or similar methods, refunds are handled outside the system (e.g., manual bank transfer back to the customer).
 
 ### Updating Order Status
 
@@ -50,7 +50,7 @@ Always verify stock levels manually after processing a refund. Automatic stock r
 For partial refunds (refunding only some items or a portion of the order total):
 
 1. Process the partial refund amount through the payment gateway.
-2. Optionally edit the order to reflect the adjustment — you can modify item quantities, prices, or add a note explaining the partial refund.
+2. Optionally edit the order to reflect the adjustment: you can modify item quantities, prices, or add a note explaining the partial refund.
 3. Update the order status to indicate it has been partially refunded.
 4. Restore stock manually for any items being returned.
 
@@ -60,15 +60,15 @@ If [store credit](./store-credit) is enabled, the **Mark Refunded** button on an
 
 This creates a credit note that increases the customer's store credit balance. The customer can then apply this balance to future orders. This is useful when you want to offer a refund without processing a return through the payment gateway.
 
-For orders that were partially paid with store credit, consider whether to restore the credit portion, refund through the gateway, or both. The refund-to-credit option and the gateway refund are independent — you can do one or both.
+For orders that were partially paid with store credit, consider whether to restore the credit portion, refund through the gateway, or both. The refund-to-credit option and the gateway refund are independent: you can do one or both.
 
 ## Record Keeping
 
 All refund-related activity is tracked through several mechanisms:
 
-- **Status Log** — The order's status log records when the status was changed to a refund-related status, who made the change, and any comment provided.
-- **Payment Log** — The invoice's payment log records refund transactions processed through the payment gateway.
-- **Credit Notes** — When refunding to store credit, a credit note is created and linked to the invoice, visible on both the invoice's Credit Notes tab and the customer's Credit tab.
-- **Order Notes** — Use the notes feature on the order to add any additional context about why the refund was issued.
+- **Status Log**: The order's status log records when the status was changed to a refund-related status, who made the change, and any comment provided.
+- **Payment Log**: The invoice's payment log records refund transactions processed through the payment gateway.
+- **Credit Notes**: When refunding to store credit, a credit note is created and linked to the invoice, visible on both the invoice's Credit Notes tab and the customer's Credit tab.
+- **Order Notes**: Use the notes feature on the order to add any additional context about why the refund was issued.
 
 Together, these records provide a complete audit trail for each refund.

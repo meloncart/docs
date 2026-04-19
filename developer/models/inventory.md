@@ -69,7 +69,7 @@ $product->releaseStock(int $quantity): void
 
 ### Variant Methods
 
-`ProductVariant` provides the same methods — `getSalableQuantity()`, `isOutOfStock()`, `reserveStock()`, `decreaseStock()`, and `releaseStock()` — operating on variant-level stock.
+`ProductVariant` provides the same methods: `getSalableQuantity()`, `isOutOfStock()`, `reserveStock()`, `decreaseStock()`, and `releaseStock()`: operating on variant-level stock.
 
 ---
 
@@ -123,7 +123,7 @@ Db::table('shop_products')
     ->update(['units_reserved' => Db::raw("units_reserved + " . (int) $quantity)]);
 ```
 
-This ensures that two simultaneous orders cannot both claim the same stock. The `units_reserved` counter acts as a soft lock — salable quantity (`units_in_stock - units_reserved`) decreases immediately when an order is placed.
+This ensures that two simultaneous orders cannot both claim the same stock. The `units_reserved` counter acts as a soft lock: salable quantity (`units_in_stock - units_reserved`) decreases immediately when an order is placed.
 
 ---
 
@@ -181,4 +181,4 @@ The **Meloncart Inventory** plugin (`meloncart/inventory`) extends the shop with
 - Replaces the `units_in_stock` field on product forms with a warehouse stock relation widget
 - Adds a **Warehouses** controller under the Shop menu
 
-The plugin uses the existing `shop.order.stockChanged` event — returning `false` to prevent the default local-column stock operations and handling inventory through `InventoryStock` static methods instead.
+The plugin uses the existing `shop.order.stockChanged` event: returning `false` to prevent the default local-column stock operations and handling inventory through `InventoryStock` static methods instead.

@@ -3,7 +3,7 @@ subtitle: Display and submit product reviews.
 ---
 # Reviews
 
-The `reviews` component provides product review functionality for your storefront. It handles displaying approved reviews, submitting new reviews, and voting on review helpfulness — all through AJAX handlers.
+The `reviews` component provides product review functionality for your storefront. It handles displaying approved reviews, submitting new reviews, and voting on review helpfulness: all through AJAX handlers.
 
 ## Component Declaration
 
@@ -95,11 +95,11 @@ Submits a new product review.
 
 **Error Conditions:**
 
-- `"Reviews are not currently enabled."` — Reviews are disabled in settings.
-- `"You must be logged in to submit a review."` — Login is required and user is not authenticated.
-- `"Product not found."` — The product ID could not be resolved.
-- `"You must purchase this product before submitting a review."` — Purchase is required and user has no paid orders with this product.
-- `"You have already reviewed this product."` — The user has already submitted a review for this product.
+- `"Reviews are not currently enabled."`: Reviews are disabled in settings.
+- `"You must be logged in to submit a review."`: Login is required and user is not authenticated.
+- `"Product not found."`: The product ID could not be resolved.
+- `"You must purchase this product before submitting a review."`: Purchase is required and user has no paid orders with this product.
+- `"You have already reviewed this product."`: The user has already submitted a review for this product.
 
 ```twig
 <form data-request="reviews::onSubmitReview" data-request-flash>

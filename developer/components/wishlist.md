@@ -5,15 +5,15 @@ subtitle: Manage customer wishlists.
 
 Meloncart does not have a dedicated wishlist component. Instead, wishlists are implemented using the **named carts** feature of the [Cart](./cart) component. By passing `cart_name = "wishlist"` to the cart's AJAX handlers, you create a separate cart that acts as a saved-for-later list.
 
-This approach reuses all existing cart infrastructure — session storage for guests, database storage for logged-in users, and the same AJAX handlers — without any additional plugin code.
+This approach reuses all existing cart infrastructure: session storage for guests, database storage for logged-in users, and the same AJAX handlers: without any additional plugin code.
 
 ## How Named Carts Work
 
 The Cart component's AJAX handlers accept a `cart_name` parameter that determines which cart to operate on. The default cart is named `main`. Any other name creates an independent cart with its own items:
 
-- `main` — The shopping cart (default)
-- `wishlist` — A saved-for-later list
-- Any custom name — Additional named carts for your own purposes
+- `main`: The shopping cart (default)
+- `wishlist`: A saved-for-later list
+- Any custom name: Additional named carts for your own purposes
 
 Each named cart has its own items, quantities, and state. Items in one named cart do not affect another.
 
@@ -161,8 +161,8 @@ You can accomplish this with a single button by chaining the operations, or by i
 
 Wishlist items follow the same storage rules as the main cart:
 
-- **Guest customers** — Wishlist items are stored in the session and will be lost when the session expires.
-- **Logged-in customers** — Wishlist items are stored in the database and persist across sessions and devices.
+- **Guest customers**: Wishlist items are stored in the session and will be lost when the session expires.
+- **Logged-in customers**: Wishlist items are stored in the database and persist across sessions and devices.
 
 When a guest customer logs in, their session-based wishlist is merged with any existing database wishlist, just like the main cart.
 

@@ -27,7 +27,7 @@ recoverPassword = 1
 | Mode | Description |
 | --- | --- |
 | `always` | Always persist the session across browser restarts |
-| `never` | Never persist — session ends when browser closes |
+| `never` | Never persist: session ends when browser closes |
 | `ask` | Show a "Remember me" checkbox and let the user decide |
 
 ## Twig API
@@ -366,6 +366,6 @@ The 2FA form toggles between an authenticator code input and a recovery code inp
 
 The following events are fired during authentication:
 
-- `rainlab.user.beforeAuthenticate` — Before the user is logged in. Receives the user model.
-- `rainlab.user.authenticate` — After the user is logged in. Return a response to override the default redirect.
-- `rainlab.user.logout` — When the user logs out.
+- `rainlab.user.beforeAuthenticate`: Before the user is logged in. Receives the user model.
+- `rainlab.user.authenticate`: After the user is logged in. Return a response to override the default redirect.
+- `rainlab.user.logout`: When the user logs out.

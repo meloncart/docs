@@ -35,7 +35,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Order Details</h2>
-        <p>Click into any order to see the full picture: line items, billing and shipping addresses, tax breakdown, payment status and timeline.</p>
+        <p>Click into any order to see the full picture, including line items, billing and shipping addresses, tax breakdown, payment status and timeline.</p>
         <p>You can update the order status, edit details, apply discounts, issue refunds and view other orders from the same customer.</p>
         <p>Order statuses follow a configurable route system, so you define the transitions that make sense for your workflow (e.g. Pending, Processing, Shipped, Completed).</p>
     </div>

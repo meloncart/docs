@@ -3,9 +3,9 @@ subtitle: Invoice and InvoiceItem model reference (Responsiv.Pay plugin).
 ---
 # Invoice Models
 
-This reference documents all Twig-accessible properties and methods for invoice-related models. All prices are stored as integers in **base currency units (cents)** — use the `|currency` filter for display.
+This reference documents all Twig-accessible properties and methods for invoice-related models. All prices are stored as integers in **base currency units (cents)**: use the `|currency` filter for display.
 
-Invoices are **accounting ledgers** — they are designed for manual entry and administrative overrides. They can be created manually or generated from orders. Unlike orders, invoices use a simplified pricing model: discounts are stored as line-level totals (like Xero), not per-unit values, and there are no tax-inclusive/exclusive discount variants. This keeps the invoice straightforward for bookkeeping purposes.
+Invoices are **accounting ledgers**: they are designed for manual entry and administrative overrides. They can be created manually or generated from orders. Unlike orders, invoices use a simplified pricing model: discounts are stored as line-level totals (like Xero), not per-unit values, and there are no tax-inclusive/exclusive discount variants. This keeps the invoice straightforward for bookkeeping purposes.
 
 For the computed order model with price rules and per-unit tax variants, see [Order Models](./order).
 
@@ -232,7 +232,7 @@ The method updates the invoice's `sent_at` timestamp after sending. It uses the 
 
 ## InvoiceItem
 
-Each line item within an invoice. Unlike order items, invoice items use a simplified pricing model — discounts are stored as **line-level totals** (the total discount for the entire row), not per-unit values. This matches the convention used by accounting software like Xero.
+Each line item within an invoice. Unlike order items, invoice items use a simplified pricing model: discounts are stored as **line-level totals** (the total discount for the entire row), not per-unit values. This matches the convention used by accounting software like Xero.
 
 ### Price Properties (Per-Unit)
 
@@ -246,7 +246,7 @@ Each line item within an invoice. Unlike order items, invoice items use a simpli
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `discount` | `int` | Line discount — the total discount for the entire row, not per-unit |
+| `discount` | `int` | Line discount: the total discount for the entire row, not per-unit |
 | `tax` | `int` | Line tax: `(unit_tax × quantity) - discount_tax` |
 | `subtotal` | `int` | Line subtotal: `quantity × price - discount` |
 | `total` | `int` | Line total: `subtotal + tax` |

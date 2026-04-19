@@ -38,7 +38,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Build and Publish</h2>
-        <p>The Marketplace is open to developers who want to distribute their own plugins and themes — free or paid. It handles <strong>licensing</strong> and distribution, so you can focus on building.</p>
+        <p>The Marketplace is open to developers who want to distribute their own plugins and themes, free or paid. It handles <strong>licensing</strong> and distribution, so you can focus on building.</p>
         <p>If you've built something useful for your own store, consider <a href="https://octobercms.com/account/author/register">registering as an author</a> and sharing it with the community.</p>
     </div>
     <div class="mc-detail-section__visual">

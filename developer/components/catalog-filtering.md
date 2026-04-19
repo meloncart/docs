@@ -3,15 +3,15 @@ subtitle: AJAX-powered product filtering for category pages.
 ---
 # Catalog Filtering
 
-The Commerce Theme includes an AJAX-powered filtering system for category pages. Customers can filter products by manufacturer, star rating, and price range — all without a full page reload.
+The Commerce Theme includes an AJAX-powered filtering system for category pages. Customers can filter products by manufacturer, star rating, and price range, all without a full page reload.
 
 ## How It Works
 
 The filtering system uses three layers:
 
-1. **Sidebar filter controls** — Twig partials with checkboxes and a price slider
-2. **The `catalog-form` JavaScript control** — Collects filter state and sends AJAX requests
-3. **The `listProducts()` method** — Proxies to `Product::listFrontEnd()` with filter parameters and returns matching products
+1. **Sidebar filter controls**: Twig partials with checkboxes and a price slider
+2. **The `catalog-form` JavaScript control**: Collects filter state and sends AJAX requests
+3. **The `listProducts()` method**: Proxies to `Product::listFrontEnd()` with filter parameters and returns matching products
 
 When a customer interacts with any filter, the `catalog-form` control gathers all active filters and sends a single AJAX request to refresh the product listing.
 
@@ -151,7 +151,7 @@ The `currency()` Twig function returns the default currency model, providing acc
 | `data-max` | Maximum slider value (base value) |
 | `data-decimal-scale` | Currency decimal scale for display conversion |
 | `data-currency-symbol` | Currency symbol for display |
-| `data-symbol-before` | `"true"` or `"false"` — symbol placement |
+| `data-symbol-before` | `"true"` or `"false"`: symbol placement |
 | `data-thousand-separator` | Thousands separator for display |
 
 ## The catalog-form Control
@@ -178,7 +178,7 @@ oc.request(this.element, 'onRefreshCatalog', {
 });
 ```
 
-Empty arrays and undefined values are omitted — when no filter is active for a given type, all products match.
+Empty arrays and undefined values are omitted: when no filter is active for a given type, all products match.
 
 ## Category Products Partial
 

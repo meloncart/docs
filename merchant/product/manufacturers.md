@@ -13,23 +13,23 @@ Click **New Manufacturer** to create a new manufacturer. The following fields ar
 
 ### Manufacturer Tab
 
-- **Name** — The display name of the manufacturer or brand. This is the only required field.
-- **Slug** — Automatically generated from the name, used to build the manufacturer's URL on the storefront. You can customize it if needed.
-- **Description** — A rich text description of the manufacturer, which can be displayed on a dedicated manufacturer page on the storefront.
+- **Name**: The display name of the manufacturer or brand. This is the only required field.
+- **Slug**: Automatically generated from the name, used to build the manufacturer's URL on the storefront. You can customize it if needed.
+- **Description**: A rich text description of the manufacturer, which can be displayed on a dedicated manufacturer page on the storefront.
 
 ### Address Tab
 
 Manufacturers can optionally store contact and address information:
 
-- **Street Address** — The manufacturer's street address.
-- **City** — City name.
-- **Zip / Postal Code** — Postal or ZIP code.
-- **Country** — Select from enabled countries.
-- **State** — Select from states within the chosen country.
-- **Phone Number** — Contact phone number.
-- **Fax Number** — Fax number.
-- **Email** — Contact email address.
-- **Website URL** — The manufacturer's website.
+- **Street Address**: The manufacturer's street address.
+- **City**: City name.
+- **Zip / Postal Code**: Postal or ZIP code.
+- **Country**: Select from enabled countries.
+- **State**: Select from states within the chosen country.
+- **Phone Number**: Contact phone number.
+- **Fax Number**: Fax number.
+- **Email**: Contact email address.
+- **Website URL**: The manufacturer's website.
 
 ### Logo Tab
 
@@ -45,8 +45,8 @@ You can filter the product list by manufacturer using the **Manufacturer** filte
 
 Your theme can display manufacturer information on the storefront in several ways:
 
-- **Product pages** — Show the manufacturer name and logo on product detail pages.
-- **Manufacturer pages** — Create a dedicated page that displays the manufacturer's description, logo, and a list of their products.
-- **Product filters** — Allow customers to filter products by manufacturer in category listings.
+- **Product pages**: Show the manufacturer name and logo on product detail pages.
+- **Manufacturer pages**: Create a dedicated page that displays the manufacturer's description, logo, and a list of their products.
+- **Product filters**: Allow customers to filter products by manufacturer in category listings.
 
 The catalog component supports looking up manufacturers by slug or ID, making it easy to build dedicated manufacturer pages. See the [Catalog component](../../developer/components/catalog) documentation for details.

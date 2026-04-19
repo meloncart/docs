@@ -9,9 +9,9 @@ Variants represent specific combinations of product options. If a product comes 
 
 Use variants when you need per-combination control over pricing or inventory. For example:
 
-- A t-shirt in sizes S, M, L and colors Red, Blue — where "Large / Red" has a different price than "Small / Blue".
-- A laptop with storage options 256GB and 512GB — where each option has a different SKU and stock count.
-- A ring in sizes 5–10 — where each size has a unique barcode.
+- A t-shirt in sizes S, M, L and colors Red, Blue: where "Large / Red" has a different price than "Small / Blue".
+- A laptop with storage options 256GB and 512GB: where each option has a different SKU and stock count.
+- A ring in sizes 5–10: where each size has a unique barcode.
 
 If all combinations share the same price, SKU, and stock level, you may only need [product options](./products#product-options) without variants.
 
@@ -35,23 +35,23 @@ For example, if your product has:
 
 Generating variants creates six variants: Small/Red, Small/Blue, Medium/Red, Medium/Blue, Large/Red, Large/Blue.
 
-Only new combinations are created — if some variants already exist, they are left unchanged. This means you can safely regenerate after adding new option values without losing existing variant data.
+Only new combinations are created. If some variants already exist, they are left unchanged. This means you can safely regenerate after adding new option values without losing existing variant data.
 
 ## Managing Variants
 
 Each variant appears as a row in the variants list. Click a variant to edit its attributes:
 
-- **SKU** — A unique SKU for this specific variant. If left empty, the product's base SKU is used.
-- **Price** — A variant-specific price. If left empty, the product's base price is used.
-- **On Sale / Sale Price** — A variant-specific sale price. When checked, the sale price is applied to this variant. If not set, the product's sale price is used as a fallback.
-- **Cost** — The cost price for this variant.
-- **Compare Price** — An optional comparison price displayed alongside the variant price.
-- **Weight** — The shipping weight for this variant. Falls back to the product's weight if empty.
-- **Dimensions** (Width, Height, Depth) — Physical dimensions for this variant. Falls back to the product's dimensions if empty.
-- **Barcode** — An optional barcode (UPC, EAN, etc.) for this variant.
-- **Units in Stock** — The stock level for this variant. See [Inventory](./inventory) for details.
-- **Stock Alert Threshold** — The stock level at which a low-stock alert is triggered.
-- **Enabled** — Whether this variant is available for purchase. Disabled variants cannot be added to the cart.
+- **SKU**: A unique SKU for this specific variant. If left empty, the product's base SKU is used.
+- **Price**: A variant-specific price. If left empty, the product's base price is used.
+- **On Sale / Sale Price**: A variant-specific sale price. When checked, the sale price is applied to this variant. If not set, the product's sale price is used as a fallback.
+- **Cost**: The cost price for this variant.
+- **Compare Price**: An optional comparison price displayed alongside the variant price.
+- **Weight**: The shipping weight for this variant. Falls back to the product's weight if empty.
+- **Dimensions** (Width, Height, Depth): Physical dimensions for this variant. Falls back to the product's dimensions if empty.
+- **Barcode**: An optional barcode (UPC, EAN, etc.) for this variant.
+- **Units in Stock**: The stock level for this variant. See [Inventory](./inventory) for details.
+- **Stock Alert Threshold**: The stock level at which a low-stock alert is triggered.
+- **Enabled**: Whether this variant is available for purchase. Disabled variants cannot be added to the cart.
 
 ::: tip
 You only need to fill in fields that differ from the product's base values. Any field left empty on the variant will automatically use the corresponding value from the parent product.
@@ -67,17 +67,17 @@ Set the **Price** field on a variant to give it a specific price. When a custome
 
 ### Variant Price Tiers
 
-Each variant can have its own tier pricing rules for volume-based discounts. Variant price tiers work the same way as product-level price tiers — you define quantity thresholds with corresponding prices, optionally restricted to specific user groups.
+Each variant can have its own tier pricing rules for volume-based discounts. Variant price tiers work the same way as product-level price tiers: you define quantity thresholds with corresponding prices, optionally restricted to specific user groups.
 
 ### How Pricing is Resolved
 
 When a customer adds a product to the cart with a specific option combination, the system resolves the variant and determines the final price using this priority:
 
-1. **Variant-specific tier price** — If the variant has tier pricing and the quantity qualifies, the tier price is used.
-2. **Variant base price** — If the variant has a price set, that price is used.
-3. **Product base price** — If the variant has no price, the product's base price is used.
-4. **Catalog price rules** — If a catalog rule (set up under **Shop → Price Rules**) produces a lower price than the resolved price, the rule price is used instead.
-5. **Sale price** — If the variant has its own sale price set (with **On Sale** checked), it is compared to the resolved price and the lower value is used. If the variant has no sale price, the product's sale price is checked as a fallback.
+1. **Variant-specific tier price**: If the variant has tier pricing and the quantity qualifies, the tier price is used.
+2. **Variant base price**: If the variant has a price set, that price is used.
+3. **Product base price**: If the variant has no price, the product's base price is used.
+4. **Catalog price rules**: If a catalog rule (set up under **Shop → Price Rules**) produces a lower price than the resolved price, the rule price is used instead.
+5. **Sale price**: If the variant has its own sale price set (with **On Sale** checked), it is compared to the resolved price and the lower value is used. If the variant has no sale price, the product's sale price is checked as a fallback.
 
 ## Variant Stock
 
@@ -91,18 +91,18 @@ For more details on inventory management, see the [Inventory](./inventory) docum
 
 Each variant can have its own set of images. When a variant has images uploaded, the storefront displays those images instead of the product's default images when the customer selects that variant's option combination.
 
-If a variant has no images, the product's default images are used as a fallback. This means you only need to upload variant-specific images for variants that look different from the base product — for example, uploading red product photos for the "Red" variant while other color variants fall back to the default images.
+If a variant has no images, the product's default images are used as a fallback. This means you only need to upload variant-specific images for variants that look different from the base product: for example, uploading red product photos for the "Red" variant while other color variants fall back to the default images.
 
 ## How Variants Look on the Storefront
 
 When a customer visits a product page with variants enabled, the option selectors (dropdowns for Size, Color, etc.) are interactive. Changing any option triggers an automatic update of the product page without a full page reload. The following elements update dynamically:
 
-- **Price** — The displayed price changes to reflect the selected variant's price.
-- **Images** — The product gallery switches to the variant's images (if the variant has its own images).
-- **Availability** — If the selected variant is disabled or out of stock, a warning message replaces the add-to-cart button:
-  - **Disabled variant** — "This product combination is currently unavailable."
-  - **Out of stock** — "This product is temporarily out of stock." with an expected availability date if one is set.
-  - **Invalid combination** — "This product combination is not available." if no variant matches the selected options.
+- **Price**: The displayed price changes to reflect the selected variant's price.
+- **Images**: The product gallery switches to the variant's images (if the variant has its own images).
+- **Availability**: If the selected variant is disabled or out of stock, a warning message replaces the add-to-cart button:
+  - **Disabled variant**: "This product combination is currently unavailable."
+  - **Out of stock**: "This product is temporarily out of stock." with an expected availability date if one is set.
+  - **Invalid combination**: "This product combination is not available." if no variant matches the selected options.
 
 This means customers always see accurate pricing and availability before adding the product to their cart.
 
@@ -114,7 +114,7 @@ If no variant matches the selected combination, or if the matching variant is di
 
 ## How Variants Appear in the Cart and Orders
 
-When a variant product is in the cart, the variant name (e.g., "Red / Large") is shown below the product name, making it clear which combination was selected. The cart uses the variant's resolved price automatically — no additional configuration is needed.
+When a variant product is in the cart, the variant name (e.g., "Red / Large") is shown below the product name, making it clear which combination was selected. The cart uses the variant's resolved price automatically: no additional configuration is needed.
 
 In order records, the variant is stored alongside the order item. The order detail view shows the variant name below the product name, just like in the cart.
 

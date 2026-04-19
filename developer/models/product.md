@@ -3,7 +3,7 @@ subtitle: Product, Variant, Option, Extra, Property, PriceTier, and Bundle model
 ---
 # Product Models
 
-This reference documents all Twig-accessible properties and methods for product-related models. All prices are stored as integers in **base currency units (cents)** — use the `|currency` filter for display.
+This reference documents all Twig-accessible properties and methods for product-related models. All prices are stored as integers in **base currency units (cents)**: use the `|currency` filter for display.
 
 ## Product
 
@@ -42,7 +42,7 @@ The `Product` model is the central model for all product data. It is typically a
 | `has_variants` | `bool` | Whether the product uses variants |
 
 ::: tip
-Use `display_price` for storefront display and `compare_price` for strikethrough pricing — both automatically apply tax display settings.
+Use `display_price` for storefront display and `compare_price` for strikethrough pricing: both automatically apply tax display settings.
 :::
 
 ```twig
@@ -309,7 +309,7 @@ The scope automatically applies `applyVisible` and `applySiteVisibility`, so cal
 
 ### Custom Product Page
 
-Individual products can override the default product page by setting the `custom_page` field (a pagefinder reference) in the Visibility tab. When set, `pageUrl()` automatically resolves to the custom CMS page instead of the default — no theme template changes needed.
+Individual products can override the default product page by setting the `custom_page` field (a pagefinder reference) in the Visibility tab. When set, `pageUrl()` automatically resolves to the custom CMS page instead of the default: no theme template changes needed.
 
 The custom CMS page must include the `[catalog]` component with `lookup = "product"` and a matching URL pattern. For example:
 
@@ -324,14 +324,14 @@ identifier = "baseid"
 This is useful for flagship products, seasonal landing pages, or any product that needs a unique layout while keeping the same URL parameter structure.
 
 ::: tip
-Theme templates that call `product.pageUrl('shop/product')` will automatically use the custom page when one is set. The override is transparent — you don't need to check for it in your templates.
+Theme templates that call `product.pageUrl('shop/product')` will automatically use the custom page when one is set. The override is transparent: you don't need to check for it in your templates.
 :::
 
 ---
 
 ## ProductOption
 
-Options are selectable attributes like Size or Color. They determine which [variant](#productvariant) is selected when variants are enabled. Options do not add cost — use [extras](#productextra) for priced add-ons.
+Options are selectable attributes like Size or Color. They determine which [variant](#productvariant) is selected when variants are enabled. Options do not add cost: use [extras](#productextra) for priced add-ons.
 
 ### Properties
 
@@ -347,7 +347,7 @@ Options are selectable attributes like Size or Color. They determine which [vari
 ### Displaying Options
 
 ```twig
-{# Product page — option selection #}
+{# Product page: option selection #}
 {% for option in product.options %}
     <div class="form-group">
         <label>{{ option.name }}</label>
@@ -359,7 +359,7 @@ Options are selectable attributes like Size or Color. They determine which [vari
     </div>
 {% endfor %}
 
-{# Cart/order context — selected value #}
+{# Cart/order context: selected value #}
 {% for option in item.options %}
     <span>{{ option.name }}: {{ option.value }}</span>
 {% endfor %}
@@ -395,9 +395,9 @@ Extras are paid or free add-ons that customers can optionally select, such as gi
 
 ### Local vs Global Extras
 
-- **Local extras** (`product.extras`) — defined directly on a product.
-- **Global extras** — defined in an Extra Set and assigned to multiple products.
-- **All extras** (`product.all_extras`) — merges both into a single collection.
+- **Local extras** (`product.extras`): defined directly on a product.
+- **Global extras**: defined in an Extra Set and assigned to multiple products.
+- **All extras** (`product.all_extras`): merges both into a single collection.
 
 Always use `product.all_extras` to display extras on the storefront.
 
@@ -434,7 +434,7 @@ When retrieved from a cart item or order item, extras have `displayPrice` proper
 
 ## ProductProperty
 
-Properties are display-only specifications like Material, Dimensions, or Color. They have no effect on pricing or cart behavior — they are purely informational.
+Properties are display-only specifications like Material, Dimensions, or Color. They have no effect on pricing or cart behavior: they are purely informational.
 
 ### Properties
 
@@ -500,7 +500,7 @@ These attributes mirror Product's API, enabling a unified template interface whe
 | `display_discount` | `int` | Amount saved: `compare_price - display_price` |
 
 ::: tip
-Use `display_price` and `compare_price` for storefront display — they automatically apply tax display settings, just like their Product counterparts.
+Use `display_price` and `compare_price` for storefront display: they automatically apply tax display settings, just like their Product counterparts.
 :::
 
 ### Relationships
@@ -545,14 +545,14 @@ When a customer submits `product_options` with `onAddToCart`, the cart component
 3. If found and enabled, the variant's price, SKU, and stock are used.
 4. If not found, an exception is thrown.
 
-For template use, `resolveVariantSafe()` is the preferred method — it returns `null` instead of throwing when the variant is not found or not available. This is useful when displaying price and availability on the product page while the customer is still selecting options:
+For template use, `resolveVariantSafe()` is the preferred method: it returns `null` instead of throwing when the variant is not found or not available. This is useful when displaying price and availability on the product page while the customer is still selecting options:
 
 ```twig
-{# Resolve variant from posted options (safe — returns null on mismatch) #}
+{# Resolve variant from posted options (safe: returns null on mismatch) #}
 {% set postedOptions = post('product_options', {}) %}
 {% set variant = product.resolveVariantSafe(postedOptions) %}
 
-{# Unified price display — works for both products and variants #}
+{# Unified price display: works for both products and variants #}
 {% set item = variant ?: product %}
 <span>{{ item.display_price|currency }}</span>
 {% if item.on_sale %}
@@ -765,7 +765,7 @@ Product types control which features and tabs are available on the product form.
 {% if product.product_type.has_shipping %}
     <p>Ships within 3-5 business days</p>
 {% else %}
-    <p>Digital delivery — instant access after purchase</p>
+    <p>Digital delivery: instant access after purchase</p>
 {% endif %}
 
 {% if product.product_type.has_files %}

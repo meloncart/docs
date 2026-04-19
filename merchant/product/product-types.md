@@ -3,7 +3,7 @@ subtitle: Configure product types to control which features are available for ea
 ---
 # Product Types
 
-Product types define which features and tabs are available when editing a product. Different kinds of products need different capabilities — a physical product needs shipping and inventory, a digital product needs file uploads, and a service needs neither. Product types let you tailor the product form to match each use case.
+Product types define which features and tabs are available when editing a product. Different kinds of products need different capabilities: a physical product needs shipping and inventory, a digital product needs file uploads, and a service needs neither. Product types let you tailor the product form to match each use case.
 
 Product types are accessed from the Products page toolbar. Click the **Product Types** button on the Products list page to open the types list.
 
@@ -43,9 +43,9 @@ For digital products delivered as file downloads.
 
 Click **New Product Type** to create a custom product type. The following fields are available:
 
-- **Type Name** — A descriptive name for the product type (e.g., "Physical with Variants", "Bundle Product", "Digital Service").
-- **API Code** — A code identifier for referencing this type programmatically. Automatically generated from the name.
-- **Default** — When checked, this type is automatically selected for new products. Only one type can be the default.
+- **Type Name**: A descriptive name for the product type (e.g., "Physical with Variants", "Bundle Product", "Digital Service").
+- **API Code**: A code identifier for referencing this type programmatically. Automatically generated from the name.
+- **Default**: When checked, this type is automatically selected for new products. Only one type can be the default.
 
 ### Feature Flags
 
@@ -99,13 +99,13 @@ Here are some common product type configurations:
 
 | Use Case | Files | Shipping | Inventory | Options | Extras | Bundles | Variants |
 |----------|-------|----------|-----------|---------|--------|---------|----------|
-| Physical product | — | Yes | Yes | Yes | Yes | — | — |
-| Physical with variants | — | Yes | Yes | Yes | Yes | — | Yes |
-| Digital download | Yes | — | — | Yes | Yes | — | — |
-| Service / subscription | — | — | — | Yes | Yes | — | — |
-| Bundle / kit | — | Yes | — | — | — | Yes | — |
-| Gift card | — | — | — | — | — | — | — |
+| Physical product |: | Yes | Yes | Yes | Yes |: |: |
+| Physical with variants |: | Yes | Yes | Yes | Yes |: | Yes |
+| Digital download | Yes |: |: | Yes | Yes |: |: |
+| Service / subscription |: |: |: | Yes | Yes |: |: |
+| Bundle / kit |: | Yes |: |: |: | Yes |: |
+| Gift card |: |: |: |: |: |: |: |
 
 ::: tip
-Create product types that match your specific business needs. The default types are a starting point — you can modify them or create new ones at any time.
+Create product types that match your specific business needs. The default types are a starting point: you can modify them or create new ones at any time.
 :::

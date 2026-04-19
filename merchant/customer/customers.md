@@ -11,9 +11,9 @@ Navigate to **Users** in the backend main navigation to see a list of all regist
 
 Click a customer to view their full profile, including:
 
-- **Name and email** — The customer's display name and login email address.
-- **Profile fields** — Extended profile information such as phone number, company name, and address details (provided by the [RainLab.UserPlus](https://octobercms.com/plugin/rainlab-userplus) plugin).
-- **Status** — Whether the account is activated, banned, or pending verification.
+- **Name and email**: The customer's display name and login email address.
+- **Profile fields**: Extended profile information such as phone number, company name, and address details (provided by the [RainLab.UserPlus](https://octobercms.com/plugin/rainlab-userplus) plugin).
+- **Status**: Whether the account is activated, banned, or pending verification.
 
 ## Customer Order History
 
@@ -29,8 +29,8 @@ User groups let you segment your customers for pricing, visibility, and tax purp
 
 Meloncart extends user groups with two additional settings:
 
-- **Force Tax Exclusive Display** — When enabled, customers in this group always see prices without tax, regardless of the store's default tax display setting.
-- **Tax Exempt** — When enabled, customers in this group are exempt from tax on all purchases.
+- **Force Tax Exclusive Display**: When enabled, customers in this group always see prices without tax, regardless of the store's default tax display setting.
+- **Tax Exempt**: When enabled, customers in this group are exempt from tax on all purchases.
 
 User groups integrate with several Meloncart features:
 

@@ -3,7 +3,7 @@ subtitle: The checkout process.
 ---
 # Checkout
 
-The `checkout` component manages the entire checkout flow — collecting customer details, selecting shipping and payment methods, placing orders, and processing payments. It stores checkout state in the session and provides AJAX handlers for each step.
+The `checkout` component manages the entire checkout flow: collecting customer details, selecting shipping and payment methods, placing orders, and processing payments. It stores checkout state in the session and provides AJAX handlers for each step.
 
 ## Component Declaration
 
@@ -783,14 +783,14 @@ The Commerce Theme includes a `checkout-form.js` JavaScript control that enhance
 </form>
 ```
 
-This control is optional — the checkout works without it, but the customer would need to click "Continue" to see updated shipping rates after changing their address.
+This control is optional. The checkout works without it, but the customer would need to click "Continue" to see updated shipping rates after changing their address.
 
 ## Events
 
 The checkout process fires several events. See the [Events](../hooks/events) documentation for details:
 
-- `shop.beforePlaceOrder` — Before the order is created.
-- `shop.beforeCreateOrderRecord` — Before a new order is saved to the database.
-- `shop.beforeUpdateOrderRecord` — Before an existing order is updated (amendment).
-- `shop.newOrder` — After a new order is created.
-- `shop.checkout.beforeSetCouponCode` — Before a coupon code is validated (allows modification).
+- `shop.beforePlaceOrder`: Before the order is created.
+- `shop.beforeCreateOrderRecord`: Before a new order is saved to the database.
+- `shop.beforeUpdateOrderRecord`: Before an existing order is updated (amendment).
+- `shop.newOrder`: After a new order is created.
+- `shop.checkout.beforeSetCouponCode`: Before a coupon code is validated (allows modification).

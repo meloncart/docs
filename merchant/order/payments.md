@@ -7,16 +7,16 @@ Payment processing in Meloncart is handled by the **[Responsiv.Pay](https://octo
 
 ## Payment Methods
 
-Payment methods are configured under **Settings → Payment Methods** (provided by the Responsiv.Pay plugin). Each payment method represents a way customers can pay for their orders — such as credit card via Stripe, PayPal, bank transfer, or cash on delivery.
+Payment methods are configured under **Settings → Payment Methods** (provided by the Responsiv.Pay plugin). Each payment method represents a way customers can pay for their orders: such as credit card via Stripe, PayPal, bank transfer, or cash on delivery.
 
 ### Setting Up a Payment Method
 
 Click **New Payment Method** to add one. Each payment method has:
 
-- **Name** — The display name shown to customers at checkout (e.g., "Credit Card", "PayPal").
-- **Driver** — The payment gateway driver that handles the transaction (e.g., Stripe, PayPal, RazorPay, offline).
-- **Enabled** — Whether the method is available to customers.
-- **Configuration** — Driver-specific settings such as API keys, webhook URLs, and mode (test/live).
+- **Name**: The display name shown to customers at checkout (e.g., "Credit Card", "PayPal").
+- **Driver**: The payment gateway driver that handles the transaction (e.g., Stripe, PayPal, RazorPay, offline).
+- **Enabled**: Whether the method is available to customers.
+- **Configuration**: Driver-specific settings such as API keys, webhook URLs, and mode (test/live).
 
 ### Order-Specific Settings
 
@@ -26,24 +26,24 @@ Meloncart extends payment method drivers with additional settings:
 
 Payment methods without an online payment form (such as bank transfer, cash on delivery, or invoice payment) have these additional settings:
 
-- **Order Start Status** — The order status to assign when a customer selects this payment method at checkout. This allows you to route orders differently based on how the customer pays. For example, bank transfer orders might start in a "Awaiting Payment" status.
-- **Suppress Order Notifications** — When enabled, the standard "new order" notification email is not sent for orders using this payment method. This is useful when you want to handle notification for certain payment types manually.
+- **Order Start Status**: The order status to assign when a customer selects this payment method at checkout. This allows you to route orders differently based on how the customer pays. For example, bank transfer orders might start in a "Awaiting Payment" status.
+- **Suppress Order Notifications**: When enabled, the standard "new order" notification email is not sent for orders using this payment method. This is useful when you want to handle notification for certain payment types manually.
 
 #### For Online Payment Methods
 
 Payment methods with an online payment form (such as Stripe or PayPal) have:
 
-- **Order Status** — The status to assign to the order upon successful payment. This defaults to "Paid" but can be changed to match your workflow.
+- **Order Status**: The status to assign to the order upon successful payment. This defaults to "Paid" but can be changed to match your workflow.
 
 ## Payment Processing Flow
 
 ### Standard Flow
 
-1. **Customer selects payment method** — During checkout, the customer chooses from available payment methods.
-2. **Order is created** — When the customer places the order, Meloncart creates an order record and an associated invoice in the Responsiv.Pay system.
-3. **Payment is processed** — For online payment methods, the customer is redirected to a payment page (or a payment form is displayed inline). For offline methods, the order is created immediately with the configured start status.
-4. **Payment confirmation** — When the payment gateway confirms the transaction, the invoice is marked as paid.
-5. **Order status updates** — Meloncart detects the paid invoice and automatically:
+1. **Customer selects payment method**: During checkout, the customer chooses from available payment methods.
+2. **Order is created**: When the customer places the order, Meloncart creates an order record and an associated invoice in the Responsiv.Pay system.
+3. **Payment is processed**: For online payment methods, the customer is redirected to a payment page (or a payment form is displayed inline). For offline methods, the order is created immediately with the configured start status.
+4. **Payment confirmation**: When the payment gateway confirms the transaction, the invoice is marked as paid.
+5. **Order status updates**: Meloncart detects the paid invoice and automatically:
    - Marks the order as payment processed (recording the timestamp).
    - Transitions the order to the "Paid" status (or the configured status for that payment method).
    - Sends status notification emails if configured.
@@ -55,11 +55,11 @@ Each order has an associated invoice managed by Responsiv.Pay. The invoice mirro
 
 Invoices track:
 
-- **Items** — Each order item is linked to a corresponding invoice item.
-- **Total** — The total amount due.
-- **Payment Method** — The selected payment gateway.
-- **Payment Status** — Whether the invoice has been paid.
-- **Payment Log** — A record of all payment attempts and transactions.
+- **Items**: Each order item is linked to a corresponding invoice item.
+- **Total**: The total amount due.
+- **Payment Method**: The selected payment gateway.
+- **Payment Status**: Whether the invoice has been paid.
+- **Payment Log**: A record of all payment attempts and transactions.
 
 ### Invoice Templates
 
@@ -67,20 +67,20 @@ Invoice templates control the layout and content of invoices for printing and PD
 
 Each template has:
 
-- **Name** — A descriptive name for the template.
-- **Code** — A unique identifier.
-- **Is Default** — Whether this is the default template used for new invoices.
+- **Name**: A descriptive name for the template.
+- **Code**: A unique identifier.
+- **Is Default**: Whether this is the default template used for new invoices.
 
 Templates use the same syntax field system as [shipping labels](./shipping-labels) and [packing slips](./packing-slips). The **HTML** and **CSS** tabs contain the template markup and styles. Syntax fields embedded in the HTML (such as `{text name="company_name"}`) are extracted on save and appear as editable form fields in the **Invoice** tab.
 
 The default template includes:
 
-- **Company logo** — Uploaded via a file upload syntax field.
-- **Company name and address** — Editable text fields for your business details.
-- **Company registration number** — For displaying ABN, VAT, or other registration numbers.
-- **Customer details** — Populated from the invoice's billing address.
-- **Invoice items table** — Description, quantity, unit price, and total for each line item.
-- **Totals** — Subtotal, tax, and total amount due.
+- **Company logo**: Uploaded via a file upload syntax field.
+- **Company name and address**: Editable text fields for your business details.
+- **Company registration number**: For displaying ABN, VAT, or other registration numbers.
+- **Customer details**: Populated from the invoice's billing address.
+- **Invoice items table**: Description, quantity, unit price, and total for each line item.
+- **Totals**: Subtotal, tax, and total amount due.
 
 #### Printing an Invoice
 
@@ -90,11 +90,11 @@ From an order's preview page, click **View Invoice** to navigate to the invoice 
 
 From the invoice preview page, click **Email Invoice** to open the email form. The form lets you:
 
-- **To** — The recipient email address, pre-filled from the invoice's email or the linked user account.
-- **Subject** — The email subject line, defaults to "Invoice {number}".
-- **Message** — A customizable message body, pre-filled from the `pay:invoice` mail template.
-- **Attach PDF** — Attach the invoice as a PDF file (enabled by default).
-- **Send myself a copy** — BCC the email to the logged-in admin user.
+- **To**: The recipient email address, pre-filled from the invoice's email or the linked user account.
+- **Subject**: The email subject line, defaults to "Invoice {number}".
+- **Message**: A customizable message body, pre-filled from the `pay:invoice` mail template.
+- **Attach PDF**: Attach the invoice as a PDF file (enabled by default).
+- **Send myself a copy**: BCC the email to the logged-in admin user.
 
 The invoice's **Sent At** timestamp is updated each time an email is sent.
 
@@ -114,8 +114,8 @@ Templates that are in use by one or more invoices cannot be deleted. Remove or r
 
 An order's payment status is determined by whether the `payment_processed_at` timestamp has been set:
 
-- **Unpaid** — The order has no payment processed timestamp. The customer may not have completed payment, or the payment gateway has not yet confirmed the transaction.
-- **Paid** — The order has a payment processed timestamp, indicating successful payment.
+- **Unpaid**: The order has no payment processed timestamp. The customer may not have completed payment, or the payment gateway has not yet confirmed the transaction.
+- **Paid**: The order has a payment processed timestamp, indicating successful payment.
 
 ::: info
 The payment status is set automatically when the payment gateway confirms the transaction. You generally do not need to manage this manually. However, for offline payment methods (bank transfer, etc.), transitioning the order to the "Paid" status in the backend will mark the payment as processed.
@@ -137,7 +137,7 @@ If a payment remains in the Approved state for an extended period, you can check
 
 ## Store Credit
 
-Store credit allows customers to apply a balance toward their order total at checkout. When a customer has available credit, they can apply it during checkout to reduce the amount charged to the payment gateway — or cover the full order if the balance is sufficient.
+Store credit allows customers to apply a balance toward their order total at checkout. When a customer has available credit, they can apply it during checkout to reduce the amount charged to the payment gateway, or cover the full order if the balance is sufficient.
 
 Store credit must be enabled in the Responsiv.Pay plugin settings. See [Store Credit](./store-credit) for full details on enabling, issuing, and managing store credit.
 

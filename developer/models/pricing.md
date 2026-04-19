@@ -3,7 +3,7 @@ subtitle: How pricing works across Products, Variants, Cart Items, and Order Ite
 ---
 # Pricing
 
-This guide explains how prices flow through the system — from database values to template display — and documents the unified pricing vocabulary that works consistently across all commerce objects.
+This guide explains how prices flow through the system, from database values to template display, and documents the unified pricing vocabulary that works consistently across all commerce objects.
 
 ## Price Vocabulary
 
@@ -23,11 +23,11 @@ Every commerce object exposes the same set of display attributes. Whether you're
 | Attribute | Product | Variant | CartItem | OrderItem | Extra |
 |-----------|---------|---------|----------|-----------|-------|
 | `display_price` | Yes | Yes | Yes | Yes | Yes |
-| `compare_price` | Yes | Yes | Yes | Yes | — |
-| `on_sale` | Yes | Yes | Yes | Yes | — |
-| `display_discount` | Yes | Yes | Yes | Yes | — |
-| `display_line_price` | — | — | Yes | Yes | — |
-| `display_line_discount` | — | — | Yes | Yes | — |
+| `compare_price` | Yes | Yes | Yes | Yes |: |
+| `on_sale` | Yes | Yes | Yes | Yes |: |
+| `display_discount` | Yes | Yes | Yes | Yes |: |
+| `display_line_price` |: |: | Yes | Yes |: |
+| `display_line_discount` |: |: | Yes | Yes |: |
 
 ::: tip Unified Templates
 Because all models share the same attribute names, you can write pricing markup once:
@@ -69,20 +69,20 @@ Template Attribute (display_price, compare_price)
 
 ### What Each Stage Does
 
-1. **DB column** — The raw `price` column stored in base currency units (cents). This is always the starting point.
+1. **DB column**: The raw `price` column stored in base currency units (cents). This is always the starting point.
 
-2. **Tier Pricing** — If the product has volume pricing tiers, the price is reduced based on the quantity being purchased and the customer's user group.
+2. **Tier Pricing**: If the product has volume pricing tiers, the price is reduced based on the quantity being purchased and the customer's user group.
 
-3. **Sale Price** — Two sources can reduce the price further:
-   - **Manual sale** — The `is_on_sale` checkbox with a `sale_price` value
-   - **Catalog price rules** — Compiled rules that apply discounts based on categories, dates, or user groups
+3. **Sale Price**: Two sources can reduce the price further:
+   - **Manual sale**: The `is_on_sale` checkbox with a `sale_price` value
+   - **Catalog price rules**: Compiled rules that apply discounts based on categories, dates, or user groups
 
-4. **Tax Display** — The `applyTaxDisplay()` method adjusts the price based on store tax settings (see [Tax Display](#tax-display) below).
+4. **Tax Display**: The `applyTaxDisplay()` method adjusts the price based on store tax settings (see [Tax Display](#tax-display) below).
 
 ### `display_price` vs `compare_price`
 
-- **`display_price`** passes through ALL stages — it's the best price the customer pays.
-- **`compare_price`** skips the sale price stage — it's what the customer would pay without any sale or catalog rule discount.
+- **`display_price`** passes through ALL stages: it's the best price the customer pays.
+- **`compare_price`** skips the sale price stage: it's what the customer would pay without any sale or catalog rule discount.
 
 When these two values differ, `on_sale` returns `true`.
 
@@ -106,7 +106,7 @@ These combine into four scenarios:
 | Yes | Yes | Return raw price |
 | Yes | No | **Remove** tax from price |
 
-The `applyTaxDisplay()` method handles this automatically on every model. You never need to think about tax when writing templates — just use `display_price` and `compare_price`.
+The `applyTaxDisplay()` method handles this automatically on every model. You never need to think about tax when writing templates: just use `display_price` and `compare_price`.
 
 ::: info
 The tax class is resolved from the product's `tax_class_id`. If no tax class is assigned, prices are returned unchanged.
@@ -123,7 +123,7 @@ TaxClass::withContext($address, $pricesIncludeTax, function() use ($product) {
 });
 ```
 
-Within templates and component handlers, this is handled automatically — no action needed.
+Within templates and component handlers, this is handled automatically: no action needed.
 :::
 
 ---

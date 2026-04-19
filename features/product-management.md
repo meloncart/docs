@@ -154,7 +154,7 @@ aside: false
 <div class="mc-detail-section">
     <div class="mc-detail-section__text">
         <h2>Sell Anything</h2>
-        <p>Meloncart supports multiple product types out of the box: physical goods, digital downloads, services.</p>
+        <p>Meloncart supports multiple product types out of the box, including physical goods, digital downloads, and services.</p>
     </div>
     <div class="mc-detail-section__visual">
         <img src="/features/feat-sell-anything.png" alt="Sell physical goods, digital downloads, and services" />

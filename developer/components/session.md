@@ -18,15 +18,15 @@ redirect = ""
 | Property | Type | Default | Description |
 | --- | --- | --- | --- |
 | `security` | dropdown | `all` | Access restriction mode: `all`, `user`, or `guest` |
-| `redirect` | dropdown | — | CMS page to redirect to when access is denied |
+| `redirect` | dropdown |: | CMS page to redirect to when access is denied |
 
 ### Security Modes
 
 | Mode | Description |
 | --- | --- |
-| `all` | Allow all visitors — no access restriction |
-| `user` | Allow only logged-in users — guests are redirected |
-| `guest` | Allow only guests — logged-in users are redirected |
+| `all` | Allow all visitors: no access restriction |
+| `user` | Allow only logged-in users: guests are redirected |
+| `guest` | Allow only guests: logged-in users are redirected |
 
 ## Twig API
 
@@ -113,7 +113,7 @@ security = "user"
 redirect = "account/login"
 ```
 
-This is the most common pattern for account pages — profile, orders, addresses, and security settings all use this configuration.
+This is the most common pattern for account pages: profile, orders, addresses, and security settings all use this configuration.
 
 ### Guest Only
 

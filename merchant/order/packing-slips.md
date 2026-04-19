@@ -19,16 +19,16 @@ Navigate to **Settings → Packing Slip Templates** to manage your templates. A 
 
 Click **New Packing Slip Template** to create one. Each template has:
 
-- **Name** — A descriptive name for the template (e.g., "Standard Packing Slip").
-- **Code** — A unique identifier.
-- **Is Default** — Whether this template is used when printing packing slips from order pages.
+- **Name**: A descriptive name for the template (e.g., "Standard Packing Slip").
+- **Code**: A unique identifier.
+- **Is Default**: Whether this template is used when printing packing slips from order pages.
 
 ### Editing Template Content
 
 Templates have two content tabs:
 
-- **HTML** — The template markup, combining syntax fields and Twig variables.
-- **CSS** — Print-friendly styles applied to the template.
+- **HTML**: The template markup, combining syntax fields and Twig variables.
+- **CSS**: Print-friendly styles applied to the template.
 
 After saving a template, any syntax fields defined in the HTML appear as editable form fields in the **Packing Slip** tab. This lets you customize values like your company name and address without editing the HTML directly.
 
@@ -123,11 +123,11 @@ Loop through items with `{% for item in order.items %}`:
 
 The default template includes:
 
-- **Company header** — Company name and address (editable via syntax fields).
-- **Packing slip number** — The order number.
-- **Bill-to and Ship-to addresses** — Populated from the order's billing and shipping details.
-- **Shipping method** — The selected shipping method and child option.
-- **Items table** — Product name, SKU, and quantity for each order item.
+- **Company header**: Company name and address (editable via syntax fields).
+- **Packing slip number**: The order number.
+- **Bill-to and Ship-to addresses**: Populated from the order's billing and shipping details.
+- **Shipping method**: The selected shipping method and child option.
+- **Items table**: Product name, SKU, and quantity for each order item.
 
 The default CSS provides a print-friendly layout with a clean table format suitable for standard paper sizes.
 

@@ -3,7 +3,7 @@ subtitle: Build your first storefront in 5 minutes.
 ---
 # Quick Start
 
-This tutorial walks through building a minimal storefront with Meloncart — from scratch, with no theme dependencies. By the end you'll have a product listing, a product page with add-to-cart, a cart, and a working checkout.
+This tutorial walks through building a minimal storefront with Meloncart, from scratch, with no theme dependencies. By the end you'll have a product listing, a product page with add-to-cart, a cart, and a working checkout.
 
 ::: tip Prerequisites
 Install Meloncart and its dependencies first. See the [Installation Guide](/developer/installation) for details. You'll also need at least one product and one payment method configured in the backend.
@@ -57,7 +57,7 @@ lookup = "category"
 ```
 
 Key points:
-- `catalog.productQuery` returns a new Product query — call `listFrontEnd()` to get a paginated collection of visible products
+- `catalog.productQuery` returns a new Product query: call `listFrontEnd()` to get a paginated collection of visible products
 - `product.display_price` is the best price for the customer, automatically adjusted for your store's [tax display settings](/developer/models/pricing#tax-display)
 - `product.compare_price` is the original/strikethrough price shown when `product.on_sale` is `true`
 - See the [Pricing guide](/developer/models/pricing) for the full vocabulary
@@ -200,7 +200,7 @@ Key points:
 
 ## 4. Checkout Page
 
-The checkout uses the **Checkout** component. This minimal example collects contact details, selects a shipping and payment method, and places the order — all in a single form. The **Location** component provides the country and state dropdowns.
+The checkout uses the **Checkout** component. This minimal example collects contact details, selects a shipping and payment method, and places the order, all in a single form. The **Location** component provides the country and state dropdowns.
 
 ```ini
 url = "/shop/checkout"
@@ -350,10 +350,10 @@ url = "/shop/checkout"
 ```
 
 Key points:
-- The hidden `post_*` fields tell the checkout component which data to process — all fields are submitted in a single request
+- The hidden `post_*` fields tell the checkout component which data to process. All fields are submitted in a single request
 - `onPlaceOrder` validates the form, creates the order, and redirects to the payment page
 - The contact address doubles as both billing and shipping address by default
-- `location::form-select-country` and `location::form-select-state` are built-in component partials from RainLab.Location — selecting a country automatically refreshes the state dropdown via AJAX
+- `location::form-select-country` and `location::form-select-state` are built-in component partials from RainLab.Location. Selecting a country automatically refreshes the state dropdown via AJAX
 - For a multi-step checkout experience, see the [Checkout Component](/developer/components/checkout) guide
 
 ## 5. Payment Page
@@ -397,9 +397,9 @@ Make sure your payment method is configured with this page as its **Payment Page
 
 ## Next Steps
 
-- [Pricing](/developer/models/pricing) — understand how `display_price`, `compare_price`, and tax display work
-- [Catalog Component](/developer/components/catalog) — full filtering, sorting, and search API
-- [Cart Component](/developer/components/cart) — cart management, shipping estimates, named carts
-- [Checkout Component](/developer/components/checkout) — multi-step checkout customization
-- [Events](/developer/hooks/events) — extend the order lifecycle, stock management, and more
-- [Price Rules](/developer/extending/price-rules) — build custom discount logic
+- [Pricing](/developer/models/pricing): understand how `display_price`, `compare_price`, and tax display work
+- [Catalog Component](/developer/components/catalog): full filtering, sorting, and search API
+- [Cart Component](/developer/components/cart): cart management, shipping estimates, named carts
+- [Checkout Component](/developer/components/checkout): multi-step checkout customization
+- [Events](/developer/hooks/events): extend the order lifecycle, stock management, and more
+- [Price Rules](/developer/extending/price-rules): build custom discount logic

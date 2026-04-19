@@ -4,7 +4,7 @@ layout: home
 hero:
     name: Meloncart
     text: The eCommerce Platform Made for Developers
-    tagline: A lightweight and flexible way to build custom online stores
+    tagline: Build custom online stores on Laravel. One-time license, no transaction fees.
     actions:
         - theme: brand
           text: Try the Demo
@@ -13,8 +13,8 @@ hero:
           text: Explore Features
           link: /features/
         - theme: alt
-          text: Install Guide
-          link: /developer/installation
+          text: View Pricing
+          link: /pricing
     image:
         src: /hero-cart.png
         alt: Meloncart Shopping Cart
@@ -40,8 +40,8 @@ features:
       linkText: Learn More
     - icon:
           src: /icons/icon-modern-stack.png
-      title: Modern Stack
-      details: Built on Laravel with a clean architecture. Twig templates, Composer packages, and artisan commands — familiar tools you already know.
+      title: Modern & AI-Friendly
+      details: Built on Laravel with clean, predictable patterns. Twig templates, Composer packages, and a codebase that AI tools like Copilot and Cursor can work with effectively.
       link: /features/performance
       linkText: Learn More
 ---
@@ -90,6 +90,35 @@ features:
                     <img src="/screenshot-editor.png" alt="Meloncart template editor" />
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="mc-section mc-section--features">
+    <div class="mc-section__inner mc-section__inner--centered">
+        <h2>The Developer's Edge</h2>
+        <p class="mc-section__subtitle">Clean, predictable patterns that make development faster, whether you're writing code yourself or working with AI.</p>
+        <div class="mc-features-grid">
+            <a href="/features/customization" class="mc-feature">
+                <div class="mc-feature__icon"><img src="/icons/icon-customize.png" alt="AI-Friendly" /></div>
+                <h3>AI-Friendly Codebase</h3>
+                <p>October CMS patterns (Twig templates, component system, YAML configs) are clean and predictable. AI tools generate working code first time.</p>
+            </a>
+            <a href="/features/customization" class="mc-feature">
+                <div class="mc-feature__icon"><img src="/icons/icon-modern-stack.png" alt="Git-Friendly" /></div>
+                <h3>Git-Friendly</h3>
+                <p>File-based templates, not database-driven. Version control your entire storefront and deploy with confidence.</p>
+            </a>
+            <a href="/developer/hooks/events" class="mc-feature">
+                <div class="mc-feature__icon"><img src="/icons/icon-extensible.png" alt="Extensible" /></div>
+                <h3>50+ Event Hooks</h3>
+                <p>Custom payment gateways, shipping types, price rules, and product behaviors. Extend anything without modifying the core.</p>
+            </a>
+            <a href="/developer/getting-started" class="mc-feature">
+                <div class="mc-feature__icon"><img src="/icons/icon-powerful.png" alt="Quick Start" /></div>
+                <h3>Build a Store in 5 Minutes</h3>
+                <p>Product listing, product page, cart, checkout, and payments. See the Quick Start guide for the full walkthrough.</p>
+            </a>
         </div>
     </div>
 </div>
@@ -149,13 +178,34 @@ features:
     </div>
 </div>
 
+<div class="mc-client-pitch">
+    <div class="mc-client-pitch__inner">
+        <h2>Pitch Your Clients With Confidence</h2>
+        <p>Building stores for clients? Here's what they want to hear.</p>
+        <div class="mc-client-pitch-grid">
+            <div class="mc-client-pitch-card">
+                <h3>No Monthly Fees</h3>
+                <p>One-time license cost. No recurring platform charges just to keep the store running.</p>
+            </div>
+            <div class="mc-client-pitch-card">
+                <h3>No Transaction Fees</h3>
+                <p>Every dollar of revenue belongs to the store owner. No percentage taken on each sale.</p>
+            </div>
+            <div class="mc-client-pitch-card">
+                <h3>Own Everything</h3>
+                <p>The store, the data, and the code. Self-hosted on any provider, no vendor lock-in.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="mc-section mc-section--cta">
     <div class="mc-section__inner mc-section__inner--centered">
-        <h2>Start Building Your Custom Store Today!</h2>
-        <p>Try the free demo to see Meloncart in action, or purchase a license to get started.</p>
+        <h2>Start Building Your Custom Store</h2>
+        <p>Try the demo to see Meloncart in action, or view pricing to get started.</p>
         <div class="mc-cta-buttons">
             <VPButton theme="brand" size="big" text="Try the Demo" href="https://octobercms.com/demo/meloncart" />
-            <VPButton theme="alt" size="big" text="Installation Guide" href="/developer/installation" />
+            <VPButton theme="alt" size="big" text="View Pricing" href="/pricing" />
         </div>
     </div>
 </div>

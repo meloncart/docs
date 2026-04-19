@@ -885,6 +885,303 @@
 }
 
 /* ============================================
+   Pricing Page
+   ============================================ */
+
+.mc-pricing-body {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+}
+
+.mc-pricing-card {
+    background: var(--vp-c-bg);
+    border: 2px solid var(--mc-green);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 104, 56, 0.08);
+}
+
+.mc-pricing-card__header {
+    text-align: center;
+    padding: 40px 32px 32px;
+}
+
+.mc-pricing-card__header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: var(--vp-c-text-1);
+    border-top: none;
+    padding-top: 0;
+}
+
+.mc-pricing-card__price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.mc-pricing-card__amount {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--mc-green);
+    line-height: 1;
+}
+
+.mc-pricing-card__term {
+    font-size: 16px;
+    color: var(--vp-c-text-2);
+}
+
+.mc-pricing-card__features {
+    padding: 0 32px 32px;
+}
+
+.mc-pricing-card__features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mc-pricing-card__features li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--vp-c-divider);
+    font-size: 15px;
+    color: var(--vp-c-text-2);
+    padding-left: 28px;
+    position: relative;
+}
+
+.mc-pricing-card__features li:last-child {
+    border-bottom: none;
+}
+
+.mc-pricing-card__features li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--mc-green);
+    font-weight: 700;
+}
+
+.mc-pricing-card__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    padding: 0 32px 40px;
+    flex-wrap: wrap;
+}
+
+.mc-pricing-card__actions .VPButton {
+    text-decoration: none !important;
+}
+
+/* Client pitch section */
+.mc-pricing-client-pitch {
+    background: var(--vp-c-bg-soft);
+    padding: 80px 24px;
+}
+
+.mc-pricing-client-pitch__inner {
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.mc-pricing-client-pitch__inner h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--vp-c-text-1);
+    border-top: none;
+    padding-top: 0;
+}
+
+.mc-pricing-client-pitch__inner > p {
+    font-size: 17px;
+    color: var(--vp-c-text-2);
+    margin: 0 0 40px;
+}
+
+.mc-pricing-pitch-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    text-align: left;
+}
+
+.mc-pricing-pitch-item {
+    background: var(--vp-c-bg);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 12px;
+    padding: 28px 24px;
+}
+
+.mc-pricing-pitch-item h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--vp-c-text-1);
+}
+
+.mc-pricing-pitch-item p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--vp-c-text-2);
+    margin: 0;
+}
+
+/* FAQ section */
+.mc-pricing-faq {
+    padding: 80px 24px;
+}
+
+.mc-pricing-faq__inner {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.mc-pricing-faq__inner h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 32px;
+    color: var(--vp-c-text-1);
+    text-align: center;
+    border-top: none;
+    padding-top: 0;
+}
+
+.mc-pricing-faq-item {
+    border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.mc-pricing-faq-item summary {
+    padding: 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--vp-c-text-1);
+    cursor: pointer;
+    list-style: none;
+}
+
+.mc-pricing-faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.mc-pricing-faq-item summary::before {
+    content: '+';
+    display: inline-block;
+    width: 20px;
+    font-size: 18px;
+    color: var(--mc-green);
+    font-weight: 700;
+}
+
+.mc-pricing-faq-item[open] summary::before {
+    content: '\2212';
+}
+
+.mc-pricing-faq-item p {
+    padding: 0 0 16px 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--vp-c-text-2);
+    margin: 0;
+}
+
+/* Pricing page responsive */
+@media (max-width: 639px) {
+    .mc-pricing-pitch-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mc-pricing-card__amount {
+        font-size: 44px;
+    }
+
+    .mc-pricing-client-pitch__inner h2,
+    .mc-pricing-faq__inner h2 {
+        font-size: 26px;
+    }
+}
+
+/* ============================================
+   Client Pitch Section (homepage)
+   ============================================ */
+
+.mc-client-pitch {
+    background: var(--vp-c-bg-soft);
+    padding: 80px 24px;
+}
+
+.mc-client-pitch__inner {
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.mc-client-pitch__inner h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--vp-c-text-1);
+    border-top: none;
+    padding-top: 0;
+}
+
+.mc-client-pitch__inner > p {
+    font-size: 17px;
+    color: var(--vp-c-text-2);
+    margin: 0 0 40px;
+}
+
+.mc-client-pitch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    text-align: left;
+}
+
+.mc-client-pitch-card {
+    background: var(--vp-c-bg);
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 12px;
+    padding: 28px 24px;
+}
+
+.mc-client-pitch-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--vp-c-text-1);
+}
+
+.mc-client-pitch-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--vp-c-text-2);
+    margin: 0;
+}
+
+@media (max-width: 959px) {
+    .mc-client-pitch-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 639px) {
+    .mc-client-pitch-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mc-client-pitch__inner h2 {
+        font-size: 26px;
+    }
+}
+
+/* ============================================
    Smooth reveal animation
    ============================================ */
 

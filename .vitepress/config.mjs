@@ -150,9 +150,18 @@ const developerSidebar = [
 
 export default {
     title: 'Meloncart',
-    description: 'A a modern eCommerce toolkit built on Laravel',
+    description: 'A modern eCommerce toolkit built on Laravel and October CMS. Build custom online stores with full creative control. One-time license, no transaction fees.',
     head: [
-        ['link', { rel: 'icon', href: '/favicon.svg' }]
+        ['link', { rel: 'icon', href: '/favicon.svg' }],
+        ['meta', { property: 'og:title', content: 'Meloncart - The eCommerce Platform Made for Developers' }],
+        ['meta', { property: 'og:description', content: 'Build custom online stores on Laravel with full creative control. One-time license, no transaction fees.' }],
+        ['meta', { property: 'og:image', content: '/og-image.png' }],
+        ['meta', { property: 'og:type', content: 'website' }],
+        ['meta', { property: 'og:url', content: 'https://meloncart.com' }],
+        ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+        ['meta', { name: 'twitter:title', content: 'Meloncart - The eCommerce Platform Made for Developers' }],
+        ['meta', { name: 'twitter:description', content: 'Build custom online stores on Laravel with full creative control. One-time license, no transaction fees.' }],
+        ['meta', { name: 'twitter:image', content: '/og-image.png' }]
     ],
     themeConfig: {
         siteTitle: false,
@@ -162,9 +171,15 @@ export default {
         },
         nav: [
             { text: 'Features', link: '/features/' },
-            { text: 'Merchant', link: '/merchant/introduction' },
-            { text: 'Developer', link: '/developer/introduction' },
-            { text: 'GitHub', link: 'https://github.com/meloncart' }
+            { text: 'Pricing', link: '/pricing' },
+            {
+                text: 'Docs',
+                items: [
+                    { text: 'Merchant Guide', link: '/merchant/introduction' },
+                    { text: 'Developer Guide', link: '/developer/introduction' }
+                ]
+            },
+            { text: 'Demo', link: 'https://octobercms.com/demo/meloncart' }
         ],
         sidebar: {
             '/features/': featuresSidebar,

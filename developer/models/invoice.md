@@ -117,6 +117,31 @@ The tax breakdown array contains objects with `name` (tax class name) and `total
 | `getTaxableAddress()` | `TaxLocation` | Address used for tax calculation |
 | `convertToPermanent()` | `void` | Convert a throwaway invoice to permanent |
 | `submitManualPayment($comment)` | `Invoice` | Record a manual payment |
+| `sendInvoiceEmail($options)` | `void` | Send the invoice by email with optional PDF attachment |
+
+#### sendInvoiceEmail Options
+
+The `sendInvoiceEmail` method accepts an options array:
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `recipient` | `string` | Invoice email or user email | Recipient email address |
+| `subject` | `string` | `null` | Custom subject line |
+| `message` | `string` | `null` | Custom message body (overrides template default) |
+| `attach_pdf` | `bool` | `true` | Attach the invoice as a PDF |
+| `send_copy` | `bool` | `false` | Send a BCC copy |
+| `copy_email` | `string` | `null` | BCC email address (used when `send_copy` is true) |
+
+```php
+$invoice->sendInvoiceEmail([
+    'recipient' => 'customer@example.com',
+    'subject' => 'Your Invoice #' . $invoice->invoice_number,
+    'message' => 'Please find your invoice attached.',
+    'attach_pdf' => true,
+]);
+```
+
+The method updates the invoice's `sent_at` timestamp after sending. It uses the `pay:invoice` mail template and the invoice's assigned template (or default) for PDF generation.
 
 ### Static Methods
 

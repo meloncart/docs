@@ -132,7 +132,7 @@ Beyond theming, you can extend Meloncart's core functionality by building custom
 
 ## Mail Templates
 
-Meloncart registers four mail templates and one shared partial. You can customize these in the backend under **Settings > Mail Templates** or by overriding them in your plugin.
+Meloncart registers four mail templates and one shared partial. The Responsiv.Pay plugin also registers an invoice email template. You can customize these in the backend under **Settings > Mail Templates** or by overriding them in your plugin.
 
 ### Templates
 
@@ -142,6 +142,7 @@ Meloncart registers four mail templates and one shared partial. You can customiz
 | `shop:new_order_internal` | New Order - #{order_id} | Admins | Sent to store managers on new orders |
 | `shop:order_status_update_internal` | Order Status Changed - #{order_id} | Admins | Sent when an order changes status |
 | `shop:low_stock_internal` | Product Stock Low - {product.name} | Admins | Sent when a product reaches its low stock threshold |
+| `pay:invoice` | Invoice {invoice_number} | Customer | Sent when an invoice is emailed manually or automatically on payment |
 
 ### Shared Partial
 
@@ -163,6 +164,13 @@ All order templates have access to these variables:
 | `previous_status` | OrderStatus | Previous status |
 | `comment` | string | Status transition comment |
 | `product` | Product | The product (available in `low_stock_internal`) |
+
+The `pay:invoice` template has access to these variables:
+
+| Variable | Type | Description |
+| --- | --- | --- |
+| `invoice` | Invoice | The invoice model with all relationships |
+| `customMessage` | string\|null | Custom message provided by the sender (replaces the template default body when set) |
 
 ::: tip
 You can add custom variables to order and product notification templates using the `shop.order.getNotificationVars` and `shop.product.getNotificationVars` [events](../hooks/events).

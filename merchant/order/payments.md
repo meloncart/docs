@@ -63,7 +63,7 @@ Invoices track:
 
 ### Invoice Templates
 
-Invoice templates control the layout and content of printed invoices. Navigate to **Settings → Invoice Templates** (provided by the Responsiv.Pay plugin) to manage your templates. A default template is created during installation.
+Invoice templates control the layout and content of invoices for printing and PDF generation. Navigate to **Settings → Invoice Templates** (provided by the Responsiv.Pay plugin) to manage your templates. A default template is created during installation.
 
 Each template has:
 
@@ -86,9 +86,29 @@ The default template includes:
 
 From an order's preview page, click **View Invoice** to navigate to the invoice preview. The invoice preview page displays the rendered invoice and includes a **Print Invoice** button that opens your browser's print dialog.
 
+#### Emailing an Invoice
+
+From the invoice preview page, click **Email Invoice** to open the email form. The form lets you:
+
+- **To** — The recipient email address, pre-filled from the invoice's email or the linked user account.
+- **Subject** — The email subject line, defaults to "Invoice {number}".
+- **Message** — A customizable message body, pre-filled from the `pay:invoice` mail template.
+- **Attach PDF** — Attach the invoice as a PDF file (enabled by default).
+- **Send myself a copy** — BCC the email to the logged-in admin user.
+
+The invoice's **Sent At** timestamp is updated each time an email is sent.
+
+#### Automatic Emailing
+
+To automatically email invoices when payment is received, enable **Email Invoice on Payment** under **Settings → Payment Settings → Invoices**. When enabled, the invoice is emailed to the customer with a PDF attachment immediately after the payment gateway confirms the transaction.
+
 #### Selecting a Template
 
 Each invoice has a template dropdown where you can select which template to use. If left as "Use Default", the template marked as default will be used. You can create multiple templates for different purposes (e.g., a formal template for business clients and a simpler one for retail customers).
+
+::: warning
+Templates that are in use by one or more invoices cannot be deleted. Remove or reassign the template from all invoices before deleting it.
+:::
 
 ## Payment Status
 

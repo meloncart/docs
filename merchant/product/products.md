@@ -110,6 +110,20 @@ To add properties, open the **Properties** tab and click **Add New Property**. E
 
 **Property Sets** let you create reusable property templates. When you load a property set into a product, it pre-fills the property names so you only need to enter the values. This helps ensure consistent specification names across similar products.
 
+## Product Filters
+
+Product properties and options automatically feed into the storefront's **faceted filter** system. When you save a property like "Color: Red" or an option like "Size: Small, Medium, Large", a corresponding filter definition is created that your theme can display as sidebar checkboxes on category pages.
+
+To manage which filters appear on the storefront, navigate to **Shop → Products** and click the **Manage** dropdown, then select **Product Filters**. The filter list shows all auto-discovered filter names. For each filter you can:
+
+- **Filterable** toggle: Controls whether the filter appears in the sidebar.
+- **Control Type**: Choose how the filter is displayed: **Checkboxes** (multi-select, default), **Dropdown** (single-select), **Radio Buttons** (single-select), or **Color Swatches** (toggle buttons).
+- **Drag to reorder**: Controls the display sequence of filters in the sidebar.
+
+::: tip
+Filter definitions are auto-created when products are saved. You do not need to create them manually. If you rename a property across your products, a new filter definition will be created for the new name.
+:::
+
 ## Related Products
 
 The **Related Products** relation lets you link products together. Related products are displayed on the product detail page as suggestions, helping customers discover similar or complementary items. Relationships are one-directional. If Product A lists Product B as related, Product B does not automatically list Product A.

@@ -343,8 +343,9 @@ The `listProducts()` method is a convenience proxy for `Product::listFrontEnd()`
 | `ratings` | array\|null | `null` | Array of star ratings to filter by (e.g., `[4, 5]` for 4+ stars) |
 | `priceMin` | integer\|null | `null` | Minimum price in base value (cents) |
 | `priceMax` | integer\|null | `null` | Maximum price in base value (cents) |
+| `filters` | array\|null | `null` | Product filter facets as `{code: [values]}` (e.g., `{color: ['Red', 'Blue']}`) |
 
-Rating values match products whose `reviews_rating` falls within the star range (e.g., rating `4` matches products rated 4.00–4.99). Visibility and site filtering are applied automatically.
+Rating values match products whose `reviews_rating` falls within the star range (e.g., rating `4` matches products rated 4.00–4.99). Multiple values within a filter facet use OR logic; different facets use AND logic. See [Catalog Filtering](./catalog-filtering#product-filters) for details. Visibility and site filtering are applied automatically.
 
 ## Complete Examples
 
@@ -501,7 +502,8 @@ The category products partial demonstrates AJAX-powered sorting and view mode to
     manufacturers: post('manufacturers'),
     ratings: post('ratings'),
     priceMin: post('priceMin'),
-    priceMax: post('priceMax')
+    priceMax: post('priceMax'),
+    filters: post('filters', [])
 }) %}
 
 <div class="d-flex justify-content-between mb-3">

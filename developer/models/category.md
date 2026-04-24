@@ -45,6 +45,7 @@ Categories organize products into a browsable hierarchy with unlimited nesting d
 | `pageUrl($pageName)` | `string` | CMS page URL for this category (respects `custom_page` override) |
 | `countProducts()` | `int` | Number of products in this category |
 | `listProducts($options)` | `Paginator` | Paginated product listing |
+| `availableFilters()` | `array` | Product filter facets available for this category (see [Catalog Filtering](../components/catalog-filtering#product-filters)) |
 | `priceRange()` | `array` | `{min, max}` base values (cents) for products in this category |
 | `getBreadcrumbPath()` | `array\|null` | Parent chain for breadcrumbs |
 | `getParents()` | `array` | All ancestor categories |
@@ -69,8 +70,9 @@ The `listProducts()` method is a convenience proxy for [`Product::listFrontEnd()
 | `ratings` | `array\|null` | `null` | Star ratings to filter by (e.g., `[4, 5]`) |
 | `priceMin` | `int\|null` | `null` | Minimum price in base value (cents) |
 | `priceMax` | `int\|null` | `null` | Maximum price in base value (cents) |
+| `filters` | `array\|null` | `null` | Product filter facets as `{code: [values]}` (e.g., `{color: ['Red']}`) |
 
-Visibility and site filtering are applied automatically.
+Multiple values within a filter facet use OR logic; different facets use AND logic. Visibility and site filtering are applied automatically.
 
 ### priceRange
 
@@ -81,6 +83,26 @@ Returns the minimum and maximum product price within the category as base values
 {# priceRange.min = 999 (i.e., $9.99) #}
 {# priceRange.max = 29999 (i.e., $299.99) #}
 ```
+
+### availableFilters
+
+Returns an array of product filter facets available for this category. Each facet contains a `code`, `name`, `type` (control type: `checkbox`, `dropdown`, `radio`, or `color`), and `values` array. Only filter definitions marked as filterable and with matching products in this category are included. Results are scoped to the current locale.
+
+```twig
+{% set facets = category.availableFilters() %}
+{# [
+#     { code: 'color', name: 'Color', type: 'color', values: [
+#         { value: 'Red', count: 5 },
+#         { value: 'Blue', count: 3 }
+#     ]},
+#     { code: 'size', name: 'Size', type: 'dropdown', values: [
+#         { value: 'Large', count: 4 },
+#         { value: 'Small', count: 2 }
+#     ]}
+# ] #}
+```
+
+See [Catalog Filtering](../components/catalog-filtering#product-filters) for the full sidebar implementation.
 
 ### Complete Examples
 

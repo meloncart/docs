@@ -258,9 +258,9 @@ All prices are integers in cents.
 | `images` | Collection | Product images (File attachments) |
 | `files` | Collection | Downloadable files (File attachments) |
 | `categories` | Collection | Assigned categories |
-| `options` | Collection | Product options (Size, Color, etc.) |
-| `all_extras` | Collection | All extras including those from extra sets |
-| `extras` | Collection | Product-specific extras only |
+| `options` | Collection | Product options (Size, Color, etc.), includes linked global set options |
+| `extras` | Collection | Product extras (paid add-ons), includes linked global set extras |
+| `all_extras` | Collection | All extras, extensible via event |
 | `properties` | Collection | Product properties/specifications |
 | `variants` | Collection | Product variants |
 | `related_products` | Collection | Related products |

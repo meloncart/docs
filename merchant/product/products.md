@@ -79,7 +79,9 @@ Options define what choices are available to the customer. If you need each comb
 
 ### Option Sets
 
-If you frequently use the same set of options across multiple products, you can save them as an **Option Set** for reuse. When editing a product's options, use the **Load Set** button to populate the options from a saved set. You can also **Save Set** to create a reusable template from the current product's options.
+If you frequently use the same set of options across multiple products, you can create an **Option Set** for reuse. Option sets are managed under **Shop → Option Sets** and define template options that can be loaded into any product.
+
+When editing a product's options, use the **Load Set** button to populate the options from a saved set. The loaded options are **linked** to the global set: they display a "Global" badge and are read-only on the product. Any changes you make to the option set are automatically reflected on all products that use it.
 
 ## Product Extras
 
@@ -95,7 +97,9 @@ To add extras, open the **Extras** tab and click **Add New Extra**. Each extra h
 
 ### Extra Sets
 
-Similar to option sets, you can create **Extra Sets** to reuse the same extras across multiple products. Extra sets are managed under **Shop → Extra Sets** and can be attached to products via the **Extra Sets** relation. When an extra set is attached to a product, all extras defined in that set become available on the product detail page alongside any product-specific extras.
+Similar to option sets, you can create **Extra Sets** to reuse the same extras across multiple products. Extra sets are managed under **Shop → Extra Sets** and define template extras that can be loaded into any product.
+
+When editing a product's extras, use the **Load Set** button to populate the extras from a saved set. The loaded extras are **linked** to the global set: they display a "Global" badge and are read-only on the product. Any changes you make to the extra set are automatically reflected on all products that use it.
 
 ## Product Properties
 

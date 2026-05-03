@@ -115,9 +115,10 @@ Use `getSalableQuantity()` and `isOutOfStock()` to check availability. See [Inve
 | `tax_class` | `TaxClass` | Tax class |
 | `images` | `Collection<File>` | Product images |
 | `files` | `Collection<File>` | Downloadable files |
-| `options` | `Collection<ProductOption>` | Configurable options (Size, Color) |
-| `extras` | `Collection<ProductExtra>` | Local extras (product-specific add-ons) |
-| `all_extras` | `Collection<ProductExtra>` | Combined local extras + extra set extras |
+| `options` | `Collection<ProductOption>` | Configurable options (Size, Color), includes linked global set options |
+| `extras` | `Collection<ProductExtra>` | Extras (paid add-ons), includes linked global set extras |
+| `all_options` | `Collection<ProductOption>` | All options, extensible via `shop.product.getAllOptions` event |
+| `all_extras` | `Collection<ProductExtra>` | All extras, extensible via `shop.product.getAllExtras` event |
 | `properties` | `Collection<ProductProperty>` | Specifications (Material, Weight) |
 | `price_tiers` | `Collection<PriceTier>` | Volume pricing tiers |
 | `visible_price_tiers` | `Collection<PriceTier>` | Tiers filtered for the current user's group (falls back to generic tiers) |
@@ -127,7 +128,6 @@ Use `getSalableQuantity()` and `isOutOfStock()` to check availability. See [Inve
 | `custom_groups` | `Collection<CustomGroup>` | Custom product groups |
 | `user_groups` | `Collection<UserGroup>` | Visible-to user groups |
 | `site_definitions` | `Collection<SiteDefinition>` | Visible-on sites (when `is_visible_site` is enabled) |
-| `extra_sets` | `Collection<ProductExtraSet>` | Assigned extra option sets |
 
 ### Methods
 
@@ -342,7 +342,20 @@ Options are selectable attributes like Size or Color. They determine which [vari
 | `values` | `array` | Available values (e.g., `["Red", "Blue", "Green"]`) |
 | `hash` | `string` | MD5 hash of name (used as form field key) |
 | `sort_order` | `int` | Display order |
+| `source_id` | `int\|null` | References the template option in a global set (see below) |
 | `value` | `string\|null` | Currently selected value (set in cart/order context) |
+
+### Linked Options (Global Sets)
+
+When options are loaded from a global **Option Set**, shell records are created on the product with a `source_id` pointing to the template option in the set. These shell records delegate their `name` and `values` to the source, so changes to the global set automatically propagate to all products using it.
+
+Use `isSourceReference()` to check whether an option is linked to a global set:
+
+```php
+$option->isSourceReference(); // true for linked options
+```
+
+Theme templates do not need to handle this distinction — `option.name` and `option.values` resolve transparently whether the option is local or linked.
 
 ### Displaying Options
 
@@ -391,15 +404,20 @@ Extras are paid or free add-ons that customers can optionally select, such as gi
 | `volume` | `float` | Computed: `width × height × depth` |
 | `hash` | `string` | MD5 hash of description |
 | `sort_order` | `int` | Display order |
+| `source_id` | `int\|null` | References the template extra in a global set (see below) |
 | `images` | `Collection<File>` | Extra images |
 
-### Local vs Global Extras
+### Linked Extras (Global Sets)
 
-- **Local extras** (`product.extras`): defined directly on a product.
-- **Global extras**: defined in an Extra Set and assigned to multiple products.
-- **All extras** (`product.all_extras`): merges both into a single collection.
+When extras are loaded from a global **Extra Set**, shell records are created on the product with a `source_id` pointing to the template extra in the set. These shell records delegate their `name`, `group_name`, `price`, `weight`, `width`, `height`, and `depth` to the source, so changes to the global set automatically propagate to all products using it.
 
-Always use `product.all_extras` to display extras on the storefront.
+Use `isSourceReference()` to check whether an extra is linked to a global set:
+
+```php
+$extra->isSourceReference(); // true for linked extras
+```
+
+Theme templates do not need to handle this distinction — all properties resolve transparently whether the extra is local or linked.
 
 ### Displaying Extras
 

@@ -29,6 +29,13 @@ Every commerce object exposes the same set of display attributes. Whether you're
 | `display_line_price` |: |: | Yes | Yes |: |
 | `display_line_discount` |: |: | Yes | Yes |: |
 
+::: info Naming conventions at a glance
+- **`display_*`** — tax-display-aware prices on items (Product, Variant, CartItem, OrderItem). The preferred template API.
+- **`compare_*`** — strikethrough/"was" prices on items, paired with `display_*` for sale displays.
+- **`original_*`** — pre-discount snapshot prices on items.
+- **`final_*`** — on the **Order** model only: with-tax accounting totals (`final_subtotal`, `final_discount`, `final_shipping_quote`). On items, `final_*` properties exist as deprecated aliases for `display_*` and should not be used in new templates.
+:::
+
 ::: tip Unified Templates
 Because all models share the same attribute names, you can write pricing markup once:
 

@@ -290,10 +290,7 @@ These are available for PHP-level calculations or backward compatibility. Prefer
 | `original_line_price` | integer | `original_price × quantity` |
 | `unit_price` | integer | Single unit price after discounts, without tax |
 | `unit_line_price` | integer | `unit_price × quantity` |
-| `final_price` | integer | Alias for `display_price` |
-| `final_line_price` | integer | Alias for `display_line_price` |
 | `discount` | integer | Per-unit discount amount without tax |
-| `final_discount` | integer | Alias for `display_discount` |
 
 ### Bundle Properties
 

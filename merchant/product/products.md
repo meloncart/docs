@@ -79,7 +79,9 @@ Options define what choices are available to the customer. If you need each comb
 
 ### Option Sets
 
-If you frequently use the same set of options across multiple products, you can save them as an **Option Set** for reuse. When editing a product's options, use the **Load Set** button to populate the options from a saved set. You can also **Save Set** to create a reusable template from the current product's options.
+If you frequently use the same set of options across multiple products, you can create an **Option Set** for reuse. Option sets are managed under **Shop → Option Sets** and define template options that can be loaded into any product.
+
+When editing a product's options, use the **Load Set** button to populate the options from a saved set. The loaded options are **linked** to the global set: they display a "Global" badge and are read-only on the product. Any changes you make to the option set are automatically reflected on all products that use it.
 
 ## Product Extras
 
@@ -95,7 +97,9 @@ To add extras, open the **Extras** tab and click **Add New Extra**. Each extra h
 
 ### Extra Sets
 
-Similar to option sets, you can create **Extra Sets** to reuse the same extras across multiple products. Extra sets are managed under **Shop → Extra Sets** and can be attached to products via the **Extra Sets** relation. When an extra set is attached to a product, all extras defined in that set become available on the product detail page alongside any product-specific extras.
+Similar to option sets, you can create **Extra Sets** to reuse the same extras across multiple products. Extra sets are managed under **Shop → Extra Sets** and define template extras that can be loaded into any product.
+
+When editing a product's extras, use the **Load Set** button to populate the extras from a saved set. The loaded extras are **linked** to the global set: they display a "Global" badge and are read-only on the product. Any changes you make to the extra set are automatically reflected on all products that use it.
 
 ## Product Properties
 
@@ -109,6 +113,20 @@ To add properties, open the **Properties** tab and click **Add New Property**. E
 ### Property Sets
 
 **Property Sets** let you create reusable property templates. When you load a property set into a product, it pre-fills the property names so you only need to enter the values. This helps ensure consistent specification names across similar products.
+
+## Product Filters
+
+Product properties and options automatically feed into the storefront's **faceted filter** system. When you save a property like "Color: Red" or an option like "Size: Small, Medium, Large", a corresponding filter definition is created that your theme can display as sidebar checkboxes on category pages.
+
+To manage which filters appear on the storefront, navigate to **Shop → Products** and click the **Manage** dropdown, then select **Product Filters**. The filter list shows all auto-discovered filter names. For each filter you can:
+
+- **Filterable** toggle: Controls whether the filter appears in the sidebar.
+- **Control Type**: Choose how the filter is displayed: **Checkboxes** (multi-select, default), **Dropdown** (single-select), **Radio Buttons** (single-select), or **Color Swatches** (toggle buttons).
+- **Drag to reorder**: Controls the display sequence of filters in the sidebar.
+
+::: tip
+Filter definitions are auto-created when products are saved. You do not need to create them manually. If you rename a property across your products, a new filter definition will be created for the new name.
+:::
 
 ## Related Products
 

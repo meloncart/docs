@@ -376,9 +376,6 @@ OrderItem supports the same unified price vocabulary as Product, ProductVariant,
 | `original_line_price` | `int` | Pre-discount line total: `quantity × original_price` |
 | `unit_price` | `int` | Alias for `price` |
 | `unit_line_price` | `int` | Line total after discount (no tax): `quantity × original_price - line_discount` |
-| `final_price` | `int` | Alias for `price_with_tax` |
-| `final_line_price` | `int` | Alias for `display_line_price` |
-| `final_discount` | `int` | Alias for `discount_with_tax` |
 | `total_cost` | `int` | Line cost: `quantity × cost` |
 | `total_weight` | `float` | Line weight: `quantity × product.weight` |
 | `total_volume` | `float` | Line volume: `quantity × product.volume` |

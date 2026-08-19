@@ -87,12 +87,10 @@ The `status` object has these properties:
 |----------|------|-------------|
 | `status.name` | `string` | Status display name (e.g., "New", "Paid") |
 | `status.code` | `string` | Status code (e.g., `new`, `paid`) |
-| `status.color_background` | `string` | Badge background color |
-| `status.color_foreground` | `string` | Badge text color |
+| `status.color_background` | `string` | Badge color, set in the status settings |
 
 ```twig
-<span style="background: {{ order.status.color_background }};
-             color: {{ order.status.color_foreground }}">
+<span style="background: {{ order.status.color_background }};">
     {{ order.status.name }}
 </span>
 ```
@@ -182,7 +180,6 @@ The `status` object has these properties:
 <div class="order-detail">
     <h2>Order #{{ order.order_number }}</h2>
     <span style="background: {{ order.status.color_background }};
-                 color: {{ order.status.color_foreground }};
                  padding: 2px 8px; border-radius: 4px;">
         {{ order.status.name }}
     </span>
@@ -519,8 +516,7 @@ Represents an order status in the workflow system.
 | `id` | `int` | Primary key |
 | `name` | `string` | Display name |
 | `code` | `string` | Unique code identifier |
-| `color_background` | `string` | Badge background color |
-| `color_foreground` | `string` | Badge text color |
+| `color_background` | `string` | Badge color, set in the status settings |
 | `is_enabled` | `bool` | Whether status is active |
 
 ### Constants
@@ -552,8 +548,7 @@ These methods return `null` if the status record does not exist in the database.
 ### Displaying Status
 
 ```twig
-<span class="badge" style="background: {{ order.status.color_background }};
-                            color: {{ order.status.color_foreground }}">
+<span class="badge" style="background: {{ order.status.color_background }};">
     {{ order.status.name }}
 </span>
 ```

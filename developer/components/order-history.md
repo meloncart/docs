@@ -54,8 +54,7 @@ All prices are integers in cents.
 | `status` | OrderStatus | Current order status |
 | `status.name` | string | Status display name (e.g., "Paid", "Shipped") |
 | `status.code` | string | Status code (e.g., `new`, `paid`, `shipped`) |
-| `status.color_background` | string | Background color hex code for badges |
-| `status.color_foreground` | string | Text color hex code for badges |
+| `status.color_background` | string | Badge color hex code, set in the status settings |
 
 ### Payment
 

@@ -206,6 +206,7 @@ Triggered by `post_contact_details = true`.
 | `zip` | string | Postal code |
 | `country_id` | integer | Country ID |
 | `state_id` | integer | State ID |
+| `tax_id_number` | string | Tax ID / VAT number |
 
 ### Address Book Preset
 
@@ -232,6 +233,7 @@ Triggered by `post_billing_details = true`. Uses the same fields as contact deta
 | `billing_zip` | string | Billing postal code |
 | `billing_country_id` | integer | Billing country ID |
 | `billing_state_id` | integer | Billing state ID |
+| `billing_tax_id_number` | string | Billing tax ID / VAT number |
 
 If billing details are not explicitly submitted, the billing address inherits from the contact details.
 

@@ -188,6 +188,13 @@ Products can have volume-based pricing tiers. Each tier specifies a minimum quan
 
 The `visible_price_tiers` attribute automatically shows user-group-specific tiers when available, falling back to generic tiers otherwise.
 
+Variants expose the same attribute for their own tier table, with the same item API (`quantity`, `quantity_label`, `price`), so the markup above works polymorphically:
+
+```twig
+{% set item = variant ?: product %}
+{% set visibleTiers = item.visible_price_tiers %}
+```
+
 ---
 
 ## Cart Discounts

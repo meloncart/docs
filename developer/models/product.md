@@ -519,6 +519,7 @@ These attributes mirror Product's API, enabling a unified template interface whe
 | `display_price` | `int` | Best price with tax display adjustment |
 | `compare_price` | `int` | Base price with tax display adjustment |
 | `display_discount` | `int` | Amount saved: `compare_price - display_price` |
+| `visible_price_tiers` | `Collection<VariantPrice>` | Variant tiers filtered for the current user's group (falls back to generic tiers) |
 
 ::: tip
 Use `display_price` and `compare_price` for storefront display: they automatically apply tax display settings, just like their Product counterparts.

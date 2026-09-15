@@ -110,6 +110,34 @@ Returns the tax inclusive label configured in the eCommerce settings, or `null` 
 </span>
 ```
 
+## Last Added Items
+
+After a successful `onAddToCart` call, the component exposes what was just added, so a confirmation partial re-rendered in the same AJAX response can describe it without re-deriving anything from the request.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `cart.lastAddedItem` | `CartItem\|null` | The master item just added, `null` on any other request |
+| `cart.lastAddedBundleItems` | `CartItem[]` | Bundle child items added alongside the master item |
+| `cart.lastAddedTotalPrice` | `int` | Display line total of everything just added, in cents |
+
+Use the add to cart button's `data-request-update` to re-render a confirmation partial in the same response:
+
+```twig
+{% if cart.lastAddedItem %}
+    <p>
+        Added {{ cart.lastAddedItem.product.name }} × {{ cart.lastAddedItem.quantity }}
+        for {{ cart.lastAddedTotalPrice|currency }}
+    </p>
+    {% for bundleItem in cart.lastAddedBundleItems %}
+        <small>
+            Includes {{ bundleItem.product.name }} × {{ bundleItem.quantity }}
+        </small>
+    {% endfor %}
+{% endif %}
+```
+
+The properties reset on every request, so `lastAddedItem` is only set in the response to the add to cart postback itself.
+
 ## AJAX Handlers
 
 ### onAddToCart

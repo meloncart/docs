@@ -210,6 +210,97 @@ CartItem also exposes internal methods used by the pricing engine: `getUnitPrice
 
 ---
 
+## Configured Totals
+
+Product pages often need a live "grand total" that reflects everything the customer has selected: the resolved variant, checked extras, bundle choices and quantity. The `ProductSelection` class resolves this configuration from the same POST parameters the [Cart component](../components/cart) accepts, so the displayed total always matches what the cart will charge.
+
+The easiest entry point is the `postedSelection` method on the Product model, which reads the submitted form state directly.
+
+```twig
+{% set selection = product.postedSelection %}
+
+<span class="fw-bold">
+    {{ selection.totalPrice|currency }}
+</span>
+{% if selection.onSale %}
+    <del>{{ selection.compareTotalPrice|currency }}</del>
+{% endif %}
+```
+
+Render this inside a partial and refresh it with `catalog::onRefreshCatalog` whenever an option, extra or bundle input changes, and the total stays live with no custom PHP.
+
+### Selection Methods
+
+All price methods return tax-aware values, consistent with the `display_*` vocabulary.
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `basePrice()` | `int` | Display price of the product or resolved variant |
+| `extrasTotal()` | `int` | Total of all selected extras |
+| `bundleTotal()` | `int` | Total of all bundle selections for one master unit |
+| `unitTotal()` | `int` | `basePrice + extrasTotal + bundleTotal` |
+| `totalPrice()` | `int` | `unitTotal` multiplied by the selected quantity |
+| `compareBasePrice()` | `int` | Base price before sale reductions |
+| `compareUnitTotal()` | `int` | Unit total before sale reductions |
+| `compareTotalPrice()` | `int` | Total before sale reductions, for strikethrough display |
+| `onSale()` | `bool` | Whether the total is reduced from the compare total |
+| `getVariant()` | `ProductVariant\|null` | The variant resolved from the selected options |
+| `getSelectedExtras()` | `Collection` | The selected ProductExtra records |
+| `getBundleSelections()` | `array` | Resolved bundle selections with pricing details |
+| `getQuantity()` | `int` | The selected quantity |
+| `getOptionValues()` | `array` | Effective option values in `[hash => value]` format |
+
+### Bundle Selections
+
+Each entry returned by `getBundleSelections()` describes one selected bundle choice:
+
+| Key | Description |
+|-----|-------------|
+| `bundleItem` | The ProductBundleItem slot |
+| `itemProduct` | The selected BundleItemProduct choice |
+| `product` | The child Product |
+| `variant` | The resolved child ProductVariant, if any |
+| `options` | Child product options in `[hash => value]` format |
+| `extras` | Child extras in `[hash => 1]` format |
+| `quantity` | Child quantity per master unit |
+| `unitPrice` | Tax-aware display price for one child unit |
+| `linePrice` | `unitPrice` multiplied by the child quantity |
+
+### Default State
+
+With nothing submitted yet (the initial page load), the selection mirrors the rendered form's preselected state:
+
+- Variant options default to the first value of each option.
+- Bundle slots default to their `is_default` choices; a required dropdown with no default falls back to its first active choice.
+- Extras default to none.
+
+### PHP Usage
+
+In PHP the selection can be built from the POST parameters or from an arbitrary data array using the same shape:
+
+```php
+use Meloncart\Shop\Classes\ProductSelection;
+
+// From the submitted form state
+$selection = ProductSelection::fromPost($product);
+
+// From explicit data
+$selection = ProductSelection::fromData($product, [
+    'quantity' => 2,
+    'options' => [$optionHash => 'Blue'],
+    'extras' => [$extraHash => 1],
+    'bundleItems' => [
+        $slotId => ['product_id' => $choiceId],
+    ],
+]);
+
+$total = $selection->totalPrice();
+```
+
+Pass `false` as the last argument to disable the default state fallback and resolve only what was explicitly submitted. This is the mode used internally by the Cart component when adding bundle items.
+
+---
+
 ## Template Recipes
 
 ### Product Card with Sale Badge
@@ -293,4 +384,40 @@ CartItem also exposes internal methods used by the pricing engine: `getUnitPrice
     <del>{{ item.compare_price|currency }}</del>
     <span>Save {{ item.display_discount|currency }}</span>
 {% endif %}
+```
+
+::: tip
+When the page also sells extras or bundle items, use `product.postedSelection` from [Configured Totals](#configured-totals) instead of resolving the variant by hand.
+:::
+
+### Sticky Configured Total
+
+A price bar that reflects every selection on the page. Place it in its own partial and refresh it whenever an input changes.
+
+```twig
+{% set selection = product.postedSelection %}
+
+<div class="sticky-price">
+    <span class="fw-bold">
+        {{ selection.totalPrice|currency }}
+    </span>
+    {% if selection.onSale %}
+        <del>{{ selection.compareTotalPrice|currency }}</del>
+    {% endif %}
+
+    {% if selection.extrasTotal %}
+        <small>
+            Includes {{ selection.extrasTotal|currency }} in extras
+        </small>
+    {% endif %}
+</div>
+```
+
+Trigger the refresh from the product form inputs:
+
+```html
+<select
+    name="product_options[{{ option.hash }}]"
+    data-request="catalog::onRefreshCatalog"
+    data-request-update="{ 'shop-product/sticky-price': '#stickyPrice' }">
 ```

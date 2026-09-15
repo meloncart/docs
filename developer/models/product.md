@@ -154,6 +154,7 @@ Use `getSalableQuantity()` and `isOutOfStock()` to check availability. See [Inve
 | `getReviewsCount()` | `int` | Cached approved review count |
 | `resolveVariant($options)` | `ProductVariant\|null` | Find variant matching options (throws on mismatch) |
 | `resolveVariantSafe($options)` | `ProductVariant\|null` | Find variant matching options (returns null on mismatch) |
+| `postedSelection()` | `ProductSelection` | Submitted product configuration with resolved pricing totals (see [Configured Totals](./pricing#configured-totals)) |
 
 ### Scopes
 

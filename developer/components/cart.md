@@ -146,6 +146,10 @@ When adding a bundle product to the cart, the `bundle_items` array contains sele
 
 When a bundle product is added, the master product becomes one cart item and each selected bundle child becomes a separate linked cart item. Removing the master item automatically removes all its bundle children.
 
+::: tip
+The same POST parameters can be resolved into a live price total before the item is added to the cart, using the `ProductSelection` class. See [Configured Totals](../models/pricing#configured-totals).
+:::
+
 ### onRemoveFromCart
 
 Removes a single item from the cart by its key. When removing a bundle master item, all linked bundle child items are automatically removed as well.

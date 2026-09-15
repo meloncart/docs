@@ -61,6 +61,55 @@ Returns a `CartItemCollection` containing all postponed (saved for later) items.
 
 Returns `true` if the cart has no items (active or postponed).
 
+## Price Preview
+
+These methods price the current product page configuration (quantity, options, extras, and bundle selections) before it is added to the cart, using the same pricing logic the cart itself uses. This keeps a live "running total" display accurate without reimplementing cart pricing in the theme.
+
+### cart.previewTotalPrice(product)
+
+Returns the tax-aware total for the current product configuration, as an integer in cents. Reads `product_cart_quantity`, `product_options`, `product_extras`, and `bundle_items` from the request, falling back to the form's default state on first page load. When the `product` argument is omitted, the page's `product` variable is used.
+
+```twig
+{% set totalPrice = cart.previewTotalPrice(product) %}
+<p>
+    {{ totalPrice|currency }} {{ cart.taxInclusiveText }}
+</p>
+```
+
+Pair it with a `data-request` refresh on the product form to keep the total live as the customer changes the configuration.
+
+### cart.previewSelection(product)
+
+Returns the underlying `ProductSelection` object for the current configuration, exposing the full price surface for more detailed displays.
+
+```twig
+{% set selection = cart.previewSelection(product) %}
+
+{% if selection.onSale %}
+    <del>{{ selection.compareTotalPrice|currency }}</del>
+{% endif %}
+
+<span>{{ selection.totalPrice|currency }}</span>
+
+{% if selection.bundleTotal %}
+    <small>
+        Includes {{ selection.bundleTotal|currency }} of bundle items
+    </small>
+{% endif %}
+```
+
+Available methods on the selection: `basePrice()`, `compareBasePrice()`, `extrasTotal()`, `bundleTotal()`, `unitTotal()`, `totalPrice()`, `compareUnitTotal()`, `compareTotalPrice()`, `onSale()`, `getVariant()`, `getQuantity()`, `getBundleSelections()`.
+
+### cart.taxInclusiveText()
+
+Returns the tax inclusive label configured in the eCommerce settings, or `null` when prices are displayed without tax. Suitable for appending directly after any displayed price.
+
+```twig
+<span>
+    {{ product.display_price|currency }} {{ cart.taxInclusiveText }}
+</span>
+```
+
 ## AJAX Handlers
 
 ### onAddToCart

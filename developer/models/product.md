@@ -39,6 +39,7 @@ The `Product` model is the central model for all product data. It is typically a
 | `on_sale` | `bool` | Whether the product has a price reduction (manual or catalog rule) |
 | `display_discount` | `int` | Amount saved: `compare_price - display_price` |
 | `in_stock` | `bool` | Whether the product is available for purchase |
+| `low_stock` | `bool` | Whether stock is low while still available for purchase |
 | `has_variants` | `bool` | Whether the product uses variants |
 
 ::: tip
@@ -72,12 +73,12 @@ Use `display_price` for storefront display and `compare_price` for strikethrough
 | `track_inventory` | `bool` | Whether stock is tracked |
 | `hide_if_out_of_stock` | `bool` | Hide product when out of stock |
 | `allow_negative_stock` | `bool` | Allow stock to go below zero |
-| `stock_alert_threshold` | `int` | Low stock notification threshold |
+| `low_stock_threshold` | `int` | Low stock warning threshold |
 | `units_in_stock` | `int\|null` | Physical units on hand |
 | `units_reserved` | `int` | Units held by pending orders |
 | `allow_pre_order` | `bool` | Accept orders when out of stock |
 
-Use `getSalableQuantity()` and `isOutOfStock()` to check availability. See [Inventory](./inventory) for the stock lifecycle.
+Use `getSalableQuantity()`, `isOutOfStock()` and `isLowStock()` to check availability. See [Inventory](./inventory) for the stock lifecycle.
 
 ### Visibility Properties
 
@@ -138,7 +139,8 @@ Use `getSalableQuantity()` and `isOutOfStock()` to check availability. See [Inve
 | `getPrimaryCategory()` | `Category\|null` | First associated category |
 | `isVisible()` | `bool` | Whether product is enabled and not archived |
 | `isVisibleOnSite($siteId)` | `bool` | Whether product is visible on a specific site (defaults to current site) |
-| `isOutOfStock()` | `bool` | Whether stock is below threshold |
+| `isOutOfStock()` | `bool` | Whether the product is out of stock |
+| `isLowStock()` | `bool` | Whether stock is low while still available for purchase |
 | `getSalableQuantity($siteId)` | `int` | Available stock (physical minus reserved) |
 | `reserveStock($quantity)` | `void` | Atomically increment reserved units |
 | `decreaseStock($quantity)` | `void` | Decrement physical stock and release reservation |
@@ -544,6 +546,7 @@ Use `display_price` and `compare_price` for storefront display: they automatical
 | `getEffectiveSku()` | `string` | Variant SKU or product fallback |
 | `getSalableQuantity($siteId)` | `int` | Available stock (physical minus reserved) |
 | `isOutOfStock()` | `bool` | Whether variant is out of stock |
+| `isLowStock()` | `bool` | Whether variant stock is low while still available for purchase |
 | `reserveStock($quantity)` | `void` | Atomically increment reserved units |
 | `decreaseStock($quantity)` | `void` | Decrement physical stock and release reservation |
 | `releaseStock($quantity)` | `void` | Release reservation without changing physical stock |

@@ -12,7 +12,7 @@ This reference documents the inventory system used by Meloncart's Shop plugin. T
 | `track_inventory` | `bool` | Whether stock is tracked |
 | `hide_if_out_of_stock` | `bool` | Hide product when out of stock |
 | `allow_negative_stock` | `bool` | Allow stock to go below zero |
-| `stock_alert_threshold` | `int` | Low stock notification threshold |
+| `low_stock_threshold` | `int` | Low stock warning threshold |
 | `allow_pre_order` | `bool` | Accept orders when out of stock |
 | `units_in_stock` | `int\|null` | Physical units on hand |
 | `units_reserved` | `int` | Units held by pending orders |
@@ -33,13 +33,23 @@ Returns `max(0, units_in_stock - units_reserved)`. The `$siteId` parameter is ac
 
 ### isOutOfStock
 
-Returns whether the product is out of stock. Accounts for `track_inventory` and `stock_alert_threshold`.
+Returns whether the product is out of stock.
 
 ```php
 $product->isOutOfStock(): bool
 ```
 
-Returns `false` if `track_inventory` is disabled. When a `stock_alert_threshold` is set, returns `true` if salable quantity is at or below the threshold.
+Returns `false` if `track_inventory` is disabled, otherwise returns `true` when the salable quantity reaches zero.
+
+### isLowStock
+
+Returns whether stock has reached the low stock threshold while the product is still available for purchase.
+
+```php
+$product->isLowStock(): bool
+```
+
+Returns `false` if `track_inventory` is disabled or no `low_stock_threshold` is set. Also available as the `low_stock` attribute in templates.
 
 ### reserveStock
 
@@ -51,7 +61,7 @@ $product->reserveStock(int $quantity): void
 
 ### decreaseStock
 
-Atomically decrements `units_in_stock` and releases the reservation. Fires `shop.productOutOfStock` if stock falls below the threshold.
+Atomically decrements `units_in_stock` and releases the reservation. Fires `shop.productOutOfStock` when stock runs out, and sends a low stock alert to store managers when stock first reaches the `low_stock_threshold` or runs out.
 
 ```php
 $product->decreaseStock(int $quantity): void
@@ -69,7 +79,7 @@ $product->releaseStock(int $quantity): void
 
 ### Variant Methods
 
-`ProductVariant` provides the same methods: `getSalableQuantity()`, `isOutOfStock()`, `reserveStock()`, `decreaseStock()`, and `releaseStock()`: operating on variant-level stock.
+`ProductVariant` provides the same methods: `getSalableQuantity()`, `isOutOfStock()`, `isLowStock()`, `reserveStock()`, `decreaseStock()`, and `releaseStock()`: operating on variant-level stock. The low stock threshold is always read from the parent product.
 
 ---
 
@@ -129,7 +139,7 @@ This ensures that two simultaneous orders cannot both claim the same stock. The 
 
 ## Displaying Stock on the Storefront
 
-Use the `isOutOfStock()` method for stock-aware templates:
+Use the `isOutOfStock()` and `isLowStock()` methods for stock-aware templates. The low stock state only occurs while the product is still purchasable, making it suitable for urgency messaging:
 
 ```twig
 {% if product.track_inventory %}
@@ -143,6 +153,10 @@ Use the `isOutOfStock()` method for stock-aware templates:
                 Out of Stock
             </span>
         {% endif %}
+    {% elseif product.low_stock %}
+        <span class="badge bg-warning">
+            Low Stock, Order Soon
+        </span>
     {% else %}
         <span class="text-success">
             In Stock

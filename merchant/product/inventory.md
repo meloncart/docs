@@ -13,7 +13,7 @@ Once enabled, the Inventory tab shows the **Units in Stock** field and the follo
 
 - **Hidden When Out Of Stock**: Automatically hides the product from the storefront when it goes out of stock.
 - **Allow Negative Stock**: Allows the stock count to go below zero, useful for accepting orders beyond current inventory.
-- **Out Of Stock Threshold**: An optional stock level that triggers a low-stock notification. When salable stock falls to or below this number, store managers are notified by email.
+- **Low Stock Threshold**: An optional stock level that triggers a low-stock notification. When salable stock falls to or below this number, store managers are notified by email and the product reports a low stock state to the storefront. The product remains purchasable until stock runs out.
 - **Allow Pre-Order**: Allows customers to purchase the product even when it is out of stock.
 
 ## Managing Stock
@@ -60,7 +60,7 @@ The order status flow for inventory is: **New** (reserve) → **Paid** (no stock
 
 ## Low-Stock Notifications
 
-When a product goes out of stock (or falls below its stock alert threshold), Meloncart sends an email notification to all backend users in the **store-managers** admin group.
+When a product first reaches its **Low Stock Threshold** or runs out of stock, Meloncart sends an email notification to all backend users in the **store-managers** admin group.
 
 To receive low-stock notifications:
 
@@ -73,7 +73,7 @@ The low-stock email template can be customized under **Settings → Mail Templat
 
 ## Out-of-Stock Behavior
 
-A product is considered out of stock when its salable quantity reaches zero (or falls to or below the **Out Of Stock Threshold**, if one is set).
+A product is considered out of stock when its salable quantity reaches zero. The **Low Stock Threshold** does not affect availability: it only triggers notifications and the storefront low stock state.
 
 Out-of-stock behavior depends on the product's settings:
 

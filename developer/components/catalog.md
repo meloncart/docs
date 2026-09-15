@@ -294,6 +294,7 @@ All prices are integers in cents.
 | `isVisible()` | boolean | Whether the product is enabled and not archived |
 | `isVisibleOnSite($siteId)` | boolean | Whether the product is visible on a specific site |
 | `isOutOfStock()` | boolean | Whether the product is out of stock |
+| `isLowStock()` | boolean | Whether stock is low while still available for purchase |
 
 ## Category Model Properties
 

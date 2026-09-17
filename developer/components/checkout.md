@@ -13,6 +13,22 @@ The `checkout` component manages the entire checkout flow: collecting customer d
 
 The Checkout component has no configurable properties. Add it to your checkout page.
 
+## Checkout Modes
+
+The component supports two address models. The mode is **detected automatically** from what your theme posts, and it is sticky for the checkout session (exposed as the `hasSeparateAddresses` page variable).
+
+### Unified address (contact only)
+
+The theme collects a single address block using the unprefixed contact fields (`first_name`, `address_line1`, and so on) via `post_contact_details`. As long as no shipping address is posted, the checkout stays unified: the shipping and billing addresses both fall back to these contact details, so the one unified address is used for everything. Billing fields are never required in this mode. This suits digital stores or any checkout that does not need separate addresses.
+
+### Separate addresses (shipping and billing)
+
+The moment the theme posts a shipping address (`shipping_` prefixed fields via `post_shipping_details`), the checkout switches to separate-address mode and stays there. Billing then reuses the shipping address unless the customer opts out by posting `billing_same_as_shipping = 0`, which reveals a separate billing address (`billing_` prefixed fields via `post_billing_details`). This is the familiar retail "Billing address same as shipping" pattern.
+
+`billing_same_as_shipping` defaults to `false`: in separate mode, if the customer does not reuse the shipping address, the `billing_` fields are validated as required. Selecting a saved billing address book entry also puts the checkout into separate mode.
+
+The billing address resolves through the chain **billing → shipping → contact**, so a partially completed checkout still produces a valid billing address.
+
 ## Page Variables
 
 The component sets these page variables on every page load and after each AJAX request. Use them in your Twig templates to display checkout state.
@@ -30,7 +46,8 @@ The component sets these page variables on every page load and after each AJAX r
 | Variable | Type | Description |
 | --- | --- | --- |
 | `address` | CheckoutAddress | The customer's contact details |
-| `billingAddress` | CheckoutAddress | The billing address (falls back to contact details if not set separately) |
+| `billingAddress` | CheckoutAddress | The billing address. In separate mode it follows the shipping address unless a separate billing address is entered; in unified mode it follows the contact details |
+| `billingSameAsShipping` | boolean | Whether the billing address reuses the shipping address (`false` by default). Only meaningful in separate mode; `true` makes `billingAddress` follow the shipping address |
 | `paymentMethod` | PaymentMethod\|null | The currently selected payment method |
 | `paymentMethods` | Collection | Payment methods available for this order |
 | `hasPaymentMethod` | boolean | Whether a payment method is selected |
@@ -53,6 +70,7 @@ The component sets these page variables on every page load and after each AJAX r
 | Variable | Type | Description |
 | --- | --- | --- |
 | `shippingRequired` | boolean | Whether the cart contains shippable products |
+| `hasSeparateAddresses` | boolean | Whether the checkout is in separate-address mode (a shipping address has been posted) rather than using a single unified contact address |
 | `shippingMethods` | array | Shipping methods available for the current address |
 | `shippingAddress` | CheckoutAddress | The shipping address (falls back to contact details if not set separately) |
 | `shippingMethod` | ShippingMethod\|null | The selected shipping method with quote |
@@ -210,11 +228,19 @@ Triggered by `post_contact_details = true`.
 
 ### Address Book Preset
 
-Triggered by `post_address_book_preset = true`. Loads a saved address from the customer's address book (requires RainLab.UserPlus).
+Triggered by `post_address_book_preset = true`. Loads a saved address from the customer's address book into the contact details (requires RainLab.UserPlus). The selected `address_book_id` is remembered across AJAX refreshes rather than resetting to "New address".
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `address_book_id` | integer | The saved address ID to load |
+
+### Billing Address Book Preset
+
+Triggered by `post_billing_address_book_preset = true`. Loads a saved address from the customer's address book into the billing address, mirroring the contact address book preset (requires RainLab.UserPlus). Pass an empty value to reset the billing address to a new entry.
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `billing_address_book_id` | integer | The saved address ID to load as the billing address |
 
 ### Billing Details
 
@@ -234,8 +260,9 @@ Triggered by `post_billing_details = true`. Uses the same fields as contact deta
 | `billing_country_id` | integer | Billing country ID |
 | `billing_state_id` | integer | Billing state ID |
 | `billing_tax_id_number` | string | Billing tax ID / VAT number |
+| `billing_same_as_shipping` | boolean | Whether the billing address reuses the shipping address (`1`) or a separate billing address is being entered (`0`); defaults to `0` |
 
-If billing details are not explicitly submitted, the billing address inherits from the contact details.
+Billing details only apply in separate-address mode (once a shipping address has been posted). Post `billing_same_as_shipping = 1` to reuse the shipping address; the `billing_` fields are then ignored. When it is `0` (the default), the `billing_` fields are validated as required. The flag is stored on the checkout session and exposed as the `billingSameAsShipping` page variable, so a "Billing address is the same as shipping" toggle keeps its state across AJAX refreshes. Selecting a billing address book preset also switches to separate-address mode automatically.
 
 ### Shipping Details
 
@@ -255,7 +282,15 @@ Triggered by `post_shipping_details = true`. Uses the same fields as contact det
 | `shipping_state_id` | integer | Shipping state ID |
 | `shipping_is_business` | boolean | Business address flag |
 
-If shipping details are not explicitly submitted, the shipping address inherits from the contact details.
+If shipping details are not explicitly submitted, the shipping address inherits from the contact details. Posting a shipping address switches the checkout to separate-address mode.
+
+### Shipping Address Book Preset
+
+Triggered by `post_shipping_address_book_preset = true`. Loads a saved address from the customer's address book into the shipping address, mirroring the contact and billing address book presets (requires RainLab.UserPlus). It also switches the checkout to separate-address mode. Pass an empty value to reset the shipping address to a new entry.
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `shipping_address_book_id` | integer | The saved address ID to load as the shipping address |
 
 ### Shipping Method
 

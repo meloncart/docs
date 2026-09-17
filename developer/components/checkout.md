@@ -15,7 +15,7 @@ The Checkout component has no configurable properties. Add it to your checkout p
 
 ## Checkout Modes
 
-The component supports two address models. The mode is **detected automatically** from what your theme posts, and it is sticky for the checkout session (exposed as the `hasSeparateAddresses` page variable).
+The component supports two address models. The mode is **detected automatically** from what your theme posts, and it is sticky for the checkout session (readable through the `checkout.hasSeparateAddresses()` method).
 
 ### Unified address (contact only)
 
@@ -23,9 +23,12 @@ The theme collects a single address block using the unprefixed contact fields (`
 
 ### Separate addresses (shipping and billing)
 
-The moment the theme posts a shipping address (`shipping_` prefixed fields via `post_shipping_details`), the checkout switches to separate-address mode and stays there. Billing then reuses the shipping address unless the customer opts out by posting `billing_same_as_shipping = 0`, which reveals a separate billing address (`billing_` prefixed fields via `post_billing_details`). This is the familiar retail "Billing address same as shipping" pattern.
+The checkout switches to separate-address mode as soon as the theme posts a distinct address, and stays there. Either address can establish it:
 
-`billing_same_as_shipping` defaults to `false`: in separate mode, if the customer does not reuse the shipping address, the `billing_` fields are validated as required. Selecting a saved billing address book entry also puts the checkout into separate mode.
+- Posting a shipping address (`shipping_` prefixed fields via `post_shipping_details`) enters separate mode. Billing then reuses the shipping address unless the customer opts out by posting `billing_same_as_shipping = 0`, which reveals a separate billing address (`billing_` prefixed fields via `post_billing_details`). This is the familiar retail "Billing address same as shipping" pattern.
+- Posting a distinct billing address (`billing_` fields with `billing_same_as_shipping = 0`) also enters separate mode, even when no shipping address has been posted. This suits a "Bill to a different address" checkout where billing is the address that leads.
+
+`billing_same_as_shipping` defaults to `false`, so posting `billing_` fields means a distinct billing address: its fields are validated as required. The "same as shipping" option only applies when a shipping address was entered first; when billing leads, there is nothing to reuse and the billing address simply stands on its own. Selecting a saved billing address book entry also puts the checkout into separate mode.
 
 The billing address resolves through the chain **billing → shipping → contact**, so a partially completed checkout still produces a valid billing address.
 
@@ -70,7 +73,6 @@ The component sets these page variables on every page load and after each AJAX r
 | Variable | Type | Description |
 | --- | --- | --- |
 | `shippingRequired` | boolean | Whether the cart contains shippable products |
-| `hasSeparateAddresses` | boolean | Whether the checkout is in separate-address mode (a shipping address has been posted) rather than using a single unified contact address |
 | `shippingMethods` | array | Shipping methods available for the current address |
 | `shippingAddress` | CheckoutAddress | The shipping address (falls back to contact details if not set separately) |
 | `shippingMethod` | ShippingMethod\|null | The selected shipping method with quote |
@@ -87,6 +89,10 @@ Returns the currently logged-in user, or `null` for guest checkout.
 ### checkout.isCartEmpty()
 
 Returns `true` if the cart has no items. Use this to show an empty cart message instead of the checkout form.
+
+### checkout.hasSeparateAddresses()
+
+Returns `true` once the checkout is in separate-address mode (a distinct shipping or billing address has been posted) rather than using a single unified contact address. The mode is sticky for the checkout session, so a toggle bound to this keeps its state across AJAX refreshes.
 
 ## AJAX Handlers
 
@@ -262,7 +268,7 @@ Triggered by `post_billing_details = true`. Uses the same fields as contact deta
 | `billing_tax_id_number` | string | Billing tax ID / VAT number |
 | `billing_same_as_shipping` | boolean | Whether the billing address reuses the shipping address (`1`) or a separate billing address is being entered (`0`); defaults to `0` |
 
-Billing details only apply in separate-address mode (once a shipping address has been posted). Post `billing_same_as_shipping = 1` to reuse the shipping address; the `billing_` fields are then ignored. When it is `0` (the default), the `billing_` fields are validated as required. The flag is stored on the checkout session and exposed as the `billingSameAsShipping` page variable, so a "Billing address is the same as shipping" toggle keeps its state across AJAX refreshes. Selecting a billing address book preset also switches to separate-address mode automatically.
+Posting billing details puts the checkout into separate-address mode. Post `billing_same_as_shipping = 1` to reuse a shipping address that was entered first; the `billing_` fields are then ignored. When it is `0` (the default), the `billing_` fields are validated as required and stored as a distinct billing address, whether or not a shipping address exists yet. The flag is stored on the checkout session and exposed as the `billingSameAsShipping` page variable, so a "Billing address is the same as shipping" toggle keeps its state across AJAX refreshes. Selecting a billing address book preset also switches to separate-address mode automatically.
 
 ### Shipping Details
 

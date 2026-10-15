@@ -153,7 +153,7 @@ Pair the `registration` component with `[session] security = "guest"` to redirec
 
 ### Guest Checkout Registration
 
-During checkout, Meloncart can register a guest customer automatically. See the [Checkout](./checkout) component's guest registration parameters (`register_user`, `register_password`) for details.
+During checkout, Meloncart can register a guest customer automatically. See the [Checkout](./checkout) component's guest registration parameters (`register_user`, `user_password`) for details.
 
 ## Events
 

@@ -258,6 +258,7 @@ Each line item within an invoice. Unlike order items, invoice items use a simpli
 | `id` | `int` | Primary key |
 | `description` | `string` | Line item description |
 | `quantity` | `int` | Quantity |
+| `is_tax_exempt` | `bool` | Exclude the line from tax |
 | `sort_order` | `int` | Display order |
 | `created_at` | `Carbon` | Creation date |
 | `updated_at` | `Carbon` | Last update date |

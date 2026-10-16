@@ -333,7 +333,7 @@ These parameters are processed during order placement:
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `register_user` | boolean | Create a customer account for the guest |
-| `user_password` | string | Password for the new account. If the field is submitted it must not be empty. Leave the field out to generate a random password, and send `user_register_notification` so the customer can set their own |
+| `user_password` | string | Password for the new account (optional). |
 | `user_auto_login` | boolean | Auto-login after registration |
 | `user_register_notification` | boolean | Send registration email |
 
@@ -501,7 +501,7 @@ The checkout view partial acts as a step router, displaying different content ba
         <label>Email Address</label>
     </div>
     <label>
-        <input type="checkbox" name="register_customer" value="1" />
+        <input type="checkbox" name="register_user" value="1" />
         Save my details for faster checkout
     </label>
 {% endif %}

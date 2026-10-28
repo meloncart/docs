@@ -318,7 +318,7 @@ Event::listen('shop.cart.addProduct', function($product, $options) {
 
 ### shop.cart.processCustomData
 
-Fires when a product is added to the cart, allowing you to modify or inject custom data that is stored with the cart item. The custom data array is passed by reference.
+Fires when a product is added to the cart, allowing you to modify or inject custom data that is stored with the cart item. The custom data array is passed by reference. Keys must start with an `x_` prefix and are copied to the order item when the order is placed, see [Custom Data](../components/cart#custom-data).
 
 | Parameter | Type | Description |
 | --- | --- | --- |
@@ -332,7 +332,7 @@ Fires when a product is added to the cart, allowing you to modify or inject cust
 Event::listen('shop.cart.processCustomData', function(&$customData, $product, $options) {
     // Attach a gift message to the cart item
     if ($message = post('gift_message')) {
-        $customData['gift_message'] = $message;
+        $customData['x_gift_message'] = $message;
     }
 });
 ```

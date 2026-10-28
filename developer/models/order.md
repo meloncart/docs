@@ -395,6 +395,10 @@ OrderItem supports the same unified price vocabulary as Product, ProductVariant,
 | `bundle_master_bundle_item_id` | `int\|null` | Bundle slot definition ID |
 | `bundle_master_bundle_item_name` | `string\|null` | Bundle slot name (e.g., "Processor") |
 
+### Custom Data
+
+Cart item custom data is copied to the order item when the order is placed. Each `x_` key is stored in the `shop_order_items` column of the same name, such as `x_gift_message`, and keys without a matching column are skipped. See [Custom Data](../components/cart#custom-data) for adding the columns.
+
 ### Download Properties
 
 | Property | Type | Description |

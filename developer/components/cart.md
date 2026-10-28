@@ -443,6 +443,45 @@ How cart data is stored depends on whether the customer is logged in:
 
 When a guest customer logs in, their session cart is merged with any existing database cart automatically.
 
+## Custom Data
+
+Cart items can carry custom data, such as a gift message or engraving text. Every key must start with an `x_` prefix, otherwise the item is rejected. Pass the values with the `item_data[]` parameter of `onAddToCart`, or inject them with the [`shop.cart.processCustomData`](../hooks/events#shop-cart-processcustomdata) event.
+
+```html
+<input name="item_data[x_gift_message]" />
+```
+
+Each key maps to a database column of the same name, which your plugin adds with a migration:
+
+- **`shop_user_cart_items`**: stores the value for logged-in customers. Guest carts keep it in the session and need no column.
+- **`shop_order_items`**: receives the value when the order is placed. Keys without a matching column are skipped.
+
+```php
+public function up()
+{
+    Schema::table('shop_user_cart_items', function ($table) {
+        $table->string('x_gift_message')->nullable();
+    });
+
+    Schema::table('shop_order_items', function ($table) {
+        $table->string('x_gift_message')->nullable();
+    });
+}
+
+public function down()
+{
+    Schema::table('shop_user_cart_items', function ($table) {
+        $table->dropColumn('x_gift_message');
+    });
+
+    Schema::table('shop_order_items', function ($table) {
+        $table->dropColumn('x_gift_message');
+    });
+}
+```
+
+Read the value from a cart item with `item.customData.x_gift_message` and from an order item with `item.x_gift_message`.
+
 ## Named Carts
 
 The cart system supports multiple named carts. The default cart is named `main`. You can target a different cart by passing the `cart_name` parameter to AJAX handlers:

@@ -574,14 +574,14 @@ Event::listen('shop.checkout.beforeSetCouponCode', function(&$code) {
 
 ### shop.shipping.beforeGetQuote
 
-Fires before a shipping quote is evaluated. Return a non-null value to override the driver quote entirely.
+Fires before a shipping quote is evaluated. Return `false` to make the method unavailable, or another non-null value to override the driver quote entirely.
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `$shippingMethod` | ShippingMethod | The shipping method model |
 | `$options` | array | Quote options: see options table below |
 
-**Return:** Return any non-null value to use as the quote result, bypassing the driver.
+**Return:** Return `false` to remove the method from the available options. Return any other non-null value to use as the quote result in the site's currency, bypassing the driver. Returning `null` keeps the driver quote.
 
 **Quote Options:**
 
@@ -590,7 +590,7 @@ Fires before a shipping quote is evaluated. Return a non-null value to override 
 | `countryId` | int | Destination country ID |
 | `stateId` | int | Destination state ID |
 | `zip` | string | Destination postal code |
-| `totalPrice` | int | Cart total in base value |
+| `totalPrice` | int | Cart total in cents, in the site's currency |
 | `totalVolume` | int | Total volume of items |
 | `totalWeight` | int | Total weight of items |
 | `totalItems` | int | Number of items |
@@ -601,22 +601,22 @@ Fires before a shipping quote is evaluated. Return a non-null value to override 
 Event::listen('shop.shipping.beforeGetQuote', function($shippingMethod, $options) {
     // Block shipping to a specific country
     if ($options['countryId'] === 999) {
-        return null; // No shipping available
+        return false; // No shipping available
     }
 });
 ```
 
 ### shop.shipping.afterGetQuote
 
-Fires after a shipping quote is evaluated, including handling fees. Return a value to override the result.
+Fires after a shipping quote is evaluated, including handling fees. Return `false` to make the method unavailable, or another value to override the result.
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `$shippingMethod` | ShippingMethod | The shipping method model |
-| `$result` | int\|array | The calculated quote: int for a single rate, array for multiple options |
+| `$result` | int\|array | The calculated quote in the site's currency: int for a single rate, array for multiple options |
 | `$options` | array | The original quote options |
 
-**Return:** Return any non-null value to override the quote result.
+**Return:** Return `false` to remove the method from the available options. Return any other non-null value to override the quote result.
 
 ```php
 Event::listen('shop.shipping.afterGetQuote', function($shippingMethod, $result, $options) {

@@ -93,9 +93,10 @@ When a customer reaches the shipping step during checkout, the system calculates
 
 1. **Filter methods**: Only enabled methods that match the customer's country, user group, and order weight are considered.
 2. **Get quotes**: Each applicable method's driver calculates a shipping rate based on the order details (items, weight, dimensions, destination, order total).
-3. **Add handling fees**: Handling fees are added to each quote.
-4. **Calculate shipping tax**: If the method is taxable, shipping tax is calculated and included.
-5. **Display to customer**: The available methods and their prices are presented for the customer to choose from.
+3. **Convert currency**: Quotes are converted from the store's base currency to the site's currency. See [Multi-Currency Pricing](../settings/multi-store#shipping-rates).
+4. **Add handling fees**: Handling fees are added to each quote.
+5. **Calculate shipping tax**: If the method is taxable, shipping tax is calculated and included.
+6. **Display to customer**: The available methods and their prices are presented for the customer to choose from.
 
 ::: tip
 If a shipping method's driver returns no quote (for example, the carrier API is unavailable or the destination is not serviceable), that method is silently excluded from the options shown to the customer.

@@ -159,6 +159,12 @@ When editing a product on a non-base currency site, each price field shows the a
 Fixed overrides are stored separately from the base price. Clearing an override does not affect the base price: it simply reverts to using the exchange rate.
 :::
 
+### Shipping Rates
+
+Table rates are entered in the store's base currency. On a site with a different display currency, shipping quotes are converted using the same exchange rates as product prices, and the order subtotal ranges in a rate table are compared in the base currency.
+
+Carrier quotes, such as Australia Post or FedEx, are also treated as base currency amounts and converted the same way, so the carrier account should quote in the store's base currency. Handling fees can have fixed overrides per currency, like product prices.
+
 ### Displaying Prices on the Storefront
 
 Use the `currency` Twig filter with the `site` option to display prices in the visitor's currency:
@@ -178,6 +184,8 @@ The current site's currency code is available as:
 Within a store, all sites share the same product catalog by default. However, you can control which products appear on which sites using per-site visibility.
 
 To restrict a product to specific sites, edit the product and navigate to the **Visibility** tab. Check **Limit Visibility to Specific Sites**, then select the sites where the product should appear. Products with this setting unchecked remain visible on all sites in the store.
+
+On other sites, a restricted product is left out of catalog listings, search and autocomplete, and its product page is not found. The cart is shared across sites, so a restricted product added on one site is removed from the cart when the customer visits a site where it is hidden.
 
 This works bidirectionally: you can hide products on the primary site while showing them on a regional site, or vice versa. For example, a store with English, French, and Colombian sites might show 12 products on the English site but 14 on the Colombian site.
 

@@ -173,10 +173,10 @@ Use the `currency` Twig filter with the `site` option to display prices in the v
 {{ product.price|currency({ site: true }) }}
 ```
 
-The current site's currency code is available as:
+The current site's currency code is available as shown below. It falls back to the store's base currency when the site has no currency set.
 
 ```twig
-{{ this.site.currency_code }}
+{{ this.site.hard_currency_code }}
 ```
 
 ## Per-Site Product Visibility
